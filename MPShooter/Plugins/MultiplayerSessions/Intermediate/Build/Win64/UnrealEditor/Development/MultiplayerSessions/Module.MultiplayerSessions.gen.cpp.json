@@ -1,13 +1,13 @@
 {
     "Version": "1.1",
     "Data": {
-        "Source": "d:\\documents\\unreal projects\\shootercourses\\mpshooter\\mpshooter\\plugins\\multiplayersessions\\intermediate\\build\\win64\\unrealeditor\\development\\multiplayersessions\\module.multiplayersessions.gen.cpp",
+        "Source": "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\plugins\\multiplayersessions\\intermediate\\build\\win64\\unrealeditor\\development\\multiplayersessions\\module.multiplayersessions.gen.cpp",
         "ProvidedModule": "",
-        "PCH": "d:\\documents\\unreal projects\\shootercourses\\mpshooter\\mpshooter\\intermediate\\build\\win64\\mpshootereditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "PCH": "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\intermediate\\build\\win64\\mpshootereditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
         "Includes": [
-            "d:\\documents\\unreal projects\\shootercourses\\mpshooter\\mpshooter\\plugins\\multiplayersessions\\intermediate\\build\\win64\\unrealeditor\\development\\multiplayersessions\\definitions.multiplayersessions.h",
-            "d:\\documents\\unreal projects\\shootercourses\\mpshooter\\mpshooter\\plugins\\multiplayersessions\\intermediate\\build\\win64\\unrealeditor\\inc\\multiplayersessions\\menu.gen.cpp",
-            "d:\\documents\\unreal projects\\shootercourses\\mpshooter\\mpshooter\\plugins\\multiplayersessions\\source\\multiplayersessions\\public\\menu.h",
+            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\plugins\\multiplayersessions\\intermediate\\build\\win64\\unrealeditor\\development\\multiplayersessions\\definitions.multiplayersessions.h",
+            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\plugins\\multiplayersessions\\intermediate\\build\\win64\\unrealeditor\\inc\\multiplayersessions\\menu.gen.cpp",
+            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\plugins\\multiplayersessions\\source\\multiplayersessions\\public\\menu.h",
             "c:\\program files\\epic games\\ue_5.0\\engine\\source\\runtime\\umg\\public\\blueprint\\userwidget.h",
             "c:\\program files\\epic games\\ue_5.0\\engine\\source\\runtime\\coreuobject\\public\\uobject\\objectsavecontext.h",
             "c:\\program files\\epic games\\ue_5.0\\engine\\source\\runtime\\umg\\public\\components\\slatewrappertypes.h",
@@ -146,11 +146,11 @@
             "c:\\program files\\epic games\\ue_5.0\\engine\\plugins\\online\\onlinesubsystem\\source\\public\\onlinedelegatemacros.h",
             "c:\\program files\\epic games\\ue_5.0\\engine\\plugins\\online\\onlinesubsystem\\source\\public\\onlinekeyvaluepair.h",
             "c:\\program files\\epic games\\ue_5.0\\engine\\plugins\\online\\onlinesubsystem\\source\\public\\onlinesubsystempackage.h",
-            "d:\\documents\\unreal projects\\shootercourses\\mpshooter\\mpshooter\\plugins\\multiplayersessions\\intermediate\\build\\win64\\unrealeditor\\inc\\multiplayersessions\\menu.generated.h",
-            "d:\\documents\\unreal projects\\shootercourses\\mpshooter\\mpshooter\\plugins\\multiplayersessions\\intermediate\\build\\win64\\unrealeditor\\inc\\multiplayersessions\\multiplayersessions.init.gen.cpp",
-            "d:\\documents\\unreal projects\\shootercourses\\mpshooter\\mpshooter\\plugins\\multiplayersessions\\intermediate\\build\\win64\\unrealeditor\\inc\\multiplayersessions\\multiplayersessionssubsystem.gen.cpp",
-            "d:\\documents\\unreal projects\\shootercourses\\mpshooter\\mpshooter\\plugins\\multiplayersessions\\source\\multiplayersessions\\public\\multiplayersessionssubsystem.h",
-            "d:\\documents\\unreal projects\\shootercourses\\mpshooter\\mpshooter\\plugins\\multiplayersessions\\intermediate\\build\\win64\\unrealeditor\\inc\\multiplayersessions\\multiplayersessionssubsystem.generated.h"
+            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\plugins\\multiplayersessions\\intermediate\\build\\win64\\unrealeditor\\inc\\multiplayersessions\\menu.generated.h",
+            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\plugins\\multiplayersessions\\intermediate\\build\\win64\\unrealeditor\\inc\\multiplayersessions\\multiplayersessions.init.gen.cpp",
+            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\plugins\\multiplayersessions\\intermediate\\build\\win64\\unrealeditor\\inc\\multiplayersessions\\multiplayersessionssubsystem.gen.cpp",
+            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\plugins\\multiplayersessions\\source\\multiplayersessions\\public\\multiplayersessionssubsystem.h",
+            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\plugins\\multiplayersessions\\intermediate\\build\\win64\\unrealeditor\\inc\\multiplayersessions\\multiplayersessionssubsystem.generated.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

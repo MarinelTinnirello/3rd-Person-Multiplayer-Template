@@ -1,0 +1,396 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="..\..\MPShooter.uproject" />
+    <Filter Include="Source">
+      <UniqueIdentifier>{F31BBDD1-B3E8-3BCC-9652-680E16935819}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\MPShooter.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\Source\MPShooterEditor.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <Filter Include="Config">
+      <UniqueIdentifier>{FA535FFB-25E1-3D20-B416-52F9BE21E06E}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\DefaultEditor.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEngine.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultGame.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultInput.ini">
+      <Filter>Config</Filter>
+    </None>
+    <Filter Include="Config\HoloLens">
+      <UniqueIdentifier>{4C8DD267-CDE7-336F-8602-F5F485D22BAB}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\HoloLens\HoloLensEngine.ini">
+      <Filter>Config\HoloLens</Filter>
+    </None>
+    <Filter Include="Plugins">
+      <UniqueIdentifier>{BB38096A-B391-30DC-A0D4-4F3EA6B44507}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugins\MultiplayerSessions">
+      <UniqueIdentifier>{B376FBB0-9029-37B4-9E5C-F55FC20DD6CD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugins\MultiplayerSessions\Source">
+      <UniqueIdentifier>{CAE7E189-351A-3AEF-AA65-9181E027D3DC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugins\MultiplayerSessions\Source\MultiplayerSessions">
+      <UniqueIdentifier>{A1318B81-C725-3B17-85AD-D8AD905147BF}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Plugins\MultiplayerSessions\Source\MultiplayerSessions\MultiplayerSessions.Build.cs">
+      <Filter>Plugins\MultiplayerSessions\Source\MultiplayerSessions</Filter>
+    </None>
+    <Filter Include="Plugins\MultiplayerSessions\Source\MultiplayerSessions\Private">
+      <UniqueIdentifier>{AEFBA6C3-EAEC-3E6A-BF0E-6FC82FC81BDA}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Plugins\MultiplayerSessions\Source\MultiplayerSessions\Private\Menu.cpp">
+      <Filter>Plugins\MultiplayerSessions\Source\MultiplayerSessions\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\MultiplayerSessions\Source\MultiplayerSessions\Private\MultiplayerSessions.cpp">
+      <Filter>Plugins\MultiplayerSessions\Source\MultiplayerSessions\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\MultiplayerSessions\Source\MultiplayerSessions\Private\MultiplayerSessionsSubsystem.cpp">
+      <Filter>Plugins\MultiplayerSessions\Source\MultiplayerSessions\Private</Filter>
+    </ClCompile>
+    <Filter Include="Plugins\MultiplayerSessions\Source\MultiplayerSessions\Public">
+      <UniqueIdentifier>{B8A815AB-71EA-30D3-AAE7-E5C007BDC21C}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Plugins\MultiplayerSessions\Source\MultiplayerSessions\Public\Menu.h">
+      <Filter>Plugins\MultiplayerSessions\Source\MultiplayerSessions\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\MultiplayerSessions\Source\MultiplayerSessions\Public\MultiplayerSessions.h">
+      <Filter>Plugins\MultiplayerSessions\Source\MultiplayerSessions\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\MultiplayerSessions\Source\MultiplayerSessions\Public\MultiplayerSessionsSubsystem.h">
+      <Filter>Plugins\MultiplayerSessions\Source\MultiplayerSessions\Public</Filter>
+    </ClInclude>
+    <None Include="..\..\Plugins\MultiplayerSessions\MultiplayerSessions.uplugin">
+      <Filter>Plugins\MultiplayerSessions</Filter>
+    </None>
+    <Filter Include="Plugins\MultiplayerSessions\Resources">
+      <UniqueIdentifier>{309C2CD4-0086-329B-99DB-BDFA765BCE16}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Plugins\MultiplayerSessions\Resources\Icon128.png">
+      <Filter>Plugins\MultiplayerSessions\Resources</Filter>
+    </None>
+    <Filter Include="Source\MPShooter">
+      <UniqueIdentifier>{EEA34272-BEBB-3C27-AC75-EE7F25346A3B}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\MPShooter\MPShooter.Build.cs">
+      <Filter>Source\MPShooter</Filter>
+    </None>
+    <ClCompile Include="..\..\Source\MPShooter\MPShooter.cpp">
+      <Filter>Source\MPShooter</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\MPShooter\MPShooter.h">
+      <Filter>Source\MPShooter</Filter>
+    </ClInclude>
+    <Filter Include="Source\MPShooter\Character">
+      <UniqueIdentifier>{0A5134CC-AF4C-3E1D-A2A0-2A413B4F5959}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\MPShooter\Character\MPAnimInstance.cpp">
+      <Filter>Source\MPShooter\Character</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\MPShooter\Character\MPAnimInstance.h">
+      <Filter>Source\MPShooter\Character</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\MPShooter\Character\MPCharacter.cpp">
+      <Filter>Source\MPShooter\Character</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\MPShooter\Character\MPCharacter.h">
+      <Filter>Source\MPShooter\Character</Filter>
+    </ClInclude>
+    <Filter Include="Source\MPShooter\GameMode">
+      <UniqueIdentifier>{09A3A59B-751A-3F26-A4C0-5868857357FD}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\MPShooter\GameMode\LobbyGameMode.cpp">
+      <Filter>Source\MPShooter\GameMode</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\MPShooter\GameMode\LobbyGameMode.h">
+      <Filter>Source\MPShooter\GameMode</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\MPShooter\GameMode\MPShooterGameMode.cpp">
+      <Filter>Source\MPShooter\GameMode</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\MPShooter\GameMode\MPShooterGameMode.h">
+      <Filter>Source\MPShooter\GameMode</Filter>
+    </ClInclude>
+    <Filter Include="Source\MPShooter\GameState">
+      <UniqueIdentifier>{BE4218B4-091C-3B2A-BD98-B7936406AA83}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\MPShooter\GameState\MPGameState.cpp">
+      <Filter>Source\MPShooter\GameState</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\MPShooter\GameState\MPGameState.h">
+      <Filter>Source\MPShooter\GameState</Filter>
+    </ClInclude>
+    <Filter Include="Source\MPShooter\HUD">
+      <UniqueIdentifier>{2873E3F5-162E-3217-9246-E8FE7B90DC88}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\MPShooter\HUD\Annoucement.cpp">
+      <Filter>Source\MPShooter\HUD</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\MPShooter\HUD\Annoucement.h">
+      <Filter>Source\MPShooter\HUD</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\MPShooter\HUD\CharacterOverlay.cpp">
+      <Filter>Source\MPShooter\HUD</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\MPShooter\HUD\CharacterOverlay.h">
+      <Filter>Source\MPShooter\HUD</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\MPShooter\HUD\MPHUD.cpp">
+      <Filter>Source\MPShooter\HUD</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\MPShooter\HUD\MPHUD.h">
+      <Filter>Source\MPShooter\HUD</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\MPShooter\HUD\OverheadWidget.cpp">
+      <Filter>Source\MPShooter\HUD</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\MPShooter\HUD\OverheadWidget.h">
+      <Filter>Source\MPShooter\HUD</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\MPShooter\HUD\SniperScopeOverlay.cpp">
+      <Filter>Source\MPShooter\HUD</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\MPShooter\HUD\SniperScopeOverlay.h">
+      <Filter>Source\MPShooter\HUD</Filter>
+    </ClInclude>
+    <Filter Include="Source\MPShooter\Interfaces">
+      <UniqueIdentifier>{FE853A82-CC6E-3BDE-A512-C7AEAA34D797}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\MPShooter\Interfaces\InteractWithCrosshairsInterface.cpp">
+      <Filter>Source\MPShooter\Interfaces</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\MPShooter\Interfaces\InteractWithCrosshairsInterface.h">
+      <Filter>Source\MPShooter\Interfaces</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\MPShooter\Interfaces\ProjectileInterface.cpp">
+      <Filter>Source\MPShooter\Interfaces</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\MPShooter\Interfaces\ProjectileInterface.h">
+      <Filter>Source\MPShooter\Interfaces</Filter>
+    </ClInclude>
+    <Filter Include="Source\MPShooter\Item">
+      <UniqueIdentifier>{C2EFBFBD-3F55-31EF-A63A-26A4E608E72A}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\MPShooter\Item\Item.cpp">
+      <Filter>Source\MPShooter\Item</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\MPShooter\Item\Item.h">
+      <Filter>Source\MPShooter\Item</Filter>
+    </ClInclude>
+    <Filter Include="Source\MPShooter\Item\Pickup">
+      <UniqueIdentifier>{3E704A94-58F1-3B1B-9EAE-ED6AFA240EC6}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\MPShooter\Item\Pickup\AmmoPickup.cpp">
+      <Filter>Source\MPShooter\Item\Pickup</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\MPShooter\Item\Pickup\AmmoPickup.h">
+      <Filter>Source\MPShooter\Item\Pickup</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\MPShooter\Item\Pickup\HealthPickup.cpp">
+      <Filter>Source\MPShooter\Item\Pickup</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\MPShooter\Item\Pickup\HealthPickup.h">
+      <Filter>Source\MPShooter\Item\Pickup</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\MPShooter\Item\Pickup\JumpPickup.cpp">
+      <Filter>Source\MPShooter\Item\Pickup</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\MPShooter\Item\Pickup\JumpPickup.h">
+      <Filter>Source\MPShooter\Item\Pickup</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\MPShooter\Item\Pickup\Pickup.cpp">
+      <Filter>Source\MPShooter\Item\Pickup</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\MPShooter\Item\Pickup\Pickup.h">
+      <Filter>Source\MPShooter\Item\Pickup</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\MPShooter\Item\Pickup\PickupSpawnPoint.cpp">
+      <Filter>Source\MPShooter\Item\Pickup</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\MPShooter\Item\Pickup\PickupSpawnPoint.h">
+      <Filter>Source\MPShooter\Item\Pickup</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\MPShooter\Item\Pickup\ShieldPickup.cpp">
+      <Filter>Source\MPShooter\Item\Pickup</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\MPShooter\Item\Pickup\ShieldPickup.h">
+      <Filter>Source\MPShooter\Item\Pickup</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\MPShooter\Item\Pickup\SpeedPickup.cpp">
+      <Filter>Source\MPShooter\Item\Pickup</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\MPShooter\Item\Pickup\SpeedPickup.h">
+      <Filter>Source\MPShooter\Item\Pickup</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\MPShooter\Item\Pickup\ThrowableWeaponPickup.cpp">
+      <Filter>Source\MPShooter\Item\Pickup</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\MPShooter\Item\Pickup\ThrowableWeaponPickup.h">
+      <Filter>Source\MPShooter\Item\Pickup</Filter>
+    </ClInclude>
+    <Filter Include="Source\MPShooter\Item\Weapon">
+      <UniqueIdentifier>{5567CE0C-F2A9-3C50-9180-4A5D638E644F}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Source\MPShooter\Item\Weapon\HitActor.h">
+      <Filter>Source\MPShooter\Item\Weapon</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\MPShooter\Item\Weapon\Weapon.cpp">
+      <Filter>Source\MPShooter\Item\Weapon</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\MPShooter\Item\Weapon\Weapon.h">
+      <Filter>Source\MPShooter\Item\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\MPShooter\Item\Weapon\WeaponTypes.h">
+      <Filter>Source\MPShooter\Item\Weapon</Filter>
+    </ClInclude>
+    <Filter Include="Source\MPShooter\Item\Weapon\Ranged">
+      <UniqueIdentifier>{77EDBBD7-00A2-3CA4-8CB1-3BBEB84F3DD7}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\MPShooter\Item\Weapon\Ranged\HitScanWeapon.cpp">
+      <Filter>Source\MPShooter\Item\Weapon\Ranged</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\MPShooter\Item\Weapon\Ranged\HitScanWeapon.h">
+      <Filter>Source\MPShooter\Item\Weapon\Ranged</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\MPShooter\Item\Weapon\Ranged\ProjectileWeapon.cpp">
+      <Filter>Source\MPShooter\Item\Weapon\Ranged</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\MPShooter\Item\Weapon\Ranged\ProjectileWeapon.h">
+      <Filter>Source\MPShooter\Item\Weapon\Ranged</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\MPShooter\Item\Weapon\Ranged\ShotgunWeapon.cpp">
+      <Filter>Source\MPShooter\Item\Weapon\Ranged</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\MPShooter\Item\Weapon\Ranged\ShotgunWeapon.h">
+      <Filter>Source\MPShooter\Item\Weapon\Ranged</Filter>
+    </ClInclude>
+    <Filter Include="Source\MPShooter\Item\Weapon\Ranged\Projectile">
+      <UniqueIdentifier>{AA58B520-9BBF-3A78-B319-C7010B9130F7}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\MPShooter\Item\Weapon\Ranged\Projectile\Projectile.cpp">
+      <Filter>Source\MPShooter\Item\Weapon\Ranged\Projectile</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\MPShooter\Item\Weapon\Ranged\Projectile\Projectile.h">
+      <Filter>Source\MPShooter\Item\Weapon\Ranged\Projectile</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\MPShooter\Item\Weapon\Ranged\Projectile\ProjectileBullet.cpp">
+      <Filter>Source\MPShooter\Item\Weapon\Ranged\Projectile</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\MPShooter\Item\Weapon\Ranged\Projectile\ProjectileBullet.h">
+      <Filter>Source\MPShooter\Item\Weapon\Ranged\Projectile</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\MPShooter\Item\Weapon\Ranged\Projectile\ProjectileGrenade.cpp">
+      <Filter>Source\MPShooter\Item\Weapon\Ranged\Projectile</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\MPShooter\Item\Weapon\Ranged\Projectile\ProjectileGrenade.h">
+      <Filter>Source\MPShooter\Item\Weapon\Ranged\Projectile</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\MPShooter\Item\Weapon\Ranged\Projectile\ProjectileRocket.cpp">
+      <Filter>Source\MPShooter\Item\Weapon\Ranged\Projectile</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\MPShooter\Item\Weapon\Ranged\Projectile\ProjectileRocket.h">
+      <Filter>Source\MPShooter\Item\Weapon\Ranged\Projectile</Filter>
+    </ClInclude>
+    <Filter Include="Source\MPShooter\Item\Weapon\Ranged\Projectile\Misc">
+      <UniqueIdentifier>{4A675646-421C-38F7-87B3-1A4CC873F8B7}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\MPShooter\Item\Weapon\Ranged\Projectile\Misc\Casing.cpp">
+      <Filter>Source\MPShooter\Item\Weapon\Ranged\Projectile\Misc</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\MPShooter\Item\Weapon\Ranged\Projectile\Misc\Casing.h">
+      <Filter>Source\MPShooter\Item\Weapon\Ranged\Projectile\Misc</Filter>
+    </ClInclude>
+    <Filter Include="Source\MPShooter\Item\Weapon\Ranged\Projectile\Movement">
+      <UniqueIdentifier>{FD66FB07-067D-3C70-AC81-68F0F24EE1EF}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\MPShooter\Item\Weapon\Ranged\Projectile\Movement\RocketMovementComponent.cpp">
+      <Filter>Source\MPShooter\Item\Weapon\Ranged\Projectile\Movement</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\MPShooter\Item\Weapon\Ranged\Projectile\Movement\RocketMovementComponent.h">
+      <Filter>Source\MPShooter\Item\Weapon\Ranged\Projectile\Movement</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\MPShooter\Item\Weapon\Ranged\Projectile\Movement\SpiralMovementComponent.cpp">
+      <Filter>Source\MPShooter\Item\Weapon\Ranged\Projectile\Movement</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\MPShooter\Item\Weapon\Ranged\Projectile\Movement\SpiralMovementComponent.h">
+      <Filter>Source\MPShooter\Item\Weapon\Ranged\Projectile\Movement</Filter>
+    </ClInclude>
+    <Filter Include="Source\MPShooter\Item\Weapon\Throwable">
+      <UniqueIdentifier>{F379D969-8121-38F4-A89D-F84C610F02AD}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\MPShooter\Item\Weapon\Throwable\GrenadeThrowableWeapon.cpp">
+      <Filter>Source\MPShooter\Item\Weapon\Throwable</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\MPShooter\Item\Weapon\Throwable\GrenadeThrowableWeapon.h">
+      <Filter>Source\MPShooter\Item\Weapon\Throwable</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\MPShooter\Item\Weapon\Throwable\ThrowableWeapon.cpp">
+      <Filter>Source\MPShooter\Item\Weapon\Throwable</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\MPShooter\Item\Weapon\Throwable\ThrowableWeapon.h">
+      <Filter>Source\MPShooter\Item\Weapon\Throwable</Filter>
+    </ClInclude>
+    <Filter Include="Source\MPShooter\MPComponents">
+      <UniqueIdentifier>{CA899CDE-C7C8-328F-AB2B-841D03008E9C}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\MPShooter\MPComponents\BuffComponent.cpp">
+      <Filter>Source\MPShooter\MPComponents</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\MPShooter\MPComponents\BuffComponent.h">
+      <Filter>Source\MPShooter\MPComponents</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\MPShooter\MPComponents\CombatComponent.cpp">
+      <Filter>Source\MPShooter\MPComponents</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\MPShooter\MPComponents\CombatComponent.h">
+      <Filter>Source\MPShooter\MPComponents</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\MPShooter\MPComponents\LagComponent.cpp">
+      <Filter>Source\MPShooter\MPComponents</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\MPShooter\MPComponents\LagComponent.h">
+      <Filter>Source\MPShooter\MPComponents</Filter>
+    </ClInclude>
+    <Filter Include="Source\MPShooter\MPTypes">
+      <UniqueIdentifier>{EB3DB15A-F762-318E-92BD-4C5CDE62DCB1}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Source\MPShooter\MPTypes\BoneBoxType.h">
+      <Filter>Source\MPShooter\MPTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\MPShooter\MPTypes\CombatState.h">
+      <Filter>Source\MPShooter\MPTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\MPShooter\MPTypes\TurningInPlace.h">
+      <Filter>Source\MPShooter\MPTypes</Filter>
+    </ClInclude>
+    <Filter Include="Source\MPShooter\PlayerController">
+      <UniqueIdentifier>{89350DBC-649F-327D-8335-474145F197EE}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\MPShooter\PlayerController\MPPlayerController.cpp">
+      <Filter>Source\MPShooter\PlayerController</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\MPShooter\PlayerController\MPPlayerController.h">
+      <Filter>Source\MPShooter\PlayerController</Filter>
+    </ClInclude>
+    <Filter Include="Source\MPShooter\PlayerState">
+      <UniqueIdentifier>{46B3C5DA-FC40-3996-8A4B-CEC7AD739E87}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\MPShooter\PlayerState\MPPlayerState.cpp">
+      <Filter>Source\MPShooter\PlayerState</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\MPShooter\PlayerState\MPPlayerState.h">
+      <Filter>Source\MPShooter\PlayerState</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

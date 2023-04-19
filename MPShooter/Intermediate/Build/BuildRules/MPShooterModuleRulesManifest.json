@@ -1,0 +1,9 @@
+{
+	"SourceFiles": [
+		"D:\\Documents\\GitHub\\3rd-Person-Multiplayer-Template\\MPShooter\\Source\\MPShooter\\MPShooter.Build.cs",
+		"D:\\Documents\\GitHub\\3rd-Person-Multiplayer-Template\\MPShooter\\Plugins\\MultiplayerSessions\\Source\\MultiplayerSessions\\MultiplayerSessions.Build.cs",
+		"D:\\Documents\\GitHub\\3rd-Person-Multiplayer-Template\\MPShooter\\Source\\MPShooter.Target.cs",
+		"D:\\Documents\\GitHub\\3rd-Person-Multiplayer-Template\\MPShooter\\Source\\MPShooterEditor.Target.cs"
+	],
+	"EngineVersion": "5.0.3"
+}

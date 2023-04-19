@@ -1,6 +1,6 @@
-"D:\Documents\Unreal Projects\ShooterCourses\MPShooter\MPShooter\Plugins\MultiplayerSessions\Intermediate\Build\Win64\UnrealEditor\Development\MultiplayerSessions\Module.MultiplayerSessions.gen.cpp"
+D:\Documents\GitHub\3rd-Person-Multiplayer-Template\MPShooter\Plugins\MultiplayerSessions\Intermediate\Build\Win64\UnrealEditor\Development\MultiplayerSessions\Module.MultiplayerSessions.gen.cpp
 /I .
-/I "D:\Documents\Unreal Projects\ShooterCourses\MPShooter\MPShooter\Plugins\MultiplayerSessions\Source\MultiplayerSessions\Private"
+/I D:\Documents\GitHub\3rd-Person-Multiplayer-Template\MPShooter\Plugins\MultiplayerSessions\Source\MultiplayerSessions\Private
 /I ..\Intermediate\Build\Win64\UnrealEditor\Inc\CoreUObject
 /I Runtime
 /I Runtime\CoreUObject\Public
@@ -252,9 +252,9 @@
 /I Runtime\ClothingSystemRuntimeInterface\Public
 /I ..\Intermediate\Build\Win64\UnrealEditor\Inc\AnimationDataController
 /I Developer\AnimationDataController\Public
-/I "D:\Documents\Unreal Projects\ShooterCourses\MPShooter\MPShooter\Plugins\MultiplayerSessions\Intermediate\Build\Win64\UnrealEditor\Inc\MultiplayerSessions"
-/I "D:\Documents\Unreal Projects\ShooterCourses\MPShooter\MPShooter\Plugins\MultiplayerSessions\Source"
-/I "D:\Documents\Unreal Projects\ShooterCourses\MPShooter\MPShooter\Plugins\MultiplayerSessions\Source\MultiplayerSessions\Public"
+/I D:\Documents\GitHub\3rd-Person-Multiplayer-Template\MPShooter\Plugins\MultiplayerSessions\Intermediate\Build\Win64\UnrealEditor\Inc\MultiplayerSessions
+/I D:\Documents\GitHub\3rd-Person-Multiplayer-Template\MPShooter\Plugins\MultiplayerSessions\Source
+/I D:\Documents\GitHub\3rd-Person-Multiplayer-Template\MPShooter\Plugins\MultiplayerSessions\Source\MultiplayerSessions\Public
 /I ..\Plugins\Online\OnlineSubsystem\Intermediate\Build\Win64\UnrealEditor\Inc\OnlineSubsystem
 /I ..\Plugins\Online\OnlineSubsystem
 /I ..\Plugins\Online\OnlineSubsystem\Source
@@ -289,12 +289,12 @@
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\shared"
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\um"
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\winrt"
-/FI"D:\Documents\Unreal Projects\ShooterCourses\MPShooter\MPShooter\Intermediate\Build\Win64\MPShooterEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"
-/FI"D:\Documents\Unreal Projects\ShooterCourses\MPShooter\MPShooter\Plugins\MultiplayerSessions\Intermediate\Build\Win64\UnrealEditor\Development\MultiplayerSessions\Definitions.MultiplayerSessions.h"
-/Yu"D:\Documents\Unreal Projects\ShooterCourses\MPShooter\MPShooter\Intermediate\Build\Win64\MPShooterEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"
-/Fp"D:\Documents\Unreal Projects\ShooterCourses\MPShooter\MPShooter\Intermediate\Build\Win64\MPShooterEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.pch"
-/Fo"D:\Documents\Unreal Projects\ShooterCourses\MPShooter\MPShooter\Plugins\MultiplayerSessions\Intermediate\Build\Win64\UnrealEditor\Development\MultiplayerSessions\Module.MultiplayerSessions.gen.cpp.obj"
-/sourceDependencies "D:\Documents\Unreal Projects\ShooterCourses\MPShooter\MPShooter\Plugins\MultiplayerSessions\Intermediate\Build\Win64\UnrealEditor\Development\MultiplayerSessions\Module.MultiplayerSessions.gen.cpp.json"
+/FI"D:\Documents\GitHub\3rd-Person-Multiplayer-Template\MPShooter\Intermediate\Build\Win64\MPShooterEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"
+/FI"D:\Documents\GitHub\3rd-Person-Multiplayer-Template\MPShooter\Plugins\MultiplayerSessions\Intermediate\Build\Win64\UnrealEditor\Development\MultiplayerSessions\Definitions.MultiplayerSessions.h"
+/Yu"D:\Documents\GitHub\3rd-Person-Multiplayer-Template\MPShooter\Intermediate\Build\Win64\MPShooterEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"
+/Fp"D:\Documents\GitHub\3rd-Person-Multiplayer-Template\MPShooter\Intermediate\Build\Win64\MPShooterEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.pch"
+/Fo"D:\Documents\GitHub\3rd-Person-Multiplayer-Template\MPShooter\Plugins\MultiplayerSessions\Intermediate\Build\Win64\UnrealEditor\Development\MultiplayerSessions\Module.MultiplayerSessions.gen.cpp.obj"
+/sourceDependencies D:\Documents\GitHub\3rd-Person-Multiplayer-Template\MPShooter\Plugins\MultiplayerSessions\Intermediate\Build\Win64\UnrealEditor\Development\MultiplayerSessions\Module.MultiplayerSessions.gen.cpp.json
 /Zc:inline
 /nologo
 /Oi
