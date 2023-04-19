@@ -14,6 +14,7 @@ void EmptyLinkFunctionForGeneratedCodeMPCharacter() {}
 	MPSHOOTER_API UScriptStruct* Z_Construct_UScriptStruct_FPhysAssetInformation();
 	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector();
 	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FTransform();
+	MPSHOOTER_API UFunction* Z_Construct_UDelegateFunction_MPShooter_OnLeftGame__DelegateSignature();
 	MPSHOOTER_API UClass* Z_Construct_UClass_AMPCharacter_NoRegister();
 	MPSHOOTER_API UClass* Z_Construct_UClass_AMPCharacter();
 	ENGINE_API UClass* Z_Construct_UClass_ACharacter();
@@ -242,6 +243,28 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FPhysAssetInformation>()
 		}
 		return Z_Registration_Info_UScriptStruct_PhysAssetInformation.InnerSingleton;
 	}
+	struct Z_Construct_UDelegateFunction_MPShooter_OnLeftGame__DelegateSignature_Statics
+	{
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UDelegateFunction_MPShooter_OnLeftGame__DelegateSignature_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Character/MPCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UDelegateFunction_MPShooter_OnLeftGame__DelegateSignature_Statics::FuncParams = { (UObject*(*)())Z_Construct_UPackage__Script_MPShooter, nullptr, "OnLeftGame__DelegateSignature", nullptr, nullptr, 0, nullptr, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00130000, 0, 0, METADATA_PARAMS(Z_Construct_UDelegateFunction_MPShooter_OnLeftGame__DelegateSignature_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_MPShooter_OnLeftGame__DelegateSignature_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UDelegateFunction_MPShooter_OnLeftGame__DelegateSignature()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UDelegateFunction_MPShooter_OnLeftGame__DelegateSignature_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
 	DEFINE_FUNCTION(AMPCharacter::execGetSurfaceType)
 	{
 		P_FINISH;
@@ -308,22 +331,37 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FPhysAssetInformation>()
 		P_THIS->ReceiveDamage(Z_Param_DamagedActor,Z_Param_Damage,Z_Param_DamageType,Z_Param_InstigatorController,Z_Param_DamageCauser);
 		P_NATIVE_END;
 	}
-	DEFINE_FUNCTION(AMPCharacter::execMulticastEliminated)
+	DEFINE_FUNCTION(AMPCharacter::execServerLeaveGame)
 	{
 		P_FINISH;
 		P_NATIVE_BEGIN;
-		P_THIS->MulticastEliminated_Implementation();
+		P_THIS->ServerLeaveGame_Implementation();
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(AMPCharacter::execMulticastEliminated)
+	{
+		P_GET_UBOOL(Z_Param_bPlayerLeftGame);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->MulticastEliminated_Implementation(Z_Param_bPlayerLeftGame);
 		P_NATIVE_END;
 	}
 	static FName NAME_AMPCharacter_MulticastEliminated = FName(TEXT("MulticastEliminated"));
-	void AMPCharacter::MulticastEliminated()
+	void AMPCharacter::MulticastEliminated(bool bPlayerLeftGame)
 	{
-		ProcessEvent(FindFunctionChecked(NAME_AMPCharacter_MulticastEliminated),NULL);
+		MPCharacter_eventMulticastEliminated_Parms Parms;
+		Parms.bPlayerLeftGame=bPlayerLeftGame ? true : false;
+		ProcessEvent(FindFunctionChecked(NAME_AMPCharacter_MulticastEliminated),&Parms);
 	}
 	static FName NAME_AMPCharacter_ServerEquipButtonPressed = FName(TEXT("ServerEquipButtonPressed"));
 	void AMPCharacter::ServerEquipButtonPressed()
 	{
 		ProcessEvent(FindFunctionChecked(NAME_AMPCharacter_ServerEquipButtonPressed),NULL);
+	}
+	static FName NAME_AMPCharacter_ServerLeaveGame = FName(TEXT("ServerLeaveGame"));
+	void AMPCharacter::ServerLeaveGame()
+	{
+		ProcessEvent(FindFunctionChecked(NAME_AMPCharacter_ServerLeaveGame),NULL);
 	}
 	void AMPCharacter::StaticRegisterNativesAMPCharacter()
 	{
@@ -337,6 +375,7 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FPhysAssetInformation>()
 			{ "OnRep_Shield", &AMPCharacter::execOnRep_Shield },
 			{ "ReceiveDamage", &AMPCharacter::execReceiveDamage },
 			{ "ServerEquipButtonPressed", &AMPCharacter::execServerEquipButtonPressed },
+			{ "ServerLeaveGame", &AMPCharacter::execServerLeaveGame },
 			{ "UpdateDissolveMaterial", &AMPCharacter::execUpdateDissolveMaterial },
 		};
 		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
@@ -375,17 +414,28 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FPhysAssetInformation>()
 	}
 	struct Z_Construct_UFunction_AMPCharacter_MulticastEliminated_Statics
 	{
+		static void NewProp_bPlayerLeftGame_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_bPlayerLeftGame;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
 #endif
 		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	void Z_Construct_UFunction_AMPCharacter_MulticastEliminated_Statics::NewProp_bPlayerLeftGame_SetBit(void* Obj)
+	{
+		((MPCharacter_eventMulticastEliminated_Parms*)Obj)->bPlayerLeftGame = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_AMPCharacter_MulticastEliminated_Statics::NewProp_bPlayerLeftGame = { "bPlayerLeftGame", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(MPCharacter_eventMulticastEliminated_Parms), &Z_Construct_UFunction_AMPCharacter_MulticastEliminated_Statics::NewProp_bPlayerLeftGame_SetBit, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AMPCharacter_MulticastEliminated_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMPCharacter_MulticastEliminated_Statics::NewProp_bPlayerLeftGame,
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMPCharacter_MulticastEliminated_Statics::Function_MetaDataParams[] = {
 		{ "ModuleRelativePath", "Character/MPCharacter.h" },
 	};
 #endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMPCharacter_MulticastEliminated_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMPCharacter, nullptr, "MulticastEliminated", nullptr, nullptr, 0, nullptr, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00024CC0, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AMPCharacter_MulticastEliminated_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AMPCharacter_MulticastEliminated_Statics::Function_MetaDataParams)) };
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMPCharacter_MulticastEliminated_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMPCharacter, nullptr, "MulticastEliminated", nullptr, nullptr, sizeof(MPCharacter_eventMulticastEliminated_Parms), Z_Construct_UFunction_AMPCharacter_MulticastEliminated_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AMPCharacter_MulticastEliminated_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00024CC0, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AMPCharacter_MulticastEliminated_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AMPCharacter_MulticastEliminated_Statics::Function_MetaDataParams)) };
 	UFunction* Z_Construct_UFunction_AMPCharacter_MulticastEliminated()
 	{
 		static UFunction* ReturnFunction = nullptr;
@@ -598,6 +648,28 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FPhysAssetInformation>()
 		if (!ReturnFunction)
 		{
 			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AMPCharacter_ServerEquipButtonPressed_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_AMPCharacter_ServerLeaveGame_Statics
+	{
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMPCharacter_ServerLeaveGame_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Character/MPCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMPCharacter_ServerLeaveGame_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMPCharacter, nullptr, "ServerLeaveGame", nullptr, nullptr, 0, nullptr, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00220CC0, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AMPCharacter_ServerLeaveGame_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AMPCharacter_ServerLeaveGame_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_AMPCharacter_ServerLeaveGame()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AMPCharacter_ServerLeaveGame_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -821,13 +893,14 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FPhysAssetInformation>()
 	};
 	const FClassFunctionLinkInfo Z_Construct_UClass_AMPCharacter_Statics::FuncInfo[] = {
 		{ &Z_Construct_UFunction_AMPCharacter_GetSurfaceType, "GetSurfaceType" }, // 839051268
-		{ &Z_Construct_UFunction_AMPCharacter_MulticastEliminated, "MulticastEliminated" }, // 3831109124
+		{ &Z_Construct_UFunction_AMPCharacter_MulticastEliminated, "MulticastEliminated" }, // 3887871201
 		{ &Z_Construct_UFunction_AMPCharacter_OnRep_Health, "OnRep_Health" }, // 1181647892
 		{ &Z_Construct_UFunction_AMPCharacter_OnRep_OverlappingThrowableWeapon, "OnRep_OverlappingThrowableWeapon" }, // 2130971630
 		{ &Z_Construct_UFunction_AMPCharacter_OnRep_OverlappingWeapon, "OnRep_OverlappingWeapon" }, // 134812474
 		{ &Z_Construct_UFunction_AMPCharacter_OnRep_Shield, "OnRep_Shield" }, // 3118912397
 		{ &Z_Construct_UFunction_AMPCharacter_ReceiveDamage, "ReceiveDamage" }, // 3433032911
 		{ &Z_Construct_UFunction_AMPCharacter_ServerEquipButtonPressed, "ServerEquipButtonPressed" }, // 3453277728
+		{ &Z_Construct_UFunction_AMPCharacter_ServerLeaveGame, "ServerLeaveGame" }, // 2451018194
 		{ &Z_Construct_UFunction_AMPCharacter_UpdateDissolveMaterial, "UpdateDissolveMaterial" }, // 605684417
 	};
 #if WITH_METADATA
@@ -1282,9 +1355,9 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FPhysAssetInformation>()
 		{ FPhysAssetInformation::StaticStruct, Z_Construct_UScriptStruct_FPhysAssetInformation_Statics::NewStructOps, TEXT("PhysAssetInformation"), &Z_Registration_Info_UScriptStruct_PhysAssetInformation, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FPhysAssetInformation), 4026808977U) },
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AMPCharacter, AMPCharacter::StaticClass, TEXT("AMPCharacter"), &Z_Registration_Info_UClass_AMPCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMPCharacter), 403592072U) },
+		{ Z_Construct_UClass_AMPCharacter, AMPCharacter::StaticClass, TEXT("AMPCharacter"), &Z_Registration_Info_UClass_AMPCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMPCharacter), 895649027U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_1182127726(TEXT("/Script/MPShooter"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_3992289864(TEXT("/Script/MPShooter"),
 		Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_Statics::ClassInfo),
 		Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_Statics::ScriptStructInfo),
 		Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_Statics::EnumInfo));

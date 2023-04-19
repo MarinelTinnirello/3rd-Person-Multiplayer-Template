@@ -16,6 +16,7 @@
 #include "MPShooter/GameMode/MPShooterGameMode.h"
 #include "MPShooter/GameState/MPGameState.h"
 #include "MPShooter/PlayerState/MPPlayerState.h"
+#include "MPShooter/HUD/ReturnToMainMenu.h"
 
 void AMPPlayerController::BeginPlay()
 {
@@ -65,6 +66,17 @@ void AMPPlayerController::ReceivedPlayer()
 	}
 }
 
+void AMPPlayerController::SetupInputComponent()
+{
+	Super::SetupInputComponent();
+	if (InputComponent == nullptr)
+	{
+		return;
+	}
+
+	InputComponent->BindAction("Quit", IE_Pressed, this, &AMPPlayerController::ShowReturnToMainMenu);
+}
+
 void AMPPlayerController::ServerCheckMatchState_Implementation()
 {
 	AMPShooterGameMode* GameMode = Cast<AMPShooterGameMode>(UGameplayStatics::GetGameMode(this));
@@ -96,44 +108,44 @@ void AMPPlayerController::ClientJoinMidGame_Implementation(FName StateOfMatch, f
 	}
 }
 
-//void AMPPlayerController::BroadcastElim(APlayerState* Attacker, APlayerState* Victim)
-//{
-//	ClientElimAnnouncement(Attacker, Victim);
-//}
-//
-//void AMPPlayerController::ClientElimAnnouncement_Implementation(APlayerState* Attacker, APlayerState* Victim)
-//{
-//	APlayerState* Self = GetPlayerState<APlayerState>();
-//	if (Attacker && Victim && Self)
-//	{
-//		MPHUD = MPHUD == nullptr ? Cast<AMPHUD>(GetHUD()) : MPHUD;
-//		if (MPHUD)
-//		{
-//			if (Attacker == Self && Victim != Self)
-//			{
-//				MPHUD->AddElimAnnouncement("You", Victim->GetPlayerName());
-//				return;
-//			}
-//			if (Victim == Self && Attacker != Self)
-//			{
-//				MPHUD->AddElimAnnouncement(Attacker->GetPlayerName(), "you");
-//				return;
-//			}
-//			if (Attacker == Victim && Attacker == Self)
-//			{
-//				MPHUD->AddElimAnnouncement("You", "yourself");
-//				return;
-//			}
-//			if (Attacker == Victim && Attacker != Self)
-//			{
-//				MPHUD->AddElimAnnouncement(Attacker->GetPlayerName(), "themselves");
-//				return;
-//			}
-//
-//			MPHUD->AddElimAnnouncement(Attacker->GetPlayerName(), Victim->GetPlayerName());
-//		}
-//	}
-//}
+void AMPPlayerController::BroadcastElim(APlayerState* Attacker, APlayerState* Victim)
+{
+	ClientElimAnnouncement(Attacker, Victim);
+}
+
+void AMPPlayerController::ClientElimAnnouncement_Implementation(APlayerState* Attacker, APlayerState* Victim)
+{
+	APlayerState* Self = GetPlayerState<APlayerState>();
+	if (Attacker && Victim && Self)
+	{
+		MPHUD = MPHUD == nullptr ? Cast<AMPHUD>(GetHUD()) : MPHUD;
+		if (MPHUD)
+		{
+			if (Attacker == Self && Victim != Self)
+			{
+				MPHUD->AddEliminateAnnouncement("You", Victim->GetPlayerName());
+				return;
+			}
+			if (Victim == Self && Attacker != Self)
+			{
+				MPHUD->AddEliminateAnnouncement(Attacker->GetPlayerName(), "you");
+				return;
+			}
+			if (Attacker == Victim && Attacker == Self)
+			{
+				MPHUD->AddEliminateAnnouncement("You", "yourself");
+				return;
+			}
+			if (Attacker == Victim && Attacker != Self)
+			{
+				MPHUD->AddEliminateAnnouncement(Attacker->GetPlayerName(), "themselves");
+				return;
+			}
+
+			MPHUD->AddEliminateAnnouncement(Attacker->GetPlayerName(), Victim->GetPlayerName());
+		}
+	}
+}
 
 void AMPPlayerController::PollInit()
 {
@@ -622,7 +634,7 @@ void AMPPlayerController::CheckPing(float DeltaTime)
 		if (PlayerState)
 		{
 			// ping is compressed; it's actually ping / 4
-			if (PlayerState->GetPing() * 4 > HighPingThreshold) 
+			if (PlayerState->GetCompressedPing() * 4 > HighPingThreshold) 
 			{
 				HighPingWarning();
 				PingAnimationRunningTime = 0.f;
@@ -698,4 +710,28 @@ void AMPPlayerController::StopHighPingWarning()
 void AMPPlayerController::ServerReportPingStatus_Implementation(bool bHighPing)
 {
 	HighPingDelegate.Broadcast(bHighPing);
+}
+
+void AMPPlayerController::ShowReturnToMainMenu()
+{
+	if (ReturnToMainMenuWidget == nullptr)
+	{
+		return;
+	}
+	if (ReturnToMainMenu == nullptr)
+	{
+		ReturnToMainMenu = CreateWidget<UReturnToMainMenu>(this, ReturnToMainMenuWidget);
+	}
+	if (ReturnToMainMenu)
+	{
+		bReturnToMainMenuOpen = !bReturnToMainMenuOpen;
+		if (bReturnToMainMenuOpen)
+		{
+			ReturnToMainMenu->MenuSetup();
+		}
+		else
+		{
+			ReturnToMainMenu->MenuTearDown();
+		}
+	}
 }

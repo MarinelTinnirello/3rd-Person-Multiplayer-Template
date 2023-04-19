@@ -34,6 +34,11 @@ void AMPHUD::AddAnnoucement()
 	}
 }
 
+void AMPHUD::AddEliminateAnnouncement(FString Attacker, FString Victim)
+{
+	//
+}
+
 void AMPHUD::AddSniperScopeOverlay()
 {
 	APlayerController* PlayerController = GetOwningPlayerController();

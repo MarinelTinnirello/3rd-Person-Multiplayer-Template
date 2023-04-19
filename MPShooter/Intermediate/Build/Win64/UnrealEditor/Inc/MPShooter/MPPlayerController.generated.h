@@ -8,6 +8,7 @@
 #include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+class APlayerState;
 #ifdef MPSHOOTER_MPPlayerController_generated_h
 #error "MPPlayerController.generated.h already included, missing '#pragma once' in MPPlayerController.h"
 #endif
@@ -28,6 +29,7 @@ static inline void FHighPingDelegate_DelegateWrapper(const FMulticastScriptDeleg
 
 #define FID_MPShooter_Source_MPShooter_PlayerController_MPPlayerController_h_17_SPARSE_DATA
 #define FID_MPShooter_Source_MPShooter_PlayerController_MPPlayerController_h_17_RPC_WRAPPERS \
+	virtual void ClientElimAnnouncement_Implementation(APlayerState* Attacker, APlayerState* Victim); \
 	virtual void ClientJoinMidGame_Implementation(FName StateOfMatch, float Warmup, float LevelStart, float Match, float Cooldown, float MatchWarning); \
 	virtual void ServerCheckMatchState_Implementation(); \
 	virtual void ServerReportPingStatus_Implementation(bool bHighPing); \
@@ -35,6 +37,7 @@ static inline void FHighPingDelegate_DelegateWrapper(const FMulticastScriptDeleg
 	virtual void ServerRequestServerTime_Implementation(float TimeOfClientRequest); \
  \
 	DECLARE_FUNCTION(execOnRep_MatchState); \
+	DECLARE_FUNCTION(execClientElimAnnouncement); \
 	DECLARE_FUNCTION(execClientJoinMidGame); \
 	DECLARE_FUNCTION(execServerCheckMatchState); \
 	DECLARE_FUNCTION(execServerReportPingStatus); \
@@ -43,6 +46,7 @@ static inline void FHighPingDelegate_DelegateWrapper(const FMulticastScriptDeleg
 
 
 #define FID_MPShooter_Source_MPShooter_PlayerController_MPPlayerController_h_17_RPC_WRAPPERS_NO_PURE_DECLS \
+	virtual void ClientElimAnnouncement_Implementation(APlayerState* Attacker, APlayerState* Victim); \
 	virtual void ClientJoinMidGame_Implementation(FName StateOfMatch, float Warmup, float LevelStart, float Match, float Cooldown, float MatchWarning); \
 	virtual void ServerCheckMatchState_Implementation(); \
 	virtual void ServerReportPingStatus_Implementation(bool bHighPing); \
@@ -50,6 +54,7 @@ static inline void FHighPingDelegate_DelegateWrapper(const FMulticastScriptDeleg
 	virtual void ServerRequestServerTime_Implementation(float TimeOfClientRequest); \
  \
 	DECLARE_FUNCTION(execOnRep_MatchState); \
+	DECLARE_FUNCTION(execClientElimAnnouncement); \
 	DECLARE_FUNCTION(execClientJoinMidGame); \
 	DECLARE_FUNCTION(execServerCheckMatchState); \
 	DECLARE_FUNCTION(execServerReportPingStatus); \
@@ -58,6 +63,11 @@ static inline void FHighPingDelegate_DelegateWrapper(const FMulticastScriptDeleg
 
 
 #define FID_MPShooter_Source_MPShooter_PlayerController_MPPlayerController_h_17_EVENT_PARMS \
+	struct MPPlayerController_eventClientElimAnnouncement_Parms \
+	{ \
+		APlayerState* Attacker; \
+		APlayerState* Victim; \
+	}; \
 	struct MPPlayerController_eventClientJoinMidGame_Parms \
 	{ \
 		FName StateOfMatch; \

@@ -45,6 +45,7 @@ public:
 
 	void AddCharacterOverlay();
 	void AddAnnoucement();
+	void AddEliminateAnnouncement(FString Attacker, FString Victim);
 	void AddSniperScopeOverlay();
 	virtual void DrawHUD() override;
 
@@ -53,10 +54,27 @@ protected:
 
 private:
 	FHUDPackage HUDPackage;
+
+	//
+	// Crosshairs
+	//
 	UPROPERTY(EditAnywhere, meta = (ToolTip = "Max amount the crosshairs should spread out."))
 	float CrosshairsSpreadMax = 16.f;
 
 	void DrawCrosshair(UTexture2D* Texture, FVector2D ViewportCenter, FVector2D Spread, FLinearColor CrosshairsColor);
+
+	//
+	// Elim Announcements
+	//
+	/*UPROPERTY(EditAnywhere)
+	TSubclassOf<class UElimAnnouncement> ElimAnnouncementClass;
+	UPROPERTY(EditAnywhere)
+	float ElimAnnouncementTime = 2.5f;
+	UPROPERTY()
+	TArray<UElimAnnouncement*> ElimMessages;
+
+	UFUNCTION()
+	void ElimAnnouncementTimerFinished(UElimAnnouncement* MsgToRemove);*/
 
 public:
 	FORCEINLINE void SetHUDPackage(const FHUDPackage& Package) { HUDPackage = Package; }

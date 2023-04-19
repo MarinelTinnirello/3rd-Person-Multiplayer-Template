@@ -91,7 +91,7 @@ void AMPShooterGameMode::CharacterEliminated(class AMPCharacter* ElimmedCharacte
 
 	if (ElimmedCharacter)
 	{
-		ElimmedCharacter->Eliminated();
+		ElimmedCharacter->Eliminated(false);
 	}
 }
 
@@ -141,5 +141,25 @@ void AMPShooterGameMode::RequestRespawn(class ACharacter* ElimmedCharacter, clas
 		// if there's no suitable spawn locations, spawn at the default
 		FRotator DefaultRotation = FRotator(0.f, 0.f, 0.f);
 		RestartPlayerAtTransform(ElimmedController, FTransform(DefaultRotation, DefaultLocation));
+	}
+}
+
+void AMPShooterGameMode::PlayerLeftGame(AMPPlayerState* PlayerLeaving)
+{
+	if (PlayerLeaving == nullptr)
+	{
+		return;
+	}
+
+	AMPGameState* MPGameState = GetGameState<AMPGameState>();
+	if (MPGameState && MPGameState->TopScoringPlayers.Contains(PlayerLeaving))
+	{
+		MPGameState->TopScoringPlayers.Remove(PlayerLeaving);
+	}
+
+	AMPCharacter* CharacterLeaving = Cast<AMPCharacter>(PlayerLeaving->GetPawn());
+	if (CharacterLeaving)
+	{
+		CharacterLeaving->Eliminated(true);
 	}
 }

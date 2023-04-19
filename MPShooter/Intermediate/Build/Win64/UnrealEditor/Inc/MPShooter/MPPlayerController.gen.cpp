@@ -14,9 +14,13 @@ void EmptyLinkFunctionForGeneratedCodeMPPlayerController() {}
 	MPSHOOTER_API UClass* Z_Construct_UClass_AMPPlayerController_NoRegister();
 	MPSHOOTER_API UClass* Z_Construct_UClass_AMPPlayerController();
 	ENGINE_API UClass* Z_Construct_UClass_APlayerController();
+	ENGINE_API UClass* Z_Construct_UClass_APlayerState_NoRegister();
 	MPSHOOTER_API UClass* Z_Construct_UClass_AMPShooterGameMode_NoRegister();
 	MPSHOOTER_API UClass* Z_Construct_UClass_AMPHUD_NoRegister();
 	MPSHOOTER_API UClass* Z_Construct_UClass_UCharacterOverlay_NoRegister();
+	COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
+	UMG_API UClass* Z_Construct_UClass_UUserWidget_NoRegister();
+	MPSHOOTER_API UClass* Z_Construct_UClass_UReturnToMainMenu_NoRegister();
 // End Cross Module References
 	struct Z_Construct_UDelegateFunction_MPShooter_HighPingDelegate__DelegateSignature_Statics
 	{
@@ -60,6 +64,15 @@ void EmptyLinkFunctionForGeneratedCodeMPPlayerController() {}
 		P_FINISH;
 		P_NATIVE_BEGIN;
 		P_THIS->OnRep_MatchState();
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(AMPPlayerController::execClientElimAnnouncement)
+	{
+		P_GET_OBJECT(APlayerState,Z_Param_Attacker);
+		P_GET_OBJECT(APlayerState,Z_Param_Victim);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->ClientElimAnnouncement_Implementation(Z_Param_Attacker,Z_Param_Victim);
 		P_NATIVE_END;
 	}
 	DEFINE_FUNCTION(AMPPlayerController::execClientJoinMidGame)
@@ -107,6 +120,14 @@ void EmptyLinkFunctionForGeneratedCodeMPPlayerController() {}
 		P_THIS->ServerRequestServerTime_Implementation(Z_Param_TimeOfClientRequest);
 		P_NATIVE_END;
 	}
+	static FName NAME_AMPPlayerController_ClientElimAnnouncement = FName(TEXT("ClientElimAnnouncement"));
+	void AMPPlayerController::ClientElimAnnouncement(APlayerState* Attacker, APlayerState* Victim)
+	{
+		MPPlayerController_eventClientElimAnnouncement_Parms Parms;
+		Parms.Attacker=Attacker;
+		Parms.Victim=Victim;
+		ProcessEvent(FindFunctionChecked(NAME_AMPPlayerController_ClientElimAnnouncement),&Parms);
+	}
 	static FName NAME_AMPPlayerController_ClientJoinMidGame = FName(TEXT("ClientJoinMidGame"));
 	void AMPPlayerController::ClientJoinMidGame(FName StateOfMatch, float Warmup, float LevelStart, float Match, float Cooldown, float MatchWarning)
 	{
@@ -150,6 +171,7 @@ void EmptyLinkFunctionForGeneratedCodeMPPlayerController() {}
 	{
 		UClass* Class = AMPPlayerController::StaticClass();
 		static const FNameNativePtrPair Funcs[] = {
+			{ "ClientElimAnnouncement", &AMPPlayerController::execClientElimAnnouncement },
 			{ "ClientJoinMidGame", &AMPPlayerController::execClientJoinMidGame },
 			{ "ClientReportServerTime", &AMPPlayerController::execClientReportServerTime },
 			{ "OnRep_MatchState", &AMPPlayerController::execOnRep_MatchState },
@@ -158,6 +180,37 @@ void EmptyLinkFunctionForGeneratedCodeMPPlayerController() {}
 			{ "ServerRequestServerTime", &AMPPlayerController::execServerRequestServerTime },
 		};
 		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
+	}
+	struct Z_Construct_UFunction_AMPPlayerController_ClientElimAnnouncement_Statics
+	{
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_Attacker;
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_Victim;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_AMPPlayerController_ClientElimAnnouncement_Statics::NewProp_Attacker = { "Attacker", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(MPPlayerController_eventClientElimAnnouncement_Parms, Attacker), Z_Construct_UClass_APlayerState_NoRegister, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_AMPPlayerController_ClientElimAnnouncement_Statics::NewProp_Victim = { "Victim", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(MPPlayerController_eventClientElimAnnouncement_Parms, Victim), Z_Construct_UClass_APlayerState_NoRegister, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AMPPlayerController_ClientElimAnnouncement_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMPPlayerController_ClientElimAnnouncement_Statics::NewProp_Attacker,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMPPlayerController_ClientElimAnnouncement_Statics::NewProp_Victim,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMPPlayerController_ClientElimAnnouncement_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "PlayerController/MPPlayerController.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMPPlayerController_ClientElimAnnouncement_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMPPlayerController, nullptr, "ClientElimAnnouncement", nullptr, nullptr, sizeof(MPPlayerController_eventClientElimAnnouncement_Parms), Z_Construct_UFunction_AMPPlayerController_ClientElimAnnouncement_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AMPPlayerController_ClientElimAnnouncement_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x01080CC0, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AMPPlayerController_ClientElimAnnouncement_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AMPPlayerController_ClientElimAnnouncement_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_AMPPlayerController_ClientElimAnnouncement()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AMPPlayerController_ClientElimAnnouncement_Statics::FuncParams);
+		}
+		return ReturnFunction;
 	}
 	struct Z_Construct_UFunction_AMPPlayerController_ClientJoinMidGame_Statics
 	{
@@ -384,6 +437,14 @@ void EmptyLinkFunctionForGeneratedCodeMPPlayerController() {}
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_HighPingThreshold_MetaData[];
 #endif
 		static const UECodeGen_Private::FFloatPropertyParams NewProp_HighPingThreshold;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_ReturnToMainMenuWidget_MetaData[];
+#endif
+		static const UECodeGen_Private::FClassPropertyParams NewProp_ReturnToMainMenuWidget;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_ReturnToMainMenu_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_ReturnToMainMenu;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
@@ -393,6 +454,7 @@ void EmptyLinkFunctionForGeneratedCodeMPPlayerController() {}
 		(UObject* (*)())Z_Construct_UPackage__Script_MPShooter,
 	};
 	const FClassFunctionLinkInfo Z_Construct_UClass_AMPPlayerController_Statics::FuncInfo[] = {
+		{ &Z_Construct_UFunction_AMPPlayerController_ClientElimAnnouncement, "ClientElimAnnouncement" }, // 4061657927
 		{ &Z_Construct_UFunction_AMPPlayerController_ClientJoinMidGame, "ClientJoinMidGame" }, // 4236702150
 		{ &Z_Construct_UFunction_AMPPlayerController_ClientReportServerTime, "ClientReportServerTime" }, // 4208733907
 		{ &Z_Construct_UFunction_AMPPlayerController_OnRep_MatchState, "OnRep_MatchState" }, // 1253050963
@@ -466,6 +528,21 @@ void EmptyLinkFunctionForGeneratedCodeMPPlayerController() {}
 	};
 #endif
 	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AMPPlayerController_Statics::NewProp_HighPingThreshold = { "HighPingThreshold", nullptr, (EPropertyFlags)0x0040000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMPPlayerController, HighPingThreshold), METADATA_PARAMS(Z_Construct_UClass_AMPPlayerController_Statics::NewProp_HighPingThreshold_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMPPlayerController_Statics::NewProp_HighPingThreshold_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMPPlayerController_Statics::NewProp_ReturnToMainMenuWidget_MetaData[] = {
+		{ "Category", "HUD" },
+		{ "ModuleRelativePath", "PlayerController/MPPlayerController.h" },
+		{ "ToolTip", "Widget for returning to the main menu." },
+	};
+#endif
+	const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_AMPPlayerController_Statics::NewProp_ReturnToMainMenuWidget = { "ReturnToMainMenuWidget", nullptr, (EPropertyFlags)0x0044000000000001, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMPPlayerController, ReturnToMainMenuWidget), Z_Construct_UClass_UUserWidget_NoRegister, Z_Construct_UClass_UClass, METADATA_PARAMS(Z_Construct_UClass_AMPPlayerController_Statics::NewProp_ReturnToMainMenuWidget_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMPPlayerController_Statics::NewProp_ReturnToMainMenuWidget_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMPPlayerController_Statics::NewProp_ReturnToMainMenu_MetaData[] = {
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "PlayerController/MPPlayerController.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMPPlayerController_Statics::NewProp_ReturnToMainMenu = { "ReturnToMainMenu", nullptr, (EPropertyFlags)0x0040000000080008, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMPPlayerController, ReturnToMainMenu), Z_Construct_UClass_UReturnToMainMenu_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AMPPlayerController_Statics::NewProp_ReturnToMainMenu_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMPPlayerController_Statics::NewProp_ReturnToMainMenu_MetaData)) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AMPPlayerController_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMPPlayerController_Statics::NewProp_TimeSyncFrequency,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMPPlayerController_Statics::NewProp_MPShooterGameMode,
@@ -475,6 +552,8 @@ void EmptyLinkFunctionForGeneratedCodeMPPlayerController() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMPPlayerController_Statics::NewProp_HighPingDuration,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMPPlayerController_Statics::NewProp_CheckPingFrequency,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMPPlayerController_Statics::NewProp_HighPingThreshold,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMPPlayerController_Statics::NewProp_ReturnToMainMenuWidget,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMPPlayerController_Statics::NewProp_ReturnToMainMenu,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_AMPPlayerController_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<AMPPlayerController>::IsAbstract,
@@ -522,9 +601,9 @@ void EmptyLinkFunctionForGeneratedCodeMPPlayerController() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_PlayerController_MPPlayerController_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AMPPlayerController, AMPPlayerController::StaticClass, TEXT("AMPPlayerController"), &Z_Registration_Info_UClass_AMPPlayerController, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMPPlayerController), 365638048U) },
+		{ Z_Construct_UClass_AMPPlayerController, AMPPlayerController::StaticClass, TEXT("AMPPlayerController"), &Z_Registration_Info_UClass_AMPPlayerController, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMPPlayerController), 1066088934U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_PlayerController_MPPlayerController_h_3114075699(TEXT("/Script/MPShooter"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_PlayerController_MPPlayerController_h_897397535(TEXT("/Script/MPShooter"),
 		Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_PlayerController_MPPlayerController_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_PlayerController_MPPlayerController_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

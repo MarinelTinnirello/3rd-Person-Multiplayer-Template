@@ -44,6 +44,8 @@ void EmptyLinkFunctionForGeneratedCodeWeaponTypes() {}
 		{ "EWeaponType::EWT_Shotgun", (int64)EWeaponType::EWT_Shotgun },
 		{ "EWeaponType::EWT_SniperRifle", (int64)EWeaponType::EWT_SniperRifle },
 		{ "EWeaponType::EWT_GrenadeLauncher", (int64)EWeaponType::EWT_GrenadeLauncher },
+		{ "EWeaponType::EWT_Flamethrower", (int64)EWeaponType::EWT_Flamethrower },
+		{ "EWeaponType::EWT_LightningGun", (int64)EWeaponType::EWT_LightningGun },
 		{ "EWeaponType::EWT_MAX", (int64)EWeaponType::EWT_MAX },
 	};
 #if WITH_METADATA
@@ -51,8 +53,12 @@ void EmptyLinkFunctionForGeneratedCodeWeaponTypes() {}
 		{ "BlueprintType", "true" },
 		{ "EWT_AssaultRifle.DisplayName", "Assault Rifle" },
 		{ "EWT_AssaultRifle.Name", "EWeaponType::EWT_AssaultRifle" },
+		{ "EWT_Flamethrower.DisplayName", "Flamethrower" },
+		{ "EWT_Flamethrower.Name", "EWeaponType::EWT_Flamethrower" },
 		{ "EWT_GrenadeLauncher.DisplayName", "Grenade Launcher" },
 		{ "EWT_GrenadeLauncher.Name", "EWeaponType::EWT_GrenadeLauncher" },
+		{ "EWT_LightningGun.DisplayName", "LightningGun" },
+		{ "EWT_LightningGun.Name", "EWeaponType::EWT_LightningGun" },
 		{ "EWT_MAX.DisplayName", "DefaultMax" },
 		{ "EWT_MAX.Name", "EWeaponType::EWT_MAX" },
 		{ "EWT_Pistol.DisplayName", "Pistol" },
@@ -235,11 +241,11 @@ void EmptyLinkFunctionForGeneratedCodeWeaponTypes() {}
 		static const FEnumRegisterCompiledInInfo EnumInfo[];
 	};
 	const FEnumRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_WeaponTypes_h_Statics::EnumInfo[] = {
-		{ EWeaponType_StaticEnum, TEXT("EWeaponType"), &Z_Registration_Info_UEnum_EWeaponType, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 2884359518U) },
+		{ EWeaponType_StaticEnum, TEXT("EWeaponType"), &Z_Registration_Info_UEnum_EWeaponType, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 2937891424U) },
 		{ EThrowableWeaponType_StaticEnum, TEXT("EThrowableWeaponType"), &Z_Registration_Info_UEnum_EThrowableWeaponType, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 3616250726U) },
 		{ EFireType_StaticEnum, TEXT("EFireType"), &Z_Registration_Info_UEnum_EFireType, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 3861538098U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_WeaponTypes_h_1360466489(TEXT("/Script/MPShooter"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_WeaponTypes_h_3190787629(TEXT("/Script/MPShooter"),
 		nullptr, 0,
 		nullptr, 0,
 		Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_WeaponTypes_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_WeaponTypes_h_Statics::EnumInfo));

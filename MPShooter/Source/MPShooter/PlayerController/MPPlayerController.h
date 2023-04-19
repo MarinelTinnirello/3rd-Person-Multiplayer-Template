@@ -43,10 +43,11 @@ public:
 	void OnMatchStateSet(FName State);
 	void HandleMatchHasStarted();
 	void HandleCooldownMatch();
-	/*void BroadcastElim(APlayerState* Attacker, APlayerState* Victim);*/
+	void BroadcastElim(APlayerState* Attacker, APlayerState* Victim);
 
 protected:
 	virtual void BeginPlay() override;
+	virtual void SetupInputComponent() override;
 
 	void PollInit();
 	void SetHUDTime();
@@ -76,14 +77,19 @@ protected:
 	void ServerReportPingStatus(bool bHighPing);
 
 	//
+	// Return to Main Menu
+	//
+	void ShowReturnToMainMenu();
+
+	//
 	// Match State
 	//
 	UFUNCTION(Server, Reliable)
 	void ServerCheckMatchState();
 	UFUNCTION(Client, Reliable)
 	void ClientJoinMidGame(FName StateOfMatch, float Warmup, float LevelStart, float Match, float Cooldown, float MatchWarning);
-	/*UFUNCTION(Client, Reliable)
-	void ClientElimAnnouncement(APlayerState* Attacker, APlayerState* Victim);*/
+	UFUNCTION(Client, Reliable)
+	void ClientElimAnnouncement(APlayerState* Attacker, APlayerState* Victim);
 
 private:
 	UPROPERTY()
@@ -142,5 +148,14 @@ private:
 	float CheckPingFrequency = 20.f;
 	UPROPERTY(EditAnywhere, Category = "Ping", meta = (ToolTip = "Threshold of acceptable ping."))
 	float HighPingThreshold = 50.f;
+
+	//
+	// Return to Main Menu
+	//
+	UPROPERTY(EditAnywhere, Category = "HUD", meta = (ToolTip = "Widget for returning to the main menu."))
+	TSubclassOf<class UUserWidget> ReturnToMainMenuWidget;
+	UPROPERTY()
+	class UReturnToMainMenu* ReturnToMainMenu;
+	bool bReturnToMainMenuOpen = false;
 
 };

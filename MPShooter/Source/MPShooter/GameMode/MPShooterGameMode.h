@@ -17,12 +17,6 @@ class MPSHOOTER_API AMPShooterGameMode : public AGameMode
 	GENERATED_BODY()
 	
 public:
-	AMPShooterGameMode();
-	virtual void Tick(float DeltaTime) override;
-
-	virtual void CharacterEliminated(class AMPCharacter* ElimmedCharacter, class AMPPlayerController* ElimmedController, class AMPPlayerController* AttackterController);
-	virtual void RequestRespawn(class ACharacter* ElimmedCharacter, class AController* ElimmedController);
-
 	UPROPERTY(EditDefaultsOnly)
 	float WarmupTime = 10.f;
 	UPROPERTY(EditDefaultsOnly)
@@ -32,6 +26,14 @@ public:
 	float CooldownTime = 10.f;
 	UPROPERTY(EditDefaultsOnly)
 	float MatchWarningTime = 10.f;
+
+	AMPShooterGameMode();
+	virtual void Tick(float DeltaTime) override;
+
+	virtual void CharacterEliminated(class AMPCharacter* ElimmedCharacter, class AMPPlayerController* ElimmedController, class AMPPlayerController* AttackterController);
+	virtual void RequestRespawn(class ACharacter* ElimmedCharacter, class AController* ElimmedController);
+
+	void PlayerLeftGame(class AMPPlayerState* PlayerLeaving);
 
 protected:
 	virtual void BeginPlay() override;

@@ -209,6 +209,16 @@ void AMPCharacter::PollInit()
 	}
 }
 
+void AMPCharacter::ServerLeaveGame_Implementation()
+{
+	AMPShooterGameMode* MPShooterGameMode = GetWorld()->GetAuthGameMode<AMPShooterGameMode>();		
+	MPPlayerState = MPPlayerState == nullptr ? GetPlayerState<AMPPlayerState>() : MPPlayerState;
+	if (MPShooterGameMode && MPPlayerState)
+	{
+		MPShooterGameMode->PlayerLeftGame(MPPlayerState);
+	}
+}
+
 UPARAM(DisplayName = "Physical Surface")
 EPhysicalSurface AMPCharacter::GetSurfaceType()
 {
@@ -1024,22 +1034,18 @@ void AMPCharacter::UpdateHUDHealth()
 	}
 }
 
-void AMPCharacter::Eliminated()
+void AMPCharacter::Eliminated(bool bPlayerLeftGame)
 {
 	DropOrDestroyWeapons();
 
-	MulticastEliminated();
-	GetWorldTimerManager().SetTimer(
-		EliminateTimer,
-		this,
-		&AMPCharacter::EliminateTimerFinished,
-		EliminateDelay
-	);
+	MulticastEliminated(bPlayerLeftGame);
 }
 
 
-void AMPCharacter::MulticastEliminated_Implementation()
+void AMPCharacter::MulticastEliminated_Implementation(bool bPlayerLeftGame)
 {
+	bLeftGame = bPlayerLeftGame;
+
 	if (MPPlayerController)
 	{
 		MPPlayerController->SetHUDWeaponAmmo(0);
@@ -1089,14 +1095,37 @@ void AMPCharacter::MulticastEliminated_Implementation()
 			GetActorLocation()
 		);
 	}
+
+	// Hide sniper scope (if necessary)
+	bool bHideSniperScope = MPPlayerController &&
+		IsLocallyControlled() &&
+		Combat &&
+		Combat->bAiming &&
+		Combat->EquippedWeapon &&
+		Combat->EquippedWeapon->GetWeaponType() == EWeaponType::EWT_SniperRifle;
+	if (bHideSniperScope)
+	{
+		MPPlayerController->SetHUDSniperScope(false);
+	}
+
+	GetWorldTimerManager().SetTimer(
+		EliminateTimer,
+		this,
+		&AMPCharacter::EliminateTimerFinished,
+		EliminateDelay
+	);
 }
 
 void AMPCharacter::EliminateTimerFinished()
 {
-	AMPShooterGameMode* MPShooterGameMode = GetWorld()->GetAuthGameMode<AMPShooterGameMode>();
-	if (MPShooterGameMode)
+	AMPShooterGameMode* MPShooterGameMode = GetWorld()->GetAuthGameMode<AMPShooterGameMode>();	
+	if (MPShooterGameMode && !bLeftGame)
 	{
 		MPShooterGameMode->RequestRespawn(this, Controller);
+	}
+	if (bLeftGame && IsLocallyControlled())
+	{
+		OnLeftGame.Broadcast();
 	}
 }
 

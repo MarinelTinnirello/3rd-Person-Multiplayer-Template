@@ -8,6 +8,7 @@
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeMPShooter_init() {}
 	MPSHOOTER_API UFunction* Z_Construct_UDelegateFunction_MPShooter_HighPingDelegate__DelegateSignature();
+	MPSHOOTER_API UFunction* Z_Construct_UDelegateFunction_MPShooter_OnLeftGame__DelegateSignature();
 	static FPackageRegistrationInfo Z_Registration_Info_UPackage__Script_MPShooter;
 	FORCENOINLINE UPackage* Z_Construct_UPackage__Script_MPShooter()
 	{
@@ -15,19 +16,20 @@ void EmptyLinkFunctionForGeneratedCodeMPShooter_init() {}
 		{
 			static UObject* (*const SingletonFuncArray[])() = {
 				(UObject* (*)())Z_Construct_UDelegateFunction_MPShooter_HighPingDelegate__DelegateSignature,
+				(UObject* (*)())Z_Construct_UDelegateFunction_MPShooter_OnLeftGame__DelegateSignature,
 			};
 			static const UECodeGen_Private::FPackageParams PackageParams = {
 				"/Script/MPShooter",
 				SingletonFuncArray,
 				UE_ARRAY_COUNT(SingletonFuncArray),
 				PKG_CompiledIn | 0x00000000,
-				0xABFFF694,
-				0x244A31B7,
+				0x436BAB97,
+				0x228897E1,
 				METADATA_PARAMS(nullptr, 0)
 			};
 			UECodeGen_Private::ConstructUPackage(Z_Registration_Info_UPackage__Script_MPShooter.OuterSingleton, PackageParams);
 		}
 		return Z_Registration_Info_UPackage__Script_MPShooter.OuterSingleton;
 	}
-	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_MPShooter(Z_Construct_UPackage__Script_MPShooter, TEXT("/Script/MPShooter"), Z_Registration_Info_UPackage__Script_MPShooter, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0xABFFF694, 0x244A31B7));
+	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_MPShooter(Z_Construct_UPackage__Script_MPShooter, TEXT("/Script/MPShooter"), Z_Registration_Info_UPackage__Script_MPShooter, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0x436BAB97, 0x228897E1));
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

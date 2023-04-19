@@ -43,6 +43,8 @@ struct FPhysAssetInformation
 	FTransform BoneWorldTransform;
 };
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnLeftGame);
+
 UCLASS()
 class MPSHOOTER_API AMPCharacter : public ACharacter, public IInteractWithCrosshairsInterface
 {
@@ -92,13 +94,18 @@ public:
 	void PlayThrowMontage();
 	void PlayEliminateMontage();
 
-	void Eliminated();
+	void Eliminated(bool bPlayerLeftGame);
 	void UpdateHUDHealth();
 	void UpdateHUDShield();
 	void UpdateHUDAmmo();
 
 	UFUNCTION(NetMulticast, Reliable)
-	void MulticastEliminated();
+	void MulticastEliminated(bool bPlayerLeftGame);
+
+	FOnLeftGame OnLeftGame;
+
+	UFUNCTION(Server, Reliable)
+	void ServerLeaveGame();
 
 	virtual void OnRep_ReplicatedMovement() override;
 
@@ -264,6 +271,11 @@ private:
 	class UParticleSystemComponent* ElimBotComponent;
 	UPROPERTY(EditAnywhere, Category = "Elim Bot", meta = (ToolTip = "Sound effect played for the bot generated on elimination."))
 	class USoundCue* ElimBotSFX;
+
+	//
+	// Networking
+	//
+	bool bLeftGame = false;
 
 	//
 	// Shield
