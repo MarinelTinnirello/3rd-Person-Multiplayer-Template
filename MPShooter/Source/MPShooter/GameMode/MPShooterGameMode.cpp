@@ -80,8 +80,34 @@ void AMPShooterGameMode::CharacterEliminated(class AMPCharacter* ElimmedCharacte
 	// Makes sure if the player eliminates themself, that the attacker won't get a free point
 	if (AttackerPlayerState && AttackerPlayerState != ElimmedPlayerState && MPGameState)
 	{
+		TArray<AMPPlayerState*> PlayersCurrentlyInTheLead;
+		for (auto LeadPlayer : MPGameState->TopScoringPlayers)
+		{
+			PlayersCurrentlyInTheLead.Add(LeadPlayer);
+		}
+
 		AttackerPlayerState->AddToScore(1.f);
 		MPGameState->UpdateTopScore(AttackerPlayerState);
+		if (MPGameState->TopScoringPlayers.Contains(AttackerPlayerState))
+		{
+			AMPCharacter* Leader = Cast<AMPCharacter>(AttackerPlayerState->GetPawn());
+			if (Leader)
+			{
+				Leader->MulticastGainedTheLead();
+			}
+		}
+
+		for (int32 i = 0; i < PlayersCurrentlyInTheLead.Num(); i++)
+		{
+			if (!MPGameState->TopScoringPlayers.Contains(PlayersCurrentlyInTheLead[i]))
+			{
+				AMPCharacter* Loser = Cast<AMPCharacter>(PlayersCurrentlyInTheLead[i]->GetPawn());
+				if (Loser)
+				{
+					Loser->MulticastLostTheLead();
+				}
+			}
+		}
 	}
 
 	if (ElimmedPlayerState)
@@ -92,6 +118,15 @@ void AMPShooterGameMode::CharacterEliminated(class AMPCharacter* ElimmedCharacte
 	if (ElimmedCharacter)
 	{
 		ElimmedCharacter->Eliminated(false);
+	}
+
+	for (FConstPlayerControllerIterator It = GetWorld()->GetPlayerControllerIterator(); It; ++It)
+	{
+		AMPPlayerController* MPPlayer = Cast<AMPPlayerController>(*It);
+		if (MPPlayer && AttackerPlayerState && VictimPlayerState)
+		{
+			MPPlayer->BroadcastElim(AttackerPlayerState, VictimPlayerState);
+		}
 	}
 }
 

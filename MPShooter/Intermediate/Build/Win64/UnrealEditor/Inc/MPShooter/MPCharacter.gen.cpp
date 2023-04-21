@@ -42,6 +42,8 @@ void EmptyLinkFunctionForGeneratedCodeMPCharacter() {}
 	ENGINE_API UClass* Z_Construct_UClass_UMaterialInstance_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_UMaterialInstanceDynamic_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_UParticleSystemComponent_NoRegister();
+	NIAGARA_API UClass* Z_Construct_UClass_UNiagaraSystem_NoRegister();
+	NIAGARA_API UClass* Z_Construct_UClass_UNiagaraComponent_NoRegister();
 	MPSHOOTER_API UClass* Z_Construct_UClass_UInteractWithCrosshairsInterface_NoRegister();
 // End Cross Module References
 	static FEnumRegistrationInfo Z_Registration_Info_UEnum_EPhysAssetCollision;
@@ -338,6 +340,20 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FPhysAssetInformation>()
 		P_THIS->ServerLeaveGame_Implementation();
 		P_NATIVE_END;
 	}
+	DEFINE_FUNCTION(AMPCharacter::execMulticastLostTheLead)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->MulticastLostTheLead_Implementation();
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(AMPCharacter::execMulticastGainedTheLead)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->MulticastGainedTheLead_Implementation();
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(AMPCharacter::execMulticastEliminated)
 	{
 		P_GET_UBOOL(Z_Param_bPlayerLeftGame);
@@ -352,6 +368,16 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FPhysAssetInformation>()
 		MPCharacter_eventMulticastEliminated_Parms Parms;
 		Parms.bPlayerLeftGame=bPlayerLeftGame ? true : false;
 		ProcessEvent(FindFunctionChecked(NAME_AMPCharacter_MulticastEliminated),&Parms);
+	}
+	static FName NAME_AMPCharacter_MulticastGainedTheLead = FName(TEXT("MulticastGainedTheLead"));
+	void AMPCharacter::MulticastGainedTheLead()
+	{
+		ProcessEvent(FindFunctionChecked(NAME_AMPCharacter_MulticastGainedTheLead),NULL);
+	}
+	static FName NAME_AMPCharacter_MulticastLostTheLead = FName(TEXT("MulticastLostTheLead"));
+	void AMPCharacter::MulticastLostTheLead()
+	{
+		ProcessEvent(FindFunctionChecked(NAME_AMPCharacter_MulticastLostTheLead),NULL);
 	}
 	static FName NAME_AMPCharacter_ServerEquipButtonPressed = FName(TEXT("ServerEquipButtonPressed"));
 	void AMPCharacter::ServerEquipButtonPressed()
@@ -369,6 +395,8 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FPhysAssetInformation>()
 		static const FNameNativePtrPair Funcs[] = {
 			{ "GetSurfaceType", &AMPCharacter::execGetSurfaceType },
 			{ "MulticastEliminated", &AMPCharacter::execMulticastEliminated },
+			{ "MulticastGainedTheLead", &AMPCharacter::execMulticastGainedTheLead },
+			{ "MulticastLostTheLead", &AMPCharacter::execMulticastLostTheLead },
 			{ "OnRep_Health", &AMPCharacter::execOnRep_Health },
 			{ "OnRep_OverlappingThrowableWeapon", &AMPCharacter::execOnRep_OverlappingThrowableWeapon },
 			{ "OnRep_OverlappingWeapon", &AMPCharacter::execOnRep_OverlappingWeapon },
@@ -442,6 +470,50 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FPhysAssetInformation>()
 		if (!ReturnFunction)
 		{
 			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AMPCharacter_MulticastEliminated_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_AMPCharacter_MulticastGainedTheLead_Statics
+	{
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMPCharacter_MulticastGainedTheLead_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Character/MPCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMPCharacter_MulticastGainedTheLead_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMPCharacter, nullptr, "MulticastGainedTheLead", nullptr, nullptr, 0, nullptr, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00024CC0, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AMPCharacter_MulticastGainedTheLead_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AMPCharacter_MulticastGainedTheLead_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_AMPCharacter_MulticastGainedTheLead()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AMPCharacter_MulticastGainedTheLead_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_AMPCharacter_MulticastLostTheLead_Statics
+	{
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMPCharacter_MulticastLostTheLead_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Character/MPCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMPCharacter_MulticastLostTheLead_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMPCharacter, nullptr, "MulticastLostTheLead", nullptr, nullptr, 0, nullptr, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00024CC0, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AMPCharacter_MulticastLostTheLead_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AMPCharacter_MulticastLostTheLead_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_AMPCharacter_MulticastLostTheLead()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AMPCharacter_MulticastLostTheLead_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -863,17 +935,25 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FPhysAssetInformation>()
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_DynamicDissolveMaterialInstance;
 #if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_ElimBotEffect_MetaData[];
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_EliminateFX_MetaData[];
 #endif
-		static const UECodeGen_Private::FObjectPropertyParams NewProp_ElimBotEffect;
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_EliminateFX;
 #if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_ElimBotComponent_MetaData[];
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_EliminateComponent_MetaData[];
 #endif
-		static const UECodeGen_Private::FObjectPropertyParams NewProp_ElimBotComponent;
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_EliminateComponent;
 #if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_ElimBotSFX_MetaData[];
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_EliminateSFX_MetaData[];
 #endif
-		static const UECodeGen_Private::FObjectPropertyParams NewProp_ElimBotSFX;
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_EliminateSFX;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_CrownSystem_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_CrownSystem;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_CrownComponent_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_CrownComponent;
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_MaxShield_MetaData[];
 #endif
@@ -894,6 +974,8 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FPhysAssetInformation>()
 	const FClassFunctionLinkInfo Z_Construct_UClass_AMPCharacter_Statics::FuncInfo[] = {
 		{ &Z_Construct_UFunction_AMPCharacter_GetSurfaceType, "GetSurfaceType" }, // 839051268
 		{ &Z_Construct_UFunction_AMPCharacter_MulticastEliminated, "MulticastEliminated" }, // 3887871201
+		{ &Z_Construct_UFunction_AMPCharacter_MulticastGainedTheLead, "MulticastGainedTheLead" }, // 4003858955
+		{ &Z_Construct_UFunction_AMPCharacter_MulticastLostTheLead, "MulticastLostTheLead" }, // 910039953
 		{ &Z_Construct_UFunction_AMPCharacter_OnRep_Health, "OnRep_Health" }, // 1181647892
 		{ &Z_Construct_UFunction_AMPCharacter_OnRep_OverlappingThrowableWeapon, "OnRep_OverlappingThrowableWeapon" }, // 2130971630
 		{ &Z_Construct_UFunction_AMPCharacter_OnRep_OverlappingWeapon, "OnRep_OverlappingWeapon" }, // 134812474
@@ -1199,30 +1281,45 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FPhysAssetInformation>()
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMPCharacter_Statics::NewProp_DynamicDissolveMaterialInstance = { "DynamicDissolveMaterialInstance", nullptr, (EPropertyFlags)0x0040000000020001, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMPCharacter, DynamicDissolveMaterialInstance), Z_Construct_UClass_UMaterialInstanceDynamic_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AMPCharacter_Statics::NewProp_DynamicDissolveMaterialInstance_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMPCharacter_Statics::NewProp_DynamicDissolveMaterialInstance_MetaData)) };
 #if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMPCharacter_Statics::NewProp_ElimBotEffect_MetaData[] = {
-		{ "Category", "Elim Bot" },
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMPCharacter_Statics::NewProp_EliminateFX_MetaData[] = {
+		{ "Category", "Eliminated" },
 		{ "ModuleRelativePath", "Character/MPCharacter.h" },
-		{ "ToolTip", "Particle system bot generated on elimination." },
+		{ "ToolTip", "Particle system generated on elimination." },
 	};
 #endif
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMPCharacter_Statics::NewProp_ElimBotEffect = { "ElimBotEffect", nullptr, (EPropertyFlags)0x0040000000000001, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMPCharacter, ElimBotEffect), Z_Construct_UClass_UParticleSystem_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AMPCharacter_Statics::NewProp_ElimBotEffect_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMPCharacter_Statics::NewProp_ElimBotEffect_MetaData)) };
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMPCharacter_Statics::NewProp_EliminateFX = { "EliminateFX", nullptr, (EPropertyFlags)0x0040000000000001, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMPCharacter, EliminateFX), Z_Construct_UClass_UParticleSystem_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AMPCharacter_Statics::NewProp_EliminateFX_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMPCharacter_Statics::NewProp_EliminateFX_MetaData)) };
 #if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMPCharacter_Statics::NewProp_ElimBotComponent_MetaData[] = {
-		{ "Category", "Elim Bot" },
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMPCharacter_Statics::NewProp_EliminateComponent_MetaData[] = {
+		{ "Category", "Eliminated" },
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "Character/MPCharacter.h" },
-		{ "ToolTip", "Particle system component for the bot generated on elimination." },
+		{ "ToolTip", "Particle system component generated on elimination." },
 	};
 #endif
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMPCharacter_Statics::NewProp_ElimBotComponent = { "ElimBotComponent", nullptr, (EPropertyFlags)0x00400000000a0009, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMPCharacter, ElimBotComponent), Z_Construct_UClass_UParticleSystemComponent_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AMPCharacter_Statics::NewProp_ElimBotComponent_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMPCharacter_Statics::NewProp_ElimBotComponent_MetaData)) };
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMPCharacter_Statics::NewProp_EliminateComponent = { "EliminateComponent", nullptr, (EPropertyFlags)0x00400000000a0009, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMPCharacter, EliminateComponent), Z_Construct_UClass_UParticleSystemComponent_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AMPCharacter_Statics::NewProp_EliminateComponent_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMPCharacter_Statics::NewProp_EliminateComponent_MetaData)) };
 #if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMPCharacter_Statics::NewProp_ElimBotSFX_MetaData[] = {
-		{ "Category", "Elim Bot" },
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMPCharacter_Statics::NewProp_EliminateSFX_MetaData[] = {
+		{ "Category", "Eliminated" },
 		{ "ModuleRelativePath", "Character/MPCharacter.h" },
-		{ "ToolTip", "Sound effect played for the bot generated on elimination." },
+		{ "ToolTip", "Sound effect played on elimination." },
 	};
 #endif
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMPCharacter_Statics::NewProp_ElimBotSFX = { "ElimBotSFX", nullptr, (EPropertyFlags)0x0040000000000001, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMPCharacter, ElimBotSFX), Z_Construct_UClass_USoundCue_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AMPCharacter_Statics::NewProp_ElimBotSFX_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMPCharacter_Statics::NewProp_ElimBotSFX_MetaData)) };
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMPCharacter_Statics::NewProp_EliminateSFX = { "EliminateSFX", nullptr, (EPropertyFlags)0x0040000000000001, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMPCharacter, EliminateSFX), Z_Construct_UClass_USoundCue_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AMPCharacter_Statics::NewProp_EliminateSFX_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMPCharacter_Statics::NewProp_EliminateSFX_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMPCharacter_Statics::NewProp_CrownSystem_MetaData[] = {
+		{ "Category", "Eliminated" },
+		{ "ModuleRelativePath", "Character/MPCharacter.h" },
+		{ "ToolTip", "Particle system generated when character takes the lead." },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMPCharacter_Statics::NewProp_CrownSystem = { "CrownSystem", nullptr, (EPropertyFlags)0x0040000000000001, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMPCharacter, CrownSystem), Z_Construct_UClass_UNiagaraSystem_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AMPCharacter_Statics::NewProp_CrownSystem_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMPCharacter_Statics::NewProp_CrownSystem_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMPCharacter_Statics::NewProp_CrownComponent_MetaData[] = {
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "Character/MPCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMPCharacter_Statics::NewProp_CrownComponent = { "CrownComponent", nullptr, (EPropertyFlags)0x0040000000080008, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMPCharacter, CrownComponent), Z_Construct_UClass_UNiagaraComponent_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AMPCharacter_Statics::NewProp_CrownComponent_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMPCharacter_Statics::NewProp_CrownComponent_MetaData)) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMPCharacter_Statics::NewProp_MaxShield_MetaData[] = {
 		{ "Category", "Character Stats" },
@@ -1284,9 +1381,11 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FPhysAssetInformation>()
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMPCharacter_Statics::NewProp_DissolveCurve,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMPCharacter_Statics::NewProp_DissolveMaterialInstance,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMPCharacter_Statics::NewProp_DynamicDissolveMaterialInstance,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMPCharacter_Statics::NewProp_ElimBotEffect,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMPCharacter_Statics::NewProp_ElimBotComponent,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMPCharacter_Statics::NewProp_ElimBotSFX,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMPCharacter_Statics::NewProp_EliminateFX,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMPCharacter_Statics::NewProp_EliminateComponent,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMPCharacter_Statics::NewProp_EliminateSFX,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMPCharacter_Statics::NewProp_CrownSystem,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMPCharacter_Statics::NewProp_CrownComponent,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMPCharacter_Statics::NewProp_MaxShield,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMPCharacter_Statics::NewProp_Shield,
 	};
@@ -1355,9 +1454,9 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FPhysAssetInformation>()
 		{ FPhysAssetInformation::StaticStruct, Z_Construct_UScriptStruct_FPhysAssetInformation_Statics::NewStructOps, TEXT("PhysAssetInformation"), &Z_Registration_Info_UScriptStruct_PhysAssetInformation, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FPhysAssetInformation), 4026808977U) },
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AMPCharacter, AMPCharacter::StaticClass, TEXT("AMPCharacter"), &Z_Registration_Info_UClass_AMPCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMPCharacter), 895649027U) },
+		{ Z_Construct_UClass_AMPCharacter, AMPCharacter::StaticClass, TEXT("AMPCharacter"), &Z_Registration_Info_UClass_AMPCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMPCharacter), 985235197U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_3992289864(TEXT("/Script/MPShooter"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_1847089099(TEXT("/Script/MPShooter"),
 		Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_Statics::ClassInfo),
 		Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_Statics::ScriptStructInfo),
 		Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_Statics::EnumInfo));

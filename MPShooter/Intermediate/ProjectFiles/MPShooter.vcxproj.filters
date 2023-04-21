@@ -146,6 +146,12 @@
     <ClInclude Include="..\..\Source\MPShooter\HUD\CharacterOverlay.h">
       <Filter>Source\MPShooter\HUD</Filter>
     </ClInclude>
+    <ClCompile Include="..\..\Source\MPShooter\HUD\EliminateAnnouncement.cpp">
+      <Filter>Source\MPShooter\HUD</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\MPShooter\HUD\EliminateAnnouncement.h">
+      <Filter>Source\MPShooter\HUD</Filter>
+    </ClInclude>
     <ClCompile Include="..\..\Source\MPShooter\HUD\MPHUD.cpp">
       <Filter>Source\MPShooter\HUD</Filter>
     </ClCompile>

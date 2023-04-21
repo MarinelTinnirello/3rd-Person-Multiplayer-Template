@@ -36,6 +36,8 @@ static inline void FOnLeftGame_DelegateWrapper(const FMulticastScriptDelegate& O
 #define FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_51_RPC_WRAPPERS \
 	virtual void ServerEquipButtonPressed_Implementation(); \
 	virtual void ServerLeaveGame_Implementation(); \
+	virtual void MulticastLostTheLead_Implementation(); \
+	virtual void MulticastGainedTheLead_Implementation(); \
 	virtual void MulticastEliminated_Implementation(bool bPlayerLeftGame); \
  \
 	DECLARE_FUNCTION(execGetSurfaceType); \
@@ -47,12 +49,16 @@ static inline void FOnLeftGame_DelegateWrapper(const FMulticastScriptDelegate& O
 	DECLARE_FUNCTION(execOnRep_OverlappingWeapon); \
 	DECLARE_FUNCTION(execReceiveDamage); \
 	DECLARE_FUNCTION(execServerLeaveGame); \
+	DECLARE_FUNCTION(execMulticastLostTheLead); \
+	DECLARE_FUNCTION(execMulticastGainedTheLead); \
 	DECLARE_FUNCTION(execMulticastEliminated);
 
 
 #define FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_51_RPC_WRAPPERS_NO_PURE_DECLS \
 	virtual void ServerEquipButtonPressed_Implementation(); \
 	virtual void ServerLeaveGame_Implementation(); \
+	virtual void MulticastLostTheLead_Implementation(); \
+	virtual void MulticastGainedTheLead_Implementation(); \
 	virtual void MulticastEliminated_Implementation(bool bPlayerLeftGame); \
  \
 	DECLARE_FUNCTION(execGetSurfaceType); \
@@ -64,6 +70,8 @@ static inline void FOnLeftGame_DelegateWrapper(const FMulticastScriptDelegate& O
 	DECLARE_FUNCTION(execOnRep_OverlappingWeapon); \
 	DECLARE_FUNCTION(execReceiveDamage); \
 	DECLARE_FUNCTION(execServerLeaveGame); \
+	DECLARE_FUNCTION(execMulticastLostTheLead); \
+	DECLARE_FUNCTION(execMulticastGainedTheLead); \
 	DECLARE_FUNCTION(execMulticastEliminated);
 
 

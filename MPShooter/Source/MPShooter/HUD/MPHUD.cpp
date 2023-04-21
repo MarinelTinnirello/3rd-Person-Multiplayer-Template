@@ -5,6 +5,7 @@
 #include "GameFramework/PlayerController.h"
 #include "CharacterOverlay.h"
 #include "Annoucement.h"
+#include "EliminateAnnouncement.h"
 #include "SniperScopeOverlay.h"
 
 void AMPHUD::BeginPlay()
@@ -36,7 +37,16 @@ void AMPHUD::AddAnnoucement()
 
 void AMPHUD::AddEliminateAnnouncement(FString Attacker, FString Victim)
 {
-	//
+	OwningPlayer = OwningPlayer == nullptr ? GetOwningPlayerController() : OwningPlayer;
+	if (OwningPlayer && EliminateAnnouncementClass)
+	{
+		UEliminateAnnouncement* EliminateAnouncementWidget = CreateWidget<UEliminateAnnouncement>(OwningPlayer, EliminateAnnouncementClass);
+		if (EliminateAnouncementWidget)
+		{
+			EliminateAnouncementWidget->SetEliminateAnnouncementText(Attacker, Victim);
+			EliminateAnouncementWidget->AddToViewport();
+		}
+	}
 }
 
 void AMPHUD::AddSniperScopeOverlay()

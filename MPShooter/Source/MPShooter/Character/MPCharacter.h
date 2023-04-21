@@ -101,6 +101,10 @@ public:
 
 	UFUNCTION(NetMulticast, Reliable)
 	void MulticastEliminated(bool bPlayerLeftGame);
+	UFUNCTION(NetMulticast, Reliable)
+	void MulticastGainedTheLead();
+	UFUNCTION(NetMulticast, Reliable)
+	void MulticastLostTheLead();
 
 	FOnLeftGame OnLeftGame;
 
@@ -263,14 +267,18 @@ private:
 	void UpdateDissolveMaterial(float DissolveValue);
 
 	//
-	// Elim Bot
+	// Elimination Effects
 	//
-	UPROPERTY(EditAnywhere, Category = "Elim Bot", meta = (ToolTip = "Particle system bot generated on elimination."))
-	class UParticleSystem* ElimBotEffect;
-	UPROPERTY(VisibleAnywhere, Category = "Elim Bot", meta = (ToolTip = "Particle system component for the bot generated on elimination."))
-	class UParticleSystemComponent* ElimBotComponent;
-	UPROPERTY(EditAnywhere, Category = "Elim Bot", meta = (ToolTip = "Sound effect played for the bot generated on elimination."))
-	class USoundCue* ElimBotSFX;
+	UPROPERTY(EditAnywhere, Category = "Eliminated", meta = (ToolTip = "Particle system generated on elimination."))
+	class UParticleSystem* EliminateFX;
+	UPROPERTY(VisibleAnywhere, Category = "Eliminated", meta = (ToolTip = "Particle system component generated on elimination."))
+	class UParticleSystemComponent* EliminateComponent;
+	UPROPERTY(EditAnywhere, Category = "Eliminated", meta = (ToolTip = "Sound effect played on elimination."))
+	class USoundCue* EliminateSFX;
+	UPROPERTY(EditAnywhere, Category = "Eliminated", meta = (ToolTip = "Particle system generated when character takes the lead."))
+	class UNiagaraSystem* CrownSystem;
+	UPROPERTY()
+	class UNiagaraComponent* CrownComponent;
 
 	//
 	// Networking

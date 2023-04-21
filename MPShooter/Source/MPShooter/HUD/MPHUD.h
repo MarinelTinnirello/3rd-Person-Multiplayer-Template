@@ -53,6 +53,9 @@ protected:
 	virtual void BeginPlay() override;
 
 private:
+	UPROPERTY()
+	class APlayerController* OwningPlayer;
+
 	FHUDPackage HUDPackage;
 
 	//
@@ -66,15 +69,15 @@ private:
 	//
 	// Elim Announcements
 	//
-	/*UPROPERTY(EditAnywhere)
-	TSubclassOf<class UElimAnnouncement> ElimAnnouncementClass;
 	UPROPERTY(EditAnywhere)
-	float ElimAnnouncementTime = 2.5f;
+	TSubclassOf<class UEliminateAnnouncement> EliminateAnnouncementClass;
+	/*UPROPERTY(EditAnywhere)
+	float EliminateAnnouncementTime = 2.5f;
 	UPROPERTY()
-	TArray<UElimAnnouncement*> ElimMessages;
+	TArray<UEliminateAnnouncement*> EliminateMessages;
 
 	UFUNCTION()
-	void ElimAnnouncementTimerFinished(UElimAnnouncement* MsgToRemove);*/
+	void EliminateAnnouncementTimerFinished(UEliminateAnnouncement* MsgToRemove);*/
 
 public:
 	FORCEINLINE void SetHUDPackage(const FHUDPackage& Package) { HUDPackage = Package; }

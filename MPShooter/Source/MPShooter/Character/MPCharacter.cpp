@@ -11,6 +11,8 @@
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Particles/ParticleSystemComponent.h"
+#include "NiagaraComponent.h"
+#include "NiagaraFunctionLibrary.h"
 #include "Sound/SoundCue.h"
 #include "TimerManager.h"
 #include "PhysicalMaterials/PhysicalMaterial.h"
@@ -24,6 +26,7 @@
 #include "MPShooter/PlayerController/MPPlayerController.h"
 #include "MPShooter/PlayerState/MPPlayerState.h"
 #include "MPShooter/GameMode/MPShooterGameMode.h"
+#include "MPShooter/GameState/MPGameState.h"
 #include "MPAnimInstance.h"
 #include "DrawDebugHelpers.h"
 
@@ -180,9 +183,9 @@ void AMPCharacter::Destroyed()
 {
 	Super::Destroyed();
 
-	if (ElimBotComponent)
+	if (EliminateComponent)
 	{
-		ElimBotComponent->DestroyComponent();
+		EliminateComponent->DestroyComponent();
 	}
 
 	AMPShooterGameMode* MPGameMode = Cast<AMPShooterGameMode>(UGameplayStatics::GetGameMode(this));
@@ -205,6 +208,13 @@ void AMPCharacter::PollInit()
 		{
 			MPPlayerState->AddToScore(0.f);
 			MPPlayerState->AddToDefeat(0);
+
+			AMPGameState* MPGameState = Cast<AMPGameState>(UGameplayStatics::GetGameState(this));
+
+			if (MPGameState && MPGameState->TopScoringPlayers.Contains(MPPlayerState))
+			{
+				MulticastGainedTheLead();
+			}
 		}
 	}
 }
@@ -1075,25 +1085,30 @@ void AMPCharacter::MulticastEliminated_Implementation(bool bPlayerLeftGame)
 	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
-	// Spawn elim bot (if necessary)
-	if (ElimBotEffect)
+	// Spawn eliminate FX (if necessary)
+	if (EliminateFX)
 	{
-		FVector ElimBotSpawnPoint(GetActorLocation().X, GetActorLocation().Y, GetActorLocation().Z + 200.f);
-		ElimBotComponent = UGameplayStatics::SpawnEmitterAtLocation(
-			GetWorld(), 
-			ElimBotEffect,
-			ElimBotSpawnPoint,
+		FVector ElimSpawnPoint(GetActorLocation().X, GetActorLocation().Y, GetActorLocation().Z + 200.f);
+		EliminateComponent = UGameplayStatics::SpawnEmitterAtLocation(
+			GetWorld(),
+			EliminateFX,
+			ElimSpawnPoint,
 			GetActorRotation()
 		);
 	}
 
-	if (ElimBotSFX)
+	if (EliminateSFX)
 	{
 		UGameplayStatics::SpawnSoundAtLocation(
 			this,
-			ElimBotSFX,
+			EliminateSFX,
 			GetActorLocation()
 		);
+	}
+
+	if (CrownComponent)
+	{
+		CrownComponent->DestroyComponent();
 	}
 
 	// Hide sniper scope (if necessary)
@@ -1182,5 +1197,39 @@ void AMPCharacter::UpdateHUDAmmo()
 		MPPlayerController->SetHUDWeaponType(Combat->EquippedWeapon->GetWeaponType());
 		MPPlayerController->SetHUDCarriedAmmo(Combat->CarriedAmmo);
 		MPPlayerController->SetHUDWeaponAmmo(Combat->EquippedWeapon->GetAmmo());
+	}
+}
+
+void AMPCharacter::MulticastGainedTheLead_Implementation()
+{
+	if (CrownSystem == nullptr)
+	{
+		return;
+	}
+
+	if (CrownComponent == nullptr)
+	{
+		CrownComponent = UNiagaraFunctionLibrary::SpawnSystemAttached(
+			CrownSystem,
+			GetCapsuleComponent(),
+			FName(),
+			GetActorLocation() + FVector(0.f, 0.f, 110.f),
+			GetActorRotation(),
+			EAttachLocation::KeepWorldPosition,
+			false
+		);
+	}
+
+	if (CrownComponent)
+	{
+		CrownComponent->Activate();
+	}
+}
+
+void AMPCharacter::MulticastLostTheLead_Implementation()
+{
+	if (CrownComponent)
+	{
+		CrownComponent->DestroyComponent();
 	}
 }
