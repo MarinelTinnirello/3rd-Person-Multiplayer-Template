@@ -8,6 +8,7 @@
 #include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+class UEliminateAnnouncement;
 #ifdef MPSHOOTER_MPHUD_generated_h
 #error "MPHUD.generated.h already included, missing '#pragma once' in MPHUD.h"
 #endif
@@ -21,8 +22,16 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 template<> MPSHOOTER_API UScriptStruct* StaticStruct<struct FHUDPackage>();
 
 #define FID_MPShooter_Source_MPShooter_HUD_MPHUD_h_27_SPARSE_DATA
-#define FID_MPShooter_Source_MPShooter_HUD_MPHUD_h_27_RPC_WRAPPERS
-#define FID_MPShooter_Source_MPShooter_HUD_MPHUD_h_27_RPC_WRAPPERS_NO_PURE_DECLS
+#define FID_MPShooter_Source_MPShooter_HUD_MPHUD_h_27_RPC_WRAPPERS \
+ \
+	DECLARE_FUNCTION(execEliminateAnnouncementTimerFinished);
+
+
+#define FID_MPShooter_Source_MPShooter_HUD_MPHUD_h_27_RPC_WRAPPERS_NO_PURE_DECLS \
+ \
+	DECLARE_FUNCTION(execEliminateAnnouncementTimerFinished);
+
+
 #define FID_MPShooter_Source_MPShooter_HUD_MPHUD_h_27_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesAMPHUD(); \

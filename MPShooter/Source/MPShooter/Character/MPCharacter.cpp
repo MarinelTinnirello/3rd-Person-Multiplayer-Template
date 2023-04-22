@@ -144,6 +144,7 @@ void AMPCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	PlayerInputComponent->BindAction("Aim", IE_Released, this, &AMPCharacter::AimButtonReleased);
 	PlayerInputComponent->BindAction("Throw", IE_Pressed, this, &AMPCharacter::ThrowButtonPressed);
 	PlayerInputComponent->BindAction("Throw", IE_Released, this, &AMPCharacter::ThrowButtonReleased);
+	PlayerInputComponent->BindAction("ViewChatBox", IE_Pressed, this, &AMPCharacter::ViewChatBoxButtonPressed);
 
 	PlayerInputComponent->BindAxis("MoveForward", this, &AMPCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &AMPCharacter::MoveRight);
@@ -624,6 +625,20 @@ void AMPCharacter::ThrowButtonPressed()
 
 void AMPCharacter::ThrowButtonReleased()
 {
+}
+
+void AMPCharacter::ViewChatBoxButtonPressed()
+{
+	if (MPPlayerController == nullptr)
+	{
+		return;
+	}
+
+	AMPHUD* MPHUD = Cast<AMPHUD>(MPPlayerController->GetHUD());
+	if (MPHUD && MPHUD->PlayerChatBoxClass)
+	{
+		MPHUD->PlayerChatBoxClass->ToggleChatBox();
+	}
 }
 
 bool AMPCharacter::IsLocallyReloading()

@@ -34,6 +34,7 @@ public:
 	virtual void RequestRespawn(class ACharacter* ElimmedCharacter, class AController* ElimmedController);
 
 	void PlayerLeftGame(class AMPPlayerState* PlayerLeaving);
+	void BroadcastChatMessage(APlayerState* Sender, const FString& Msg);
 
 protected:
 	virtual void BeginPlay() override;

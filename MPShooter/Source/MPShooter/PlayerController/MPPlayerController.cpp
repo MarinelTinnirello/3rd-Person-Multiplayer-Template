@@ -108,12 +108,12 @@ void AMPPlayerController::ClientJoinMidGame_Implementation(FName StateOfMatch, f
 	}
 }
 
-void AMPPlayerController::BroadcastElim(APlayerState* Attacker, APlayerState* Victim)
+void AMPPlayerController::BroadcastEliminate(APlayerState* Attacker, APlayerState* Victim)
 {
-	ClientElimAnnouncement(Attacker, Victim);
+	ClientEliminateAnnouncement(Attacker, Victim);
 }
 
-void AMPPlayerController::ClientElimAnnouncement_Implementation(APlayerState* Attacker, APlayerState* Victim)
+void AMPPlayerController::ClientEliminateAnnouncement_Implementation(APlayerState* Attacker, APlayerState* Victim)
 {
 	APlayerState* Self = GetPlayerState<APlayerState>();
 	if (Attacker && Victim && Self)
@@ -733,5 +733,27 @@ void AMPPlayerController::ShowReturnToMainMenu()
 		{
 			ReturnToMainMenu->MenuTearDown();
 		}
+	}
+}
+
+void AMPPlayerController::ServerBroadcastChatMessage_Implementation(APlayerState* Sender, const FString& Msg)
+{
+	AMPShooterGameMode* MPShooterGameMode = GetWorld()->GetAuthGameMode<AMPShooterGameMode>();
+	if (MPShooterGameMode)
+	{
+		MPShooterGameMode->BroadcastChatMessage(Sender, Msg);
+	}
+}
+
+void AMPPlayerController::ClientChatMessage_Implementation(const FString& SenderName, const FString& Msg)
+{
+	if (MPHUD == nullptr)
+	{
+		MPHUD = Cast<AMPHUD>(GetHUD());
+	}
+
+	if (MPHUD)
+	{
+		MPHUD->AddChatMessage(SenderName, Msg);
 	}
 }

@@ -43,7 +43,12 @@ public:
 	void OnMatchStateSet(FName State);
 	void HandleMatchHasStarted();
 	void HandleCooldownMatch();
-	void BroadcastElim(APlayerState* Attacker, APlayerState* Victim);
+	void BroadcastEliminate(APlayerState* Attacker, APlayerState* Victim);
+
+	UFUNCTION(Server, Reliable)
+	void ServerBroadcastChatMessage(APlayerState* Sender, const FString& Msg);
+	UFUNCTION(Client, Reliable)
+	void ClientChatMessage(const FString& SenderName, const FString& Msg);
 
 protected:
 	virtual void BeginPlay() override;
@@ -77,11 +82,6 @@ protected:
 	void ServerReportPingStatus(bool bHighPing);
 
 	//
-	// Return to Main Menu
-	//
-	void ShowReturnToMainMenu();
-
-	//
 	// Match State
 	//
 	UFUNCTION(Server, Reliable)
@@ -89,7 +89,12 @@ protected:
 	UFUNCTION(Client, Reliable)
 	void ClientJoinMidGame(FName StateOfMatch, float Warmup, float LevelStart, float Match, float Cooldown, float MatchWarning);
 	UFUNCTION(Client, Reliable)
-	void ClientElimAnnouncement(APlayerState* Attacker, APlayerState* Victim);
+	void ClientEliminateAnnouncement(APlayerState* Attacker, APlayerState* Victim);
+
+	//
+	// Return to Main Menu
+	//
+	void ShowReturnToMainMenu();
 
 private:
 	UPROPERTY()

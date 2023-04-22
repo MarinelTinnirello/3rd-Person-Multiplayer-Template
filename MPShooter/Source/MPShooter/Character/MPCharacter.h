@@ -131,6 +131,7 @@ protected:
 	void AimButtonReleased();
 	void ThrowButtonPressed();
 	void ThrowButtonReleased();
+	void ViewChatBoxButtonPressed();
 
 	void AimOffset(float DeltaTime);
 	void CalculateAO_Pitch();

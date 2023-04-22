@@ -3,10 +3,14 @@
 
 #include "MPHUD.h"
 #include "GameFramework/PlayerController.h"
+#include "Blueprint/WidgetLayoutLibrary.h"
+#include "Components/HorizontalBox.h"
+#include "Components/CanvasPanelSlot.h"
 #include "CharacterOverlay.h"
 #include "Annoucement.h"
 #include "EliminateAnnouncement.h"
 #include "SniperScopeOverlay.h"
+#include "PlayerChatBox.h"
 
 void AMPHUD::BeginPlay()
 {
@@ -15,22 +19,20 @@ void AMPHUD::BeginPlay()
 
 void AMPHUD::AddCharacterOverlay()
 {
-	APlayerController* PlayerController = GetOwningPlayerController();
-
-	if (PlayerController && CharacterOverlayClass)
+	OwningPlayer = OwningPlayer == nullptr ? GetOwningPlayerController() : OwningPlayer;
+	if (OwningPlayer && CharacterOverlayClass)
 	{
-		CharacterOverlay = CreateWidget<UCharacterOverlay>(PlayerController, CharacterOverlayClass);
+		CharacterOverlay = CreateWidget<UCharacterOverlay>(OwningPlayer, CharacterOverlayClass);
 		CharacterOverlay->AddToViewport();
 	}
 }
 
 void AMPHUD::AddAnnoucement()
 {
-	APlayerController* PlayerController = GetOwningPlayerController();
-
-	if (PlayerController && AnnoucementClass)
+	OwningPlayer = OwningPlayer == nullptr ? GetOwningPlayerController() : OwningPlayer;
+	if (OwningPlayer && AnnoucementClass)
 	{
-		Annoucement = CreateWidget<UAnnoucement>(PlayerController, AnnoucementClass);
+		Annoucement = CreateWidget<UAnnoucement>(OwningPlayer, AnnoucementClass);
 		Annoucement->AddToViewport();
 	}
 }
@@ -40,23 +42,92 @@ void AMPHUD::AddEliminateAnnouncement(FString Attacker, FString Victim)
 	OwningPlayer = OwningPlayer == nullptr ? GetOwningPlayerController() : OwningPlayer;
 	if (OwningPlayer && EliminateAnnouncementClass)
 	{
-		UEliminateAnnouncement* EliminateAnouncementWidget = CreateWidget<UEliminateAnnouncement>(OwningPlayer, EliminateAnnouncementClass);
-		if (EliminateAnouncementWidget)
+		UEliminateAnnouncement* EliminateAnnouncementWidget = CreateWidget<UEliminateAnnouncement>(OwningPlayer, EliminateAnnouncementClass);
+		if (EliminateAnnouncementWidget)
 		{
-			EliminateAnouncementWidget->SetEliminateAnnouncementText(Attacker, Victim);
-			EliminateAnouncementWidget->AddToViewport();
+			EliminateAnnouncementWidget->SetEliminateAnnouncementText(Attacker, Victim);
+			EliminateAnnouncementWidget->AddToViewport();
+
+			for (UEliminateAnnouncement* Msg : EliminateMessages)
+			{
+				if (Msg && Msg->AnnouncementBox)
+				{
+					UCanvasPanelSlot* CanvasSlot = UWidgetLayoutLibrary::SlotAsCanvasSlot(Msg->AnnouncementBox);
+					if (CanvasSlot)
+					{
+						FVector2D Position = CanvasSlot->GetPosition();
+						FVector2D NewPosition(
+							CanvasSlot->GetPosition().X,
+							Position.Y - CanvasSlot->GetSize().Y
+						);
+						CanvasSlot->SetPosition(NewPosition);
+					}
+				}
+			}
+
+			EliminateMessages.Add(EliminateAnnouncementWidget);
+
+			FTimerHandle EliminateMsgTimer;
+			FTimerDelegate EliminateMsgDelegate;
+			EliminateMsgDelegate.BindUFunction(this, FName("EliminateAnnouncementTimerFinished"), EliminateAnnouncementWidget);
+			GetWorldTimerManager().SetTimer(
+				EliminateMsgTimer,
+				EliminateMsgDelegate,
+				EliminateAnnouncementTime,
+				false
+			);
 		}
+	}
+}
+
+void AMPHUD::EliminateAnnouncementTimerFinished(UEliminateAnnouncement* MsgToRemove)
+{
+	if (MsgToRemove)
+	{
+		MsgToRemove->RemoveFromParent();
 	}
 }
 
 void AMPHUD::AddSniperScopeOverlay()
 {
-	APlayerController* PlayerController = GetOwningPlayerController();
-
-	if (PlayerController && SniperScopeOverlayClass)
+	OwningPlayer = OwningPlayer == nullptr ? GetOwningPlayerController() : OwningPlayer;
+	if (OwningPlayer && SniperScopeOverlayClass)
 	{
-		SniperScopeOverlay = CreateWidget<USniperScopeOverlay>(PlayerController, SniperScopeOverlayClass);
+		SniperScopeOverlay = CreateWidget<USniperScopeOverlay>(OwningPlayer, SniperScopeOverlayClass);
 		SniperScopeOverlay->AddToViewport();
+	}
+}
+
+void AMPHUD::AddChatMessage(const FString& SenderName, const FString& Msg)
+{
+	OwningPlayer = OwningPlayer == nullptr ? GetOwningPlayerController() : OwningPlayer;
+	if (OwningPlayer && PlayerChatBoxClass)
+	{
+		UPlayerChatBox* PlayerChatBoxWidget = CreateWidget<UPlayerChatBox>(OwningPlayer, PlayerChatBoxClass);
+		if (PlayerChatBoxWidget)
+		{
+			PlayerChatBoxWidget->SetPlayerChatText(SenderName, Msg);
+			PlayerChatBoxWidget->AddToViewport();
+
+			for (UPlayerChatBox* Msg : ChatMessages)
+			{
+				if (Msg && Msg->AnnouncementBox)
+				{
+					UCanvasPanelSlot* CanvasSlot = UWidgetLayoutLibrary::SlotAsCanvasSlot(Msg->AnnouncementBox);
+					if (CanvasSlot)
+					{
+						FVector2D Position = CanvasSlot->GetPosition();
+						FVector2D NewPosition(
+							CanvasSlot->GetPosition().X,
+							Position.Y - CanvasSlot->GetSize().Y
+						);
+						CanvasSlot->SetPosition(NewPosition);
+					}
+				}
+			}
+
+			ChatMessages.Add(PlayerChatBoxWidget);
+		}
 	}
 }
 
@@ -121,3 +192,4 @@ void AMPHUD::DrawCrosshair(UTexture2D* Texture, FVector2D ViewportCenter, FVecto
 		CrosshairsColor
 	);
 }
+

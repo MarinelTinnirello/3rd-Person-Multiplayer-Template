@@ -6,7 +6,7 @@
 
 void UEliminateAnnouncement::SetEliminateAnnouncementText(FString AttackerName, FString VictimName)
 {
-	FString EliminateAnnouncementText = FString::Printf(TEXT("%s %s %s!"), *AttackerName, EliminateText, *VictimName);
+	FString EliminateAnnouncementText = FString::Printf(TEXT("%s eliminated by %s!"), *AttackerName, *VictimName);
 	if (AnnouncementText)
 	{
 		AnnouncementText->SetText(FText::FromString(EliminateAnnouncementText));

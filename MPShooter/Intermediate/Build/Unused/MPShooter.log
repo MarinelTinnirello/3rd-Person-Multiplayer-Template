@@ -1,26 +1,19 @@
 ﻿  Using bundled DotNet SDK
   Log file: C:\Users\M T\AppData\Local\UnrealBuildTool\Log.txt
   Using 'git status' to determine working set for adaptive non-unity build (D:\Documents\GitHub\3rd-Person-Multiplayer-Template).
-  Invalidating makefile for MPShooterEditor (working set of source files changed)
-  Parsing headers for MPShooterEditor
-    Running UnrealHeaderTool "D:\Documents\GitHub\3rd-Person-Multiplayer-Template\MPShooter\MPShooter.uproject" "D:\Documents\GitHub\3rd-Person-Multiplayer-Template\MPShooter\Intermediate\Build\Win64\MPShooterEditor\Development\MPShooterEditor.uhtmanifest" -LogCmds="loginit warning, logexit warning, logdatabase error" -Unattended -WarningsAsErrors -abslog="C:\Users\M T\AppData\Local\UnrealBuildTool\Log_UHT.txt" -installed
-  Reflection code generated for MPShooterEditor in 6.9394548 seconds
   Building MPShooterEditor...
   Using Visual Studio 2019 14.29.30141 toolchain (C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133) and Windows 10.0.19041.0 SDK (C:\Program Files (x86)\Windows Kits\10).
-  [Adaptive Build] Excluded from MPShooter unity file: MPCharacter.cpp, MPShooterGameMode.cpp
+  [Adaptive Build] Excluded from MPShooter unity file: MPShooterGameMode.cpp, EliminateAnnouncement.cpp, MPHUD.cpp, MPPlayerController.cpp
+  [Adaptive Build] Excluded from MPShooter unity file: EliminateAnnouncement.gen.cpp, MPHUD.gen.cpp, MPPlayerController.gen.cpp, MPShooter.init.gen.cpp
   Determining max actions to execute in parallel (6 physical cores, 12 logical cores)
     Executing up to 6 processes, one per physical core
-    Requested 1.5 GB free memory per action, 3.01 GB available: limiting max parallel actions to 2
-  Building 7 actions with 2 processes...
-  [1/7] Compile MPCharacter.cpp
-  [2/7] Compile Module.MPShooter.cpp
-D:\Documents\GitHub\3rd-Person-Multiplayer-Template\MPShooter\Source\MPShooter\Item\Pickup\PickupSpawnPoint.cpp(31): warning C4996: 'FMath::FRandRange': Arguments cause function resolution ambiguity, expected a floating point type. Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
-  [3/7] Compile MPShooterGameMode.cpp
-  [4/7] Compile Module.MPShooter.gen.2_of_3.cpp
-  [5/7] Link UnrealEditor-MPShooter.lib
+    Requested 1.5 GB free memory per action, 4.28 GB available: limiting max parallel actions to 2
+  Building 4 actions with 2 processes...
+  [1/4] Compile MPHUD.cpp
+  [2/4] Link UnrealEditor-MPShooter.lib
      Creating library D:\Documents\GitHub\3rd-Person-Multiplayer-Template\MPShooter\Intermediate\Build\Win64\UnrealEditor\Development\MPShooter\UnrealEditor-MPShooter.lib and object D:\Documents\GitHub\3rd-Person-Multiplayer-Template\MPShooter\Intermediate\Build\Win64\UnrealEditor\Development\MPShooter\UnrealEditor-MPShooter.exp
-  [6/7] Link UnrealEditor-MPShooter.dll
+  [3/4] Link UnrealEditor-MPShooter.dll
      Creating library D:\Documents\GitHub\3rd-Person-Multiplayer-Template\MPShooter\Intermediate\Build\Win64\UnrealEditor\Development\MPShooter\UnrealEditor-MPShooter.suppressed.lib and object D:\Documents\GitHub\3rd-Person-Multiplayer-Template\MPShooter\Intermediate\Build\Win64\UnrealEditor\Development\MPShooter\UnrealEditor-MPShooter.suppressed.exp
-  [7/7] WriteMetadata MPShooterEditor.target
-  Total time in Parallel executor: 1446.96 seconds
-  Total execution time: 1458.62 seconds
+  [4/4] WriteMetadata MPShooterEditor.target
+  Total time in Parallel executor: 393.34 seconds
+  Total execution time: 394.35 seconds

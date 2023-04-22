@@ -164,6 +164,12 @@
     <ClInclude Include="..\..\Source\MPShooter\HUD\OverheadWidget.h">
       <Filter>Source\MPShooter\HUD</Filter>
     </ClInclude>
+    <ClCompile Include="..\..\Source\MPShooter\HUD\PlayerChatBox.cpp">
+      <Filter>Source\MPShooter\HUD</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\MPShooter\HUD\PlayerChatBox.h">
+      <Filter>Source\MPShooter\HUD</Filter>
+    </ClInclude>
     <ClCompile Include="..\..\Source\MPShooter\HUD\ReturnToMainMenu.cpp">
       <Filter>Source\MPShooter\HUD</Filter>
     </ClCompile>

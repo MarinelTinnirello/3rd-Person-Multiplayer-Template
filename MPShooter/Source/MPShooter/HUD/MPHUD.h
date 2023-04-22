@@ -27,9 +27,6 @@ class MPSHOOTER_API AMPHUD : public AHUD
 	GENERATED_BODY()
 	
 public:
-	//
-	// Health
-	//
 	UPROPERTY()
 	class UCharacterOverlay* CharacterOverlay;
 	UPROPERTY(EditAnywhere, Category = "Character Stats", meta = (ToolTip = "Character overlay to be displayed."))
@@ -38,6 +35,8 @@ public:
 	class UAnnoucement* Annoucement;
 	UPROPERTY(EditAnywhere, Category = "Annoucements", meta = (ToolTip = "Annoucement overlay to be displayed."))
 	TSubclassOf<class UUserWidget> AnnoucementClass;
+	UPROPERTY(EditAnywhere, Category = "Announcements - Chat Box", meta = (ToolTip = "Player chat box during matches."))
+	TSubclassOf<class UPlayerChatBox> PlayerChatBoxClass;
 	UPROPERTY()
 	class USniperScopeOverlay* SniperScopeOverlay;
 	UPROPERTY(EditAnywhere, Category = "Weapon", meta = (ToolTip = "Sniper scope overlay to be displayed."))
@@ -47,6 +46,7 @@ public:
 	void AddAnnoucement();
 	void AddEliminateAnnouncement(FString Attacker, FString Victim);
 	void AddSniperScopeOverlay();
+	void AddChatMessage(const FString& SenderName, const FString& Msg);
 	virtual void DrawHUD() override;
 
 protected:
@@ -61,7 +61,7 @@ private:
 	//
 	// Crosshairs
 	//
-	UPROPERTY(EditAnywhere, meta = (ToolTip = "Max amount the crosshairs should spread out."))
+	UPROPERTY(EditAnywhere, Category = "Weapon", meta = (ToolTip = "Max amount the crosshairs should spread out."))
 	float CrosshairsSpreadMax = 16.f;
 
 	void DrawCrosshair(UTexture2D* Texture, FVector2D ViewportCenter, FVector2D Spread, FLinearColor CrosshairsColor);
@@ -69,15 +69,26 @@ private:
 	//
 	// Elim Announcements
 	//
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Announcements - Eliminate", meta = (ToolTip = "Annoucement overlay when a character is eliminated."))
 	TSubclassOf<class UEliminateAnnouncement> EliminateAnnouncementClass;
-	/*UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Announcements - Eliminate", meta = (ToolTip = "Time until eliminated message is deleted."))
 	float EliminateAnnouncementTime = 2.5f;
 	UPROPERTY()
 	TArray<UEliminateAnnouncement*> EliminateMessages;
 
 	UFUNCTION()
-	void EliminateAnnouncementTimerFinished(UEliminateAnnouncement* MsgToRemove);*/
+	void EliminateAnnouncementTimerFinished(UEliminateAnnouncement* MsgToRemove);
+
+	//
+	// Player Chat
+	//
+	UPROPERTY(EditAnywhere, Category = "Announcements - Chat Box", meta = (ToolTip = "Time until chat message is deleted."))
+	float EliminateAnnouncementTime = 10f;
+	UPROPERTY()
+	TArray<UPlayerChatBox*> ChatMessages;
+
+	UFUNCTION()
+	void EliminateAnnouncementTimerFinished(UEliminateAnnouncement* MsgToRemove);
 
 public:
 	FORCEINLINE void SetHUDPackage(const FHUDPackage& Package) { HUDPackage = Package; }

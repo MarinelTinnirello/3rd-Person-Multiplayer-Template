@@ -13,10 +13,10 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #endif
 #define MPSHOOTER_EliminateAnnouncement_generated_h
 
-#define FID_MPShooter_Source_MPShooter_HUD_EliminateAnnouncement_h_15_SPARSE_DATA
-#define FID_MPShooter_Source_MPShooter_HUD_EliminateAnnouncement_h_15_RPC_WRAPPERS
-#define FID_MPShooter_Source_MPShooter_HUD_EliminateAnnouncement_h_15_RPC_WRAPPERS_NO_PURE_DECLS
-#define FID_MPShooter_Source_MPShooter_HUD_EliminateAnnouncement_h_15_INCLASS_NO_PURE_DECLS \
+#define FID_MPShooter_Source_MPShooter_HUD_EliminateAnnouncement_h_12_SPARSE_DATA
+#define FID_MPShooter_Source_MPShooter_HUD_EliminateAnnouncement_h_12_RPC_WRAPPERS
+#define FID_MPShooter_Source_MPShooter_HUD_EliminateAnnouncement_h_12_RPC_WRAPPERS_NO_PURE_DECLS
+#define FID_MPShooter_Source_MPShooter_HUD_EliminateAnnouncement_h_12_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesUEliminateAnnouncement(); \
 	friend struct Z_Construct_UClass_UEliminateAnnouncement_Statics; \
@@ -25,7 +25,7 @@ public: \
 	DECLARE_SERIALIZER(UEliminateAnnouncement)
 
 
-#define FID_MPShooter_Source_MPShooter_HUD_EliminateAnnouncement_h_15_INCLASS \
+#define FID_MPShooter_Source_MPShooter_HUD_EliminateAnnouncement_h_12_INCLASS \
 private: \
 	static void StaticRegisterNativesUEliminateAnnouncement(); \
 	friend struct Z_Construct_UClass_UEliminateAnnouncement_Statics; \
@@ -34,7 +34,7 @@ public: \
 	DECLARE_SERIALIZER(UEliminateAnnouncement)
 
 
-#define FID_MPShooter_Source_MPShooter_HUD_EliminateAnnouncement_h_15_STANDARD_CONSTRUCTORS \
+#define FID_MPShooter_Source_MPShooter_HUD_EliminateAnnouncement_h_12_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API UEliminateAnnouncement(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UEliminateAnnouncement) \
@@ -47,7 +47,7 @@ private: \
 public:
 
 
-#define FID_MPShooter_Source_MPShooter_HUD_EliminateAnnouncement_h_15_ENHANCED_CONSTRUCTORS \
+#define FID_MPShooter_Source_MPShooter_HUD_EliminateAnnouncement_h_12_ENHANCED_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API UEliminateAnnouncement(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()) : Super(ObjectInitializer) { }; \
 private: \
@@ -60,25 +60,25 @@ public: \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UEliminateAnnouncement)
 
 
-#define FID_MPShooter_Source_MPShooter_HUD_EliminateAnnouncement_h_12_PROLOG
-#define FID_MPShooter_Source_MPShooter_HUD_EliminateAnnouncement_h_15_GENERATED_BODY_LEGACY \
+#define FID_MPShooter_Source_MPShooter_HUD_EliminateAnnouncement_h_9_PROLOG
+#define FID_MPShooter_Source_MPShooter_HUD_EliminateAnnouncement_h_12_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_MPShooter_Source_MPShooter_HUD_EliminateAnnouncement_h_15_SPARSE_DATA \
-	FID_MPShooter_Source_MPShooter_HUD_EliminateAnnouncement_h_15_RPC_WRAPPERS \
-	FID_MPShooter_Source_MPShooter_HUD_EliminateAnnouncement_h_15_INCLASS \
-	FID_MPShooter_Source_MPShooter_HUD_EliminateAnnouncement_h_15_STANDARD_CONSTRUCTORS \
+	FID_MPShooter_Source_MPShooter_HUD_EliminateAnnouncement_h_12_SPARSE_DATA \
+	FID_MPShooter_Source_MPShooter_HUD_EliminateAnnouncement_h_12_RPC_WRAPPERS \
+	FID_MPShooter_Source_MPShooter_HUD_EliminateAnnouncement_h_12_INCLASS \
+	FID_MPShooter_Source_MPShooter_HUD_EliminateAnnouncement_h_12_STANDARD_CONSTRUCTORS \
 public: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define FID_MPShooter_Source_MPShooter_HUD_EliminateAnnouncement_h_15_GENERATED_BODY \
+#define FID_MPShooter_Source_MPShooter_HUD_EliminateAnnouncement_h_12_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_MPShooter_Source_MPShooter_HUD_EliminateAnnouncement_h_15_SPARSE_DATA \
-	FID_MPShooter_Source_MPShooter_HUD_EliminateAnnouncement_h_15_RPC_WRAPPERS_NO_PURE_DECLS \
-	FID_MPShooter_Source_MPShooter_HUD_EliminateAnnouncement_h_15_INCLASS_NO_PURE_DECLS \
-	FID_MPShooter_Source_MPShooter_HUD_EliminateAnnouncement_h_15_ENHANCED_CONSTRUCTORS \
+	FID_MPShooter_Source_MPShooter_HUD_EliminateAnnouncement_h_12_SPARSE_DATA \
+	FID_MPShooter_Source_MPShooter_HUD_EliminateAnnouncement_h_12_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_MPShooter_Source_MPShooter_HUD_EliminateAnnouncement_h_12_INCLASS_NO_PURE_DECLS \
+	FID_MPShooter_Source_MPShooter_HUD_EliminateAnnouncement_h_12_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

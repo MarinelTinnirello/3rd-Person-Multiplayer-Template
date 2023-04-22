@@ -123,9 +123,9 @@ void AMPShooterGameMode::CharacterEliminated(class AMPCharacter* ElimmedCharacte
 	for (FConstPlayerControllerIterator It = GetWorld()->GetPlayerControllerIterator(); It; ++It)
 	{
 		AMPPlayerController* MPPlayer = Cast<AMPPlayerController>(*It);
-		if (MPPlayer && AttackerPlayerState && VictimPlayerState)
+		if (MPPlayer && AttackerPlayerState && ElimmedPlayerState)
 		{
-			MPPlayer->BroadcastElim(AttackerPlayerState, VictimPlayerState);
+			MPPlayer->BroadcastEliminate(AttackerPlayerState, ElimmedPlayerState);
 		}
 	}
 }
@@ -196,5 +196,19 @@ void AMPShooterGameMode::PlayerLeftGame(AMPPlayerState* PlayerLeaving)
 	if (CharacterLeaving)
 	{
 		CharacterLeaving->Eliminated(true);
+	}
+}
+
+void AMPShooterGameMode::BroadcastChatMessage(APlayerState* Sender, const FString& Msg)
+{
+	// Chat checks & safety
+	for (FConstPlayerControllerIterator It = GetWorld()->GetPlayerControllerIterator(); It; ++It)
+	{
+		AMPPlayerController* MPPlayerController = Cast<AMPPlayerController>(*It);
+		if (MPPlayerController)
+		{
+			FString SenderName = Sender->GetPlayerName();
+			MPPlayerController->ClientChatMessage(SenderName, Msg);
+		}
 	}
 }

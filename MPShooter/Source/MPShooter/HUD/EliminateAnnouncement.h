@@ -16,8 +16,8 @@ public:
 	class UHorizontalBox* AnnouncementBox;
 	UPROPERTY(meta = (BindWidget))
 	class UTextBlock* AnnouncementText;
-	UPROPERTY(EditAnywhere, meta = (ToolTip = "Text used to inicate who's been eliminated."))
-	FString EliminateText = "eliminated";
+	UPROPERTY(EditAnywhere, Category = "Eliminate", meta = (ToolTip = "Text used to inicate who's been eliminated."))
+	FString EliminateText = "eliminated by";
 
 	void SetEliminateAnnouncementText(FString AttackerName, FString VictimName);
 };

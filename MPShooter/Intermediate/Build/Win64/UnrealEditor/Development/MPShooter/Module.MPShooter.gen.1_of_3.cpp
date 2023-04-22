@@ -7,7 +7,6 @@
 #include "D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Intermediate/Build/Win64/UnrealEditor/Inc/MPShooter/CharacterOverlay.gen.cpp"
 #include "D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Intermediate/Build/Win64/UnrealEditor/Inc/MPShooter/CombatComponent.gen.cpp"
 #include "D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Intermediate/Build/Win64/UnrealEditor/Inc/MPShooter/CombatState.gen.cpp"
-#include "D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Intermediate/Build/Win64/UnrealEditor/Inc/MPShooter/EliminateAnnouncement.gen.cpp"
 #include "D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Intermediate/Build/Win64/UnrealEditor/Inc/MPShooter/GrenadeThrowableWeapon.gen.cpp"
 #include "D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Intermediate/Build/Win64/UnrealEditor/Inc/MPShooter/HealthPickup.gen.cpp"
 #include "D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Intermediate/Build/Win64/UnrealEditor/Inc/MPShooter/HitActor.gen.cpp"
