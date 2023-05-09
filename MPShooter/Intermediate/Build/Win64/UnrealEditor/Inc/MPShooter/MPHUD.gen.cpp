@@ -19,6 +19,7 @@ void EmptyLinkFunctionForGeneratedCodeMPHUD() {}
 	COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
 	UMG_API UClass* Z_Construct_UClass_UUserWidget_NoRegister();
 	MPSHOOTER_API UClass* Z_Construct_UClass_UAnnoucement_NoRegister();
+	MPSHOOTER_API UClass* Z_Construct_UClass_UPlayerChatBox_NoRegister();
 	MPSHOOTER_API UClass* Z_Construct_UClass_USniperScopeOverlay_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_APlayerController_NoRegister();
 // End Cross Module References
@@ -159,6 +160,14 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FHUDPackage>()
 #endif
 		static const UECodeGen_Private::FClassPropertyParams NewProp_AnnoucementClass;
 #if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_PlayerChatBox_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_PlayerChatBox;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_PlayerChatBoxClass_MetaData[];
+#endif
+		static const UECodeGen_Private::FClassPropertyParams NewProp_PlayerChatBoxClass;
+#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_SniperScopeOverlay_MetaData[];
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_SniperScopeOverlay;
@@ -208,10 +217,8 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FHUDPackage>()
 #endif
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMPHUD_Statics::NewProp_CharacterOverlay_MetaData[] = {
-		{ "Comment", "//\n// Health\n//\n" },
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "HUD/MPHUD.h" },
-		{ "ToolTip", "Health" },
 	};
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMPHUD_Statics::NewProp_CharacterOverlay = { "CharacterOverlay", nullptr, (EPropertyFlags)0x0010000000080008, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMPHUD, CharacterOverlay), Z_Construct_UClass_UCharacterOverlay_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AMPHUD_Statics::NewProp_CharacterOverlay_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMPHUD_Statics::NewProp_CharacterOverlay_MetaData)) };
@@ -238,6 +245,21 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FHUDPackage>()
 	};
 #endif
 	const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_AMPHUD_Statics::NewProp_AnnoucementClass = { "AnnoucementClass", nullptr, (EPropertyFlags)0x0014000000000001, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMPHUD, AnnoucementClass), Z_Construct_UClass_UUserWidget_NoRegister, Z_Construct_UClass_UClass, METADATA_PARAMS(Z_Construct_UClass_AMPHUD_Statics::NewProp_AnnoucementClass_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMPHUD_Statics::NewProp_AnnoucementClass_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMPHUD_Statics::NewProp_PlayerChatBox_MetaData[] = {
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "HUD/MPHUD.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMPHUD_Statics::NewProp_PlayerChatBox = { "PlayerChatBox", nullptr, (EPropertyFlags)0x0010000000080008, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMPHUD, PlayerChatBox), Z_Construct_UClass_UPlayerChatBox_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AMPHUD_Statics::NewProp_PlayerChatBox_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMPHUD_Statics::NewProp_PlayerChatBox_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMPHUD_Statics::NewProp_PlayerChatBoxClass_MetaData[] = {
+		{ "Category", "Announcements - Chat Box" },
+		{ "ModuleRelativePath", "HUD/MPHUD.h" },
+		{ "ToolTip", "Player chat box during matches." },
+	};
+#endif
+	const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_AMPHUD_Statics::NewProp_PlayerChatBoxClass = { "PlayerChatBoxClass", nullptr, (EPropertyFlags)0x0014000000000001, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMPHUD, PlayerChatBoxClass), Z_Construct_UClass_UPlayerChatBox_NoRegister, Z_Construct_UClass_UClass, METADATA_PARAMS(Z_Construct_UClass_AMPHUD_Statics::NewProp_PlayerChatBoxClass_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMPHUD_Statics::NewProp_PlayerChatBoxClass_MetaData)) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMPHUD_Statics::NewProp_SniperScopeOverlay_MetaData[] = {
 		{ "EditInline", "true" },
@@ -296,6 +318,8 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FHUDPackage>()
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMPHUD_Statics::NewProp_CharacterOverlayClass,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMPHUD_Statics::NewProp_Annoucement,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMPHUD_Statics::NewProp_AnnoucementClass,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMPHUD_Statics::NewProp_PlayerChatBox,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMPHUD_Statics::NewProp_PlayerChatBoxClass,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMPHUD_Statics::NewProp_SniperScopeOverlay,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMPHUD_Statics::NewProp_SniperScopeOverlayClass,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMPHUD_Statics::NewProp_OwningPlayer,
@@ -345,9 +369,9 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FHUDPackage>()
 		{ FHUDPackage::StaticStruct, Z_Construct_UScriptStruct_FHUDPackage_Statics::NewStructOps, TEXT("HUDPackage"), &Z_Registration_Info_UScriptStruct_HUDPackage, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FHUDPackage), 2172949305U) },
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_HUD_MPHUD_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AMPHUD, AMPHUD::StaticClass, TEXT("AMPHUD"), &Z_Registration_Info_UClass_AMPHUD, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMPHUD), 3980278645U) },
+		{ Z_Construct_UClass_AMPHUD, AMPHUD::StaticClass, TEXT("AMPHUD"), &Z_Registration_Info_UClass_AMPHUD, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMPHUD), 2070810071U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_HUD_MPHUD_h_2100500153(TEXT("/Script/MPShooter"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_HUD_MPHUD_h_823469961(TEXT("/Script/MPShooter"),
 		Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_HUD_MPHUD_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_HUD_MPHUD_h_Statics::ClassInfo),
 		Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_HUD_MPHUD_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_HUD_MPHUD_h_Statics::ScriptStructInfo),
 		nullptr, 0);

@@ -35,6 +35,8 @@ static inline void FHighPingDelegate_DelegateWrapper(const FMulticastScriptDeleg
 	virtual void ServerReportPingStatus_Implementation(bool bHighPing); \
 	virtual void ClientReportServerTime_Implementation(float TimeOfClientRequest, float TimeServerReceivedClientRequest); \
 	virtual void ServerRequestServerTime_Implementation(float TimeOfClientRequest); \
+	virtual void ClientChatMessage_Implementation(const FString& SenderName, const FString& Msg); \
+	virtual void ServerBroadcastChatMessage_Implementation(APlayerState* Sender, const FString& Msg); \
  \
 	DECLARE_FUNCTION(execOnRep_MatchState); \
 	DECLARE_FUNCTION(execClientEliminateAnnouncement); \
@@ -42,7 +44,9 @@ static inline void FHighPingDelegate_DelegateWrapper(const FMulticastScriptDeleg
 	DECLARE_FUNCTION(execServerCheckMatchState); \
 	DECLARE_FUNCTION(execServerReportPingStatus); \
 	DECLARE_FUNCTION(execClientReportServerTime); \
-	DECLARE_FUNCTION(execServerRequestServerTime);
+	DECLARE_FUNCTION(execServerRequestServerTime); \
+	DECLARE_FUNCTION(execClientChatMessage); \
+	DECLARE_FUNCTION(execServerBroadcastChatMessage);
 
 
 #define FID_MPShooter_Source_MPShooter_PlayerController_MPPlayerController_h_17_RPC_WRAPPERS_NO_PURE_DECLS \
@@ -52,6 +56,8 @@ static inline void FHighPingDelegate_DelegateWrapper(const FMulticastScriptDeleg
 	virtual void ServerReportPingStatus_Implementation(bool bHighPing); \
 	virtual void ClientReportServerTime_Implementation(float TimeOfClientRequest, float TimeServerReceivedClientRequest); \
 	virtual void ServerRequestServerTime_Implementation(float TimeOfClientRequest); \
+	virtual void ClientChatMessage_Implementation(const FString& SenderName, const FString& Msg); \
+	virtual void ServerBroadcastChatMessage_Implementation(APlayerState* Sender, const FString& Msg); \
  \
 	DECLARE_FUNCTION(execOnRep_MatchState); \
 	DECLARE_FUNCTION(execClientEliminateAnnouncement); \
@@ -59,10 +65,17 @@ static inline void FHighPingDelegate_DelegateWrapper(const FMulticastScriptDeleg
 	DECLARE_FUNCTION(execServerCheckMatchState); \
 	DECLARE_FUNCTION(execServerReportPingStatus); \
 	DECLARE_FUNCTION(execClientReportServerTime); \
-	DECLARE_FUNCTION(execServerRequestServerTime);
+	DECLARE_FUNCTION(execServerRequestServerTime); \
+	DECLARE_FUNCTION(execClientChatMessage); \
+	DECLARE_FUNCTION(execServerBroadcastChatMessage);
 
 
 #define FID_MPShooter_Source_MPShooter_PlayerController_MPPlayerController_h_17_EVENT_PARMS \
+	struct MPPlayerController_eventClientChatMessage_Parms \
+	{ \
+		FString SenderName; \
+		FString Msg; \
+	}; \
 	struct MPPlayerController_eventClientEliminateAnnouncement_Parms \
 	{ \
 		APlayerState* Attacker; \
@@ -81,6 +94,11 @@ static inline void FHighPingDelegate_DelegateWrapper(const FMulticastScriptDeleg
 	{ \
 		float TimeOfClientRequest; \
 		float TimeServerReceivedClientRequest; \
+	}; \
+	struct MPPlayerController_eventServerBroadcastChatMessage_Parms \
+	{ \
+		APlayerState* Sender; \
+		FString Msg; \
 	}; \
 	struct MPPlayerController_eventServerReportPingStatus_Parms \
 	{ \

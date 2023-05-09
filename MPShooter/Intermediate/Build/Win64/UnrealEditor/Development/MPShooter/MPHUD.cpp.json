@@ -162,7 +162,9 @@
             "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\source\\mpshooter\\hud\\eliminateannouncement.h",
             "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\intermediate\\build\\win64\\unrealeditor\\inc\\mpshooter\\eliminateannouncement.generated.h",
             "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\source\\mpshooter\\hud\\sniperscopeoverlay.h",
-            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\intermediate\\build\\win64\\unrealeditor\\inc\\mpshooter\\sniperscopeoverlay.generated.h"
+            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\intermediate\\build\\win64\\unrealeditor\\inc\\mpshooter\\sniperscopeoverlay.generated.h",
+            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\source\\mpshooter\\hud\\playerchatbox.h",
+            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\intermediate\\build\\win64\\unrealeditor\\inc\\mpshooter\\playerchatbox.generated.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

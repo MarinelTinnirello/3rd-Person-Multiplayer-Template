@@ -634,11 +634,7 @@ void AMPCharacter::ViewChatBoxButtonPressed()
 		return;
 	}
 
-	AMPHUD* MPHUD = Cast<AMPHUD>(MPPlayerController->GetHUD());
-	if (MPHUD && MPHUD->PlayerChatBoxClass)
-	{
-		MPHUD->PlayerChatBoxClass->ToggleChatBox();
-	}
+	MPPlayerController->ToggleChatBox();
 }
 
 bool AMPCharacter::IsLocallyReloading()

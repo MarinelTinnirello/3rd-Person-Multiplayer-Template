@@ -120,6 +120,32 @@ void EmptyLinkFunctionForGeneratedCodeMPPlayerController() {}
 		P_THIS->ServerRequestServerTime_Implementation(Z_Param_TimeOfClientRequest);
 		P_NATIVE_END;
 	}
+	DEFINE_FUNCTION(AMPPlayerController::execClientChatMessage)
+	{
+		P_GET_PROPERTY(FStrProperty,Z_Param_SenderName);
+		P_GET_PROPERTY(FStrProperty,Z_Param_Msg);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->ClientChatMessage_Implementation(Z_Param_SenderName,Z_Param_Msg);
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(AMPPlayerController::execServerBroadcastChatMessage)
+	{
+		P_GET_OBJECT(APlayerState,Z_Param_Sender);
+		P_GET_PROPERTY(FStrProperty,Z_Param_Msg);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->ServerBroadcastChatMessage_Implementation(Z_Param_Sender,Z_Param_Msg);
+		P_NATIVE_END;
+	}
+	static FName NAME_AMPPlayerController_ClientChatMessage = FName(TEXT("ClientChatMessage"));
+	void AMPPlayerController::ClientChatMessage(const FString& SenderName, const FString& Msg)
+	{
+		MPPlayerController_eventClientChatMessage_Parms Parms;
+		Parms.SenderName=SenderName;
+		Parms.Msg=Msg;
+		ProcessEvent(FindFunctionChecked(NAME_AMPPlayerController_ClientChatMessage),&Parms);
+	}
 	static FName NAME_AMPPlayerController_ClientEliminateAnnouncement = FName(TEXT("ClientEliminateAnnouncement"));
 	void AMPPlayerController::ClientEliminateAnnouncement(APlayerState* Attacker, APlayerState* Victim)
 	{
@@ -148,6 +174,14 @@ void EmptyLinkFunctionForGeneratedCodeMPPlayerController() {}
 		Parms.TimeServerReceivedClientRequest=TimeServerReceivedClientRequest;
 		ProcessEvent(FindFunctionChecked(NAME_AMPPlayerController_ClientReportServerTime),&Parms);
 	}
+	static FName NAME_AMPPlayerController_ServerBroadcastChatMessage = FName(TEXT("ServerBroadcastChatMessage"));
+	void AMPPlayerController::ServerBroadcastChatMessage(APlayerState* Sender, const FString& Msg)
+	{
+		MPPlayerController_eventServerBroadcastChatMessage_Parms Parms;
+		Parms.Sender=Sender;
+		Parms.Msg=Msg;
+		ProcessEvent(FindFunctionChecked(NAME_AMPPlayerController_ServerBroadcastChatMessage),&Parms);
+	}
 	static FName NAME_AMPPlayerController_ServerCheckMatchState = FName(TEXT("ServerCheckMatchState"));
 	void AMPPlayerController::ServerCheckMatchState()
 	{
@@ -171,15 +205,64 @@ void EmptyLinkFunctionForGeneratedCodeMPPlayerController() {}
 	{
 		UClass* Class = AMPPlayerController::StaticClass();
 		static const FNameNativePtrPair Funcs[] = {
+			{ "ClientChatMessage", &AMPPlayerController::execClientChatMessage },
 			{ "ClientEliminateAnnouncement", &AMPPlayerController::execClientEliminateAnnouncement },
 			{ "ClientJoinMidGame", &AMPPlayerController::execClientJoinMidGame },
 			{ "ClientReportServerTime", &AMPPlayerController::execClientReportServerTime },
 			{ "OnRep_MatchState", &AMPPlayerController::execOnRep_MatchState },
+			{ "ServerBroadcastChatMessage", &AMPPlayerController::execServerBroadcastChatMessage },
 			{ "ServerCheckMatchState", &AMPPlayerController::execServerCheckMatchState },
 			{ "ServerReportPingStatus", &AMPPlayerController::execServerReportPingStatus },
 			{ "ServerRequestServerTime", &AMPPlayerController::execServerRequestServerTime },
 		};
 		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
+	}
+	struct Z_Construct_UFunction_AMPPlayerController_ClientChatMessage_Statics
+	{
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_SenderName_MetaData[];
+#endif
+		static const UECodeGen_Private::FStrPropertyParams NewProp_SenderName;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_Msg_MetaData[];
+#endif
+		static const UECodeGen_Private::FStrPropertyParams NewProp_Msg;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMPPlayerController_ClientChatMessage_Statics::NewProp_SenderName_MetaData[] = {
+		{ "NativeConst", "" },
+	};
+#endif
+	const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_AMPPlayerController_ClientChatMessage_Statics::NewProp_SenderName = { "SenderName", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(MPPlayerController_eventClientChatMessage_Parms, SenderName), METADATA_PARAMS(Z_Construct_UFunction_AMPPlayerController_ClientChatMessage_Statics::NewProp_SenderName_MetaData, UE_ARRAY_COUNT(Z_Construct_UFunction_AMPPlayerController_ClientChatMessage_Statics::NewProp_SenderName_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMPPlayerController_ClientChatMessage_Statics::NewProp_Msg_MetaData[] = {
+		{ "NativeConst", "" },
+	};
+#endif
+	const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_AMPPlayerController_ClientChatMessage_Statics::NewProp_Msg = { "Msg", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(MPPlayerController_eventClientChatMessage_Parms, Msg), METADATA_PARAMS(Z_Construct_UFunction_AMPPlayerController_ClientChatMessage_Statics::NewProp_Msg_MetaData, UE_ARRAY_COUNT(Z_Construct_UFunction_AMPPlayerController_ClientChatMessage_Statics::NewProp_Msg_MetaData)) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AMPPlayerController_ClientChatMessage_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMPPlayerController_ClientChatMessage_Statics::NewProp_SenderName,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMPPlayerController_ClientChatMessage_Statics::NewProp_Msg,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMPPlayerController_ClientChatMessage_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "PlayerController/MPPlayerController.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMPPlayerController_ClientChatMessage_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMPPlayerController, nullptr, "ClientChatMessage", nullptr, nullptr, sizeof(MPPlayerController_eventClientChatMessage_Parms), Z_Construct_UFunction_AMPPlayerController_ClientChatMessage_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AMPPlayerController_ClientChatMessage_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x01020CC0, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AMPPlayerController_ClientChatMessage_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AMPPlayerController_ClientChatMessage_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_AMPPlayerController_ClientChatMessage()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AMPPlayerController_ClientChatMessage_Statics::FuncParams);
+		}
+		return ReturnFunction;
 	}
 	struct Z_Construct_UFunction_AMPPlayerController_ClientEliminateAnnouncement_Statics
 	{
@@ -305,6 +388,45 @@ void EmptyLinkFunctionForGeneratedCodeMPPlayerController() {}
 		if (!ReturnFunction)
 		{
 			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AMPPlayerController_OnRep_MatchState_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_AMPPlayerController_ServerBroadcastChatMessage_Statics
+	{
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_Sender;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_Msg_MetaData[];
+#endif
+		static const UECodeGen_Private::FStrPropertyParams NewProp_Msg;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_AMPPlayerController_ServerBroadcastChatMessage_Statics::NewProp_Sender = { "Sender", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(MPPlayerController_eventServerBroadcastChatMessage_Parms, Sender), Z_Construct_UClass_APlayerState_NoRegister, METADATA_PARAMS(nullptr, 0) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMPPlayerController_ServerBroadcastChatMessage_Statics::NewProp_Msg_MetaData[] = {
+		{ "NativeConst", "" },
+	};
+#endif
+	const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_AMPPlayerController_ServerBroadcastChatMessage_Statics::NewProp_Msg = { "Msg", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(MPPlayerController_eventServerBroadcastChatMessage_Parms, Msg), METADATA_PARAMS(Z_Construct_UFunction_AMPPlayerController_ServerBroadcastChatMessage_Statics::NewProp_Msg_MetaData, UE_ARRAY_COUNT(Z_Construct_UFunction_AMPPlayerController_ServerBroadcastChatMessage_Statics::NewProp_Msg_MetaData)) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AMPPlayerController_ServerBroadcastChatMessage_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMPPlayerController_ServerBroadcastChatMessage_Statics::NewProp_Sender,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMPPlayerController_ServerBroadcastChatMessage_Statics::NewProp_Msg,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMPPlayerController_ServerBroadcastChatMessage_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "PlayerController/MPPlayerController.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMPPlayerController_ServerBroadcastChatMessage_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMPPlayerController, nullptr, "ServerBroadcastChatMessage", nullptr, nullptr, sizeof(MPPlayerController_eventServerBroadcastChatMessage_Parms), Z_Construct_UFunction_AMPPlayerController_ServerBroadcastChatMessage_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AMPPlayerController_ServerBroadcastChatMessage_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00220CC0, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AMPPlayerController_ServerBroadcastChatMessage_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AMPPlayerController_ServerBroadcastChatMessage_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_AMPPlayerController_ServerBroadcastChatMessage()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AMPPlayerController_ServerBroadcastChatMessage_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -454,10 +576,12 @@ void EmptyLinkFunctionForGeneratedCodeMPPlayerController() {}
 		(UObject* (*)())Z_Construct_UPackage__Script_MPShooter,
 	};
 	const FClassFunctionLinkInfo Z_Construct_UClass_AMPPlayerController_Statics::FuncInfo[] = {
+		{ &Z_Construct_UFunction_AMPPlayerController_ClientChatMessage, "ClientChatMessage" }, // 3187986061
 		{ &Z_Construct_UFunction_AMPPlayerController_ClientEliminateAnnouncement, "ClientEliminateAnnouncement" }, // 1266057710
 		{ &Z_Construct_UFunction_AMPPlayerController_ClientJoinMidGame, "ClientJoinMidGame" }, // 4236702150
 		{ &Z_Construct_UFunction_AMPPlayerController_ClientReportServerTime, "ClientReportServerTime" }, // 4208733907
 		{ &Z_Construct_UFunction_AMPPlayerController_OnRep_MatchState, "OnRep_MatchState" }, // 1253050963
+		{ &Z_Construct_UFunction_AMPPlayerController_ServerBroadcastChatMessage, "ServerBroadcastChatMessage" }, // 1146088138
 		{ &Z_Construct_UFunction_AMPPlayerController_ServerCheckMatchState, "ServerCheckMatchState" }, // 1562194947
 		{ &Z_Construct_UFunction_AMPPlayerController_ServerReportPingStatus, "ServerReportPingStatus" }, // 300720284
 		{ &Z_Construct_UFunction_AMPPlayerController_ServerRequestServerTime, "ServerRequestServerTime" }, // 4203439380
@@ -601,9 +725,9 @@ void EmptyLinkFunctionForGeneratedCodeMPPlayerController() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_PlayerController_MPPlayerController_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AMPPlayerController, AMPPlayerController::StaticClass, TEXT("AMPPlayerController"), &Z_Registration_Info_UClass_AMPPlayerController, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMPPlayerController), 4018176289U) },
+		{ Z_Construct_UClass_AMPPlayerController, AMPPlayerController::StaticClass, TEXT("AMPPlayerController"), &Z_Registration_Info_UClass_AMPPlayerController, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMPPlayerController), 3422313579U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_PlayerController_MPPlayerController_h_2946867447(TEXT("/Script/MPShooter"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_PlayerController_MPPlayerController_h_3944133200(TEXT("/Script/MPShooter"),
 		Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_PlayerController_MPPlayerController_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_PlayerController_MPPlayerController_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

@@ -17,7 +17,7 @@ public:
 	UPROPERTY(meta = (BindWidget))
 	class UTextBlock* AnnouncementText;
 	UPROPERTY(meta = (BindWidget))
-	class UEditableTextBox* ChatTextBox;
+	class UEditableText* ChatTextBox;
 
 	UPROPERTY()
 	bool bChatBoxVisible = false;

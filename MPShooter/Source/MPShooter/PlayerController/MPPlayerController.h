@@ -37,6 +37,7 @@ public:
 	void SetHUDSniperScope(bool bIsAiming);
 	void SetHUDMatchCountdown(float CountdownTime, float MatchWarningTime);
 	void SetHUDAnnouncementCountdown(float CountdownTime);
+	void ToggleChatBox();
 
 	virtual float GetServerTime();
 

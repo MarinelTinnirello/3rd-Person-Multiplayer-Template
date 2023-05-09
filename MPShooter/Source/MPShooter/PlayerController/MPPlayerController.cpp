@@ -11,6 +11,7 @@
 #include "MPShooter/HUD/CharacterOverlay.h"
 #include "MPShooter/HUD/Annoucement.h"
 #include "MPShooter/HUD/SniperScopeOverlay.h"
+#include "MPShooter/HUD/PlayerChatBox.h"
 #include "MPShooter/Character/MPCharacter.h"
 #include "MPShooter/MPComponents/CombatComponent.h"
 #include "MPShooter/GameMode/MPShooterGameMode.h"
@@ -69,6 +70,7 @@ void AMPPlayerController::ReceivedPlayer()
 void AMPPlayerController::SetupInputComponent()
 {
 	Super::SetupInputComponent();
+
 	if (InputComponent == nullptr)
 	{
 		return;
@@ -462,7 +464,6 @@ void AMPPlayerController::SetHUDTime()
 	if (HasAuthority())
 	{
 		MPShooterGameMode = MPShooterGameMode == nullptr ? Cast<AMPShooterGameMode>(UGameplayStatics::GetGameMode(this)) : MPShooterGameMode;
-
 		if (MPShooterGameMode)
 		{
 			SecondsLeft = FMath::CeilToInt(MPShooterGameMode->GetCountdownTime() + LevelStartTime);
@@ -736,9 +737,18 @@ void AMPPlayerController::ShowReturnToMainMenu()
 	}
 }
 
+void AMPPlayerController::ToggleChatBox()
+{
+	MPHUD = MPHUD == nullptr ? Cast<AMPHUD>(GetHUD()) : MPHUD;
+	if (MPHUD && MPHUD->PlayerChatBoxClass)
+	{
+		MPHUD->PlayerChatBox->ToggleChatBox();
+	}
+}
+
 void AMPPlayerController::ServerBroadcastChatMessage_Implementation(APlayerState* Sender, const FString& Msg)
 {
-	AMPShooterGameMode* MPShooterGameMode = GetWorld()->GetAuthGameMode<AMPShooterGameMode>();
+	MPShooterGameMode = MPShooterGameMode == nullptr ? Cast<AMPShooterGameMode>(UGameplayStatics::GetGameMode(this)) : MPShooterGameMode;
 	if (MPShooterGameMode)
 	{
 		MPShooterGameMode->BroadcastChatMessage(Sender, Msg);

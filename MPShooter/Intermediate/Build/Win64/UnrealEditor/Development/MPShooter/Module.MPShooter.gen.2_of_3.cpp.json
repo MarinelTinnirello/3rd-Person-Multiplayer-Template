@@ -222,21 +222,7 @@
             "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\intermediate\\build\\win64\\unrealeditor\\inc\\mpshooter\\rocketmovementcomponent.generated.h",
             "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\intermediate\\build\\win64\\unrealeditor\\inc\\mpshooter\\shieldpickup.gen.cpp",
             "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\source\\mpshooter\\item\\pickup\\shieldpickup.h",
-            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\intermediate\\build\\win64\\unrealeditor\\inc\\mpshooter\\shieldpickup.generated.h",
-            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\intermediate\\build\\win64\\unrealeditor\\inc\\mpshooter\\shotgunweapon.gen.cpp",
-            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\source\\mpshooter\\item\\weapon\\ranged\\shotgunweapon.h",
-            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\source\\mpshooter\\item\\weapon\\ranged\\hitscanweapon.h",
-            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\intermediate\\build\\win64\\unrealeditor\\inc\\mpshooter\\hitscanweapon.generated.h",
-            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\intermediate\\build\\win64\\unrealeditor\\inc\\mpshooter\\shotgunweapon.generated.h",
-            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\intermediate\\build\\win64\\unrealeditor\\inc\\mpshooter\\sniperscopeoverlay.gen.cpp",
-            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\source\\mpshooter\\hud\\sniperscopeoverlay.h",
-            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\intermediate\\build\\win64\\unrealeditor\\inc\\mpshooter\\sniperscopeoverlay.generated.h",
-            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\intermediate\\build\\win64\\unrealeditor\\inc\\mpshooter\\speedpickup.gen.cpp",
-            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\source\\mpshooter\\item\\pickup\\speedpickup.h",
-            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\intermediate\\build\\win64\\unrealeditor\\inc\\mpshooter\\speedpickup.generated.h",
-            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\intermediate\\build\\win64\\unrealeditor\\inc\\mpshooter\\spiralmovementcomponent.gen.cpp",
-            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\source\\mpshooter\\item\\weapon\\ranged\\projectile\\movement\\spiralmovementcomponent.h",
-            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\intermediate\\build\\win64\\unrealeditor\\inc\\mpshooter\\spiralmovementcomponent.generated.h"
+            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\intermediate\\build\\win64\\unrealeditor\\inc\\mpshooter\\shieldpickup.generated.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

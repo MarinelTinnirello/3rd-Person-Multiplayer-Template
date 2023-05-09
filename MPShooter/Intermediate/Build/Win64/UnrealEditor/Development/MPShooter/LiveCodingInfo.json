@@ -3,11 +3,12 @@
 	{
 		"Module.MPShooter.cpp.obj": [
 			"MPAnimInstance.cpp.obj",
-			"MPCharacter.cpp.obj",
 			"LobbyGameMode.cpp.obj",
+			"MPShooterGameMode.cpp.obj",
 			"MPGameState.cpp.obj",
 			"Annoucement.cpp.obj",
 			"CharacterOverlay.cpp.obj",
+			"EliminateAnnouncement.cpp.obj",
 			"OverheadWidget.cpp.obj",
 			"ReturnToMainMenu.cpp.obj",
 			"SniperScopeOverlay.cpp.obj",
@@ -40,8 +41,7 @@
 			"LagComponent.cpp.obj",
 			"MPShooter.cpp.obj",
 			"MPPlayerState.cpp.obj",
-			"MPShooterGameMode.cpp.obj",
-			"EliminateAnnouncement.cpp.obj",
+			"MPCharacter.cpp.obj",
 			"MPHUD.cpp.obj",
 			"PlayerChatBox.cpp.obj",
 			"MPPlayerController.cpp.obj"
@@ -55,6 +55,7 @@
 			"CharacterOverlay.gen.cpp.obj",
 			"CombatComponent.gen.cpp.obj",
 			"CombatState.gen.cpp.obj",
+			"EliminateAnnouncement.gen.cpp.obj",
 			"GrenadeThrowableWeapon.gen.cpp.obj",
 			"HealthPickup.gen.cpp.obj",
 			"HitActor.gen.cpp.obj",
@@ -64,8 +65,7 @@
 			"JumpPickup.gen.cpp.obj",
 			"LagComponent.gen.cpp.obj",
 			"LobbyGameMode.gen.cpp.obj",
-			"MPAnimInstance.gen.cpp.obj",
-			"EliminateAnnouncement.gen.cpp.obj"
+			"MPAnimInstance.gen.cpp.obj"
 		],
 		"Module.MPShooter.gen.2_of_3.cpp.obj": [
 			"MPCharacter.gen.cpp.obj",
@@ -75,7 +75,6 @@
 			"OverheadWidget.gen.cpp.obj",
 			"Pickup.gen.cpp.obj",
 			"PickupSpawnPoint.gen.cpp.obj",
-			"PlayerChatBox.gen.cpp.obj",
 			"Projectile.gen.cpp.obj",
 			"ProjectileBullet.gen.cpp.obj",
 			"ProjectileGrenade.gen.cpp.obj",
@@ -85,14 +84,15 @@
 			"ReturnToMainMenu.gen.cpp.obj",
 			"RocketMovementComponent.gen.cpp.obj",
 			"ShieldPickup.gen.cpp.obj",
+			"MPHUD.gen.cpp.obj",
+			"MPPlayerController.gen.cpp.obj",
+			"MPShooter.init.gen.cpp.obj",
+			"PlayerChatBox.gen.cpp.obj"
+		],
+		"Module.MPShooter.gen.3_of_3.cpp.obj": [
 			"ShotgunWeapon.gen.cpp.obj",
 			"SniperScopeOverlay.gen.cpp.obj",
 			"SpeedPickup.gen.cpp.obj",
-			"MPHUD.gen.cpp.obj",
-			"MPPlayerController.gen.cpp.obj",
-			"MPShooter.init.gen.cpp.obj"
-		],
-		"Module.MPShooter.gen.3_of_3.cpp.obj": [
 			"SpiralMovementComponent.gen.cpp.obj",
 			"ThrowableWeapon.gen.cpp.obj",
 			"ThrowableWeaponPickup.gen.cpp.obj",

@@ -1,19 +1,28 @@
 ﻿  Using bundled DotNet SDK
   Log file: C:\Users\M T\AppData\Local\UnrealBuildTool\Log.txt
   Using 'git status' to determine working set for adaptive non-unity build (D:\Documents\GitHub\3rd-Person-Multiplayer-Template).
+  Waiting for 'git status' command to complete
+  Invalidating makefile for MPShooterEditor (working set of source files changed)
+  Parsing headers for MPShooterEditor
+    Running UnrealHeaderTool "D:\Documents\GitHub\3rd-Person-Multiplayer-Template\MPShooter\MPShooter.uproject" "D:\Documents\GitHub\3rd-Person-Multiplayer-Template\MPShooter\Intermediate\Build\Win64\MPShooterEditor\Development\MPShooterEditor.uhtmanifest" -LogCmds="loginit warning, logexit warning, logdatabase error" -Unattended -WarningsAsErrors -abslog="C:\Users\M T\AppData\Local\UnrealBuildTool\Log_UHT.txt" -installed
+  Reflection code generated for MPShooterEditor in 6.8215177 seconds
   Building MPShooterEditor...
   Using Visual Studio 2019 14.29.30141 toolchain (C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133) and Windows 10.0.19041.0 SDK (C:\Program Files (x86)\Windows Kits\10).
-  [Adaptive Build] Excluded from MPShooter unity file: MPShooterGameMode.cpp, EliminateAnnouncement.cpp, MPHUD.cpp, MPPlayerController.cpp
-  [Adaptive Build] Excluded from MPShooter unity file: EliminateAnnouncement.gen.cpp, MPHUD.gen.cpp, MPPlayerController.gen.cpp, MPShooter.init.gen.cpp
+  [Adaptive Build] Excluded from MPShooter unity file: MPCharacter.cpp, MPHUD.cpp, PlayerChatBox.cpp, MPPlayerController.cpp
+  [Adaptive Build] Excluded from MPShooter unity file: MPHUD.gen.cpp, MPPlayerController.gen.cpp, MPShooter.init.gen.cpp, PlayerChatBox.gen.cpp
   Determining max actions to execute in parallel (6 physical cores, 12 logical cores)
     Executing up to 6 processes, one per physical core
-    Requested 1.5 GB free memory per action, 4.28 GB available: limiting max parallel actions to 2
-  Building 4 actions with 2 processes...
-  [1/4] Compile MPHUD.cpp
-  [2/4] Link UnrealEditor-MPShooter.lib
+    Requested 1.5 GB free memory per action, 6.82 GB available: limiting max parallel actions to 4
+  Building 8 actions with 4 processes...
+  [1/8] Compile MPShooter.init.gen.cpp
+  [2/8] Compile PlayerChatBox.gen.cpp
+  [3/8] Compile PlayerChatBox.cpp
+  [4/8] Compile MPHUD.cpp
+  [5/8] Compile MPPlayerController.cpp
+  [6/8] Link UnrealEditor-MPShooter.lib
      Creating library D:\Documents\GitHub\3rd-Person-Multiplayer-Template\MPShooter\Intermediate\Build\Win64\UnrealEditor\Development\MPShooter\UnrealEditor-MPShooter.lib and object D:\Documents\GitHub\3rd-Person-Multiplayer-Template\MPShooter\Intermediate\Build\Win64\UnrealEditor\Development\MPShooter\UnrealEditor-MPShooter.exp
-  [3/4] Link UnrealEditor-MPShooter.dll
+  [7/8] Link UnrealEditor-MPShooter.dll
      Creating library D:\Documents\GitHub\3rd-Person-Multiplayer-Template\MPShooter\Intermediate\Build\Win64\UnrealEditor\Development\MPShooter\UnrealEditor-MPShooter.suppressed.lib and object D:\Documents\GitHub\3rd-Person-Multiplayer-Template\MPShooter\Intermediate\Build\Win64\UnrealEditor\Development\MPShooter\UnrealEditor-MPShooter.suppressed.exp
-  [4/4] WriteMetadata MPShooterEditor.target
-  Total time in Parallel executor: 393.34 seconds
-  Total execution time: 394.35 seconds
+  [8/8] WriteMetadata MPShooterEditor.target
+  Total time in Parallel executor: 457.41 seconds
+  Total execution time: 469.19 seconds

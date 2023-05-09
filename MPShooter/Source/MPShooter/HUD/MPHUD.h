@@ -35,6 +35,8 @@ public:
 	class UAnnoucement* Annoucement;
 	UPROPERTY(EditAnywhere, Category = "Annoucements", meta = (ToolTip = "Annoucement overlay to be displayed."))
 	TSubclassOf<class UUserWidget> AnnoucementClass;
+	UPROPERTY()
+	class UPlayerChatBox* PlayerChatBox;
 	UPROPERTY(EditAnywhere, Category = "Announcements - Chat Box", meta = (ToolTip = "Player chat box during matches."))
 	TSubclassOf<class UPlayerChatBox> PlayerChatBoxClass;
 	UPROPERTY()
@@ -82,13 +84,13 @@ private:
 	//
 	// Player Chat
 	//
-	UPROPERTY(EditAnywhere, Category = "Announcements - Chat Box", meta = (ToolTip = "Time until chat message is deleted."))
-	float EliminateAnnouncementTime = 10f;
+	/*UPROPERTY(EditAnywhere, Category = "Announcements - Chat Box", meta = (ToolTip = "Time until chat message is deleted."))
+	float ChatMessageTime = 10.f;
 	UPROPERTY()
 	TArray<UPlayerChatBox*> ChatMessages;
 
 	UFUNCTION()
-	void EliminateAnnouncementTimerFinished(UEliminateAnnouncement* MsgToRemove);
+	void ChatMessageTimerFinished(UPlayerChatBox* MsgToRemove);*/
 
 public:
 	FORCEINLINE void SetHUDPackage(const FHUDPackage& Package) { HUDPackage = Package; }

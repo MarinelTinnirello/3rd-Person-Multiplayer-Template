@@ -1,16 +1,17 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "PlayerChatBox.h"
+#include "PlayerChatbox.h"
 #include "Components/TextBlock.h"
+#include "Components/EditableText.h"
 #include "Components/ScrollBox.h"
-#include "Components/EditableTextBox.h"
 #include "MPShooter/PlayerController/MPPlayerController.h"
+#include "MPShooter/PlayerState/MPPlayerState.h"
 
 void UPlayerChatBox::ToggleChatBox()
 {
 	AMPPlayerController* MPPlayerController = Cast<AMPPlayerController>(GetOwningPlayer());
-	if (MPPlayerController)
+	if (MPPlayerController && ChatTextBox && AnnouncementBox)
 	{
 		if (!bChatBoxVisible)
 		{
@@ -25,6 +26,7 @@ void UPlayerChatBox::ToggleChatBox()
 		{
 			ChatTextBox->OnTextCommitted.RemoveDynamic(this, &UPlayerChatBox::CommitChatTextBox);
 			ChatTextBox->SetVisibility(ESlateVisibility::Collapsed);
+			AnnouncementBox->SetVisibility(ESlateVisibility::Collapsed);
 			MPPlayerController->SetInputMode(FInputModeGameOnly());
 			bChatBoxVisible = false;
 		}
@@ -34,11 +36,12 @@ void UPlayerChatBox::ToggleChatBox()
 void UPlayerChatBox::CommitChatTextBox(const FText& Text, ETextCommit::Type CommitMethod)
 {
 	AMPPlayerController* MPPlayerController = Cast<AMPPlayerController>(GetOwningPlayer());
+	AMPPlayerState* MPPlayerState = Cast<AMPPlayerState>(GetOwningPlayerState());
 	if (CommitMethod == ETextCommit::OnEnter)
 	{
-		if (MPPlayerController)
+		if (MPPlayerController && MPPlayerState && ChatTextBox && AnnouncementBox)
 		{
-			MPPlayerController->ServerBroadcastChatMessage(GetOwningPlayerState(), Text.ToString());
+			MPPlayerController->ServerBroadcastChatMessage(MPPlayerState, Text.ToString());
 			ChatTextBox->SetVisibility(ESlateVisibility::Collapsed);
 			AnnouncementBox->SetVisibility(ESlateVisibility::Collapsed);
 			ChatTextBox->SetText(FText::FromString(""));
@@ -51,6 +54,7 @@ void UPlayerChatBox::CommitChatTextBox(const FText& Text, ETextCommit::Type Comm
 	{
 		ChatTextBox->OnTextCommitted.RemoveDynamic(this, &UPlayerChatBox::CommitChatTextBox);
 		ChatTextBox->SetVisibility(ESlateVisibility::Collapsed);
+		AnnouncementBox->SetVisibility(ESlateVisibility::Collapsed);
 		MPPlayerController->SetInputMode(FInputModeGameOnly());
 		bChatBoxVisible = false;
 	}
@@ -62,5 +66,9 @@ void UPlayerChatBox::SetPlayerChatText(const FString& SenderName, const FString&
 	if (AnnouncementText)
 	{
 		AnnouncementText->SetText(FText::FromString(ChatAnnouncementText));
+		AnnouncementText->SetAutoWrapText(true);
+		AnnouncementBox->AddChild(AnnouncementText);
+		AnnouncementBox->ScrollToEnd();
+		AnnouncementBox->bAnimateWheelScrolling = true;
 	}
 }
