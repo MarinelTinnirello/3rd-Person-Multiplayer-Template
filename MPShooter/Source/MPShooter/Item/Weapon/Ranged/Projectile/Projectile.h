@@ -16,8 +16,10 @@ public:
 	//
 	// Projectile Properties
 	//
-	UPROPERTY(EditAnywhere, Category = "Projectile Properties", meta = (ToolTip = "Amount of damage each projectile deals to whatever it hits."))
+	UPROPERTY(EditAnywhere, Category = "Projectile Properties", meta = (ToolTip = "Amount of damage each projectile deals to whatever it hits. Only needs to be set for things like grenades and rockets, since they're explosives."))
 	float Damage = 20.f;
+	UPROPERTY(EditAnywhere, Category = "Projectile Properties", meta = (ToolTip = "Amount of damage each projectile deals to whatever it hits. Doesn't need to be set for things like grenades and rockets, since they're explosives."))
+	float HeadShotDamage = 40.f;
 	UPROPERTY(EditAnywhere, Category = "Projectile Properties", meta = (ToolTip = "Amount of speed each projectile initially starts at. This will also set the MaxSpeed to be equal, although this can be changed in the ProjectileMovement properties."))
 	float InitialSpeed = 15000;
 

@@ -74,7 +74,7 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FProjectileWeaponDataTable>
 		{ "ToolTip", "General weapon properties of a weapon." },
 	};
 #endif
-	const UECodeGen_Private::FStructPropertyParams Z_Construct_UScriptStruct_FProjectileWeaponDataTable_Statics::NewProp_WeaponProperties = { "WeaponProperties", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FProjectileWeaponDataTable, WeaponProperties), Z_Construct_UScriptStruct_FWeaponProperties, METADATA_PARAMS(Z_Construct_UScriptStruct_FProjectileWeaponDataTable_Statics::NewProp_WeaponProperties_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FProjectileWeaponDataTable_Statics::NewProp_WeaponProperties_MetaData)) }; // 2733503730
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UScriptStruct_FProjectileWeaponDataTable_Statics::NewProp_WeaponProperties = { "WeaponProperties", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FProjectileWeaponDataTable, WeaponProperties), Z_Construct_UScriptStruct_FWeaponProperties, METADATA_PARAMS(Z_Construct_UScriptStruct_FProjectileWeaponDataTable_Statics::NewProp_WeaponProperties_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FProjectileWeaponDataTable_Statics::NewProp_WeaponProperties_MetaData)) }; // 3989517923
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FProjectileWeaponDataTable_Statics::NewProp_ProjectileClass_MetaData[] = {
 		{ "Category", "Projectile" },
@@ -214,12 +214,12 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FProjectileWeaponDataTable>
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FStructRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_Ranged_ProjectileWeapon_h_Statics::ScriptStructInfo[] = {
-		{ FProjectileWeaponDataTable::StaticStruct, Z_Construct_UScriptStruct_FProjectileWeaponDataTable_Statics::NewStructOps, TEXT("ProjectileWeaponDataTable"), &Z_Registration_Info_UScriptStruct_ProjectileWeaponDataTable, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FProjectileWeaponDataTable), 3846647065U) },
+		{ FProjectileWeaponDataTable::StaticStruct, Z_Construct_UScriptStruct_FProjectileWeaponDataTable_Statics::NewStructOps, TEXT("ProjectileWeaponDataTable"), &Z_Registration_Info_UScriptStruct_ProjectileWeaponDataTable, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FProjectileWeaponDataTable), 3092456768U) },
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_Ranged_ProjectileWeapon_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AProjectileWeapon, AProjectileWeapon::StaticClass, TEXT("AProjectileWeapon"), &Z_Registration_Info_UClass_AProjectileWeapon, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AProjectileWeapon), 279270817U) },
+		{ Z_Construct_UClass_AProjectileWeapon, AProjectileWeapon::StaticClass, TEXT("AProjectileWeapon"), &Z_Registration_Info_UClass_AProjectileWeapon, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AProjectileWeapon), 1825048567U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_Ranged_ProjectileWeapon_h_3427460328(TEXT("/Script/MPShooter"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_Ranged_ProjectileWeapon_h_243930647(TEXT("/Script/MPShooter"),
 		Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_Ranged_ProjectileWeapon_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_Ranged_ProjectileWeapon_h_Statics::ClassInfo),
 		Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_Ranged_ProjectileWeapon_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_Ranged_ProjectileWeapon_h_Statics::ScriptStructInfo),
 		nullptr, 0);

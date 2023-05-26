@@ -293,6 +293,10 @@ void EmptyLinkFunctionForGeneratedCodeProjectile() {}
 #endif
 		static const UECodeGen_Private::FFloatPropertyParams NewProp_Damage;
 #if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_HeadShotDamage_MetaData[];
+#endif
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_HeadShotDamage;
+#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_InitialSpeed_MetaData[];
 #endif
 		static const UECodeGen_Private::FFloatPropertyParams NewProp_InitialSpeed;
@@ -397,10 +401,18 @@ void EmptyLinkFunctionForGeneratedCodeProjectile() {}
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AProjectile_Statics::NewProp_Damage_MetaData[] = {
 		{ "Category", "Projectile Properties" },
 		{ "ModuleRelativePath", "Item/Weapon/Ranged/Projectile/Projectile.h" },
-		{ "ToolTip", "Amount of damage each projectile deals to whatever it hits." },
+		{ "ToolTip", "Amount of damage each projectile deals to whatever it hits. Only needs to be set for things like grenades and rockets, since they're explosives." },
 	};
 #endif
 	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AProjectile_Statics::NewProp_Damage = { "Damage", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AProjectile, Damage), METADATA_PARAMS(Z_Construct_UClass_AProjectile_Statics::NewProp_Damage_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AProjectile_Statics::NewProp_Damage_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AProjectile_Statics::NewProp_HeadShotDamage_MetaData[] = {
+		{ "Category", "Projectile Properties" },
+		{ "ModuleRelativePath", "Item/Weapon/Ranged/Projectile/Projectile.h" },
+		{ "ToolTip", "Amount of damage each projectile deals to whatever it hits. Doesn't need to be set for things like grenades and rockets, since they're explosives." },
+	};
+#endif
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AProjectile_Statics::NewProp_HeadShotDamage = { "HeadShotDamage", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AProjectile, HeadShotDamage), METADATA_PARAMS(Z_Construct_UClass_AProjectile_Statics::NewProp_HeadShotDamage_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AProjectile_Statics::NewProp_HeadShotDamage_MetaData)) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AProjectile_Statics::NewProp_InitialSpeed_MetaData[] = {
 		{ "Category", "Projectile Properties" },
@@ -561,6 +573,7 @@ void EmptyLinkFunctionForGeneratedCodeProjectile() {}
 	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AProjectile_Statics::NewProp_DestroyTime = { "DestroyTime", nullptr, (EPropertyFlags)0x0040000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AProjectile, DestroyTime), METADATA_PARAMS(Z_Construct_UClass_AProjectile_Statics::NewProp_DestroyTime_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AProjectile_Statics::NewProp_DestroyTime_MetaData)) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AProjectile_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectile_Statics::NewProp_Damage,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectile_Statics::NewProp_HeadShotDamage,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectile_Statics::NewProp_InitialSpeed,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectile_Statics::NewProp_ImpactParticles,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProjectile_Statics::NewProp_ImpactSound,
@@ -629,9 +642,9 @@ void EmptyLinkFunctionForGeneratedCodeProjectile() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_Ranged_Projectile_Projectile_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AProjectile, AProjectile::StaticClass, TEXT("AProjectile"), &Z_Registration_Info_UClass_AProjectile, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AProjectile), 586552348U) },
+		{ Z_Construct_UClass_AProjectile, AProjectile::StaticClass, TEXT("AProjectile"), &Z_Registration_Info_UClass_AProjectile, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AProjectile), 3493186603U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_Ranged_Projectile_Projectile_h_1497847640(TEXT("/Script/MPShooter"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_Ranged_Projectile_Projectile_h_1084613704(TEXT("/Script/MPShooter"),
 		Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_Ranged_Projectile_Projectile_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_Ranged_Projectile_Projectile_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

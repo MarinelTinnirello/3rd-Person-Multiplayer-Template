@@ -5,6 +5,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "MPShooter/Character/MPCharacter.h"
+#include "MPShooter/Character/MPAnimInstance.h"
 #include "MPShooter/PlayerController/MPPlayerController.h"
 #include "MPShooter/MPComponents/LagComponent.h"
 
@@ -29,11 +30,13 @@ void AProjectileBullet::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, 
 	if (OwnerCharacter)
 	{
 		AMPPlayerController* OwnerController = Cast<AMPPlayerController>(OwnerCharacter->Controller);
-		if (OwnerCharacter->HasAuthority() && !bUseServerSideRewind)
+		UMPAnimInstance* AnimInstance = Cast<UMPAnimInstance>(OwnerCharacter->GetMesh()->GetAnimInstance());
+		if (OwnerCharacter->HasAuthority() && !bUseServerSideRewind && AnimInstance)
 		{
+			const float DamageToCause = Hit.BoneName == AnimInstance->GetHeadBone() ? HeadShotDamage : Damage;
 			UGameplayStatics::ApplyDamage(
 				OtherActor, 
-				Damage, 
+				DamageToCause, 
 				OwnerController, 
 				this, 
 				UDamageType::StaticClass()

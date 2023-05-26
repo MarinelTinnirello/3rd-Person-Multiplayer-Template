@@ -103,6 +103,10 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FWeaponProperties>()
 #endif
 		static const UECodeGen_Private::FFloatPropertyParams NewProp_Damage;
 #if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_HeadShotDamage_MetaData[];
+#endif
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_HeadShotDamage;
+#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_DistanceToSphere_MetaData[];
 #endif
 		static const UECodeGen_Private::FFloatPropertyParams NewProp_DistanceToSphere;
@@ -306,6 +310,14 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FWeaponProperties>()
 #endif
 	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewProp_Damage = { "Damage", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FWeaponProperties, Damage), METADATA_PARAMS(Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewProp_Damage_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewProp_Damage_MetaData)) };
 #if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewProp_HeadShotDamage_MetaData[] = {
+		{ "Category", "Combat" },
+		{ "ModuleRelativePath", "Item/Weapon/Weapon.h" },
+		{ "ToolTip", "Damage dealt by the weapon if hit on the head." },
+	};
+#endif
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewProp_HeadShotDamage = { "HeadShotDamage", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FWeaponProperties, HeadShotDamage), METADATA_PARAMS(Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewProp_HeadShotDamage_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewProp_HeadShotDamage_MetaData)) };
+#if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewProp_DistanceToSphere_MetaData[] = {
 		{ "Category", "Combat - Ranged" },
 		{ "ModuleRelativePath", "Item/Weapon/Weapon.h" },
@@ -458,6 +470,7 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FWeaponProperties>()
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewProp_bHasPhysicsAttachment,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewProp_MuzzleFlash,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewProp_Damage,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewProp_HeadShotDamage,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewProp_DistanceToSphere,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewProp_SphereRadius,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewProp_bUseServerSideRewind,
@@ -714,6 +727,10 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FWeaponProperties>()
 #endif
 		static const UECodeGen_Private::FFloatPropertyParams NewProp_Damage;
 #if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_HeadShotDamage_MetaData[];
+#endif
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_HeadShotDamage;
+#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_DistanceToSphere_MetaData[];
 #endif
 		static const UECodeGen_Private::FFloatPropertyParams NewProp_DistanceToSphere;
@@ -929,6 +946,14 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FWeaponProperties>()
 #endif
 	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AWeapon_Statics::NewProp_Damage = { "Damage", nullptr, (EPropertyFlags)0x0020080000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AWeapon, Damage), METADATA_PARAMS(Z_Construct_UClass_AWeapon_Statics::NewProp_Damage_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AWeapon_Statics::NewProp_Damage_MetaData)) };
 #if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AWeapon_Statics::NewProp_HeadShotDamage_MetaData[] = {
+		{ "Category", "Combat" },
+		{ "ModuleRelativePath", "Item/Weapon/Weapon.h" },
+		{ "ToolTip", "Damage dealt by the weapon if hit on the head." },
+	};
+#endif
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AWeapon_Statics::NewProp_HeadShotDamage = { "HeadShotDamage", nullptr, (EPropertyFlags)0x0020080000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AWeapon, HeadShotDamage), METADATA_PARAMS(Z_Construct_UClass_AWeapon_Statics::NewProp_HeadShotDamage_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AWeapon_Statics::NewProp_HeadShotDamage_MetaData)) };
+#if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AWeapon_Statics::NewProp_DistanceToSphere_MetaData[] = {
 		{ "Category", "Combat - Ranged" },
 		{ "ModuleRelativePath", "Item/Weapon/Weapon.h" },
@@ -1082,6 +1107,7 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FWeaponProperties>()
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AWeapon_Statics::NewProp_bHasPhysicsAttachment,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AWeapon_Statics::NewProp_MuzzleFlash,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AWeapon_Statics::NewProp_Damage,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AWeapon_Statics::NewProp_HeadShotDamage,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AWeapon_Statics::NewProp_DistanceToSphere,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AWeapon_Statics::NewProp_SphereRadius,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AWeapon_Statics::NewProp_bUseServerSideRewind,
@@ -1147,12 +1173,12 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FWeaponProperties>()
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FStructRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_Statics::ScriptStructInfo[] = {
-		{ FWeaponProperties::StaticStruct, Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewStructOps, TEXT("WeaponProperties"), &Z_Registration_Info_UScriptStruct_WeaponProperties, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FWeaponProperties), 2733503730U) },
+		{ FWeaponProperties::StaticStruct, Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewStructOps, TEXT("WeaponProperties"), &Z_Registration_Info_UScriptStruct_WeaponProperties, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FWeaponProperties), 3989517923U) },
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AWeapon, AWeapon::StaticClass, TEXT("AWeapon"), &Z_Registration_Info_UClass_AWeapon, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AWeapon), 3863420752U) },
+		{ Z_Construct_UClass_AWeapon, AWeapon::StaticClass, TEXT("AWeapon"), &Z_Registration_Info_UClass_AWeapon, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AWeapon), 473927360U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_1166990160(TEXT("/Script/MPShooter"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_67306093(TEXT("/Script/MPShooter"),
 		Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_Statics::ClassInfo),
 		Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_Statics::ScriptStructInfo),
 		nullptr, 0);

@@ -1,0 +1,18 @@
+{
+    "Version": "1.1",
+    "Data": {
+        "Source": "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\intermediate\\build\\win64\\unrealeditor\\inc\\mpshooter\\projectilebullet.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\intermediate\\build\\win64\\mpshootereditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "Includes": [
+            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\intermediate\\build\\win64\\unrealeditor\\development\\mpshooter\\definitions.mpshooter.h",
+            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\source\\mpshooter\\item\\weapon\\ranged\\projectile\\projectilebullet.h",
+            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\source\\mpshooter\\item\\weapon\\ranged\\projectile\\projectile.h",
+            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\source\\mpshooter\\item\\weapon\\hitactor.h",
+            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\intermediate\\build\\win64\\unrealeditor\\inc\\mpshooter\\projectile.generated.h",
+            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\intermediate\\build\\win64\\unrealeditor\\inc\\mpshooter\\projectilebullet.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

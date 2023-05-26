@@ -59,6 +59,8 @@ struct FWeaponProperties
 	FName MuzzleFlash = "MuzzleFlash";
 	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Damage dealt by the weapon."))
 	float Damage = 20.f;
+	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Damage dealt by the weapon if hit on the head."))
+	float HeadShotDamage = 40.f;
 
 	//
 	// Weapon Scatter
@@ -178,6 +180,8 @@ protected:
 	FName MuzzleFlash = "MuzzleFlash";
 	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Damage dealt by the weapon."))
 	float Damage = 20.f;
+	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Damage dealt by the weapon if hit on the head."))
+	float HeadShotDamage = 40.f;
 
 	//
 	// Weapon Scatter
@@ -267,6 +271,7 @@ public:
 	FORCEINLINE EWeaponType GetWeaponType() const { return WeaponType; }
 	FORCEINLINE EFireType GetFireType() const { return FireType; }
 	FORCEINLINE float GetDamage() const { return Damage; }
+	FORCEINLINE float GetHeadShotDamage() const { return HeadShotDamage; }
 	bool IsAttachedToRightHand();
 	bool IsDoubleHanded();
 	bool IsDualWield();

@@ -4,6 +4,7 @@
 #include "Projectile.h"
 #include "Components/BoxComponent.h"
 #include "Net/UnrealNetwork.h"
+#include "GameFramework/ProjectileMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "Particles/ParticleSystem.h"
