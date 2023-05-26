@@ -26,6 +26,7 @@
 			"ShieldPickup.cpp.obj",
 			"SpeedPickup.cpp.obj",
 			"ThrowableWeaponPickup.cpp.obj",
+			"HitScanWeapon.cpp.obj",
 			"ProjectileWeapon.cpp.obj",
 			"Casing.cpp.obj",
 			"RocketMovementComponent.cpp.obj",
@@ -34,7 +35,6 @@
 			"ProjectileBullet.cpp.obj",
 			"ProjectileGrenade.cpp.obj",
 			"ProjectileRocket.cpp.obj",
-			"ShotgunWeapon.cpp.obj",
 			"GrenadeThrowableWeapon.cpp.obj",
 			"ThrowableWeapon.cpp.obj",
 			"Weapon.cpp.obj",
@@ -44,7 +44,7 @@
 			"MPShooter.cpp.obj",
 			"MPPlayerController.cpp.obj",
 			"MPPlayerState.cpp.obj",
-			"HitScanWeapon.cpp.obj"
+			"ShotgunWeapon.cpp.obj"
 		],
 		"Module.MPShooter.gen.1_of_3.cpp.obj": [
 			"AmmoPickup.gen.cpp.obj",

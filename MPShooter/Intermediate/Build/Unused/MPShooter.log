@@ -3,16 +3,16 @@
   Using 'git status' to determine working set for adaptive non-unity build (D:\Documents\GitHub\3rd-Person-Multiplayer-Template).
   Building MPShooterEditor...
   Using Visual Studio 2019 14.29.30141 toolchain (C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133) and Windows 10.0.19041.0 SDK (C:\Program Files (x86)\Windows Kits\10).
-  [Adaptive Build] Excluded from MPShooter unity file: HitScanWeapon.cpp
+  [Adaptive Build] Excluded from MPShooter unity file: ShotgunWeapon.cpp
   Determining max actions to execute in parallel (6 physical cores, 12 logical cores)
     Executing up to 6 processes, one per physical core
-    Requested 1.5 GB free memory per action, 5.07 GB available: limiting max parallel actions to 3
-  Building 4 actions with 3 processes...
-  [1/4] Compile HitScanWeapon.cpp
+    Requested 1.5 GB free memory per action, 4.28 GB available: limiting max parallel actions to 2
+  Building 4 actions with 2 processes...
+  [1/4] Compile ShotgunWeapon.cpp
   [2/4] Link UnrealEditor-MPShooter.lib
      Creating library D:\Documents\GitHub\3rd-Person-Multiplayer-Template\MPShooter\Intermediate\Build\Win64\UnrealEditor\Development\MPShooter\UnrealEditor-MPShooter.lib and object D:\Documents\GitHub\3rd-Person-Multiplayer-Template\MPShooter\Intermediate\Build\Win64\UnrealEditor\Development\MPShooter\UnrealEditor-MPShooter.exp
   [3/4] Link UnrealEditor-MPShooter.dll
      Creating library D:\Documents\GitHub\3rd-Person-Multiplayer-Template\MPShooter\Intermediate\Build\Win64\UnrealEditor\Development\MPShooter\UnrealEditor-MPShooter.suppressed.lib and object D:\Documents\GitHub\3rd-Person-Multiplayer-Template\MPShooter\Intermediate\Build\Win64\UnrealEditor\Development\MPShooter\UnrealEditor-MPShooter.suppressed.exp
   [4/4] WriteMetadata MPShooterEditor.target
-  Total time in Parallel executor: 5.49 seconds
-  Total execution time: 6.19 seconds
+  Total time in Parallel executor: 65.59 seconds
+  Total execution time: 66.73 seconds

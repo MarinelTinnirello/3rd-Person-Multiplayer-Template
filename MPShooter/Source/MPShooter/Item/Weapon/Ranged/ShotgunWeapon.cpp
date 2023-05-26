@@ -8,6 +8,7 @@
 #include "Particles/ParticleSystemComponent.h"
 #include "Sound/SoundCue.h"
 #include "MPShooter/Character/MPCharacter.h"
+#include "MPShooter/Character/MPAnimInstance.h"
 #include "MPShooter/PlayerController/MPPlayerController.h"
 #include "MPShooter/MPComponents/LagComponent.h"
 
@@ -29,6 +30,7 @@ void AShotgunWeapon::FireShotgun(const TArray<FVector_NetQuantize>& HitTargets)
 		const FVector Start = SocketTransform.GetLocation();
 
 		TMap<AMPCharacter*, uint32> HitMap;
+		TMap<AMPCharacter*, uint32> HeadShotHitMap;
 		for (FVector_NetQuantize HitTarget : HitTargets)
 		{
 			FHitResult FireHit;
@@ -37,13 +39,20 @@ void AShotgunWeapon::FireShotgun(const TArray<FVector_NetQuantize>& HitTargets)
 			AMPCharacter* MPCharacter = Cast<AMPCharacter>(FireHit.GetActor());
 			if (MPCharacter)
 			{
-				if (HitMap.Contains(MPCharacter))
+				UMPAnimInstance* AnimInstance = Cast<UMPAnimInstance>(MPCharacter->GetMesh()->GetAnimInstance());
+				if (AnimInstance)
 				{
-					HitMap[MPCharacter]++;
-				}
-				else
-				{
-					HitMap.Emplace(MPCharacter, 1);
+					const bool bHeadShot = FireHit.BoneName == AnimInstance->GetHeadBone();
+					if (bHeadShot)
+					{
+						if (HeadShotHitMap.Contains(MPCharacter)) HeadShotHitMap[MPCharacter]++;
+						else HeadShotHitMap.Emplace(MPCharacter, 1);
+					}
+					else
+					{
+						if (HitMap.Contains(MPCharacter)) HitMap[MPCharacter]++;
+						else HitMap.Emplace(MPCharacter, 1);
+					}
 				}
 			}
 
@@ -69,16 +78,39 @@ void AShotgunWeapon::FireShotgun(const TArray<FVector_NetQuantize>& HitTargets)
 		}
 
 		TArray<AMPCharacter*> HitCharacters;
+		TMap<AMPCharacter*, float> DamageMap;
+		// Calculate body shot damage by multiplying hit by Damage
 		for (auto HitPair : HitMap)
 		{
-			if (HitPair.Key && HasAuthority() && InstigatorController)
+			if (HitPair.Key)
+			{
+				DamageMap.Emplace(HitPair.Key, HitPair.Value * Damage);
+
+				HitCharacters.AddUnique(HitPair.Key);
+			}
+		}
+		// Calculate head shot damage by multiplying hit by HeadShotDamage
+		for (auto HeadShotHitPair : HeadShotHitMap)
+		{
+			if (HeadShotHitPair.Key)
+			{
+				if (DamageMap.Contains(HeadShotHitPair.Key)) DamageMap[HeadShotHitPair.Key] += HeadShotHitPair.Value * HeadShotDamage;
+				else DamageMap.Emplace(HeadShotHitPair.Key, HeadShotHitPair.Value * HeadShotDamage);
+
+				HitCharacters.AddUnique(HeadShotHitPair.Key);
+			}
+		}
+		// Loop through DamageMap to get total damage for each character
+		for (auto DamagePair : DamageMap)
+		{
+			if (DamagePair.Key && InstigatorController)
 			{
 				bool bCauseAuthDamage = !bUseServerSideRewind || OwnerPawn->IsLocallyControlled();
 				if (HasAuthority() && bCauseAuthDamage)
 				{
 					UGameplayStatics::ApplyDamage(
-						HitPair.Key,
-						Damage * HitPair.Value,
+						DamagePair.Key, // Character hit
+						DamagePair.Value, // Damage calculated in the two for loops above
 						InstigatorController,
 						this,
 						UDamageType::StaticClass()
