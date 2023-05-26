@@ -56,8 +56,7 @@ void AHitScanWeapon::Fire(const FVector& HitTarget)
 						MPCharacter,
 						Start,
 						HitTarget,
-						MPOwnerController->GetServerTime() - MPOwnerController->SingleTripTime,
-						this
+						MPOwnerController->GetServerTime() - MPOwnerController->SingleTripTime					
 					);
 				}
 			}

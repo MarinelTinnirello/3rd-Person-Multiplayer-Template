@@ -11,7 +11,6 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 class AMPCharacter;
 struct FVector_NetQuantize;
 struct FVector_NetQuantize100;
-class AWeapon;
 #ifdef MPSHOOTER_LagComponent_generated_h
 #error "LagComponent.generated.h already included, missing '#pragma once' in LagComponent.h"
 #endif
@@ -56,7 +55,7 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<struct FServerSideRewindSho
 #define FID_MPShooter_Source_MPShooter_MPComponents_LagComponent_h_78_RPC_WRAPPERS \
 	virtual void ServerScoreRequestProjectile_Implementation(AMPCharacter* HitCharacter, FVector_NetQuantize const& TraceStart, FVector_NetQuantize100 const& InitialVelocity, float HitTime); \
 	virtual void ServerScoreRequestShotgun_Implementation(TArray<AMPCharacter*> const& HitCharacters, FVector_NetQuantize const& TraceStart, TArray<FVector_NetQuantize> const& HitLocations, float HitTime); \
-	virtual void ServerScoreRequest_Implementation(AMPCharacter* HitCharacter, FVector_NetQuantize const& TraceStart, FVector_NetQuantize const& HitLocation, float HitTime, AWeapon* DamageCauser); \
+	virtual void ServerScoreRequest_Implementation(AMPCharacter* HitCharacter, FVector_NetQuantize const& TraceStart, FVector_NetQuantize const& HitLocation, float HitTime); \
  \
 	DECLARE_FUNCTION(execServerScoreRequestProjectile); \
 	DECLARE_FUNCTION(execServerScoreRequestShotgun); \
@@ -66,7 +65,7 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<struct FServerSideRewindSho
 #define FID_MPShooter_Source_MPShooter_MPComponents_LagComponent_h_78_RPC_WRAPPERS_NO_PURE_DECLS \
 	virtual void ServerScoreRequestProjectile_Implementation(AMPCharacter* HitCharacter, FVector_NetQuantize const& TraceStart, FVector_NetQuantize100 const& InitialVelocity, float HitTime); \
 	virtual void ServerScoreRequestShotgun_Implementation(TArray<AMPCharacter*> const& HitCharacters, FVector_NetQuantize const& TraceStart, TArray<FVector_NetQuantize> const& HitLocations, float HitTime); \
-	virtual void ServerScoreRequest_Implementation(AMPCharacter* HitCharacter, FVector_NetQuantize const& TraceStart, FVector_NetQuantize const& HitLocation, float HitTime, AWeapon* DamageCauser); \
+	virtual void ServerScoreRequest_Implementation(AMPCharacter* HitCharacter, FVector_NetQuantize const& TraceStart, FVector_NetQuantize const& HitLocation, float HitTime); \
  \
 	DECLARE_FUNCTION(execServerScoreRequestProjectile); \
 	DECLARE_FUNCTION(execServerScoreRequestShotgun); \
@@ -80,7 +79,6 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<struct FServerSideRewindSho
 		FVector_NetQuantize TraceStart; \
 		FVector_NetQuantize HitLocation; \
 		float HitTime; \
-		AWeapon* DamageCauser; \
 	}; \
 	struct LagComponent_eventServerScoreRequestProjectile_Parms \
 	{ \
