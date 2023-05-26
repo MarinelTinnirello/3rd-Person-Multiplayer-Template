@@ -7,6 +7,7 @@
 #include "Sound/SoundCue.h"
 #include "MPShooter/MPComponents/LagComponent.h"
 #include "MPShooter/Character/MPCharacter.h"
+#include "MPShooter/Character/MPAnimInstance.h"
 #include "MPShooter/PlayerController/MPPlayerController.h"
 
 void AHitScanWeapon::Fire(const FVector& HitTarget)
@@ -33,11 +34,13 @@ void AHitScanWeapon::Fire(const FVector& HitTarget)
 		if (MPCharacter && InstigatorController)
 		{
 			bool bCauseAuthDamage = !bUseServerSideRewind || OwnerPawn->IsLocallyControlled();
-			if (HasAuthority() && bCauseAuthDamage)
+			UMPAnimInstance* AnimInstance = Cast<UMPAnimInstance>(MPCharacter->GetMesh()->GetAnimInstance());
+			if (HasAuthority() && bCauseAuthDamage && AnimInstance)
 			{
+				const float DamageToCause = FireHit.BoneName == AnimInstance->GetHeadBone() ? HeadShotDamage : Damage;
 				UGameplayStatics::ApplyDamage(
 					MPCharacter,
-					Damage,
+					DamageToCause,
 					InstigatorController,
 					this,
 					UDamageType::StaticClass()
@@ -81,7 +84,6 @@ void AHitScanWeapon::Fire(const FVector& HitTarget)
 
 void AHitScanWeapon::WeaponTraceHit(const FVector& TraceStart, const FVector& HitTarget, FHitResult& OutHit)
 {
-
 	UWorld* World = GetWorld();
 	if (World)
 	{
@@ -93,10 +95,16 @@ void AHitScanWeapon::WeaponTraceHit(const FVector& TraceStart, const FVector& Hi
 			ECollisionChannel::ECC_Visibility
 		);
 		FVector BeamEnd = End;
+
 		if (OutHit.bBlockingHit)
 		{
 			BeamEnd = OutHit.ImpactPoint;
 		}
+		else
+		{
+			OutHit.ImpactPoint = End;
+		}
+
 		if (BeamParticles)
 		{
 			UParticleSystemComponent* Beam = UGameplayStatics::SpawnEmitterAtLocation(

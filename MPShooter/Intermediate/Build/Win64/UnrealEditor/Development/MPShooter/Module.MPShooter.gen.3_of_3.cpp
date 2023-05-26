@@ -6,4 +6,5 @@
 #include "D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Intermediate/Build/Win64/UnrealEditor/Inc/MPShooter/ThrowableWeapon.gen.cpp"
 #include "D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Intermediate/Build/Win64/UnrealEditor/Inc/MPShooter/ThrowableWeaponPickup.gen.cpp"
 #include "D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Intermediate/Build/Win64/UnrealEditor/Inc/MPShooter/TurningInPlace.gen.cpp"
+#include "D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Intermediate/Build/Win64/UnrealEditor/Inc/MPShooter/Weapon.gen.cpp"
 #include "D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Intermediate/Build/Win64/UnrealEditor/Inc/MPShooter/WeaponTypes.gen.cpp"
