@@ -194,6 +194,11 @@ void AWeapon::Fire(const FVector& HitTarget)
 	SpendRound();
 }
 
+void AWeapon::FireMulti(const TArray<FVector_NetQuantize>& HitTargets)
+{
+	Fire(FVector());
+}
+
 void AWeapon::SpendRound()
 {
 	// we're only spending 1 ammo per fire
@@ -291,4 +296,9 @@ FVector AWeapon::TraceEndWithScatter(const FVector& HitTarget)
 	const FVector ToEndLoc = EndLoc - TraceStart;
 
 	return FVector(TraceStart + ToEndLoc * TRACE_LENGTH / ToEndLoc.Size());
+}
+
+void AWeapon::MultiTraceEndWithScatter(const FVector& HitTarget, TArray<FVector_NetQuantize>& HitTargets)
+{
+	// done in HitScanWeapon
 }

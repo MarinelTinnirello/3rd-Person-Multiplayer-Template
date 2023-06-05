@@ -81,7 +81,7 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FHitScanWeaponDataTable>()
 		{ "ToolTip", "General weapon properties of a weapon." },
 	};
 #endif
-	const UECodeGen_Private::FStructPropertyParams Z_Construct_UScriptStruct_FHitScanWeaponDataTable_Statics::NewProp_WeaponProperties = { "WeaponProperties", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FHitScanWeaponDataTable, WeaponProperties), Z_Construct_UScriptStruct_FWeaponProperties, METADATA_PARAMS(Z_Construct_UScriptStruct_FHitScanWeaponDataTable_Statics::NewProp_WeaponProperties_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FHitScanWeaponDataTable_Statics::NewProp_WeaponProperties_MetaData)) }; // 3989517923
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UScriptStruct_FHitScanWeaponDataTable_Statics::NewProp_WeaponProperties = { "WeaponProperties", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FHitScanWeaponDataTable, WeaponProperties), Z_Construct_UScriptStruct_FWeaponProperties, METADATA_PARAMS(Z_Construct_UScriptStruct_FHitScanWeaponDataTable_Statics::NewProp_WeaponProperties_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FHitScanWeaponDataTable_Statics::NewProp_WeaponProperties_MetaData)) }; // 3259765496
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FHitScanWeaponDataTable_Statics::NewProp_ImpactParticles_MetaData[] = {
 		{ "Category", "Hit Scan Weapon Properties" },
@@ -168,6 +168,10 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FHitScanWeaponDataTable>()
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_BeamParticles_MetaData[];
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_BeamParticles;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_NumOfSlugs_MetaData[];
+#endif
+		static const UECodeGen_Private::FUInt32PropertyParams NewProp_NumOfSlugs;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
@@ -206,10 +210,19 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FHitScanWeaponDataTable>()
 	};
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AHitScanWeapon_Statics::NewProp_BeamParticles = { "BeamParticles", nullptr, (EPropertyFlags)0x0040000000000001, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AHitScanWeapon, BeamParticles), Z_Construct_UClass_UParticleSystem_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AHitScanWeapon_Statics::NewProp_BeamParticles_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AHitScanWeapon_Statics::NewProp_BeamParticles_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AHitScanWeapon_Statics::NewProp_NumOfSlugs_MetaData[] = {
+		{ "Category", "Shotgun Weapon Properties" },
+		{ "ModuleRelativePath", "Item/Weapon/Ranged/HitScanWeapon.h" },
+		{ "ToolTip", "Number of slugs shot from the weapon." },
+	};
+#endif
+	const UECodeGen_Private::FUInt32PropertyParams Z_Construct_UClass_AHitScanWeapon_Statics::NewProp_NumOfSlugs = { "NumOfSlugs", nullptr, (EPropertyFlags)0x0040000000000001, UECodeGen_Private::EPropertyGenFlags::UInt32, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AHitScanWeapon, NumOfSlugs), METADATA_PARAMS(Z_Construct_UClass_AHitScanWeapon_Statics::NewProp_NumOfSlugs_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AHitScanWeapon_Statics::NewProp_NumOfSlugs_MetaData)) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AHitScanWeapon_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AHitScanWeapon_Statics::NewProp_ImpactParticles,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AHitScanWeapon_Statics::NewProp_ImpactSound,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AHitScanWeapon_Statics::NewProp_BeamParticles,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AHitScanWeapon_Statics::NewProp_NumOfSlugs,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_AHitScanWeapon_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<AHitScanWeapon>::IsAbstract,
@@ -248,12 +261,12 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FHitScanWeaponDataTable>()
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FStructRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_Ranged_HitScanWeapon_h_Statics::ScriptStructInfo[] = {
-		{ FHitScanWeaponDataTable::StaticStruct, Z_Construct_UScriptStruct_FHitScanWeaponDataTable_Statics::NewStructOps, TEXT("HitScanWeaponDataTable"), &Z_Registration_Info_UScriptStruct_HitScanWeaponDataTable, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FHitScanWeaponDataTable), 214150375U) },
+		{ FHitScanWeaponDataTable::StaticStruct, Z_Construct_UScriptStruct_FHitScanWeaponDataTable_Statics::NewStructOps, TEXT("HitScanWeaponDataTable"), &Z_Registration_Info_UScriptStruct_HitScanWeaponDataTable, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FHitScanWeaponDataTable), 793255034U) },
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_Ranged_HitScanWeapon_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AHitScanWeapon, AHitScanWeapon::StaticClass, TEXT("AHitScanWeapon"), &Z_Registration_Info_UClass_AHitScanWeapon, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AHitScanWeapon), 3805479065U) },
+		{ Z_Construct_UClass_AHitScanWeapon, AHitScanWeapon::StaticClass, TEXT("AHitScanWeapon"), &Z_Registration_Info_UClass_AHitScanWeapon, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AHitScanWeapon), 909348355U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_Ranged_HitScanWeapon_h_756717306(TEXT("/Script/MPShooter"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_Ranged_HitScanWeapon_h_1824386209(TEXT("/Script/MPShooter"),
 		Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_Ranged_HitScanWeapon_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_Ranged_HitScanWeapon_h_Statics::ClassInfo),
 		Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_Ranged_HitScanWeapon_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_Ranged_HitScanWeapon_h_Statics::ScriptStructInfo),
 		nullptr, 0);

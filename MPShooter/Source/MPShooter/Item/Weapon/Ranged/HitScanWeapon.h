@@ -43,6 +43,8 @@ class MPSHOOTER_API AHitScanWeapon : public AWeapon
 
 public:
 	virtual void Fire(const FVector& HitTarget) override;
+	virtual void FireMulti(const TArray<FVector_NetQuantize>& HitTargets);
+	virtual void MultiTraceEndWithScatter(const FVector& HitTarget, TArray<FVector_NetQuantize>& HitTargets);
 
 	void WeaponTraceHit(const FVector& TraceStart, const FVector& HitTarget, FHitResult& OutHit);
 
@@ -53,7 +55,15 @@ protected:
 	class USoundCue* ImpactSound;
 
 private:
+	//
+	// Hit Scan Properties
+	//
 	UPROPERTY(EditAnywhere, Category = "Hit Scan Weapon Properties", meta = (ToolTip = "Particles trailing from the weapon."))
 	class UParticleSystem* BeamParticles;
 
+	//
+	// Shotgun Properties
+	//
+	UPROPERTY(EditAnywhere, Category = "Shotgun Weapon Properties", meta = (ToolTip = "Number of slugs shot from the weapon."))
+	uint32 NumOfSlugs = 10;
 };

@@ -39,6 +39,8 @@ struct FWeaponProperties
 	float ZoomedFOV = 30.f;
 	UPROPERTY(EditAnywhere, Category = "Crosshairs", meta = (ToolTip = "Speed at which a weapon is zoomed in when aiming."))
 	float ZoomedInterpSpeed = 20.f;
+	UPROPERTY(EditAnywhere, Category = "Crosshairs", meta = (ToolTip = "Whether or not to use a zoomed screen overlay."))
+	bool bUseSniperZoomedOverlay = false;
 
 	//
 	// Automatic Fire
@@ -136,6 +138,8 @@ public:
 	float ZoomedFOV = 30.f;
 	UPROPERTY(EditAnywhere, Category = "Crosshairs", meta = (ToolTip = "Speed at which a weapon is zoomed in when aiming."))
 	float ZoomedInterpSpeed = 20.f;
+	UPROPERTY(EditAnywhere, Category = "Crosshairs", meta = (ToolTip = "Whether or not to use a zoomed screen overlay."))
+	bool bUseSniperZoomedOverlay = false;
 
 	//
 	// Automatic Fire
@@ -156,6 +160,8 @@ public:
 	virtual void OnRep_Owner() override;
 
 	virtual void Fire(const FVector& HitTarget);
+	virtual void FireMulti(const TArray<FVector_NetQuantize>& HitTargets);
+	virtual void MultiTraceEndWithScatter(const FVector& HitTarget, TArray<FVector_NetQuantize>& HitTargets);
 	virtual void Dropped();
 
 	void SetHUDAmmo();

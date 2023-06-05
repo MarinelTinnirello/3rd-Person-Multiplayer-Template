@@ -1128,7 +1128,7 @@ void AMPCharacter::MulticastEliminated_Implementation(bool bPlayerLeftGame)
 		Combat &&
 		Combat->bAiming &&
 		Combat->EquippedWeapon &&
-		Combat->EquippedWeapon->GetWeaponType() == EWeaponType::EWT_SniperRifle;
+		Combat->EquippedWeapon->bUseSniperZoomedOverlay;
 	if (bHideSniperScope)
 	{
 		MPPlayerController->SetHUDSniperScope(false);

@@ -28,11 +28,6 @@ void EmptyLinkFunctionForGeneratedCodeShotgunWeapon() {}
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[];
 #endif
-#if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_NumOfSlugs_MetaData[];
-#endif
-		static const UECodeGen_Private::FUInt32PropertyParams NewProp_NumOfSlugs;
-		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
 	};
@@ -46,17 +41,6 @@ void EmptyLinkFunctionForGeneratedCodeShotgunWeapon() {}
 		{ "ModuleRelativePath", "Item/Weapon/Ranged/ShotgunWeapon.h" },
 	};
 #endif
-#if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AShotgunWeapon_Statics::NewProp_NumOfSlugs_MetaData[] = {
-		{ "Category", "Shotgun Weapon Properties" },
-		{ "ModuleRelativePath", "Item/Weapon/Ranged/ShotgunWeapon.h" },
-		{ "ToolTip", "Number of slugs shot from the weapon." },
-	};
-#endif
-	const UECodeGen_Private::FUInt32PropertyParams Z_Construct_UClass_AShotgunWeapon_Statics::NewProp_NumOfSlugs = { "NumOfSlugs", nullptr, (EPropertyFlags)0x0040000000000001, UECodeGen_Private::EPropertyGenFlags::UInt32, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AShotgunWeapon, NumOfSlugs), METADATA_PARAMS(Z_Construct_UClass_AShotgunWeapon_Statics::NewProp_NumOfSlugs_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AShotgunWeapon_Statics::NewProp_NumOfSlugs_MetaData)) };
-	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AShotgunWeapon_Statics::PropPointers[] = {
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AShotgunWeapon_Statics::NewProp_NumOfSlugs,
-	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_AShotgunWeapon_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<AShotgunWeapon>::IsAbstract,
 	};
@@ -66,11 +50,11 @@ void EmptyLinkFunctionForGeneratedCodeShotgunWeapon() {}
 		&StaticCppClassTypeInfo,
 		DependentSingletons,
 		nullptr,
-		Z_Construct_UClass_AShotgunWeapon_Statics::PropPointers,
+		nullptr,
 		nullptr,
 		UE_ARRAY_COUNT(DependentSingletons),
 		0,
-		UE_ARRAY_COUNT(Z_Construct_UClass_AShotgunWeapon_Statics::PropPointers),
+		0,
 		0,
 		0x009000A4u,
 		METADATA_PARAMS(Z_Construct_UClass_AShotgunWeapon_Statics::Class_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UClass_AShotgunWeapon_Statics::Class_MetaDataParams))
@@ -93,9 +77,9 @@ void EmptyLinkFunctionForGeneratedCodeShotgunWeapon() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_Ranged_ShotgunWeapon_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AShotgunWeapon, AShotgunWeapon::StaticClass, TEXT("AShotgunWeapon"), &Z_Registration_Info_UClass_AShotgunWeapon, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AShotgunWeapon), 2634879049U) },
+		{ Z_Construct_UClass_AShotgunWeapon, AShotgunWeapon::StaticClass, TEXT("AShotgunWeapon"), &Z_Registration_Info_UClass_AShotgunWeapon, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AShotgunWeapon), 2813935615U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_Ranged_ShotgunWeapon_h_2125246612(TEXT("/Script/MPShooter"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_Ranged_ShotgunWeapon_h_1268319553(TEXT("/Script/MPShooter"),
 		Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_Ranged_ShotgunWeapon_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_Ranged_ShotgunWeapon_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

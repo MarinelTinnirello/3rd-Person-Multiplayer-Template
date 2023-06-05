@@ -11,7 +11,6 @@
 #include "D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Intermediate/Build/Win64/UnrealEditor/Inc/MPShooter/GrenadeThrowableWeapon.gen.cpp"
 #include "D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Intermediate/Build/Win64/UnrealEditor/Inc/MPShooter/HealthPickup.gen.cpp"
 #include "D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Intermediate/Build/Win64/UnrealEditor/Inc/MPShooter/HitActor.gen.cpp"
-#include "D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Intermediate/Build/Win64/UnrealEditor/Inc/MPShooter/HitScanWeapon.gen.cpp"
 #include "D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Intermediate/Build/Win64/UnrealEditor/Inc/MPShooter/InteractWithCrosshairsInterface.gen.cpp"
 #include "D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Intermediate/Build/Win64/UnrealEditor/Inc/MPShooter/Item.gen.cpp"
 #include "D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Intermediate/Build/Win64/UnrealEditor/Inc/MPShooter/JumpPickup.gen.cpp"

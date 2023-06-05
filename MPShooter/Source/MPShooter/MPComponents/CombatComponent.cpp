@@ -10,11 +10,11 @@
 #include "Kismet/GameplayStatics.h"
 #include "Sound/SoundCue.h"
 #include "TimerManager.h"
+#include "MPShooter/GameMode/MPShooterGameMode.h"
 #include "MPShooter/Character/MPCharacter.h"
 #include "MPShooter/PlayerController/MPPlayerController.h"
 #include "MPShooter/Character/MPAnimInstance.h"
 #include "MPShooter/Item/Weapon/Weapon.h"
-#include "MPShooter/Item/Weapon/Ranged/ShotgunWeapon.h"
 #include "MPShooter/Item/Weapon/Throwable/ThrowableWeapon.h"
 #include "MPShooter/Item/Weapon/Ranged/Projectile/Projectile.h"
 
@@ -500,11 +500,10 @@ void UCombatComponent::FireHitScanWeapon()
 
 void UCombatComponent::FireShotgun()
 {
-	AShotgunWeapon* Shotgun = Cast<AShotgunWeapon>(EquippedWeapon);
-	if (Shotgun && Character)
+	if (EquippedWeapon && Character)
 	{
 		TArray<FVector_NetQuantize> HitTargets;
-		Shotgun->ShotgunTraceEndWithScatter(HitTarget, HitTargets);
+		EquippedWeapon->MultiTraceEndWithScatter(HitTarget, HitTargets);
 
 		if (!Character->HasAuthority())
 		{
@@ -581,8 +580,7 @@ void UCombatComponent::LocalFire(const FVector_NetQuantize& TraceHitTarget)
 
 void UCombatComponent::LocalFireShotgun(const TArray<FVector_NetQuantize>& TraceHitTargets)
 {
-	AShotgunWeapon* Shotgun = Cast<AShotgunWeapon>(EquippedWeapon);
-	if (Shotgun == nullptr || Character == nullptr)
+	if (EquippedWeapon == nullptr || Character == nullptr)
 	{
 		return;
 	}
@@ -590,7 +588,7 @@ void UCombatComponent::LocalFireShotgun(const TArray<FVector_NetQuantize>& Trace
 	if (CombatState == ECombatState::ECS_Reloading || CombatState == ECombatState::ECS_Unoccupied)
 	{
 		Character->PlayFireMontage(bAiming);
-		Shotgun->FireShotgun(TraceHitTargets);
+		EquippedWeapon->FireMulti(TraceHitTargets);
 		CombatState = ECombatState::ECS_Unoccupied;
 		bLocallyReloading = false;
 	}
