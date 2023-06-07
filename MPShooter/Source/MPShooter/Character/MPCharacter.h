@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "InputActionValue.h"
 #include "GameFramework/Character.h"
 #include "Components/TimelineComponent.h"
 #include "MPShooter/MPTypes/TurningInPlace.h"
@@ -114,7 +115,18 @@ public:
 	virtual void OnRep_ReplicatedMovement() override;
 
 protected:
+	//
+	// Enhanced Input
+	//
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enhanced Input")
+	class UInputMappingContext* InputMapping;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enhanced Input")
+	class UMPInputConfigData* InputActions;
+
 	virtual void BeginPlay() override;
+
+	void Move(const FInputActionValue& Value);
+	void Look(const FInputActionValue& Value);
 
 	void MoveForward(float AxisValue);
 	void MoveRight(float AxisValue);

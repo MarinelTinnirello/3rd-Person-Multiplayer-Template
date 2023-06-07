@@ -182,6 +182,15 @@
     <ClInclude Include="..\..\Source\MPShooter\HUD\SniperScopeOverlay.h">
       <Filter>Source\MPShooter\HUD</Filter>
     </ClInclude>
+    <Filter Include="Source\MPShooter\Input">
+      <UniqueIdentifier>{E00F5FE8-0334-37DB-B58E-ED6DE68897DE}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\MPShooter\Input\MPInputConfigData.cpp">
+      <Filter>Source\MPShooter\Input</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\MPShooter\Input\MPInputConfigData.h">
+      <Filter>Source\MPShooter\Input</Filter>
+    </ClInclude>
     <Filter Include="Source\MPShooter\Interfaces">
       <UniqueIdentifier>{FE853A82-CC6E-3BDE-A512-C7AEAA34D797}</UniqueIdentifier>
     </Filter>

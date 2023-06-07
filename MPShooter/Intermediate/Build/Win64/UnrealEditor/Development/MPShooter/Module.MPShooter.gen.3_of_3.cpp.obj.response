@@ -253,6 +253,9 @@ D:\Documents\GitHub\3rd-Person-Multiplayer-Template\MPShooter\Intermediate\Build
 /I Developer\AnimationDataController\Public
 /I D:\Documents\GitHub\3rd-Person-Multiplayer-Template\MPShooter\Intermediate\Build\Win64\UnrealEditor\Inc\MPShooter
 /I D:\Documents\GitHub\3rd-Person-Multiplayer-Template\MPShooter\Source
+/I ..\Plugins\Experimental\EnhancedInput\Intermediate\Build\Win64\UnrealEditor\Inc\EnhancedInput
+/I ..\Plugins\Experimental\EnhancedInput\Source
+/I ..\Plugins\Experimental\EnhancedInput\Source\EnhancedInput\Public
 /I ..\Plugins\FX\Niagara\Intermediate\Build\Win64\UnrealEditor\Inc\Niagara
 /I ..\Plugins\FX\Niagara\Source
 /I ..\Plugins\FX\Niagara\Source\Niagara\Classes

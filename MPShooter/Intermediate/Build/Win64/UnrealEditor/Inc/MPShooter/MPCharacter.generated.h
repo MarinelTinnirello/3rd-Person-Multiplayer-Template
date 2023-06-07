@@ -18,22 +18,22 @@ class AController;
 #endif
 #define MPSHOOTER_MPCharacter_generated_h
 
-#define FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_28_GENERATED_BODY \
+#define FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_29_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FPhysAssetInformation_Statics; \
 	MPSHOOTER_API static class UScriptStruct* StaticStruct();
 
 
 template<> MPSHOOTER_API UScriptStruct* StaticStruct<struct FPhysAssetInformation>();
 
-#define FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_46_DELEGATE \
+#define FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_47_DELEGATE \
 static inline void FOnLeftGame_DelegateWrapper(const FMulticastScriptDelegate& OnLeftGame) \
 { \
 	OnLeftGame.ProcessMulticastDelegate<UObject>(NULL); \
 }
 
 
-#define FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_51_SPARSE_DATA
-#define FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_51_RPC_WRAPPERS \
+#define FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_52_SPARSE_DATA
+#define FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_52_RPC_WRAPPERS \
 	virtual void ServerEquipButtonPressed_Implementation(); \
 	virtual void ServerLeaveGame_Implementation(); \
 	virtual void MulticastLostTheLead_Implementation(); \
@@ -54,7 +54,7 @@ static inline void FOnLeftGame_DelegateWrapper(const FMulticastScriptDelegate& O
 	DECLARE_FUNCTION(execMulticastEliminated);
 
 
-#define FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_51_RPC_WRAPPERS_NO_PURE_DECLS \
+#define FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_52_RPC_WRAPPERS_NO_PURE_DECLS \
 	virtual void ServerEquipButtonPressed_Implementation(); \
 	virtual void ServerLeaveGame_Implementation(); \
 	virtual void MulticastLostTheLead_Implementation(); \
@@ -75,15 +75,15 @@ static inline void FOnLeftGame_DelegateWrapper(const FMulticastScriptDelegate& O
 	DECLARE_FUNCTION(execMulticastEliminated);
 
 
-#define FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_51_EVENT_PARMS \
+#define FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_52_EVENT_PARMS \
 	struct MPCharacter_eventMulticastEliminated_Parms \
 	{ \
 		bool bPlayerLeftGame; \
 	};
 
 
-#define FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_51_CALLBACK_WRAPPERS
-#define FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_51_INCLASS_NO_PURE_DECLS \
+#define FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_52_CALLBACK_WRAPPERS
+#define FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_52_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesAMPCharacter(); \
 	friend struct Z_Construct_UClass_AMPCharacter_Statics; \
@@ -103,7 +103,7 @@ public: \
 	NO_API virtual void ValidateGeneratedRepEnums(const TArray<struct FRepRecord>& ClassReps) const override;
 
 
-#define FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_51_INCLASS \
+#define FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_52_INCLASS \
 private: \
 	static void StaticRegisterNativesAMPCharacter(); \
 	friend struct Z_Construct_UClass_AMPCharacter_Statics; \
@@ -123,7 +123,7 @@ public: \
 	NO_API virtual void ValidateGeneratedRepEnums(const TArray<struct FRepRecord>& ClassReps) const override;
 
 
-#define FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_51_STANDARD_CONSTRUCTORS \
+#define FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_52_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API AMPCharacter(const FObjectInitializer& ObjectInitializer); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(AMPCharacter) \
@@ -136,7 +136,7 @@ private: \
 public:
 
 
-#define FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_51_ENHANCED_CONSTRUCTORS \
+#define FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_52_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	NO_API AMPCharacter(AMPCharacter&&); \
@@ -147,30 +147,30 @@ public: \
 	DEFINE_DEFAULT_CONSTRUCTOR_CALL(AMPCharacter)
 
 
-#define FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_48_PROLOG \
-	FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_51_EVENT_PARMS
+#define FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_49_PROLOG \
+	FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_52_EVENT_PARMS
 
 
-#define FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_51_GENERATED_BODY_LEGACY \
+#define FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_52_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_51_SPARSE_DATA \
-	FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_51_RPC_WRAPPERS \
-	FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_51_CALLBACK_WRAPPERS \
-	FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_51_INCLASS \
-	FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_51_STANDARD_CONSTRUCTORS \
+	FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_52_SPARSE_DATA \
+	FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_52_RPC_WRAPPERS \
+	FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_52_CALLBACK_WRAPPERS \
+	FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_52_INCLASS \
+	FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_52_STANDARD_CONSTRUCTORS \
 public: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_51_GENERATED_BODY \
+#define FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_52_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_51_SPARSE_DATA \
-	FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_51_RPC_WRAPPERS_NO_PURE_DECLS \
-	FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_51_CALLBACK_WRAPPERS \
-	FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_51_INCLASS_NO_PURE_DECLS \
-	FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_51_ENHANCED_CONSTRUCTORS \
+	FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_52_SPARSE_DATA \
+	FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_52_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_52_CALLBACK_WRAPPERS \
+	FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_52_INCLASS_NO_PURE_DECLS \
+	FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_52_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

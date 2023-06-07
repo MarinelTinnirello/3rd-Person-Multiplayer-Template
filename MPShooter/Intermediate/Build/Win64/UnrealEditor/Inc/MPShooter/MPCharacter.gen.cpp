@@ -28,6 +28,8 @@ void EmptyLinkFunctionForGeneratedCodeMPCharacter() {}
 	ENGINE_API UClass* Z_Construct_UClass_UParticleSystem_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_UBoxComponent_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_UCapsuleComponent_NoRegister();
+	ENHANCEDINPUT_API UClass* Z_Construct_UClass_UInputMappingContext_NoRegister();
+	MPSHOOTER_API UClass* Z_Construct_UClass_UMPInputConfigData_NoRegister();
 	MPSHOOTER_API UClass* Z_Construct_UClass_AMPPlayerController_NoRegister();
 	MPSHOOTER_API UClass* Z_Construct_UClass_AMPPlayerState_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_USpringArmComponent_NoRegister();
@@ -839,6 +841,14 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FPhysAssetInformation>()
 #endif
 		static const UECodeGen_Private::FArrayPropertyParams NewProp_hitBoxBones;
 #if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_InputMapping_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_InputMapping;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_InputActions_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_InputActions;
+#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_MPPlayerController_MetaData[];
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_MPPlayerController;
@@ -1082,6 +1092,22 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FPhysAssetInformation>()
 	};
 #endif
 	const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_AMPCharacter_Statics::NewProp_hitBoxBones = { "hitBoxBones", nullptr, (EPropertyFlags)0x001000800000000d, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMPCharacter, hitBoxBones), EArrayPropertyFlags::None, METADATA_PARAMS(Z_Construct_UClass_AMPCharacter_Statics::NewProp_hitBoxBones_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMPCharacter_Statics::NewProp_hitBoxBones_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMPCharacter_Statics::NewProp_InputMapping_MetaData[] = {
+		{ "Category", "Enhanced Input" },
+		{ "Comment", "//\n// Enhanced Input\n//\n" },
+		{ "ModuleRelativePath", "Character/MPCharacter.h" },
+		{ "ToolTip", "Enhanced Input" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMPCharacter_Statics::NewProp_InputMapping = { "InputMapping", nullptr, (EPropertyFlags)0x0020080000010015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMPCharacter, InputMapping), Z_Construct_UClass_UInputMappingContext_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AMPCharacter_Statics::NewProp_InputMapping_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMPCharacter_Statics::NewProp_InputMapping_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMPCharacter_Statics::NewProp_InputActions_MetaData[] = {
+		{ "Category", "Enhanced Input" },
+		{ "ModuleRelativePath", "Character/MPCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AMPCharacter_Statics::NewProp_InputActions = { "InputActions", nullptr, (EPropertyFlags)0x0020080000010015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMPCharacter, InputActions), Z_Construct_UClass_UMPInputConfigData_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AMPCharacter_Statics::NewProp_InputActions_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMPCharacter_Statics::NewProp_InputActions_MetaData)) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMPCharacter_Statics::NewProp_MPPlayerController_MetaData[] = {
 		{ "Comment", "//\n// Character Properties\n//\n" },
@@ -1357,6 +1383,8 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FPhysAssetInformation>()
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMPCharacter_Statics::NewProp_hitCapsuleBones,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMPCharacter_Statics::NewProp_hitBoxBones_Inner,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMPCharacter_Statics::NewProp_hitBoxBones,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMPCharacter_Statics::NewProp_InputMapping,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMPCharacter_Statics::NewProp_InputActions,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMPCharacter_Statics::NewProp_MPPlayerController,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMPCharacter_Statics::NewProp_MPPlayerState,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMPCharacter_Statics::NewProp_CameraBoom,
@@ -1454,9 +1482,9 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FPhysAssetInformation>()
 		{ FPhysAssetInformation::StaticStruct, Z_Construct_UScriptStruct_FPhysAssetInformation_Statics::NewStructOps, TEXT("PhysAssetInformation"), &Z_Registration_Info_UScriptStruct_PhysAssetInformation, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FPhysAssetInformation), 4026808977U) },
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AMPCharacter, AMPCharacter::StaticClass, TEXT("AMPCharacter"), &Z_Registration_Info_UClass_AMPCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMPCharacter), 985235197U) },
+		{ Z_Construct_UClass_AMPCharacter, AMPCharacter::StaticClass, TEXT("AMPCharacter"), &Z_Registration_Info_UClass_AMPCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMPCharacter), 3955990073U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_1847089099(TEXT("/Script/MPShooter"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_3655352626(TEXT("/Script/MPShooter"),
 		Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_Statics::ClassInfo),
 		Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_Statics::ScriptStructInfo),
 		Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Character_MPCharacter_h_Statics::EnumInfo));
