@@ -40,16 +40,22 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Announcements - Chat Box", meta = (ToolTip = "Player chat box during matches."))
 	TSubclassOf<class UPlayerChatBox> PlayerChatBoxClass;
 	UPROPERTY()
+	class UWeaponWheelWidget* WeaponWheel;
+	UPROPERTY(EditAnywhere, Category = "Weapon", meta = (ToolTip = "Weapon wheel to be displayed."))
+	TSubclassOf<class UUserWidget> WeaponWheelClass;
+	UPROPERTY()
 	class USniperScopeOverlay* SniperScopeOverlay;
 	UPROPERTY(EditAnywhere, Category = "Weapon", meta = (ToolTip = "Sniper scope overlay to be displayed."))
 	TSubclassOf<class UUserWidget> SniperScopeOverlayClass;
 
+	virtual void DrawHUD() override;
+
 	void AddCharacterOverlay();
 	void AddAnnoucement();
 	void AddEliminateAnnouncement(FString Attacker, FString Victim);
+	void AddWeaponWheel();
 	void AddSniperScopeOverlay();
 	void AddChatMessage(const FString& SenderName, const FString& Msg);
-	virtual void DrawHUD() override;
 
 protected:
 	virtual void BeginPlay() override;

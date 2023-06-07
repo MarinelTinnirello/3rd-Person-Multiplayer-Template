@@ -182,6 +182,12 @@
     <ClInclude Include="..\..\Source\MPShooter\HUD\SniperScopeOverlay.h">
       <Filter>Source\MPShooter\HUD</Filter>
     </ClInclude>
+    <ClCompile Include="..\..\Source\MPShooter\HUD\WeaponWheelWidget.cpp">
+      <Filter>Source\MPShooter\HUD</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\MPShooter\HUD\WeaponWheelWidget.h">
+      <Filter>Source\MPShooter\HUD</Filter>
+    </ClInclude>
     <Filter Include="Source\MPShooter\Input">
       <UniqueIdentifier>{E00F5FE8-0334-37DB-B58E-ED6DE68897DE}</UniqueIdentifier>
     </Filter>

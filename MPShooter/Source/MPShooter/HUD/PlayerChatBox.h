@@ -26,4 +26,5 @@ public:
 	UFUNCTION()
 	void CommitChatTextBox(const FText& Text, ETextCommit::Type CommitMethod);
 	void SetPlayerChatText(const FString& SenderName, const FString& Msg);
+
 };

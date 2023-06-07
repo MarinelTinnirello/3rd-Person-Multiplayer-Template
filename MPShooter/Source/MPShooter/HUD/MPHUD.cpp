@@ -9,6 +9,7 @@
 #include "CharacterOverlay.h"
 #include "Annoucement.h"
 #include "EliminateAnnouncement.h"
+#include "WeaponWheelWidget.h"
 #include "SniperScopeOverlay.h"
 #include "PlayerChatBox.h"
 
@@ -85,6 +86,16 @@ void AMPHUD::EliminateAnnouncementTimerFinished(UEliminateAnnouncement* MsgToRem
 	if (MsgToRemove)
 	{
 		MsgToRemove->RemoveFromParent();
+	}
+}
+
+void AMPHUD::AddWeaponWheel()
+{
+	OwningPlayer = OwningPlayer == nullptr ? GetOwningPlayerController() : OwningPlayer;
+	if (OwningPlayer && WeaponWheelClass)
+	{
+		WeaponWheel = CreateWidget<UWeaponWheelWidget>(OwningPlayer, WeaponWheelClass);
+		WeaponWheel->AddToViewport();
 	}
 }
 

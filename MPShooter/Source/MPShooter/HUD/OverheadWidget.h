@@ -6,9 +6,6 @@
 #include "Blueprint/UserWidget.h"
 #include "OverheadWidget.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class MPSHOOTER_API UOverheadWidget : public UUserWidget
 {

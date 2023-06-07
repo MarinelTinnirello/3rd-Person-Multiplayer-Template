@@ -63,7 +63,6 @@
             "c:\\program files\\epic games\\ue_5.0\\engine\\source\\runtime\\engine\\classes\\gameframework\\playerstate.h",
             "c:\\program files\\epic games\\ue_5.0\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\playerstate.generated.h",
             "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\intermediate\\build\\win64\\unrealeditor\\inc\\mpshooter\\mpplayerstate.generated.h",
-            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\intermediate\\build\\win64\\unrealeditor\\inc\\mpshooter\\mpshooter.init.gen.cpp",
             "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\intermediate\\build\\win64\\unrealeditor\\inc\\mpshooter\\mpshootergamemode.gen.cpp",
             "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\source\\mpshooter\\gamemode\\mpshootergamemode.h",
             "c:\\program files\\epic games\\ue_5.0\\engine\\source\\runtime\\engine\\classes\\gameframework\\gamemode.h",
@@ -237,10 +236,7 @@
             "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\source\\mpshooter\\item\\weapon\\ranged\\projectileweapon.h",
             "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\source\\mpshooter\\item\\weapon\\weapon.h",
             "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\intermediate\\build\\win64\\unrealeditor\\inc\\mpshooter\\weapon.generated.h",
-            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\intermediate\\build\\win64\\unrealeditor\\inc\\mpshooter\\projectileweapon.generated.h",
-            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\intermediate\\build\\win64\\unrealeditor\\inc\\mpshooter\\returntomainmenu.gen.cpp",
-            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\source\\mpshooter\\hud\\returntomainmenu.h",
-            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\intermediate\\build\\win64\\unrealeditor\\inc\\mpshooter\\returntomainmenu.generated.h"
+            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\intermediate\\build\\win64\\unrealeditor\\inc\\mpshooter\\projectileweapon.generated.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

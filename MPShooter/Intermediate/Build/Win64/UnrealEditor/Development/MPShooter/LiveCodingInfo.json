@@ -3,14 +3,13 @@
 	{
 		"Module.MPShooter.cpp.obj": [
 			"MPAnimInstance.cpp.obj",
+			"MPCharacter.cpp.obj",
 			"LobbyGameMode.cpp.obj",
 			"MPShooterGameMode.cpp.obj",
 			"MPGameState.cpp.obj",
 			"Annoucement.cpp.obj",
 			"CharacterOverlay.cpp.obj",
 			"EliminateAnnouncement.cpp.obj",
-			"MPHUD.cpp.obj",
-			"OverheadWidget.cpp.obj",
 			"PlayerChatBox.cpp.obj",
 			"ReturnToMainMenu.cpp.obj",
 			"SniperScopeOverlay.cpp.obj",
@@ -43,9 +42,11 @@
 			"CombatComponent.cpp.obj",
 			"LagComponent.cpp.obj",
 			"MPShooter.cpp.obj",
+			"MPPlayerController.cpp.obj",
 			"MPPlayerState.cpp.obj",
-			"MPCharacter.cpp.obj",
-			"MPPlayerController.cpp.obj"
+			"MPHUD.cpp.obj",
+			"OverheadWidget.cpp.obj",
+			"WeaponWheelWidget.cpp.obj"
 		],
 		"Module.MPShooter.gen.1_of_3.cpp.obj": [
 			"AmmoPickup.gen.cpp.obj",
@@ -75,7 +76,6 @@
 			"MPInputConfigData.gen.cpp.obj",
 			"MPPlayerController.gen.cpp.obj",
 			"MPPlayerState.gen.cpp.obj",
-			"MPShooter.init.gen.cpp.obj",
 			"MPShooterGameMode.gen.cpp.obj",
 			"OverheadWidget.gen.cpp.obj",
 			"Pickup.gen.cpp.obj",
@@ -87,9 +87,10 @@
 			"ProjectileInterface.gen.cpp.obj",
 			"ProjectileRocket.gen.cpp.obj",
 			"ProjectileWeapon.gen.cpp.obj",
-			"ReturnToMainMenu.gen.cpp.obj"
+			"MPShooter.init.gen.cpp.obj"
 		],
 		"Module.MPShooter.gen.3_of_3.cpp.obj": [
+			"ReturnToMainMenu.gen.cpp.obj",
 			"RocketMovementComponent.gen.cpp.obj",
 			"ShieldPickup.gen.cpp.obj",
 			"ShotgunWeapon.gen.cpp.obj",
@@ -100,7 +101,8 @@
 			"ThrowableWeaponPickup.gen.cpp.obj",
 			"TurningInPlace.gen.cpp.obj",
 			"Weapon.gen.cpp.obj",
-			"WeaponTypes.gen.cpp.obj"
+			"WeaponTypes.gen.cpp.obj",
+			"WeaponWheelWidget.gen.cpp.obj"
 		]
 	}
 }
