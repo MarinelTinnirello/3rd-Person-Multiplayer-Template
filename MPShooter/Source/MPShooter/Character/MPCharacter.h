@@ -128,11 +128,6 @@ protected:
 	void Move(const FInputActionValue& Value);
 	void Look(const FInputActionValue& Value);
 
-	void MoveForward(float AxisValue);
-	void MoveRight(float AxisValue);
-	void TurnRate(float AxisValue);
-	void LookUp(float AxisValue);
-
 	virtual void Jump() override;
 	void EquipButtonPressed();
 	void CrouchButtonPressed();

@@ -14,6 +14,7 @@
 			"PlayerChatBox.cpp.obj",
 			"ReturnToMainMenu.cpp.obj",
 			"SniperScopeOverlay.cpp.obj",
+			"MPInputConfigData.cpp.obj",
 			"InteractWithCrosshairsInterface.cpp.obj",
 			"ProjectileInterface.cpp.obj",
 			"Item.cpp.obj",
@@ -44,7 +45,6 @@
 			"MPShooter.cpp.obj",
 			"MPPlayerState.cpp.obj",
 			"MPCharacter.cpp.obj",
-			"MPInputConfigData.cpp.obj",
 			"MPPlayerController.cpp.obj"
 		],
 		"Module.MPShooter.gen.1_of_3.cpp.obj": [

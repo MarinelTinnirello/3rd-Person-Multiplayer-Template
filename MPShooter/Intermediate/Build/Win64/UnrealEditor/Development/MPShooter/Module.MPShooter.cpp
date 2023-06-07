@@ -11,6 +11,7 @@
 #include "D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Source/MPShooter/HUD/PlayerChatBox.cpp"
 #include "D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Source/MPShooter/HUD/ReturnToMainMenu.cpp"
 #include "D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Source/MPShooter/HUD/SniperScopeOverlay.cpp"
+#include "D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Source/MPShooter/Input/MPInputConfigData.cpp"
 #include "D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Source/MPShooter/Interfaces/InteractWithCrosshairsInterface.cpp"
 #include "D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Source/MPShooter/Interfaces/ProjectileInterface.cpp"
 #include "D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Source/MPShooter/Item/Item.cpp"

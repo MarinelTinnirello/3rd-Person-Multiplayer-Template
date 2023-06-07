@@ -139,23 +139,6 @@ void AMPCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
-	//PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &AMPCharacter::Jump);
-	//PlayerInputComponent->BindAction("Equip", IE_Pressed, this, &AMPCharacter::EquipButtonPressed);
-	//PlayerInputComponent->BindAction("Crouch", IE_Pressed, this, &AMPCharacter::CrouchButtonPressed);
-	//PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &AMPCharacter::FireButtonPressed);
-	//PlayerInputComponent->BindAction("Fire", IE_Released, this, &AMPCharacter::FireButtonReleased);
-	//PlayerInputComponent->BindAction("Reload", IE_Pressed, this, &AMPCharacter::ReloadButtonPressed);
-	//PlayerInputComponent->BindAction("Aim", IE_Pressed, this, &AMPCharacter::AimButtonPressed);
-	//PlayerInputComponent->BindAction("Aim", IE_Released, this, &AMPCharacter::AimButtonReleased);
-	//PlayerInputComponent->BindAction("Throw", IE_Pressed, this, &AMPCharacter::ThrowButtonPressed);
-	//PlayerInputComponent->BindAction("Throw", IE_Released, this, &AMPCharacter::ThrowButtonReleased);
-	//PlayerInputComponent->BindAction("ViewChatBox", IE_Pressed, this, &AMPCharacter::ViewChatBoxButtonPressed);
-
-	/*PlayerInputComponent->BindAxis("MoveForward", this, &AMPCharacter::MoveForward);
-	PlayerInputComponent->BindAxis("MoveRight", this, &AMPCharacter::MoveRight);
-	PlayerInputComponent->BindAxis("TurnRate", this, &AMPCharacter::TurnRate);
-	PlayerInputComponent->BindAxis("LookUp", this, &AMPCharacter::LookUp);*/
-
 	APlayerController* PlayerController = Cast<APlayerController>(GetController());
 	if (PlayerController)
 	{
@@ -447,46 +430,6 @@ void AMPCharacter::Look(const FInputActionValue& Value)
 			AddControllerPitchInput(LookValue.Y);
 		}
 	}
-}
-
-void AMPCharacter::MoveForward(float AxisValue)
-{
-	if (bDisableGameplay)
-	{
-		return;
-	}
-
-	if (Controller != nullptr && AxisValue != 0.f)
-	{
-		const FRotator YawRot(0.f, Controller->GetControlRotation().Yaw, 0.f);
-		const FVector Dir(FRotationMatrix(YawRot).GetUnitAxis(EAxis::X));
-		AddMovementInput(Dir, AxisValue);
-	}
-}
-
-void AMPCharacter::MoveRight(float AxisValue)
-{
-	if (bDisableGameplay)
-	{
-		return;
-	}
-
-	if (Controller != nullptr && AxisValue != 0.f)
-	{
-		const FRotator YawRot(0.f, Controller->GetControlRotation().Yaw, 0.f);
-		const FVector Dir(FRotationMatrix(YawRot).GetUnitAxis(EAxis::Y));
-		AddMovementInput(Dir, AxisValue);
-	}
-}
-
-void AMPCharacter::TurnRate(float AxisValue)
-{
-	AddControllerYawInput(AxisValue);
-}
-
-void AMPCharacter::LookUp(float AxisValue)
-{
-	AddControllerPitchInput(AxisValue);
 }
 
 void AMPCharacter::Jump()

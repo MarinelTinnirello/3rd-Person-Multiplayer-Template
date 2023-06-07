@@ -39,5 +39,4 @@
 #include "D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Source/MPShooter/MPComponents/CombatComponent.cpp"
 #include "D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Source/MPShooter/MPComponents/LagComponent.cpp"
 #include "D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Source/MPShooter/MPShooter.cpp"
-#include "D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Source/MPShooter/PlayerController/MPPlayerController.cpp"
 #include "D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Source/MPShooter/PlayerState/MPPlayerState.cpp"

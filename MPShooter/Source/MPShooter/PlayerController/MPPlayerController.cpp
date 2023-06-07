@@ -1,6 +1,5 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "MPPlayerController.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
@@ -84,7 +83,6 @@ void AMPPlayerController::SetupInputComponent()
 	AMPCharacter* MPCharacter = Cast<AMPCharacter>(GetPawn());
 	if (MPCharacter)
 	{
-		//InputComponent->BindAction("Quit", IE_Pressed, this, &AMPPlayerController::ShowReturnToMainMenu);
 		UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
 		if (Subsystem)
 		{
