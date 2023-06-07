@@ -364,5 +364,7 @@ public:
 	/*FORCEINLINE UStaticMeshComponent* GetAttachedThrowable() const { return AttachedThrowable; }*/
 
 	FORCEINLINE bool GetDisableGameplay() const { return bDisableGameplay; }
+	FORCEINLINE UInputMappingContext* GetInputMapping() const { return InputMapping; }
+	FORCEINLINE UMPInputConfigData* GetInputActions() const { return InputActions; }
 
 };

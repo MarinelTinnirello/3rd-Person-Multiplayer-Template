@@ -139,17 +139,17 @@ void AMPCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
-	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &AMPCharacter::Jump);
-	PlayerInputComponent->BindAction("Equip", IE_Pressed, this, &AMPCharacter::EquipButtonPressed);
-	PlayerInputComponent->BindAction("Crouch", IE_Pressed, this, &AMPCharacter::CrouchButtonPressed);
-	PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &AMPCharacter::FireButtonPressed);
-	PlayerInputComponent->BindAction("Fire", IE_Released, this, &AMPCharacter::FireButtonReleased);
-	PlayerInputComponent->BindAction("Reload", IE_Pressed, this, &AMPCharacter::ReloadButtonPressed);
-	PlayerInputComponent->BindAction("Aim", IE_Pressed, this, &AMPCharacter::AimButtonPressed);
-	PlayerInputComponent->BindAction("Aim", IE_Released, this, &AMPCharacter::AimButtonReleased);
-	PlayerInputComponent->BindAction("Throw", IE_Pressed, this, &AMPCharacter::ThrowButtonPressed);
-	PlayerInputComponent->BindAction("Throw", IE_Released, this, &AMPCharacter::ThrowButtonReleased);
-	PlayerInputComponent->BindAction("ViewChatBox", IE_Pressed, this, &AMPCharacter::ViewChatBoxButtonPressed);
+	//PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &AMPCharacter::Jump);
+	//PlayerInputComponent->BindAction("Equip", IE_Pressed, this, &AMPCharacter::EquipButtonPressed);
+	//PlayerInputComponent->BindAction("Crouch", IE_Pressed, this, &AMPCharacter::CrouchButtonPressed);
+	//PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &AMPCharacter::FireButtonPressed);
+	//PlayerInputComponent->BindAction("Fire", IE_Released, this, &AMPCharacter::FireButtonReleased);
+	//PlayerInputComponent->BindAction("Reload", IE_Pressed, this, &AMPCharacter::ReloadButtonPressed);
+	//PlayerInputComponent->BindAction("Aim", IE_Pressed, this, &AMPCharacter::AimButtonPressed);
+	//PlayerInputComponent->BindAction("Aim", IE_Released, this, &AMPCharacter::AimButtonReleased);
+	//PlayerInputComponent->BindAction("Throw", IE_Pressed, this, &AMPCharacter::ThrowButtonPressed);
+	//PlayerInputComponent->BindAction("Throw", IE_Released, this, &AMPCharacter::ThrowButtonReleased);
+	//PlayerInputComponent->BindAction("ViewChatBox", IE_Pressed, this, &AMPCharacter::ViewChatBoxButtonPressed);
 
 	/*PlayerInputComponent->BindAxis("MoveForward", this, &AMPCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &AMPCharacter::MoveRight);
@@ -170,6 +170,18 @@ void AMPCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 			{
 				EnhancedInputComponent->BindAction(InputActions->InputMove, ETriggerEvent::Triggered, this, &AMPCharacter::Move);
 				EnhancedInputComponent->BindAction(InputActions->InputLook, ETriggerEvent::Triggered, this, &AMPCharacter::Look);
+
+				EnhancedInputComponent->BindAction(InputActions->InputJump, ETriggerEvent::Triggered, this, &AMPCharacter::Jump);
+				EnhancedInputComponent->BindAction(InputActions->InputEquip, ETriggerEvent::Triggered, this, &AMPCharacter::EquipButtonPressed);
+				EnhancedInputComponent->BindAction(InputActions->InputCrouch, ETriggerEvent::Triggered, this, &AMPCharacter::CrouchButtonPressed);
+				EnhancedInputComponent->BindAction(InputActions->InputFire, ETriggerEvent::Triggered, this, &AMPCharacter::FireButtonPressed);
+				EnhancedInputComponent->BindAction(InputActions->InputFire, ETriggerEvent::Completed, this, &AMPCharacter::FireButtonReleased);
+				EnhancedInputComponent->BindAction(InputActions->InputReload, ETriggerEvent::Triggered, this, &AMPCharacter::ReloadButtonPressed);
+				EnhancedInputComponent->BindAction(InputActions->InputAim, ETriggerEvent::Triggered, this, &AMPCharacter::AimButtonPressed);
+				EnhancedInputComponent->BindAction(InputActions->InputAim, ETriggerEvent::Completed, this, &AMPCharacter::AimButtonReleased);
+				EnhancedInputComponent->BindAction(InputActions->InputThrow, ETriggerEvent::Triggered, this, &AMPCharacter::ThrowButtonPressed);
+				EnhancedInputComponent->BindAction(InputActions->InputThrow, ETriggerEvent::Completed, this, &AMPCharacter::ThrowButtonReleased);
+				EnhancedInputComponent->BindAction(InputActions->InputViewChatBox, ETriggerEvent::Triggered, this, &AMPCharacter::ViewChatBoxButtonPressed);
 			}
 		}
 	}

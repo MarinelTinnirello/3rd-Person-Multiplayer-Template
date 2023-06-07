@@ -17,5 +17,23 @@ public:
     UInputAction* InputMove;
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
     UInputAction* InputLook;
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+    UInputAction* InputJump;
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+    UInputAction* InputEquip;
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+    UInputAction* InputCrouch;
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+    UInputAction* InputFire;
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+    UInputAction* InputReload;
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+    UInputAction* InputAim;
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+    UInputAction* InputThrow;
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+    UInputAction* InputQuit;
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+    UInputAction* InputViewChatBox;
 
 };

@@ -2,22 +2,27 @@
 
 
 #include "MPPlayerController.h"
+#include "EnhancedInputSubsystems.h"
+#include "EnhancedInputComponent.h"
+#include "InputMappingContext.h"
+#include "InputActionValue.h"
 #include "Components/ProgressBar.h"
 #include "Components/TextBlock.h"
 #include "Components/Image.h"
 #include "Net/UnrealNetwork.h"
 #include "Kismet/GameplayStatics.h"
+#include "MPShooter/Input/MPInputConfigData.h"
 #include "MPShooter/HUD/MPHUD.h"
 #include "MPShooter/HUD/CharacterOverlay.h"
 #include "MPShooter/HUD/Annoucement.h"
 #include "MPShooter/HUD/SniperScopeOverlay.h"
 #include "MPShooter/HUD/PlayerChatBox.h"
+#include "MPShooter/HUD/ReturnToMainMenu.h"
 #include "MPShooter/Character/MPCharacter.h"
 #include "MPShooter/MPComponents/CombatComponent.h"
 #include "MPShooter/GameMode/MPShooterGameMode.h"
 #include "MPShooter/GameState/MPGameState.h"
 #include "MPShooter/PlayerState/MPPlayerState.h"
-#include "MPShooter/HUD/ReturnToMainMenu.h"
 
 void AMPPlayerController::BeginPlay()
 {
@@ -76,7 +81,23 @@ void AMPPlayerController::SetupInputComponent()
 		return;
 	}
 
-	InputComponent->BindAction("Quit", IE_Pressed, this, &AMPPlayerController::ShowReturnToMainMenu);
+	AMPCharacter* MPCharacter = Cast<AMPCharacter>(GetPawn());
+	if (MPCharacter)
+	{
+		//InputComponent->BindAction("Quit", IE_Pressed, this, &AMPPlayerController::ShowReturnToMainMenu);
+		UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
+		if (Subsystem)
+		{
+			Subsystem->ClearAllMappings();
+			Subsystem->AddMappingContext(MPCharacter->GetInputMapping(), 0);
+
+			UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(InputComponent);
+			if (EnhancedInputComponent)
+			{
+				EnhancedInputComponent->BindAction(MPCharacter->GetInputActions()->InputQuit, ETriggerEvent::Triggered, this, &AMPPlayerController::ShowReturnToMainMenu);
+			}
+		}
+	}
 }
 
 void AMPPlayerController::ServerCheckMatchState_Implementation()
