@@ -12,42 +12,71 @@ class MPSHOOTER_API UWeaponWheelWidget : public UUserWidget
 	GENERATED_BODY()
 
 public:
-	UPROPERTY(meta = (BindWidget))
+	//
+	// Buttons
+	//
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	class UButton* CenterButton;
-	UPROPERTY(meta = (BindWidget))
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	UButton* TopButton;
-	UPROPERTY(meta = (BindWidget))
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	UButton* TopLeftButton;
-	UPROPERTY(meta = (BindWidget))
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	UButton* TopRightButton;
-	UPROPERTY(meta = (BindWidget))
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	UButton* LeftButton;
-	UPROPERTY(meta = (BindWidget))
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	UButton* RightButton;
-	UPROPERTY(meta = (BindWidget))
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	UButton* BottomLeftButton;
-	UPROPERTY(meta = (BindWidget))
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	UButton* BottomRightButton;
-	UPROPERTY(meta = (BindWidget))
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	UButton* BottomButton;
 
-	UPROPERTY(meta = (BindWidget))
+	//
+	// Images
+	//
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	class UImage* CenterImage;
-	UPROPERTY(meta = (BindWidget))
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	UImage* TopImage;
-	UPROPERTY(meta = (BindWidget))
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	UImage* TopLeftImage;
-	UPROPERTY(meta = (BindWidget))
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	UImage* TopRightImage;
-	UPROPERTY(meta = (BindWidget))
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	UImage* LeftImage;
-	UPROPERTY(meta = (BindWidget))
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	UImage* RightImage;
-	UPROPERTY(meta = (BindWidget))
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	UImage* BottomLeftImage;
-	UPROPERTY(meta = (BindWidget))
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	UImage* BottomRightImage;
-	UPROPERTY(meta = (BindWidget))
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	UImage* BottomImage;
+
+	//
+	// Animations
+	//
+	UPROPERTY(Transient, meta = (BindWidgetAnim))
+	UWidgetAnimation* Appear;
+
+	//
+	// Time Dilation
+	//
+	UPROPERTY(EditAnywhere, Category = "Time Dilation", meta = (ToolTip = "Check if time should slow down while the screen is up."))
+	bool bUseSlowDown = true;
+	UPROPERTY(EditAnywhere, Category = "Time Dilation", meta = (ToolTip = "Amount that time slows down while the screen is up."))
+	float SlowDownTime = 0.35f;
+
+	//
+	// Coloration
+	//
+	UPROPERTY(EditAnywhere, Category = "Coloration", meta = (ToolTip = "Color of an image when hovered over."))
+	FColor ImageHoverColor;
+
+	UFUNCTION(BlueprintCallable)
+	void ChangeColorOnHover(bool bIsHovered, UButton* button, UImage* image);
 	
 };

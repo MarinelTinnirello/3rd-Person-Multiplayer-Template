@@ -3,17 +3,17 @@
 	{
 		"Module.MPShooter.cpp.obj": [
 			"MPAnimInstance.cpp.obj",
-			"MPCharacter.cpp.obj",
 			"LobbyGameMode.cpp.obj",
 			"MPShooterGameMode.cpp.obj",
 			"MPGameState.cpp.obj",
 			"Annoucement.cpp.obj",
 			"CharacterOverlay.cpp.obj",
 			"EliminateAnnouncement.cpp.obj",
+			"MPHUD.cpp.obj",
+			"OverheadWidget.cpp.obj",
 			"PlayerChatBox.cpp.obj",
 			"ReturnToMainMenu.cpp.obj",
 			"SniperScopeOverlay.cpp.obj",
-			"MPInputConfigData.cpp.obj",
 			"InteractWithCrosshairsInterface.cpp.obj",
 			"ProjectileInterface.cpp.obj",
 			"Item.cpp.obj",
@@ -42,11 +42,11 @@
 			"CombatComponent.cpp.obj",
 			"LagComponent.cpp.obj",
 			"MPShooter.cpp.obj",
-			"MPPlayerController.cpp.obj",
 			"MPPlayerState.cpp.obj",
-			"MPHUD.cpp.obj",
-			"OverheadWidget.cpp.obj",
-			"WeaponWheelWidget.cpp.obj"
+			"MPCharacter.cpp.obj",
+			"WeaponWheelWidget.cpp.obj",
+			"MPInputConfigData.cpp.obj",
+			"MPPlayerController.cpp.obj"
 		],
 		"Module.MPShooter.gen.1_of_3.cpp.obj": [
 			"AmmoPickup.gen.cpp.obj",
@@ -73,7 +73,6 @@
 			"MPCharacter.gen.cpp.obj",
 			"MPGameState.gen.cpp.obj",
 			"MPHUD.gen.cpp.obj",
-			"MPInputConfigData.gen.cpp.obj",
 			"MPPlayerController.gen.cpp.obj",
 			"MPPlayerState.gen.cpp.obj",
 			"MPShooterGameMode.gen.cpp.obj",
@@ -87,6 +86,7 @@
 			"ProjectileInterface.gen.cpp.obj",
 			"ProjectileRocket.gen.cpp.obj",
 			"ProjectileWeapon.gen.cpp.obj",
+			"MPInputConfigData.gen.cpp.obj",
 			"MPShooter.init.gen.cpp.obj"
 		],
 		"Module.MPShooter.gen.3_of_3.cpp.obj": [

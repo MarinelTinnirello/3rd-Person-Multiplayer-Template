@@ -8,14 +8,24 @@
 #include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+class UButton;
+class UImage;
 #ifdef MPSHOOTER_WeaponWheelWidget_generated_h
 #error "WeaponWheelWidget.generated.h already included, missing '#pragma once' in WeaponWheelWidget.h"
 #endif
 #define MPSHOOTER_WeaponWheelWidget_generated_h
 
 #define FID_MPShooter_Source_MPShooter_HUD_WeaponWheelWidget_h_12_SPARSE_DATA
-#define FID_MPShooter_Source_MPShooter_HUD_WeaponWheelWidget_h_12_RPC_WRAPPERS
-#define FID_MPShooter_Source_MPShooter_HUD_WeaponWheelWidget_h_12_RPC_WRAPPERS_NO_PURE_DECLS
+#define FID_MPShooter_Source_MPShooter_HUD_WeaponWheelWidget_h_12_RPC_WRAPPERS \
+ \
+	DECLARE_FUNCTION(execChangeColorOnHover);
+
+
+#define FID_MPShooter_Source_MPShooter_HUD_WeaponWheelWidget_h_12_RPC_WRAPPERS_NO_PURE_DECLS \
+ \
+	DECLARE_FUNCTION(execChangeColorOnHover);
+
+
 #define FID_MPShooter_Source_MPShooter_HUD_WeaponWheelWidget_h_12_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesUWeaponWheelWidget(); \

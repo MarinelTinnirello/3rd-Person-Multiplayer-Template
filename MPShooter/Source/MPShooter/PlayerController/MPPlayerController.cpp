@@ -14,6 +14,7 @@
 #include "MPShooter/HUD/MPHUD.h"
 #include "MPShooter/HUD/CharacterOverlay.h"
 #include "MPShooter/HUD/Annoucement.h"
+#include "MPShooter/HUD/WeaponWheelWidget.h"
 #include "MPShooter/HUD/SniperScopeOverlay.h"
 #include "MPShooter/HUD/PlayerChatBox.h"
 #include "MPShooter/HUD/ReturnToMainMenu.h"
@@ -762,6 +763,90 @@ void AMPPlayerController::ToggleChatBox()
 	if (MPHUD && MPHUD->PlayerChatBoxClass)
 	{
 		MPHUD->PlayerChatBox->ToggleChatBox();
+	}
+}
+
+void AMPPlayerController::SetHUDWeaponWheel(bool bIsVisible)
+{
+	MPHUD = MPHUD == nullptr ? Cast<AMPHUD>(GetHUD()) : MPHUD;
+	bool bHUDValid = MPHUD &&
+		MPHUD->WeaponWheel &&
+		MPHUD->WeaponWheel->bUseSlowDown &&
+		MPHUD->WeaponWheel->SlowDownTime &&
+		MPHUD->WeaponWheel->Appear;
+	if (!MPHUD->WeaponWheel)
+	{
+		MPHUD->AddWeaponWheel();
+	}
+
+	if (bHUDValid)
+	{
+		if (bIsVisible)
+		{
+			SetInputMode(FInputModeGameAndUI());
+			bShowMouseCursor = true;
+
+			MPHUD->WeaponWheel->PlayAnimation(MPHUD->WeaponWheel->Appear);
+			if (MPHUD->WeaponWheel->bUseSlowDown)
+			{
+				AMPCharacter* MPCharacter = Cast<AMPCharacter>(GetPawn());
+				if (MPCharacter && (!MPCharacter->HasAuthority() || MPCharacter->IsLocallyControlled()))
+				{
+					MPCharacter->CustomTimeDilation = MPHUD->WeaponWheel->SlowDownTime;
+				}
+
+			}
+			else
+			{
+				if (MPHUD->WeaponWheel->bUseSlowDown)
+				{
+					AMPCharacter* MPCharacter = Cast<AMPCharacter>(GetPawn());
+					if (MPCharacter && (!MPCharacter->HasAuthority() || MPCharacter->IsLocallyControlled()))
+					{
+						MPCharacter->CustomTimeDilation = 1.0f;
+					}
+				}
+
+			}
+		}
+		else
+		{
+			SetInputMode(FInputModeGameOnly());
+			bShowMouseCursor = false;
+
+			MPHUD->WeaponWheel->PlayAnimationReverse(MPHUD->WeaponWheel->Appear);
+		}
+	}
+}
+
+void AMPPlayerController::SetHUDWeaponWheelIcon()
+{
+	MPHUD = MPHUD == nullptr ? Cast<AMPHUD>(GetHUD()) : MPHUD;
+	bool bHUDValid = MPHUD &&
+		MPHUD->WeaponWheel &&
+		MPHUD->WeaponWheel->TopButton &&
+		MPHUD->WeaponWheel->TopLeftButton &&
+		MPHUD->WeaponWheel->TopRightButton &&
+		MPHUD->WeaponWheel->RightButton &&
+		MPHUD->WeaponWheel->LeftButton &&
+		MPHUD->WeaponWheel->BottomLeftButton &&
+		MPHUD->WeaponWheel->BottomRightButton &&
+		MPHUD->WeaponWheel->BottomButton;
+		/*MPHUD->WeaponWheel->TopImage &&
+		MPHUD->WeaponWheel->TopLeftImage &&
+		MPHUD->WeaponWheel->TopRightImage &&
+		MPHUD->WeaponWheel->RightImage &&
+		MPHUD->WeaponWheel->LeftImage &&
+		MPHUD->WeaponWheel->BottomLeftImage &&
+		MPHUD->WeaponWheel->BottomRightImage &&
+		MPHUD->WeaponWheel->BottomImage;*/
+	/*if (!MPHUD->WeaponWheel)
+	{
+		MPHUD->AddWeaponWheel();
+	}*/
+
+	if (bHUDValid)
+	{
 	}
 }
 

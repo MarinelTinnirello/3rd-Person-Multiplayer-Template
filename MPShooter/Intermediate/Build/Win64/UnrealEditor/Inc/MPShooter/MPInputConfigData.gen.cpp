@@ -73,6 +73,10 @@ void EmptyLinkFunctionForGeneratedCodeMPInputConfigData() {}
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_InputViewChatBox_MetaData[];
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_InputViewChatBox;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_InputWeaponWheel_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_InputWeaponWheel;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
@@ -164,6 +168,13 @@ void EmptyLinkFunctionForGeneratedCodeMPInputConfigData() {}
 	};
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UMPInputConfigData_Statics::NewProp_InputViewChatBox = { "InputViewChatBox", nullptr, (EPropertyFlags)0x0010000000010015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UMPInputConfigData, InputViewChatBox), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(Z_Construct_UClass_UMPInputConfigData_Statics::NewProp_InputViewChatBox_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UMPInputConfigData_Statics::NewProp_InputViewChatBox_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UMPInputConfigData_Statics::NewProp_InputWeaponWheel_MetaData[] = {
+		{ "Category", "MPInputConfigData" },
+		{ "ModuleRelativePath", "Input/MPInputConfigData.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UMPInputConfigData_Statics::NewProp_InputWeaponWheel = { "InputWeaponWheel", nullptr, (EPropertyFlags)0x0010000000010015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UMPInputConfigData, InputWeaponWheel), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(Z_Construct_UClass_UMPInputConfigData_Statics::NewProp_InputWeaponWheel_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UMPInputConfigData_Statics::NewProp_InputWeaponWheel_MetaData)) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UMPInputConfigData_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMPInputConfigData_Statics::NewProp_InputMove,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMPInputConfigData_Statics::NewProp_InputLook,
@@ -176,6 +187,7 @@ void EmptyLinkFunctionForGeneratedCodeMPInputConfigData() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMPInputConfigData_Statics::NewProp_InputThrow,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMPInputConfigData_Statics::NewProp_InputQuit,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMPInputConfigData_Statics::NewProp_InputViewChatBox,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMPInputConfigData_Statics::NewProp_InputWeaponWheel,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_UMPInputConfigData_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<UMPInputConfigData>::IsAbstract,
@@ -213,9 +225,9 @@ void EmptyLinkFunctionForGeneratedCodeMPInputConfigData() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Input_MPInputConfigData_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UMPInputConfigData, UMPInputConfigData::StaticClass, TEXT("UMPInputConfigData"), &Z_Registration_Info_UClass_UMPInputConfigData, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UMPInputConfigData), 529849992U) },
+		{ Z_Construct_UClass_UMPInputConfigData, UMPInputConfigData::StaticClass, TEXT("UMPInputConfigData"), &Z_Registration_Info_UClass_UMPInputConfigData, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UMPInputConfigData), 1295048375U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Input_MPInputConfigData_h_1742660926(TEXT("/Script/MPShooter"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Input_MPInputConfigData_h_1854593724(TEXT("/Script/MPShooter"),
 		Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Input_MPInputConfigData_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Input_MPInputConfigData_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

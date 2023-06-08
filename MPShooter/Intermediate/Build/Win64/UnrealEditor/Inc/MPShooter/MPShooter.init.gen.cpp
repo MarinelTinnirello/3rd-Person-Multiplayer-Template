@@ -23,7 +23,7 @@ void EmptyLinkFunctionForGeneratedCodeMPShooter_init() {}
 				SingletonFuncArray,
 				UE_ARRAY_COUNT(SingletonFuncArray),
 				PKG_CompiledIn | 0x00000000,
-				0x8F8914AC,
+				0xA9D11BCF,
 				0x44040436,
 				METADATA_PARAMS(nullptr, 0)
 			};
@@ -31,5 +31,5 @@ void EmptyLinkFunctionForGeneratedCodeMPShooter_init() {}
 		}
 		return Z_Registration_Info_UPackage__Script_MPShooter.OuterSingleton;
 	}
-	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_MPShooter(Z_Construct_UPackage__Script_MPShooter, TEXT("/Script/MPShooter"), Z_Registration_Info_UPackage__Script_MPShooter, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0x8F8914AC, 0x44040436));
+	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_MPShooter(Z_Construct_UPackage__Script_MPShooter, TEXT("/Script/MPShooter"), Z_Registration_Info_UPackage__Script_MPShooter, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0xA9D11BCF, 0x44040436));
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

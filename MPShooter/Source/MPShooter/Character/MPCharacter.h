@@ -139,6 +139,8 @@ protected:
 	void ThrowButtonPressed();
 	void ThrowButtonReleased();
 	void ViewChatBoxButtonPressed();
+	void WeaponWheelButtonPressed();
+	void WeaponWheelButtonReleased();
 
 	void AimOffset(float DeltaTime);
 	void CalculateAO_Pitch();

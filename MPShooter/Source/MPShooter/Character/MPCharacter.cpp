@@ -165,6 +165,8 @@ void AMPCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 				EnhancedInputComponent->BindAction(InputActions->InputThrow, ETriggerEvent::Triggered, this, &AMPCharacter::ThrowButtonPressed);
 				EnhancedInputComponent->BindAction(InputActions->InputThrow, ETriggerEvent::Completed, this, &AMPCharacter::ThrowButtonReleased);
 				EnhancedInputComponent->BindAction(InputActions->InputViewChatBox, ETriggerEvent::Triggered, this, &AMPCharacter::ViewChatBoxButtonPressed);
+				EnhancedInputComponent->BindAction(InputActions->InputWeaponWheel, ETriggerEvent::Triggered, this, &AMPCharacter::WeaponWheelButtonPressed);
+				EnhancedInputComponent->BindAction(InputActions->InputWeaponWheel, ETriggerEvent::Completed, this, &AMPCharacter::WeaponWheelButtonReleased);
 			}
 		}
 	}
@@ -662,6 +664,26 @@ void AMPCharacter::ViewChatBoxButtonPressed()
 	MPPlayerController->ToggleChatBox();
 }
 
+void AMPCharacter::WeaponWheelButtonPressed()
+{
+	if (bDisableGameplay || MPPlayerController == nullptr)
+	{
+		return;
+	}
+
+	MPPlayerController->SetHUDWeaponWheel(true);
+}
+
+void AMPCharacter::WeaponWheelButtonReleased()
+{
+	if (bDisableGameplay || MPPlayerController == nullptr)
+	{
+		return;
+	}
+
+	MPPlayerController->SetHUDWeaponWheel(false);
+}
+
 bool AMPCharacter::IsLocallyReloading()
 {
 	if (Combat == nullptr)
@@ -1157,6 +1179,14 @@ void AMPCharacter::MulticastEliminated_Implementation(bool bPlayerLeftGame)
 	if (bHideSniperScope)
 	{
 		MPPlayerController->SetHUDSniperScope(false);
+	}
+
+	// Hide weapon wheel (if necessary)
+	bool bHideWeaponWheel = MPPlayerController &&
+		IsLocallyControlled();
+	if (bHideWeaponWheel)
+	{
+		MPPlayerController->SetHUDWeaponWheel(false);
 	}
 
 	GetWorldTimerManager().SetTimer(

@@ -35,5 +35,7 @@ public:
     UInputAction* InputQuit;
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
     UInputAction* InputViewChatBox;
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+    UInputAction* InputWeaponWheel;
 
 };

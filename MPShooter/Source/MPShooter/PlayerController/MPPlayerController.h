@@ -38,6 +38,8 @@ public:
 	void SetHUDMatchCountdown(float CountdownTime, float MatchWarningTime);
 	void SetHUDAnnouncementCountdown(float CountdownTime);
 	void ToggleChatBox();
+	void SetHUDWeaponWheel(bool bIsVisible);
+	void SetHUDWeaponWheelIcon();
 
 	virtual float GetServerTime();
 
