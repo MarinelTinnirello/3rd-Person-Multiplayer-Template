@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
-#include "MPShooter/Item/Weapon/WeaponTypes.h"
+#include "MPShooter/MPTypes/WeaponTypes.h"
 
 #include "MPPlayerController.generated.h"
 
@@ -37,9 +37,18 @@ public:
 	void SetHUDSniperScope(bool bIsAiming);
 	void SetHUDMatchCountdown(float CountdownTime, float MatchWarningTime);
 	void SetHUDAnnouncementCountdown(float CountdownTime);
-	void ToggleChatBox();
 	void SetHUDWeaponWheel(bool bIsVisible);
 	void SetHUDWeaponWheelIcon();
+
+	void AddChatBox();
+	void ToggleChatBox();
+	UFUNCTION()
+	void CommitChatTextBox(const FText& Text, ETextCommit::Type CommitMethod);
+
+	UFUNCTION(Server, Reliable)
+	void ServerBroadcastChatMessage(APlayerState* Sender, const FString& Msg);
+	UFUNCTION(Client, Reliable)
+	void ClientChatMessage(const FString& SenderName, const FString& Msg);
 
 	virtual float GetServerTime();
 
@@ -47,11 +56,6 @@ public:
 	void HandleMatchHasStarted();
 	void HandleCooldownMatch();
 	void BroadcastEliminate(APlayerState* Attacker, APlayerState* Victim);
-
-	UFUNCTION(Server, Reliable)
-	void ServerBroadcastChatMessage(APlayerState* Sender, const FString& Msg);
-	UFUNCTION(Client, Reliable)
-	void ClientChatMessage(const FString& SenderName, const FString& Msg);
 
 protected:
 	virtual void BeginPlay() override;

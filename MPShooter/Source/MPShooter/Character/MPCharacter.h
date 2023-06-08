@@ -8,7 +8,6 @@
 #include "Components/TimelineComponent.h"
 #include "MPShooter/MPTypes/TurningInPlace.h"
 #include "MPShooter/MPTypes/CombatState.h"
-#include "MPShooter/MPTypes/BoneBoxType.h"
 #include "MPShooter/Interfaces/InteractWithCrosshairsInterface.h"
 #include "MPCharacter.generated.h"
 

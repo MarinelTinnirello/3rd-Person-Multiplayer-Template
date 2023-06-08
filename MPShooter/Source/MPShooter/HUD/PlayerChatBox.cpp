@@ -8,57 +8,59 @@
 #include "MPShooter/PlayerController/MPPlayerController.h"
 #include "MPShooter/PlayerState/MPPlayerState.h"
 
-void UPlayerChatBox::ToggleChatBox()
-{
-	AMPPlayerController* MPPlayerController = Cast<AMPPlayerController>(GetOwningPlayer());
-	if (MPPlayerController && ChatTextBox && AnnouncementBox)
-	{
-		if (!bChatBoxVisible)
-		{
-			ChatTextBox->OnTextCommitted.AddDynamic(this, &UPlayerChatBox::CommitChatTextBox);
-			ChatTextBox->SetVisibility(ESlateVisibility::Visible);
-			AnnouncementBox->SetVisibility(ESlateVisibility::Visible);
-			ChatTextBox->SetFocus();
-			MPPlayerController->SetInputMode(FInputModeGameAndUI());
-			bChatBoxVisible = true;
-		}
-		else
-		{
-			ChatTextBox->OnTextCommitted.RemoveDynamic(this, &UPlayerChatBox::CommitChatTextBox);
-			ChatTextBox->SetVisibility(ESlateVisibility::Collapsed);
-			AnnouncementBox->SetVisibility(ESlateVisibility::Collapsed);
-			MPPlayerController->SetInputMode(FInputModeGameOnly());
-			bChatBoxVisible = false;
-		}
-	}
-}
+//void UPlayerChatBox::ToggleChatBox()
+//{
+//	AMPPlayerController* MPPlayerController = Cast<AMPPlayerController>(GetOwningPlayer());
+//	if (MPPlayerController && ChatTextBox && AnnouncementBox)
+//	{
+//		if (!bChatBoxVisible)
+//		{
+//			ChatTextBox->OnTextCommitted.AddDynamic(this, &UPlayerChatBox::CommitChatTextBox);
+//			ChatTextBox->SetVisibility(ESlateVisibility::Visible);
+//			AnnouncementBox->SetVisibility(ESlateVisibility::Visible);
+//			ChatTextBox->SetFocus();
+//			MPPlayerController->SetInputMode(FInputModeGameAndUI());
+//			bChatBoxVisible = true;
+//		}
+//		else
+//		{
+//			ChatTextBox->OnTextCommitted.RemoveDynamic(this, &UPlayerChatBox::CommitChatTextBox);
+//			ChatTextBox->SetVisibility(ESlateVisibility::Collapsed);
+//			AnnouncementBox->SetVisibility(ESlateVisibility::Collapsed);
+//			MPPlayerController->SetInputMode(FInputModeGameOnly());
+//			bChatBoxVisible = false;
+//		}
+//	}
+//}
 
-void UPlayerChatBox::CommitChatTextBox(const FText& Text, ETextCommit::Type CommitMethod)
-{
-	AMPPlayerController* MPPlayerController = Cast<AMPPlayerController>(GetOwningPlayer());
-	AMPPlayerState* MPPlayerState = Cast<AMPPlayerState>(GetOwningPlayerState());
-	if (CommitMethod == ETextCommit::OnEnter)
-	{
-		if (MPPlayerController && MPPlayerState && ChatTextBox && AnnouncementBox)
-		{
-			MPPlayerController->ServerBroadcastChatMessage(MPPlayerState, Text.ToString());
-			ChatTextBox->SetVisibility(ESlateVisibility::Collapsed);
-			AnnouncementBox->SetVisibility(ESlateVisibility::Collapsed);
-			ChatTextBox->SetText(FText::FromString(""));
-			MPPlayerController->SetInputMode(FInputModeGameOnly());
-			bChatBoxVisible = false;
-			ChatTextBox->OnTextCommitted.RemoveDynamic(this, &UPlayerChatBox::CommitChatTextBox);
-		}
-	}
-	else
-	{
-		ChatTextBox->OnTextCommitted.RemoveDynamic(this, &UPlayerChatBox::CommitChatTextBox);
-		ChatTextBox->SetVisibility(ESlateVisibility::Collapsed);
-		AnnouncementBox->SetVisibility(ESlateVisibility::Collapsed);
-		MPPlayerController->SetInputMode(FInputModeGameOnly());
-		bChatBoxVisible = false;
-	}
-}
+//void UPlayerChatBox::CommitChatTextBox(const FText& Text, ETextCommit::Type CommitMethod)
+//{
+//	AMPPlayerController* MPPlayerController = Cast<AMPPlayerController>(GetOwningPlayer());
+//	AMPPlayerState* MPPlayerState = Cast<AMPPlayerState>(GetOwningPlayerState());
+//	if (CommitMethod == ETextCommit::OnEnter)
+//	{
+//		if (MPPlayerController && MPPlayerState && ChatTextBox && AnnouncementBox)
+//		{
+//			MPPlayerController->ServerBroadcastChatMessage(MPPlayerState, Text.ToString());
+//			ChatTextBox->SetVisibility(ESlateVisibility::Collapsed);
+//			AnnouncementBox->SetVisibility(ESlateVisibility::Collapsed);
+//			ChatTextBox->SetText(FText::FromString(""));
+//
+//			MPPlayerController->SetInputMode(FInputModeGameOnly());
+//			MPPlayerController->SetShowMouseCursor(false);
+//			ChatTextBox->OnTextCommitted.RemoveDynamic(this, &UPlayerChatBox::CommitChatTextBox);
+//		}
+//	}
+//	else
+//	{
+//		ChatTextBox->OnTextCommitted.RemoveDynamic(this, &UPlayerChatBox::CommitChatTextBox);
+//		ChatTextBox->SetVisibility(ESlateVisibility::Collapsed);
+//		AnnouncementBox->SetVisibility(ESlateVisibility::Collapsed);
+//
+//		MPPlayerController->SetInputMode(FInputModeGameOnly());
+//		MPPlayerController->SetShowMouseCursor(false);
+//	}
+//}
 
 void UPlayerChatBox::SetPlayerChatText(const FString& SenderName, const FString& Msg)
 {

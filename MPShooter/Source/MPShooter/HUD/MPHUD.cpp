@@ -109,45 +109,55 @@ void AMPHUD::AddSniperScopeOverlay()
 	}
 }
 
-void AMPHUD::AddChatMessage(const FString& SenderName, const FString& Msg)
+void AMPHUD::AddChatBox()
 {
 	OwningPlayer = OwningPlayer == nullptr ? GetOwningPlayerController() : OwningPlayer;
 	if (OwningPlayer && PlayerChatBoxClass)
 	{
 		PlayerChatBox = CreateWidget<UPlayerChatBox>(OwningPlayer, PlayerChatBoxClass);
-		PlayerChatBox->SetPlayerChatText(SenderName, Msg);
 		PlayerChatBox->AddToViewport();
-
-		/*for (UPlayerChatBox* Msg : ChatMessages)
-		{
-			if (Msg && Msg->AnnouncementBox)
-			{
-				UCanvasPanelSlot* CanvasSlot = UWidgetLayoutLibrary::SlotAsCanvasSlot(Msg->AnnouncementBox);
-				if (CanvasSlot)
-				{
-					FVector2D Position = CanvasSlot->GetPosition();
-					FVector2D NewPosition(
-						CanvasSlot->GetPosition().X,
-						Position.Y - CanvasSlot->GetSize().Y
-					);
-					CanvasSlot->SetPosition(NewPosition);
-				}
-			}
-		}
-
-		ChatMessages.Add(PlayerChatBoxWidget);
-
-		FTimerHandle ChatMsgTimer;
-		FTimerDelegate ChatMsgDelegate;
-		ChatMsgDelegate.BindUFunction(this, FName("ChatMessageTimeTimerFinished"), PlayerChatBoxWidget);
-		GetWorldTimerManager().SetTimer(
-			ChatMsgTimer,
-			ChatMsgDelegate,
-			ChatMessageTime,
-			false
-		);*/
 	}
 }
+
+//void AMPHUD::AddChatMessage(const FString& SenderName, const FString& Msg)
+//{
+//	OwningPlayer = OwningPlayer == nullptr ? GetOwningPlayerController() : OwningPlayer;
+//	if (OwningPlayer && PlayerChatBoxClass)
+//	{
+//		PlayerChatBox = CreateWidget<UPlayerChatBox>(OwningPlayer, PlayerChatBoxClass);
+//		PlayerChatBox->SetPlayerChatText(SenderName, Msg);
+//		PlayerChatBox->AddToViewport();
+//
+//		/*for (UPlayerChatBox* Msg : ChatMessages)
+//		{
+//			if (Msg && Msg->AnnouncementBox)
+//			{
+//				UCanvasPanelSlot* CanvasSlot = UWidgetLayoutLibrary::SlotAsCanvasSlot(Msg->AnnouncementBox);
+//				if (CanvasSlot)
+//				{
+//					FVector2D Position = CanvasSlot->GetPosition();
+//					FVector2D NewPosition(
+//						CanvasSlot->GetPosition().X,
+//						Position.Y - CanvasSlot->GetSize().Y
+//					);
+//					CanvasSlot->SetPosition(NewPosition);
+//				}
+//			}
+//		}
+//
+//		ChatMessages.Add(PlayerChatBoxWidget);
+//
+//		FTimerHandle ChatMsgTimer;
+//		FTimerDelegate ChatMsgDelegate;
+//		ChatMsgDelegate.BindUFunction(this, FName("ChatMessageTimeTimerFinished"), PlayerChatBoxWidget);
+//		GetWorldTimerManager().SetTimer(
+//			ChatMsgTimer,
+//			ChatMsgDelegate,
+//			ChatMessageTime,
+//			false
+//		);*/
+//	}
+//}
 
 //void AMPHUD::ChatMessageTimerFinished(UPlayerChatBox* MsgToRemove)
 //{

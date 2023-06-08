@@ -7,6 +7,8 @@
 #include "InputActionValue.h"
 #include "Components/ProgressBar.h"
 #include "Components/TextBlock.h"
+#include "Components/EditableText.h"
+#include "Components/ScrollBox.h"
 #include "Components/Image.h"
 #include "Net/UnrealNetwork.h"
 #include "Kismet/GameplayStatics.h"
@@ -555,6 +557,12 @@ void AMPPlayerController::HandleMatchHasStarted()
 		{
 			MPHUD->Annoucement->SetVisibility(ESlateVisibility::Hidden);
 		}
+
+		if (IsLocalPlayerController())
+		{
+			//MPHUD->AddChatBox();
+			//AddChatBox();
+		}
 	}
 }
 
@@ -757,15 +765,6 @@ void AMPPlayerController::ShowReturnToMainMenu()
 	}
 }
 
-void AMPPlayerController::ToggleChatBox()
-{
-	MPHUD = MPHUD == nullptr ? Cast<AMPHUD>(GetHUD()) : MPHUD;
-	if (MPHUD && MPHUD->PlayerChatBoxClass)
-	{
-		MPHUD->PlayerChatBox->ToggleChatBox();
-	}
-}
-
 void AMPPlayerController::SetHUDWeaponWheel(bool bIsVisible)
 {
 	MPHUD = MPHUD == nullptr ? Cast<AMPHUD>(GetHUD()) : MPHUD;
@@ -846,6 +845,75 @@ void AMPPlayerController::SetHUDWeaponWheelIcon()
 	}
 }
 
+void AMPPlayerController::AddChatBox()
+{
+	MPHUD = MPHUD == nullptr ? Cast<AMPHUD>(GetHUD()) : MPHUD;
+	if (MPHUD && MPHUD->PlayerChatBoxClass)
+	{
+		MPHUD->PlayerChatBox->ChatTextBox->SetVisibility(ESlateVisibility::Collapsed);
+		MPHUD->PlayerChatBox->ChatTextBox->OnTextCommitted.AddDynamic(this, &AMPPlayerController::CommitChatTextBox);
+	}
+}
+
+void AMPPlayerController::ToggleChatBox()
+{
+	MPHUD = MPHUD == nullptr ? Cast<AMPHUD>(GetHUD()) : MPHUD;
+	if (MPHUD && MPHUD->PlayerChatBoxClass)
+	{
+		//MPHUD->PlayerChatBox->ToggleChatBox();
+		if (MPHUD->PlayerChatBox->ChatTextBox && MPHUD->PlayerChatBox->AnnouncementBox)
+		{
+			if (MPHUD->PlayerChatBox->GetVisibility() == ESlateVisibility::Collapsed)
+			{
+				//MPHUD->PlayerChatBox->ChatTextBox->OnTextCommitted.AddDynamic(this, &UPlayerChatBox::CommitChatTextBox);
+				MPHUD->PlayerChatBox->ChatTextBox->SetVisibility(ESlateVisibility::Visible);
+				MPHUD->PlayerChatBox->AnnouncementBox->SetVisibility(ESlateVisibility::Visible);
+
+				MPHUD->PlayerChatBox->ChatTextBox->SetFocus();
+				SetInputMode(FInputModeGameAndUI());
+				SetShowMouseCursor(true);
+			}
+			else
+			{
+				//MPHUD->PlayerChatBox->ChatTextBox->OnTextCommitted.RemoveDynamic(this, &UPlayerChatBox::CommitChatTextBox);
+				MPHUD->PlayerChatBox->ChatTextBox->SetVisibility(ESlateVisibility::Collapsed);
+				MPHUD->PlayerChatBox->AnnouncementBox->SetVisibility(ESlateVisibility::Collapsed);
+
+				SetInputMode(FInputModeGameOnly());
+				SetShowMouseCursor(false);
+			}
+		}
+	}
+}
+
+void AMPPlayerController::CommitChatTextBox(const FText& Text, ETextCommit::Type CommitMethod)
+{
+	PlayerState = PlayerState == nullptr ? GetPlayerState<APlayerState>() : PlayerState;
+	if (CommitMethod == ETextCommit::OnEnter)
+	{
+		if (PlayerState && MPHUD->PlayerChatBox->ChatTextBox && MPHUD->PlayerChatBox->AnnouncementBox)
+		{
+			ServerBroadcastChatMessage(PlayerState, Text.ToString());
+			MPHUD->PlayerChatBox->ChatTextBox->SetVisibility(ESlateVisibility::Collapsed);
+			MPHUD->PlayerChatBox->AnnouncementBox->SetVisibility(ESlateVisibility::Collapsed);
+			MPHUD->PlayerChatBox->ChatTextBox->SetText(FText::FromString(""));
+
+			SetInputMode(FInputModeGameOnly());
+			SetShowMouseCursor(false);
+			//MPHUD->PlayerChatBox->ChatTextBox->OnTextCommitted.RemoveDynamic(this, &UPlayerChatBox::CommitChatTextBox);
+		}
+	}
+	else
+	{
+		//MPHUD->PlayerChatBox->ChatTextBox->OnTextCommitted.RemoveDynamic(this, &UPlayerChatBox::CommitChatTextBox);
+		MPHUD->PlayerChatBox->ChatTextBox->SetVisibility(ESlateVisibility::Collapsed);
+		MPHUD->PlayerChatBox->AnnouncementBox->SetVisibility(ESlateVisibility::Collapsed);
+
+		SetInputMode(FInputModeGameOnly());
+		SetShowMouseCursor(false);
+	}
+}
+
 void AMPPlayerController::ServerBroadcastChatMessage_Implementation(APlayerState* Sender, const FString& Msg)
 {
 	MPShooterGameMode = MPShooterGameMode == nullptr ? Cast<AMPShooterGameMode>(UGameplayStatics::GetGameMode(this)) : MPShooterGameMode;
@@ -862,8 +930,9 @@ void AMPPlayerController::ClientChatMessage_Implementation(const FString& Sender
 		MPHUD = Cast<AMPHUD>(GetHUD());
 	}
 
-	if (MPHUD)
+	if (MPHUD && MPHUD->PlayerChatBox)
 	{
-		MPHUD->AddChatMessage(SenderName, Msg);
+		//MPHUD->AddChatMessage(SenderName, Msg);
+		MPHUD->PlayerChatBox->SetPlayerChatText(SenderName, Msg);
 	}
 }

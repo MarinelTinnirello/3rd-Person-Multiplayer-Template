@@ -275,16 +275,10 @@
     <Filter Include="Source\MPShooter\Item\Weapon">
       <UniqueIdentifier>{5567CE0C-F2A9-3C50-9180-4A5D638E644F}</UniqueIdentifier>
     </Filter>
-    <ClInclude Include="..\..\Source\MPShooter\Item\Weapon\HitActor.h">
-      <Filter>Source\MPShooter\Item\Weapon</Filter>
-    </ClInclude>
     <ClCompile Include="..\..\Source\MPShooter\Item\Weapon\Weapon.cpp">
       <Filter>Source\MPShooter\Item\Weapon</Filter>
     </ClCompile>
     <ClInclude Include="..\..\Source\MPShooter\Item\Weapon\Weapon.h">
-      <Filter>Source\MPShooter\Item\Weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\MPShooter\Item\Weapon\WeaponTypes.h">
       <Filter>Source\MPShooter\Item\Weapon</Filter>
     </ClInclude>
     <Filter Include="Source\MPShooter\Item\Weapon\Ranged">
@@ -398,13 +392,16 @@
     <Filter Include="Source\MPShooter\MPTypes">
       <UniqueIdentifier>{EB3DB15A-F762-318E-92BD-4C5CDE62DCB1}</UniqueIdentifier>
     </Filter>
-    <ClInclude Include="..\..\Source\MPShooter\MPTypes\BoneBoxType.h">
-      <Filter>Source\MPShooter\MPTypes</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\MPShooter\MPTypes\CombatState.h">
       <Filter>Source\MPShooter\MPTypes</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\MPShooter\MPTypes\HitActor.h">
+      <Filter>Source\MPShooter\MPTypes</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\MPShooter\MPTypes\TurningInPlace.h">
+      <Filter>Source\MPShooter\MPTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\MPShooter\MPTypes\WeaponTypes.h">
       <Filter>Source\MPShooter\MPTypes</Filter>
     </ClInclude>
     <Filter Include="Source\MPShooter\PlayerController">

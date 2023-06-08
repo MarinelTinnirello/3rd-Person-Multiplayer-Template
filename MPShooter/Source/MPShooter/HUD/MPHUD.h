@@ -55,7 +55,8 @@ public:
 	void AddEliminateAnnouncement(FString Attacker, FString Victim);
 	void AddWeaponWheel();
 	void AddSniperScopeOverlay();
-	void AddChatMessage(const FString& SenderName, const FString& Msg);
+	void AddChatBox();
+	//void AddChatMessage(const FString& SenderName, const FString& Msg);
 
 protected:
 	virtual void BeginPlay() override;

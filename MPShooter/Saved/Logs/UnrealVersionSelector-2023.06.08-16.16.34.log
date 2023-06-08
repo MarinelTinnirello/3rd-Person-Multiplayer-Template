@@ -1,8 +1,8 @@
-Log started at 6/6/2023 8:02:19 PM (2023-06-07T00:02:19Z)
+Log started at 6/8/2023 4:16:35 PM (2023-06-08T20:16:35Z)
 No config file at C:\Users\M T\Documents\Unreal Engine\UnrealBuildTool\BuildConfiguration.xml
 Configuration will be read from:
   C:\Users\M T\AppData\Roaming\Unreal Engine\UnrealBuildTool\BuildConfiguration.xml
-Log file: D:\Documents\GitHub\3rd-Person-Multiplayer-Template\MPShooter\Saved\Logs\UnrealVersionSelector-2023.06.06-20.02.19.log
+Log file: D:\Documents\GitHub\3rd-Person-Multiplayer-Template\MPShooter\Saved\Logs\UnrealVersionSelector-2023.06.08-16.16.34.log
 
 Note: Android toolchain NDK r21b recommended
 Found Windows 10 SDK root at C:\Program Files (x86)\Windows Kits\10 (1)
@@ -318,5 +318,5 @@ WriteFileIfChanged() wrote 2 changed files of 1214 requested writes.
 Timeline:
 
 [ 0.000]
-[ 0.000](+11.676) <unknown>
-[11.676]
+[ 0.000](+13.532) <unknown>
+[13.532]

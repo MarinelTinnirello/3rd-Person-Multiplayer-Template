@@ -19,12 +19,12 @@ public:
 	UPROPERTY(meta = (BindWidget))
 	class UEditableText* ChatTextBox;
 
-	UPROPERTY()
-	bool bChatBoxVisible = false;
+	/*UPROPERTY()
+	bool bChatBoxVisible = false;*/
 
-	void ToggleChatBox();
+	/*void ToggleChatBox();
 	UFUNCTION()
-	void CommitChatTextBox(const FText& Text, ETextCommit::Type CommitMethod);
+	void CommitChatTextBox(const FText& Text, ETextCommit::Type CommitMethod);*/
 	void SetPlayerChatText(const FString& SenderName, const FString& Msg);
 
 };
