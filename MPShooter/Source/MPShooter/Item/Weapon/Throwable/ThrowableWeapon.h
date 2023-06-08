@@ -4,8 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "MPShooter/Item/Item.h"
-#include "MPShooter/Item/Weapon/WeaponTypes.h"
-#include "MPShooter/Item/Weapon/HitActor.h"
+#include "MPShooter/MPTypes/WeaponTypes.h"
+#include "MPShooter/MPTypes/HitActor.h"
 #include "ThrowableWeapon.generated.h"
 
 UCLASS()

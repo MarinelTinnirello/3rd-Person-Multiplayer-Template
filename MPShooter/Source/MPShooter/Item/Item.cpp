@@ -6,7 +6,7 @@
 #include "Components/WidgetComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Net/UnrealNetwork.h"
-#include "MPShooter/Item/Weapon/WeaponTypes.h"
+#include "MPShooter/MPTypes/WeaponTypes.h"
 
 AItem::AItem()
 {

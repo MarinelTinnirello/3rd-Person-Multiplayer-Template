@@ -24,7 +24,7 @@
 #include "MPShooter/Input/MPInputConfigData.h"
 #include "MPShooter/Item/Weapon/Weapon.h"
 #include "MPShooter/Item/Weapon/Throwable/ThrowableWeapon.h"
-#include "MPShooter/Item/Weapon/WeaponTypes.h"
+#include "MPShooter/MPTypes/WeaponTypes.h"
 #include "MPShooter/MPComponents/CombatComponent.h"
 #include "MPShooter/MPComponents/BuffComponent.h"
 #include "MPShooter/MPComponents/LagComponent.h"

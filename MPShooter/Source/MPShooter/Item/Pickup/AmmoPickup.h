@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Pickup.h"
-#include "MPShooter/Item/Weapon/WeaponTypes.h"
+#include "MPShooter/MPTypes/WeaponTypes.h"
 #include "AmmoPickup.generated.h"
 
 UCLASS()

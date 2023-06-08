@@ -1,0 +1,13 @@
+{
+    "Version": "1.1",
+    "Data": {
+        "Source": "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\intermediate\\build\\win64\\unrealeditor\\inc\\mpshooter\\mpshooter.init.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\intermediate\\build\\win64\\mpshootereditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "Includes": [
+            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\intermediate\\build\\win64\\unrealeditor\\development\\mpshooter\\definitions.mpshooter.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

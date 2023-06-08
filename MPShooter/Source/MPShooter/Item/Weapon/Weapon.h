@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "MPShooter/Item/Item.h"
-#include "WeaponTypes.h"
+#include "MPShooter/MPTypes/WeaponTypes.h"
 #include "Weapon.generated.h"
 
 USTRUCT(BlueprintType)

@@ -1,0 +1,25 @@
+{
+    "Version": "1.1",
+    "Data": {
+        "Source": "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\intermediate\\build\\win64\\unrealeditor\\inc\\mpshooter\\shotgunweapon.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\intermediate\\build\\win64\\mpshootereditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "Includes": [
+            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\intermediate\\build\\win64\\unrealeditor\\development\\mpshooter\\definitions.mpshooter.h",
+            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\source\\mpshooter\\item\\weapon\\ranged\\shotgunweapon.h",
+            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\source\\mpshooter\\item\\weapon\\ranged\\hitscanweapon.h",
+            "c:\\program files\\epic games\\ue_5.0\\engine\\source\\runtime\\engine\\classes\\engine\\datatable.h",
+            "c:\\program files\\epic games\\ue_5.0\\engine\\source\\runtime\\engine\\public\\datatableutils.h",
+            "c:\\program files\\epic games\\ue_5.0\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\datatable.generated.h",
+            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\source\\mpshooter\\item\\weapon\\weapon.h",
+            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\source\\mpshooter\\item\\item.h",
+            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\intermediate\\build\\win64\\unrealeditor\\inc\\mpshooter\\item.generated.h",
+            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\source\\mpshooter\\mptypes\\weapontypes.h",
+            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\intermediate\\build\\win64\\unrealeditor\\inc\\mpshooter\\weapon.generated.h",
+            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\intermediate\\build\\win64\\unrealeditor\\inc\\mpshooter\\hitscanweapon.generated.h",
+            "d:\\documents\\github\\3rd-person-multiplayer-template\\mpshooter\\intermediate\\build\\win64\\unrealeditor\\inc\\mpshooter\\shotgunweapon.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

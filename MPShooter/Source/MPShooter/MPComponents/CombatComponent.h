@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "MPShooter/HUD/MPHUD.h"
-#include "MPShooter/Item/Weapon/WeaponTypes.h"
+#include "MPShooter/MPTypes/WeaponTypes.h"
 #include "MPShooter/MPTypes/CombatState.h"
 
 #include "CombatComponent.generated.h"

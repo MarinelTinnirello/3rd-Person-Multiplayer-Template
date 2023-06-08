@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "MPShooter/Item/Weapon/HitActor.h"
+#include "MPShooter/MPTypes/HitActor.h"
 #include "Projectile.generated.h"
 
 UCLASS()
