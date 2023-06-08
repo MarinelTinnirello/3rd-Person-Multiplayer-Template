@@ -3,19 +3,16 @@
 #include "WeaponWheelWidget.h"
 #include "Components/Image.h"
 
-void UWeaponWheelWidget::ChangeColorOnHover(bool bIsHovered, UButton* button, UImage* image)
+void UWeaponWheelWidget::ChangeColorOnHover(bool bIsHovered, UButton* button, UImage* image, UWidgetAnimation* hoverAnimation)
 {
-	if (image == nullptr)
-	{
-		return;
-	}
-
 	if (bIsHovered)
 	{
-		image->ColorAndOpacity = ImageHoverColor;
+		if (hoverAnimation) PlayAnimation(hoverAnimation);
+		if (image) image->ColorAndOpacity = ImageHoverColor;
 	}
 	else
 	{
-		image->ColorAndOpacity = FColor(255, 255, 255, 255);
+		if (hoverAnimation) PlayAnimationReverse(hoverAnimation);
+		if (image) image->ColorAndOpacity = FColor(255, 255, 255, 255);
 	}
 }

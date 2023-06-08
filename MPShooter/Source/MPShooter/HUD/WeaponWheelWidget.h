@@ -60,7 +60,7 @@ public:
 	// Animations
 	//
 	UPROPERTY(Transient, meta = (BindWidgetAnim))
-	UWidgetAnimation* Appear;
+	class UWidgetAnimation* Appear;
 
 	//
 	// Time Dilation
@@ -77,6 +77,6 @@ public:
 	FColor ImageHoverColor;
 
 	UFUNCTION(BlueprintCallable)
-	void ChangeColorOnHover(bool bIsHovered, UButton* button, UImage* image);
+	void ChangeColorOnHover(bool bIsHovered, UButton* button, UImage* image, UWidgetAnimation* hoverAnimation);
 	
 };

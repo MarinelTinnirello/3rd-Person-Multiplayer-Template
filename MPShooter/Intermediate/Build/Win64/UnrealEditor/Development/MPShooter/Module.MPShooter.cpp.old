@@ -7,6 +7,8 @@
 #include "D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Source/MPShooter/HUD/Annoucement.cpp"
 #include "D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Source/MPShooter/HUD/CharacterOverlay.cpp"
 #include "D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Source/MPShooter/HUD/EliminateAnnouncement.cpp"
+#include "D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Source/MPShooter/HUD/MPHUD.cpp"
+#include "D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Source/MPShooter/HUD/OverheadWidget.cpp"
 #include "D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Source/MPShooter/HUD/PlayerChatBox.cpp"
 #include "D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Source/MPShooter/HUD/ReturnToMainMenu.cpp"
 #include "D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Source/MPShooter/HUD/SniperScopeOverlay.cpp"

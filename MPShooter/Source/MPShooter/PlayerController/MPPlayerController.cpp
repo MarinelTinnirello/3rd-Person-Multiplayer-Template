@@ -796,18 +796,6 @@ void AMPPlayerController::SetHUDWeaponWheel(bool bIsVisible)
 				}
 
 			}
-			else
-			{
-				if (MPHUD->WeaponWheel->bUseSlowDown)
-				{
-					AMPCharacter* MPCharacter = Cast<AMPCharacter>(GetPawn());
-					if (MPCharacter && (!MPCharacter->HasAuthority() || MPCharacter->IsLocallyControlled()))
-					{
-						MPCharacter->CustomTimeDilation = 1.0f;
-					}
-				}
-
-			}
 		}
 		else
 		{
@@ -815,6 +803,14 @@ void AMPPlayerController::SetHUDWeaponWheel(bool bIsVisible)
 			bShowMouseCursor = false;
 
 			MPHUD->WeaponWheel->PlayAnimationReverse(MPHUD->WeaponWheel->Appear);
+			if (MPHUD->WeaponWheel->bUseSlowDown)
+			{
+				AMPCharacter* MPCharacter = Cast<AMPCharacter>(GetPawn());
+				if (MPCharacter && (!MPCharacter->HasAuthority() || MPCharacter->IsLocallyControlled()))
+				{
+					MPCharacter->CustomTimeDilation = 1.0f;
+				}
+			}
 		}
 	}
 }

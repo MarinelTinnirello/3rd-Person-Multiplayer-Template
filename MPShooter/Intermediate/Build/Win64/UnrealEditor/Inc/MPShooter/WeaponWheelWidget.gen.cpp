@@ -23,9 +23,10 @@ void EmptyLinkFunctionForGeneratedCodeWeaponWheelWidget() {}
 		P_GET_UBOOL(Z_Param_bIsHovered);
 		P_GET_OBJECT(UButton,Z_Param_button);
 		P_GET_OBJECT(UImage,Z_Param_image);
+		P_GET_OBJECT(UWidgetAnimation,Z_Param_hoverAnimation);
 		P_FINISH;
 		P_NATIVE_BEGIN;
-		P_THIS->ChangeColorOnHover(Z_Param_bIsHovered,Z_Param_button,Z_Param_image);
+		P_THIS->ChangeColorOnHover(Z_Param_bIsHovered,Z_Param_button,Z_Param_image,Z_Param_hoverAnimation);
 		P_NATIVE_END;
 	}
 	void UWeaponWheelWidget::StaticRegisterNativesUWeaponWheelWidget()
@@ -43,6 +44,7 @@ void EmptyLinkFunctionForGeneratedCodeWeaponWheelWidget() {}
 			bool bIsHovered;
 			UButton* button;
 			UImage* image;
+			UWidgetAnimation* hoverAnimation;
 		};
 		static void NewProp_bIsHovered_SetBit(void* Obj);
 		static const UECodeGen_Private::FBoolPropertyParams NewProp_bIsHovered;
@@ -54,6 +56,7 @@ void EmptyLinkFunctionForGeneratedCodeWeaponWheelWidget() {}
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_image_MetaData[];
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_image;
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_hoverAnimation;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
@@ -77,10 +80,12 @@ void EmptyLinkFunctionForGeneratedCodeWeaponWheelWidget() {}
 	};
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UWeaponWheelWidget_ChangeColorOnHover_Statics::NewProp_image = { "image", nullptr, (EPropertyFlags)0x0010000000080080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(WeaponWheelWidget_eventChangeColorOnHover_Parms, image), Z_Construct_UClass_UImage_NoRegister, METADATA_PARAMS(Z_Construct_UFunction_UWeaponWheelWidget_ChangeColorOnHover_Statics::NewProp_image_MetaData, UE_ARRAY_COUNT(Z_Construct_UFunction_UWeaponWheelWidget_ChangeColorOnHover_Statics::NewProp_image_MetaData)) };
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UWeaponWheelWidget_ChangeColorOnHover_Statics::NewProp_hoverAnimation = { "hoverAnimation", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(WeaponWheelWidget_eventChangeColorOnHover_Parms, hoverAnimation), Z_Construct_UClass_UWidgetAnimation_NoRegister, METADATA_PARAMS(nullptr, 0) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UWeaponWheelWidget_ChangeColorOnHover_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UWeaponWheelWidget_ChangeColorOnHover_Statics::NewProp_bIsHovered,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UWeaponWheelWidget_ChangeColorOnHover_Statics::NewProp_button,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UWeaponWheelWidget_ChangeColorOnHover_Statics::NewProp_image,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UWeaponWheelWidget_ChangeColorOnHover_Statics::NewProp_hoverAnimation,
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UWeaponWheelWidget_ChangeColorOnHover_Statics::Function_MetaDataParams[] = {
@@ -207,7 +212,7 @@ void EmptyLinkFunctionForGeneratedCodeWeaponWheelWidget() {}
 		(UObject* (*)())Z_Construct_UPackage__Script_MPShooter,
 	};
 	const FClassFunctionLinkInfo Z_Construct_UClass_UWeaponWheelWidget_Statics::FuncInfo[] = {
-		{ &Z_Construct_UFunction_UWeaponWheelWidget_ChangeColorOnHover, "ChangeColorOnHover" }, // 4210679652
+		{ &Z_Construct_UFunction_UWeaponWheelWidget_ChangeColorOnHover, "ChangeColorOnHover" }, // 934851960
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UWeaponWheelWidget_Statics::Class_MetaDataParams[] = {
@@ -478,9 +483,9 @@ void EmptyLinkFunctionForGeneratedCodeWeaponWheelWidget() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_HUD_WeaponWheelWidget_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UWeaponWheelWidget, UWeaponWheelWidget::StaticClass, TEXT("UWeaponWheelWidget"), &Z_Registration_Info_UClass_UWeaponWheelWidget, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UWeaponWheelWidget), 764983953U) },
+		{ Z_Construct_UClass_UWeaponWheelWidget, UWeaponWheelWidget::StaticClass, TEXT("UWeaponWheelWidget"), &Z_Registration_Info_UClass_UWeaponWheelWidget, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UWeaponWheelWidget), 1436915580U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_HUD_WeaponWheelWidget_h_636537239(TEXT("/Script/MPShooter"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_HUD_WeaponWheelWidget_h_2846307324(TEXT("/Script/MPShooter"),
 		Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_HUD_WeaponWheelWidget_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_HUD_WeaponWheelWidget_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

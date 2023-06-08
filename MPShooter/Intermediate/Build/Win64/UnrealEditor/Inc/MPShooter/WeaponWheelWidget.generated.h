@@ -10,6 +10,7 @@
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 class UButton;
 class UImage;
+class UWidgetAnimation;
 #ifdef MPSHOOTER_WeaponWheelWidget_generated_h
 #error "WeaponWheelWidget.generated.h already included, missing '#pragma once' in WeaponWheelWidget.h"
 #endif
