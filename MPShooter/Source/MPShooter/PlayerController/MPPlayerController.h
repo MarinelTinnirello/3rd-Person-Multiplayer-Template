@@ -37,6 +37,7 @@ public:
 	void SetHUDSniperScope(bool bIsAiming);
 	void SetHUDMatchCountdown(float CountdownTime, float MatchWarningTime);
 	void SetHUDAnnouncementCountdown(float CountdownTime);
+	void ShowReturnToMainMenu();
 	void SetHUDWeaponWheel(bool bIsVisible);
 	void SetHUDWeaponWheelIcon();
 
@@ -59,7 +60,6 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
-	virtual void SetupInputComponent() override;
 
 	void PollInit();
 	void SetHUDTime();
@@ -97,11 +97,6 @@ protected:
 	void ClientJoinMidGame(FName StateOfMatch, float Warmup, float LevelStart, float Match, float Cooldown, float MatchWarning);
 	UFUNCTION(Client, Reliable)
 	void ClientEliminateAnnouncement(APlayerState* Attacker, APlayerState* Victim);
-
-	//
-	// Return to Main Menu
-	//
-	void ShowReturnToMainMenu();
 
 private:
 	UPROPERTY()

@@ -164,6 +164,7 @@ void AMPCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 				EnhancedInputComponent->BindAction(InputActions->InputAim, ETriggerEvent::Completed, this, &AMPCharacter::AimButtonReleased);
 				EnhancedInputComponent->BindAction(InputActions->InputThrow, ETriggerEvent::Triggered, this, &AMPCharacter::ThrowButtonPressed);
 				EnhancedInputComponent->BindAction(InputActions->InputThrow, ETriggerEvent::Completed, this, &AMPCharacter::ThrowButtonReleased);
+				EnhancedInputComponent->BindAction(InputActions->InputQuit, ETriggerEvent::Triggered, this, &AMPCharacter::QuitButtonPressed);
 				EnhancedInputComponent->BindAction(InputActions->InputViewChatBox, ETriggerEvent::Triggered, this, &AMPCharacter::ViewChatBoxButtonPressed);
 				EnhancedInputComponent->BindAction(InputActions->InputWeaponWheel, ETriggerEvent::Triggered, this, &AMPCharacter::WeaponWheelButtonPressed);
 				EnhancedInputComponent->BindAction(InputActions->InputWeaponWheel, ETriggerEvent::Completed, this, &AMPCharacter::WeaponWheelButtonReleased);
@@ -662,6 +663,16 @@ void AMPCharacter::ViewChatBoxButtonPressed()
 	}
 
 	MPPlayerController->ToggleChatBox();
+}
+
+void AMPCharacter::QuitButtonPressed()
+{
+	if (bDisableGameplay || MPPlayerController == nullptr)
+	{
+		return;
+	}
+
+	MPPlayerController->ShowReturnToMainMenu();
 }
 
 void AMPCharacter::WeaponWheelButtonPressed()

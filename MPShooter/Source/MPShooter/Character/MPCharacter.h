@@ -138,6 +138,7 @@ protected:
 	void ThrowButtonPressed();
 	void ThrowButtonReleased();
 	void ViewChatBoxButtonPressed();
+	void QuitButtonPressed();
 	void WeaponWheelButtonPressed();
 	void WeaponWheelButtonReleased();
 

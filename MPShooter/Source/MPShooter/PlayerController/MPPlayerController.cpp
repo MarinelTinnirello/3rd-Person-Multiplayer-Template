@@ -1,10 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "MPPlayerController.h"
-#include "EnhancedInputSubsystems.h"
-#include "EnhancedInputComponent.h"
-#include "InputMappingContext.h"
-#include "InputActionValue.h"
 #include "Components/ProgressBar.h"
 #include "Components/TextBlock.h"
 #include "Components/EditableText.h"
@@ -71,33 +67,6 @@ void AMPPlayerController::ReceivedPlayer()
 	if (IsLocalController())
 	{
 		ServerRequestServerTime(GetWorld()->GetTimeSeconds());
-	}
-}
-
-void AMPPlayerController::SetupInputComponent()
-{
-	Super::SetupInputComponent();
-
-	if (InputComponent == nullptr)
-	{
-		return;
-	}
-
-	AMPCharacter* MPCharacter = Cast<AMPCharacter>(GetPawn());
-	if (MPCharacter)
-	{
-		UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
-		if (Subsystem)
-		{
-			Subsystem->ClearAllMappings();
-			Subsystem->AddMappingContext(MPCharacter->GetInputMapping(), 0);
-
-			UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(InputComponent);
-			if (EnhancedInputComponent)
-			{
-				EnhancedInputComponent->BindAction(MPCharacter->GetInputActions()->InputQuit, ETriggerEvent::Triggered, this, &AMPPlayerController::ShowReturnToMainMenu);
-			}
-		}
 	}
 }
 
@@ -783,7 +752,7 @@ void AMPPlayerController::SetHUDWeaponWheel(bool bIsVisible)
 		if (bIsVisible)
 		{
 			SetInputMode(FInputModeGameAndUI());
-			bShowMouseCursor = true;
+			SetShowMouseCursor(true);
 
 			MPHUD->WeaponWheel->PlayAnimation(MPHUD->WeaponWheel->Appear);
 			if (MPHUD->WeaponWheel->bUseSlowDown)
@@ -799,7 +768,7 @@ void AMPPlayerController::SetHUDWeaponWheel(bool bIsVisible)
 		else
 		{
 			SetInputMode(FInputModeGameOnly());
-			bShowMouseCursor = false;
+			SetShowMouseCursor(false);
 
 			MPHUD->WeaponWheel->PlayAnimationReverse(MPHUD->WeaponWheel->Appear);
 			if (MPHUD->WeaponWheel->bUseSlowDown)
