@@ -15,6 +15,8 @@ void EmptyLinkFunctionForGeneratedCodeWeapon() {}
 	ENGINE_API UClass* Z_Construct_UClass_UTexture2D_NoRegister();
 	MPSHOOTER_API UEnum* Z_Construct_UEnum_MPShooter_EWeaponType();
 	MPSHOOTER_API UEnum* Z_Construct_UEnum_MPShooter_EFireType();
+	MPSHOOTER_API UEnum* Z_Construct_UEnum_MPShooter_EWeaponAttachmentSocket();
+	MPSHOOTER_API UEnum* Z_Construct_UEnum_MPShooter_EWeaponLaterality();
 	ENGINE_API UClass* Z_Construct_UClass_UAnimationAsset_NoRegister();
 	COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
 	MPSHOOTER_API UClass* Z_Construct_UClass_ACasing_NoRegister();
@@ -134,6 +136,21 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FWeaponProperties>()
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_FireType_MetaData[];
 #endif
 		static const UECodeGen_Private::FEnumPropertyParams NewProp_FireType;
+		static const UECodeGen_Private::FBytePropertyParams NewProp_EquippedWeaponSocket_Underlying;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_EquippedWeaponSocket_MetaData[];
+#endif
+		static const UECodeGen_Private::FEnumPropertyParams NewProp_EquippedWeaponSocket;
+		static const UECodeGen_Private::FBytePropertyParams NewProp_UnequippedWeaponSocket_Underlying;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_UnequippedWeaponSocket_MetaData[];
+#endif
+		static const UECodeGen_Private::FEnumPropertyParams NewProp_UnequippedWeaponSocket;
+		static const UECodeGen_Private::FBytePropertyParams NewProp_WeaponHandiness_Underlying;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_WeaponHandiness_MetaData[];
+#endif
+		static const UECodeGen_Private::FEnumPropertyParams NewProp_WeaponHandiness;
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_bAttachToRightHand_MetaData[];
 #endif
@@ -380,6 +397,33 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FWeaponProperties>()
 	};
 #endif
 	const UECodeGen_Private::FEnumPropertyParams Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewProp_FireType = { "FireType", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FWeaponProperties, FireType), Z_Construct_UEnum_MPShooter_EFireType, METADATA_PARAMS(Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewProp_FireType_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewProp_FireType_MetaData)) }; // 300460462
+	const UECodeGen_Private::FBytePropertyParams Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewProp_EquippedWeaponSocket_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, nullptr, METADATA_PARAMS(nullptr, 0) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewProp_EquippedWeaponSocket_MetaData[] = {
+		{ "Category", "Weapon Properties" },
+		{ "ModuleRelativePath", "Item/Weapon/Weapon.h" },
+		{ "ToolTip", "Checks where the weapon should attach to when equipped, based on the weapon animations. Most animations use hands, so the hands sockets will likely be your picks. Particularly for 2-handed weapons, animations tend to be right-handed, so the default will be 'Right Hand'." },
+	};
+#endif
+	const UECodeGen_Private::FEnumPropertyParams Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewProp_EquippedWeaponSocket = { "EquippedWeaponSocket", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FWeaponProperties, EquippedWeaponSocket), Z_Construct_UEnum_MPShooter_EWeaponAttachmentSocket, METADATA_PARAMS(Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewProp_EquippedWeaponSocket_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewProp_EquippedWeaponSocket_MetaData)) }; // 2580864729
+	const UECodeGen_Private::FBytePropertyParams Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewProp_UnequippedWeaponSocket_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, nullptr, METADATA_PARAMS(nullptr, 0) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewProp_UnequippedWeaponSocket_MetaData[] = {
+		{ "Category", "Weapon Properties" },
+		{ "ModuleRelativePath", "Item/Weapon/Weapon.h" },
+		{ "ToolTip", "Checks where the weapon should attach to when unequipped." },
+	};
+#endif
+	const UECodeGen_Private::FEnumPropertyParams Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewProp_UnequippedWeaponSocket = { "UnequippedWeaponSocket", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FWeaponProperties, UnequippedWeaponSocket), Z_Construct_UEnum_MPShooter_EWeaponAttachmentSocket, METADATA_PARAMS(Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewProp_UnequippedWeaponSocket_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewProp_UnequippedWeaponSocket_MetaData)) }; // 2580864729
+	const UECodeGen_Private::FBytePropertyParams Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewProp_WeaponHandiness_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, nullptr, METADATA_PARAMS(nullptr, 0) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewProp_WeaponHandiness_MetaData[] = {
+		{ "Category", "Weapon Properties" },
+		{ "ModuleRelativePath", "Item/Weapon/Weapon.h" },
+		{ "ToolTip", "Checks how many hands the weapon uses, based on the weapon animations." },
+	};
+#endif
+	const UECodeGen_Private::FEnumPropertyParams Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewProp_WeaponHandiness = { "WeaponHandiness", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FWeaponProperties, WeaponHandiness), Z_Construct_UEnum_MPShooter_EWeaponLaterality, METADATA_PARAMS(Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewProp_WeaponHandiness_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewProp_WeaponHandiness_MetaData)) }; // 794302630
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewProp_bAttachToRightHand_MetaData[] = {
 		{ "Category", "Weapon Properties" },
@@ -496,6 +540,12 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FWeaponProperties>()
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewProp_WeaponType,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewProp_FireType_Underlying,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewProp_FireType,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewProp_EquippedWeaponSocket_Underlying,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewProp_EquippedWeaponSocket,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewProp_UnequippedWeaponSocket_Underlying,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewProp_UnequippedWeaponSocket,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewProp_WeaponHandiness_Underlying,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewProp_WeaponHandiness,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewProp_bAttachToRightHand,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewProp_bDoubleHanded,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewProp_bDualWield,
@@ -746,6 +796,10 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FWeaponProperties>()
 #endif
 		static const UECodeGen_Private::FNamePropertyParams NewProp_MuzzleFlash;
 #if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_FireAnimation_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_FireAnimation;
+#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_Damage_MetaData[];
 #endif
 		static const UECodeGen_Private::FFloatPropertyParams NewProp_Damage;
@@ -776,6 +830,21 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FWeaponProperties>()
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_FireType_MetaData[];
 #endif
 		static const UECodeGen_Private::FEnumPropertyParams NewProp_FireType;
+		static const UECodeGen_Private::FBytePropertyParams NewProp_EquippedWeaponSocket_Underlying;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_EquippedWeaponSocket_MetaData[];
+#endif
+		static const UECodeGen_Private::FEnumPropertyParams NewProp_EquippedWeaponSocket;
+		static const UECodeGen_Private::FBytePropertyParams NewProp_UnequippedWeaponSocket_Underlying;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_UnequippedWeaponSocket_MetaData[];
+#endif
+		static const UECodeGen_Private::FEnumPropertyParams NewProp_UnequippedWeaponSocket;
+		static const UECodeGen_Private::FBytePropertyParams NewProp_WeaponHandiness_Underlying;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_WeaponHandiness_MetaData[];
+#endif
+		static const UECodeGen_Private::FEnumPropertyParams NewProp_WeaponHandiness;
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_bAttachToRightHand_MetaData[];
 #endif
@@ -791,10 +860,6 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FWeaponProperties>()
 #endif
 		static void NewProp_bDualWield_SetBit(void* Obj);
 		static const UECodeGen_Private::FBoolPropertyParams NewProp_bDualWield;
-#if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_FireAnimation_MetaData[];
-#endif
-		static const UECodeGen_Private::FObjectPropertyParams NewProp_FireAnimation;
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_WeaponTypeReloadMontageSection_MetaData[];
 #endif
@@ -973,6 +1038,14 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FWeaponProperties>()
 #endif
 	const UECodeGen_Private::FNamePropertyParams Z_Construct_UClass_AWeapon_Statics::NewProp_MuzzleFlash = { "MuzzleFlash", nullptr, (EPropertyFlags)0x0020080000000001, UECodeGen_Private::EPropertyGenFlags::Name, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AWeapon, MuzzleFlash), METADATA_PARAMS(Z_Construct_UClass_AWeapon_Statics::NewProp_MuzzleFlash_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AWeapon_Statics::NewProp_MuzzleFlash_MetaData)) };
 #if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AWeapon_Statics::NewProp_FireAnimation_MetaData[] = {
+		{ "Category", "Weapon Properties" },
+		{ "ModuleRelativePath", "Item/Weapon/Weapon.h" },
+		{ "ToolTip", "Animation played when a weapon is fired." },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AWeapon_Statics::NewProp_FireAnimation = { "FireAnimation", nullptr, (EPropertyFlags)0x0020080000000001, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AWeapon, FireAnimation), Z_Construct_UClass_UAnimationAsset_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AWeapon_Statics::NewProp_FireAnimation_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AWeapon_Statics::NewProp_FireAnimation_MetaData)) };
+#if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AWeapon_Statics::NewProp_Damage_MetaData[] = {
 		{ "Category", "Combat" },
 		{ "ModuleRelativePath", "Item/Weapon/Weapon.h" },
@@ -1034,6 +1107,33 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FWeaponProperties>()
 	};
 #endif
 	const UECodeGen_Private::FEnumPropertyParams Z_Construct_UClass_AWeapon_Statics::NewProp_FireType = { "FireType", nullptr, (EPropertyFlags)0x0040000000000001, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AWeapon, FireType), Z_Construct_UEnum_MPShooter_EFireType, METADATA_PARAMS(Z_Construct_UClass_AWeapon_Statics::NewProp_FireType_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AWeapon_Statics::NewProp_FireType_MetaData)) }; // 300460462
+	const UECodeGen_Private::FBytePropertyParams Z_Construct_UClass_AWeapon_Statics::NewProp_EquippedWeaponSocket_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, nullptr, METADATA_PARAMS(nullptr, 0) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AWeapon_Statics::NewProp_EquippedWeaponSocket_MetaData[] = {
+		{ "Category", "Weapon Properties" },
+		{ "ModuleRelativePath", "Item/Weapon/Weapon.h" },
+		{ "ToolTip", "Checks where the weapon should attach to when equipped, based on the weapon animations. Most animations use hands, so the hands sockets will likely be your picks. Particularly for 2-handed weapons, animations tend to be right-handed, so the default will be 'Right Hand'." },
+	};
+#endif
+	const UECodeGen_Private::FEnumPropertyParams Z_Construct_UClass_AWeapon_Statics::NewProp_EquippedWeaponSocket = { "EquippedWeaponSocket", nullptr, (EPropertyFlags)0x0040000000000001, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AWeapon, EquippedWeaponSocket), Z_Construct_UEnum_MPShooter_EWeaponAttachmentSocket, METADATA_PARAMS(Z_Construct_UClass_AWeapon_Statics::NewProp_EquippedWeaponSocket_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AWeapon_Statics::NewProp_EquippedWeaponSocket_MetaData)) }; // 2580864729
+	const UECodeGen_Private::FBytePropertyParams Z_Construct_UClass_AWeapon_Statics::NewProp_UnequippedWeaponSocket_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, nullptr, METADATA_PARAMS(nullptr, 0) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AWeapon_Statics::NewProp_UnequippedWeaponSocket_MetaData[] = {
+		{ "Category", "Weapon Properties" },
+		{ "ModuleRelativePath", "Item/Weapon/Weapon.h" },
+		{ "ToolTip", "Checks where the weapon should attach to when unequipped." },
+	};
+#endif
+	const UECodeGen_Private::FEnumPropertyParams Z_Construct_UClass_AWeapon_Statics::NewProp_UnequippedWeaponSocket = { "UnequippedWeaponSocket", nullptr, (EPropertyFlags)0x0040000000000001, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AWeapon, UnequippedWeaponSocket), Z_Construct_UEnum_MPShooter_EWeaponAttachmentSocket, METADATA_PARAMS(Z_Construct_UClass_AWeapon_Statics::NewProp_UnequippedWeaponSocket_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AWeapon_Statics::NewProp_UnequippedWeaponSocket_MetaData)) }; // 2580864729
+	const UECodeGen_Private::FBytePropertyParams Z_Construct_UClass_AWeapon_Statics::NewProp_WeaponHandiness_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, nullptr, METADATA_PARAMS(nullptr, 0) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AWeapon_Statics::NewProp_WeaponHandiness_MetaData[] = {
+		{ "Category", "Weapon Properties" },
+		{ "ModuleRelativePath", "Item/Weapon/Weapon.h" },
+		{ "ToolTip", "Checks how many hands the weapon uses, based on the weapon animations." },
+	};
+#endif
+	const UECodeGen_Private::FEnumPropertyParams Z_Construct_UClass_AWeapon_Statics::NewProp_WeaponHandiness = { "WeaponHandiness", nullptr, (EPropertyFlags)0x0040000000000001, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AWeapon, WeaponHandiness), Z_Construct_UEnum_MPShooter_EWeaponLaterality, METADATA_PARAMS(Z_Construct_UClass_AWeapon_Statics::NewProp_WeaponHandiness_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AWeapon_Statics::NewProp_WeaponHandiness_MetaData)) }; // 794302630
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AWeapon_Statics::NewProp_bAttachToRightHand_MetaData[] = {
 		{ "Category", "Weapon Properties" },
@@ -1070,14 +1170,6 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FWeaponProperties>()
 		((AWeapon*)Obj)->bDualWield = 1;
 	}
 	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AWeapon_Statics::NewProp_bDualWield = { "bDualWield", nullptr, (EPropertyFlags)0x0040000000000001, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(AWeapon), &Z_Construct_UClass_AWeapon_Statics::NewProp_bDualWield_SetBit, METADATA_PARAMS(Z_Construct_UClass_AWeapon_Statics::NewProp_bDualWield_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AWeapon_Statics::NewProp_bDualWield_MetaData)) };
-#if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AWeapon_Statics::NewProp_FireAnimation_MetaData[] = {
-		{ "Category", "Weapon Properties" },
-		{ "ModuleRelativePath", "Item/Weapon/Weapon.h" },
-		{ "ToolTip", "Animation played when a weapon is fired." },
-	};
-#endif
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AWeapon_Statics::NewProp_FireAnimation = { "FireAnimation", nullptr, (EPropertyFlags)0x0040000000000001, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AWeapon, FireAnimation), Z_Construct_UClass_UAnimationAsset_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AWeapon_Statics::NewProp_FireAnimation_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AWeapon_Statics::NewProp_FireAnimation_MetaData)) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AWeapon_Statics::NewProp_WeaponTypeReloadMontageSection_MetaData[] = {
 		{ "Category", "Weapon Properties - Ranged" },
@@ -1142,6 +1234,7 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FWeaponProperties>()
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AWeapon_Statics::NewProp_MPOwnerController,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AWeapon_Statics::NewProp_bHasPhysicsAttachment,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AWeapon_Statics::NewProp_MuzzleFlash,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AWeapon_Statics::NewProp_FireAnimation,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AWeapon_Statics::NewProp_Damage,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AWeapon_Statics::NewProp_HeadShotDamage,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AWeapon_Statics::NewProp_DistanceToSphere,
@@ -1151,10 +1244,15 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FWeaponProperties>()
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AWeapon_Statics::NewProp_WeaponType,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AWeapon_Statics::NewProp_FireType_Underlying,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AWeapon_Statics::NewProp_FireType,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AWeapon_Statics::NewProp_EquippedWeaponSocket_Underlying,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AWeapon_Statics::NewProp_EquippedWeaponSocket,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AWeapon_Statics::NewProp_UnequippedWeaponSocket_Underlying,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AWeapon_Statics::NewProp_UnequippedWeaponSocket,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AWeapon_Statics::NewProp_WeaponHandiness_Underlying,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AWeapon_Statics::NewProp_WeaponHandiness,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AWeapon_Statics::NewProp_bAttachToRightHand,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AWeapon_Statics::NewProp_bDoubleHanded,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AWeapon_Statics::NewProp_bDualWield,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AWeapon_Statics::NewProp_FireAnimation,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AWeapon_Statics::NewProp_WeaponTypeReloadMontageSection,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AWeapon_Statics::NewProp_CasingClass,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AWeapon_Statics::NewProp_AmmoEject,
@@ -1209,12 +1307,12 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<FWeaponProperties>()
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FStructRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_Statics::ScriptStructInfo[] = {
-		{ FWeaponProperties::StaticStruct, Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewStructOps, TEXT("WeaponProperties"), &Z_Registration_Info_UScriptStruct_WeaponProperties, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FWeaponProperties), 1175586641U) },
+		{ FWeaponProperties::StaticStruct, Z_Construct_UScriptStruct_FWeaponProperties_Statics::NewStructOps, TEXT("WeaponProperties"), &Z_Registration_Info_UScriptStruct_WeaponProperties, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FWeaponProperties), 2130916314U) },
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AWeapon, AWeapon::StaticClass, TEXT("AWeapon"), &Z_Registration_Info_UClass_AWeapon, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AWeapon), 4292794460U) },
+		{ Z_Construct_UClass_AWeapon, AWeapon::StaticClass, TEXT("AWeapon"), &Z_Registration_Info_UClass_AWeapon, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AWeapon), 242143208U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_2655495952(TEXT("/Script/MPShooter"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_1236931181(TEXT("/Script/MPShooter"),
 		Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_Statics::ClassInfo),
 		Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_Statics::ScriptStructInfo),
 		nullptr, 0);

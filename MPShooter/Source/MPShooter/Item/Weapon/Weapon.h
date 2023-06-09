@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "MPShooter/Item/Item.h"
 #include "MPShooter/MPTypes/WeaponTypes.h"
+#include "MPShooter/MPTypes/ActorAttachment.h"
 #include "Weapon.generated.h"
 
 USTRUCT(BlueprintType)
@@ -85,6 +86,12 @@ struct FWeaponProperties
 	EWeaponType WeaponType;
 	UPROPERTY(EditAnywhere, Category = "Weapon Properties", meta = (ToolTip = "Type of weapon firing for LocalFire() handling, based on the parent class of the weapon (lag compensation)."))
 	EFireType FireType;
+	UPROPERTY(EditAnywhere, Category = "Weapon Properties", meta = (ToolTip = "Checks where the weapon should attach to when equipped, based on the weapon animations. Most animations use hands, so the hands sockets will likely be your picks. Particularly for 2-handed weapons, animations tend to be right-handed, so the default will be 'Right Hand'."))
+	EWeaponAttachmentSocket EquippedWeaponSocket;
+	UPROPERTY(EditAnywhere, Category = "Weapon Properties", meta = (ToolTip = "Checks where the weapon should attach to when unequipped."))
+	EWeaponAttachmentSocket UnequippedWeaponSocket;
+	UPROPERTY(EditAnywhere, Category = "Weapon Properties", meta = (ToolTip = "Checks how many hands the weapon uses, based on the weapon animations."))
+	EWeaponLaterality WeaponHandiness;
 	UPROPERTY(EditAnywhere, Category = "Weapon Properties", meta = (ToolTip = "Checks if the weapon should attach to the right or left hand. Most animations (particularly for 2-handed weapons) are right-handed, so the default will be 'true'."))
 	bool bAttachToRightHand = true;
 	UPROPERTY(EditAnywhere, Category = "Weapon Properties", meta = (ToolTip = "Checks if the weapon is double-handed."))
@@ -184,6 +191,8 @@ protected:
 	bool bHasPhysicsAttachment = false;
 	UPROPERTY(EditAnywhere, Category = "Weapon Properties  - Ranged", meta = (ToolTip = "Muzzle socket name on a weapon."))
 	FName MuzzleFlash = "MuzzleFlash";
+	UPROPERTY(EditAnywhere, Category = "Weapon Properties", meta = (ToolTip = "Animation played when a weapon is fired."))
+	class UAnimationAsset* FireAnimation;
 	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Damage dealt by the weapon."))
 	float Damage = 20.f;
 	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Damage dealt by the weapon if hit on the head."))
@@ -234,14 +243,18 @@ private:
 	EWeaponType WeaponType;
 	UPROPERTY(EditAnywhere, Category = "Weapon Properties", meta = (ToolTip = "Type of weapon firing for LocalFire() handling, based on the parent class of the weapon (lag compensation)."))
 	EFireType FireType;
+	UPROPERTY(EditAnywhere, Category = "Weapon Properties", meta = (ToolTip = "Checks where the weapon should attach to when equipped, based on the weapon animations. Most animations use hands, so the hands sockets will likely be your picks. Particularly for 2-handed weapons, animations tend to be right-handed, so the default will be 'Right Hand'."))
+	EWeaponAttachmentSocket EquippedWeaponSocket;
+	UPROPERTY(EditAnywhere, Category = "Weapon Properties", meta = (ToolTip = "Checks where the weapon should attach to when unequipped."))
+	EWeaponAttachmentSocket UnequippedWeaponSocket;
+	UPROPERTY(EditAnywhere, Category = "Weapon Properties", meta = (ToolTip = "Checks how many hands the weapon uses, based on the weapon animations."))
+	EWeaponLaterality WeaponHandiness;
 	UPROPERTY(EditAnywhere, Category = "Weapon Properties", meta = (ToolTip = "Checks if the weapon should attach to the right or left hand. Most animations (particularly for 2-handed weapons) are right-handed, so the default will be 'true'."))
 	bool bAttachToRightHand = true;
 	UPROPERTY(EditAnywhere, Category = "Weapon Properties", meta = (ToolTip = "Checks if the weapon is double-handed."))
 	bool bDoubleHanded = true;
 	UPROPERTY(EditAnywhere, Category = "Weapon Properties", meta = (ToolTip = "Checks if the weapon is dual-wielded."))
 	bool bDualWield = false;
-	UPROPERTY(EditAnywhere, Category = "Weapon Properties", meta = (ToolTip = "Animation played when a weapon is fired."))
-	class UAnimationAsset* FireAnimation;
 
 	// 
 	// Weapon Properties - Ranged

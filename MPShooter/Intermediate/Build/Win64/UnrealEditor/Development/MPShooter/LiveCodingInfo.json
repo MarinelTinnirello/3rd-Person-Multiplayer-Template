@@ -3,6 +3,7 @@
 	{
 		"Module.MPShooter.cpp.obj": [
 			"MPAnimInstance.cpp.obj",
+			"MPCharacter.cpp.obj",
 			"LobbyGameMode.cpp.obj",
 			"MPShooterGameMode.cpp.obj",
 			"MPGameState.cpp.obj",
@@ -27,7 +28,6 @@
 			"ShieldPickup.cpp.obj",
 			"SpeedPickup.cpp.obj",
 			"ThrowableWeaponPickup.cpp.obj",
-			"HitScanWeapon.cpp.obj",
 			"ProjectileWeapon.cpp.obj",
 			"Casing.cpp.obj",
 			"RocketMovementComponent.cpp.obj",
@@ -39,13 +39,14 @@
 			"ShotgunWeapon.cpp.obj",
 			"GrenadeThrowableWeapon.cpp.obj",
 			"ThrowableWeapon.cpp.obj",
-			"Weapon.cpp.obj",
 			"BuffComponent.cpp.obj",
 			"CombatComponent.cpp.obj",
 			"LagComponent.cpp.obj",
 			"MPShooter.cpp.obj",
 			"MPPlayerState.cpp.obj",
-			"MPCharacter.cpp.obj",
+			"MeleeWeapon.cpp.obj",
+			"HitScanWeapon.cpp.obj",
+			"Weapon.cpp.obj",
 			"MPPlayerController.cpp.obj"
 		],
 		"Module.MPShooter.gen.1_of_3.cpp.obj": [
@@ -60,13 +61,15 @@
 			"GrenadeThrowableWeapon.gen.cpp.obj",
 			"HealthPickup.gen.cpp.obj",
 			"HitActor.gen.cpp.obj",
-			"HitScanWeapon.gen.cpp.obj",
 			"InteractWithCrosshairsInterface.gen.cpp.obj",
 			"Item.gen.cpp.obj",
 			"JumpPickup.gen.cpp.obj",
 			"LagComponent.gen.cpp.obj",
 			"LobbyGameMode.gen.cpp.obj",
-			"MPAnimInstance.gen.cpp.obj"
+			"MPAnimInstance.gen.cpp.obj",
+			"ActorAttachment.gen.cpp.obj",
+			"HitScanWeapon.gen.cpp.obj",
+			"MeleeWeapon.gen.cpp.obj"
 		],
 		"Module.MPShooter.gen.2_of_3.cpp.obj": [
 			"MPCharacter.gen.cpp.obj",
@@ -75,7 +78,6 @@
 			"MPInputConfigData.gen.cpp.obj",
 			"MPPlayerController.gen.cpp.obj",
 			"MPPlayerState.gen.cpp.obj",
-			"MPShooter.init.gen.cpp.obj",
 			"MPShooterGameMode.gen.cpp.obj",
 			"OverheadWidget.gen.cpp.obj",
 			"Pickup.gen.cpp.obj",
@@ -86,22 +88,23 @@
 			"ProjectileGrenade.gen.cpp.obj",
 			"ProjectileInterface.gen.cpp.obj",
 			"ProjectileRocket.gen.cpp.obj",
-			"ProjectileWeapon.gen.cpp.obj",
-			"ReturnToMainMenu.gen.cpp.obj"
+			"ReturnToMainMenu.gen.cpp.obj",
+			"MPShooter.init.gen.cpp.obj",
+			"ProjectileWeapon.gen.cpp.obj"
 		],
 		"Module.MPShooter.gen.3_of_3.cpp.obj": [
 			"RocketMovementComponent.gen.cpp.obj",
 			"ShieldPickup.gen.cpp.obj",
-			"ShotgunWeapon.gen.cpp.obj",
 			"SniperScopeOverlay.gen.cpp.obj",
 			"SpeedPickup.gen.cpp.obj",
 			"SpiralMovementComponent.gen.cpp.obj",
 			"ThrowableWeapon.gen.cpp.obj",
 			"ThrowableWeaponPickup.gen.cpp.obj",
 			"TurningInPlace.gen.cpp.obj",
-			"Weapon.gen.cpp.obj",
 			"WeaponTypes.gen.cpp.obj",
-			"WeaponWheelWidget.gen.cpp.obj"
+			"WeaponWheelWidget.gen.cpp.obj",
+			"ShotgunWeapon.gen.cpp.obj",
+			"Weapon.gen.cpp.obj"
 		]
 	}
 }

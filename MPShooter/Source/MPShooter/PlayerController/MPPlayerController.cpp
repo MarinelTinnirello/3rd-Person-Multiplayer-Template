@@ -716,10 +716,12 @@ void AMPPlayerController::ShowReturnToMainMenu()
 	{
 		return;
 	}
+
 	if (ReturnToMainMenu == nullptr)
 	{
 		ReturnToMainMenu = CreateWidget<UReturnToMainMenu>(this, ReturnToMainMenuWidget);
 	}
+
 	if (ReturnToMainMenu)
 	{
 		bReturnToMainMenuOpen = !bReturnToMainMenuOpen;

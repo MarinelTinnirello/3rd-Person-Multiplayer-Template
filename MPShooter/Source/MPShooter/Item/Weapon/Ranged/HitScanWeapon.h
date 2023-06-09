@@ -43,7 +43,7 @@ class MPSHOOTER_API AHitScanWeapon : public AWeapon
 
 public:
 	virtual void Fire(const FVector& HitTarget) override;
-	virtual void FireMulti(const TArray<FVector_NetQuantize>& HitTargets);
+	virtual void FireMulti(const TArray<FVector_NetQuantize>& HitTargets) override;
 	virtual void MultiTraceEndWithScatter(const FVector& HitTarget, TArray<FVector_NetQuantize>& HitTargets);
 
 	void WeaponTraceHit(const FVector& TraceStart, const FVector& HitTarget, FHitResult& OutHit);

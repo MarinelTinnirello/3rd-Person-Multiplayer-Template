@@ -281,6 +281,15 @@
     <ClInclude Include="..\..\Source\MPShooter\Item\Weapon\Weapon.h">
       <Filter>Source\MPShooter\Item\Weapon</Filter>
     </ClInclude>
+    <Filter Include="Source\MPShooter\Item\Weapon\Melee">
+      <UniqueIdentifier>{D42A98C2-18F9-316B-8A94-B19573C0B209}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\MPShooter\Item\Weapon\Melee\MeleeWeapon.cpp">
+      <Filter>Source\MPShooter\Item\Weapon\Melee</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\MPShooter\Item\Weapon\Melee\MeleeWeapon.h">
+      <Filter>Source\MPShooter\Item\Weapon\Melee</Filter>
+    </ClInclude>
     <Filter Include="Source\MPShooter\Item\Weapon\Ranged">
       <UniqueIdentifier>{77EDBBD7-00A2-3CA4-8CB1-3BBEB84F3DD7}</UniqueIdentifier>
     </Filter>
@@ -421,6 +430,11 @@
     </ClCompile>
     <ClInclude Include="..\..\Source\MPShooter\PlayerState\MPPlayerState.h">
       <Filter>Source\MPShooter\PlayerState</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Source\MPShooter\MPTypes\ActorAttachment.h">
+      <Filter>Source\MPShooter\MPTypes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

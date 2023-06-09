@@ -13,15 +13,15 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #endif
 #define MPSHOOTER_Weapon_generated_h
 
-#define FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_13_GENERATED_BODY \
+#define FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_14_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FWeaponProperties_Statics; \
 	MPSHOOTER_API static class UScriptStruct* StaticStruct();
 
 
 template<> MPSHOOTER_API UScriptStruct* StaticStruct<struct FWeaponProperties>();
 
-#define FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_117_SPARSE_DATA
-#define FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_117_RPC_WRAPPERS \
+#define FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_124_SPARSE_DATA
+#define FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_124_RPC_WRAPPERS \
 	virtual void ClientAddAmmo_Implementation(int32 AmmoToAdd); \
 	virtual void ClientUpdateAmmo_Implementation(int32 ServerAmmo); \
  \
@@ -30,7 +30,7 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<struct FWeaponProperties>()
 	DECLARE_FUNCTION(execOnPingTooHigh);
 
 
-#define FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_117_RPC_WRAPPERS_NO_PURE_DECLS \
+#define FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_124_RPC_WRAPPERS_NO_PURE_DECLS \
 	virtual void ClientAddAmmo_Implementation(int32 AmmoToAdd); \
 	virtual void ClientUpdateAmmo_Implementation(int32 ServerAmmo); \
  \
@@ -39,7 +39,7 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<struct FWeaponProperties>()
 	DECLARE_FUNCTION(execOnPingTooHigh);
 
 
-#define FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_117_EVENT_PARMS \
+#define FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_124_EVENT_PARMS \
 	struct Weapon_eventClientAddAmmo_Parms \
 	{ \
 		int32 AmmoToAdd; \
@@ -50,8 +50,8 @@ template<> MPSHOOTER_API UScriptStruct* StaticStruct<struct FWeaponProperties>()
 	};
 
 
-#define FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_117_CALLBACK_WRAPPERS
-#define FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_117_INCLASS_NO_PURE_DECLS \
+#define FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_124_CALLBACK_WRAPPERS
+#define FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_124_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesAWeapon(); \
 	friend struct Z_Construct_UClass_AWeapon_Statics; \
@@ -66,7 +66,7 @@ public: \
 	NO_API virtual void ValidateGeneratedRepEnums(const TArray<struct FRepRecord>& ClassReps) const override;
 
 
-#define FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_117_INCLASS \
+#define FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_124_INCLASS \
 private: \
 	static void StaticRegisterNativesAWeapon(); \
 	friend struct Z_Construct_UClass_AWeapon_Statics; \
@@ -81,7 +81,7 @@ public: \
 	NO_API virtual void ValidateGeneratedRepEnums(const TArray<struct FRepRecord>& ClassReps) const override;
 
 
-#define FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_117_STANDARD_CONSTRUCTORS \
+#define FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_124_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API AWeapon(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(AWeapon) \
@@ -94,7 +94,7 @@ private: \
 public:
 
 
-#define FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_117_ENHANCED_CONSTRUCTORS \
+#define FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_124_ENHANCED_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API AWeapon() { }; \
 private: \
@@ -107,30 +107,30 @@ public: \
 	DEFINE_DEFAULT_CONSTRUCTOR_CALL(AWeapon)
 
 
-#define FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_114_PROLOG \
-	FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_117_EVENT_PARMS
+#define FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_121_PROLOG \
+	FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_124_EVENT_PARMS
 
 
-#define FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_117_GENERATED_BODY_LEGACY \
+#define FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_124_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_117_SPARSE_DATA \
-	FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_117_RPC_WRAPPERS \
-	FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_117_CALLBACK_WRAPPERS \
-	FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_117_INCLASS \
-	FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_117_STANDARD_CONSTRUCTORS \
+	FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_124_SPARSE_DATA \
+	FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_124_RPC_WRAPPERS \
+	FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_124_CALLBACK_WRAPPERS \
+	FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_124_INCLASS \
+	FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_124_STANDARD_CONSTRUCTORS \
 public: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_117_GENERATED_BODY \
+#define FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_124_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_117_SPARSE_DATA \
-	FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_117_RPC_WRAPPERS_NO_PURE_DECLS \
-	FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_117_CALLBACK_WRAPPERS \
-	FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_117_INCLASS_NO_PURE_DECLS \
-	FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_117_ENHANCED_CONSTRUCTORS \
+	FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_124_SPARSE_DATA \
+	FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_124_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_124_CALLBACK_WRAPPERS \
+	FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_124_INCLASS_NO_PURE_DECLS \
+	FID_MPShooter_Source_MPShooter_Item_Weapon_Weapon_h_124_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

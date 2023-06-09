@@ -77,9 +77,9 @@ void EmptyLinkFunctionForGeneratedCodeShotgunWeapon() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_Ranged_ShotgunWeapon_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AShotgunWeapon, AShotgunWeapon::StaticClass, TEXT("AShotgunWeapon"), &Z_Registration_Info_UClass_AShotgunWeapon, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AShotgunWeapon), 738003098U) },
+		{ Z_Construct_UClass_AShotgunWeapon, AShotgunWeapon::StaticClass, TEXT("AShotgunWeapon"), &Z_Registration_Info_UClass_AShotgunWeapon, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AShotgunWeapon), 1404564402U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_Ranged_ShotgunWeapon_h_1454171423(TEXT("/Script/MPShooter"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_Ranged_ShotgunWeapon_h_3048455927(TEXT("/Script/MPShooter"),
 		Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_Ranged_ShotgunWeapon_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_MPShooter_Source_MPShooter_Item_Weapon_Ranged_ShotgunWeapon_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);
