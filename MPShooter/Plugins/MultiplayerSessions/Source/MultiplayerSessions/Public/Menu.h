@@ -23,7 +23,8 @@ public:
 protected:
 	// Binds to delegates via overriding UWidgets
 	virtual bool Initialize() override;
-	virtual void OnLevelRemovedFromWorld(ULevel* InLevel, UWorld* InWorld) override;
+	// Replaces `OnLevelRemovedFromWorld()` as of 5.1, as this allows more flexiblity with widgets
+	virtual void NativeDestruct() override;
 
 	//
 	// Callbacks for custom delegates in MultiplayerSessionsSubsystem class

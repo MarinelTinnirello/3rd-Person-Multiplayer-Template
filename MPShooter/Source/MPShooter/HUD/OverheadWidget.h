@@ -22,5 +22,6 @@ public:
 	void ShowPlayerName(APawn* InPawn);
 
 protected:
-	virtual void OnLevelRemovedFromWorld(ULevel* InLevel, UWorld* InWorld) override;
+	//Replaced `OnLevelRemovedFromWorld()` as of 5.1, as this allows for more flexibility
+	virtual void NativeDestruct() override;
 };

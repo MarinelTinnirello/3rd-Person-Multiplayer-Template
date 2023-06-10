@@ -8,11 +8,11 @@ void UWeaponWheelWidget::ChangeColorOnHover(bool bIsHovered, UButton* button, UI
 	if (bIsHovered)
 	{
 		if (hoverAnimation) PlayAnimation(hoverAnimation);
-		if (image) image->ColorAndOpacity = ImageHoverColor;
+		if (image) image->SetColorAndOpacity(ImageHoverColor);
 	}
 	else
 	{
 		if (hoverAnimation) PlayAnimationReverse(hoverAnimation);
-		if (image) image->ColorAndOpacity = FColor(255, 255, 255, 255);
+		if (image) image->SetColorAndOpacity(FColor(255, 255, 255, 255));
 	}
 }
