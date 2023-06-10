@@ -1278,3 +1278,40 @@ LogConfig: Set CVar [[r.Shadow.DetectVertexShaderLayerAtRuntime:1]]
 [2023.06.10-02.02.27:798][700]LogSlate: Window 'SKM_Manny' being destroyed
 [2023.06.10-02.02.27:812][700]LogWorld: UWorld::CleanupWorld for World_9, bSessionEnded=true, bCleanupResources=true
 [2023.06.10-02.02.27:812][700]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2023.06.10-02.05.32:572][741]LogSlate: Prevented a slow task dialog from being summoned while a context menu was open
+[2023.06.10-02.05.32:614][741]LogLevel: Error: Failed to load Actor for External Actor Package /Game/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/D/SY/Z4CTQ4LG3YV10EKPD0UE8Q
+[2023.06.10-02.05.32:633][741]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2023.06.10-02.05.32:642][741]LogObjectTools: Deleting 1 worlds: /Game/ThirdPerson/Maps/ThirdPersonMap.ThirdPersonMap
+[2023.06.10-02.05.32:642][741]LogObjectTools: Currently 11 active worlds: /Game/Maps/TEST_Map.TEST_Map, /Engine/Transient.World_0, /Engine/Transient.World_1, /Engine/Transient.World_2, /Engine/Transient.World_3, /Engine/Transient.World_4, /Engine/Transient.World_5, /Engine/Transient.World_6, /Engine/Transient.World_7, /Engine/Transient.World_8, /Engine/Transient.World_10
+[2023.06.10-02.05.32:662][741]LogUObjectHash: Compacting FUObjectHashTables data took   0.89ms
+[2023.06.10-02.05.47:029][741]LogSlate: Window 'Delete Assets' being destroyed
+[2023.06.10-02.05.47:129][741]LogUObjectGlobals: Force Deleting 54 Package(s):
+	Asset Name: /Game/ThirdPerson/Blueprints/BP_ThirdPersonCharacter.BP_ThirdPersonCharacter
+	Asset Type: Blueprint
+	Asset Name: /Game/ThirdPerson/Input/IMC_Default.IMC_Default
+	Asset Type: InputMappingContext
+	Asset Name: /Game/ThirdPerson/Input/Actions/IA_Move.IA_Move
+	Asset Type: InputAction
+	Asset Name: /Game/ThirdPerson/Input/Actions/IA_Look.IA_Look
+	Asset Type: InputAction
+	Asset Name: /Game/ThirdPerson/Input/Actions/IA_Jump.IA_Jump
+	Asset Type: InputAction
+	Asset Name: /Game/ThirdPerson/Blueprints/BP_ThirdPersonGameMode.BP_ThirdPersonGameMode
+	Asset Type: Blueprint
+	Asset Name: /Game/ThirdPerson/Maps/ThirdPersonMap.ThirdPersonMap
+	Asset Type: World
+	Asset Name: /Game/ThirdPerson/Maps/ThirdPersonMap_BuiltData.ThirdPersonMap_BuiltData
+	Asset Type: MapBuildDataRegistry
+	Asset Name: /Game/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/0/43/HYQWORMY4JDQ5X3OKZXFLC
+	Asset Type: Package
+	Asset Name: /Game/__ExternalObjects__/ThirdPerson/Maps/ThirdPersonMap/4/VW/TY7TSUER9KKGHX2BMKSL0L
+	Asset Type: Package
+[2023.06.10-02.05.47:410][741]LogUObjectHash: Compacting FUObjectHashTables data took   1.09ms
+[2023.06.10-02.05.47:463][741]LogWorld: UWorld::CleanupWorld for ThirdPersonMap, bSessionEnded=true, bCleanupResources=true
+[2023.06.10-02.05.47:463][741]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2023.06.10-02.05.49:947][741]LogUObjectHash: Compacting FUObjectHashTables data took   1.00ms
+[2023.06.10-02.05.49:961][741]LogUObjectHash: Compacting FUObjectHashTables data took   1.22ms
+[2023.06.10-02.05.49:974][741]LogUObjectHash: Compacting FUObjectHashTables data took   0.43ms
+[2023.06.10-02.05.50:025][741]LogAssetRegistry: Warning: ScanPathsSynchronous: Package /Game/ThirdPerson/Maps/ThirdPersonMap does not exist, will not scan.
+[2023.06.10-02.05.50:036][742]LogAutomationController: Ignoring very large delta of 17.48 seconds in calls to FAutomationControllerManager::Tick() and not penalizing unresponsive tests
+[2023.06.10-02.06.02:468][449]LogAssetRegistry: Warning: ScanPathsSynchronous: Package /Game/ThirdPerson/Maps/ThirdPersonMap does not exist, will not scan.
