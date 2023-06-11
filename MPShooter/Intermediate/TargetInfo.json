@@ -2,12 +2,12 @@
 	"Targets": [
 		{
 			"Name": "MPShooter",
-			"Path": "D:\\Documents\\GitHub\\3rd-Person-Multiplayer-Template\\MPShooter 5.2\\Source\\MPShooter.Target.cs",
+			"Path": "D:\\Documents\\GitHub\\3rd-Person-Multiplayer-Template\\MPShooter\\Source\\MPShooter.Target.cs",
 			"Type": "Game"
 		},
 		{
 			"Name": "MPShooterEditor",
-			"Path": "D:\\Documents\\GitHub\\3rd-Person-Multiplayer-Template\\MPShooter 5.2\\Source\\MPShooterEditor.Target.cs",
+			"Path": "D:\\Documents\\GitHub\\3rd-Person-Multiplayer-Template\\MPShooter\\Source\\MPShooterEditor.Target.cs",
 			"Type": "Editor"
 		}
 	]
