@@ -2023,3 +2023,103 @@ LogConfig: CVar [[framepro.ScopeMinTimeMicroseconds:10]] deferred - dummy variab
 [2023.06.12-04.45.07:271][577]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
 [2023.06.12-04.45.07:462][577]LogWorld: UWorld::CleanupWorld for World_34, bSessionEnded=true, bCleanupResources=true
 [2023.06.12-04.45.07:462][577]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2023.06.12-04.45.53:533][389]LogAssetEditorSubsystem: Opening Asset editor for AnimBlueprint /Game/Blueprints/Character/Animations/ABP_MPCharacter.ABP_MPCharacter
+[2023.06.12-04.45.53:534][389]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2023.06.12-04.45.53:534][389]LogChaos: FPhysicsSolverBase::AsyncDt:-1.000000
+[2023.06.12-04.45.53:578][389]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2023.06.12-04.45.53:578][389]LogChaos: FPhysicsSolverBase::AsyncDt:-1.000000
+[2023.06.12-04.45.53:592][389]LogActorComponent: RegisterComponentWithWorld: (/Engine/Transient.World_53:PersistentLevel.AnimationEditorPreviewActor_0.DebugSkelMeshComponent_0) Already registered. Aborting.
+[2023.06.12-04.45.54:017][389]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2023.06.12-04.45.54:017][389]LogChaos: FPhysicsSolverBase::AsyncDt:-1.000000
+[2023.06.12-04.45.54:210][389]LogViewport: Scene viewport resized to 408x360, mode Windowed.
+[2023.06.12-04.45.54:464][390]LogContentBrowser: Verbose: The majority of assets in the view are of type: /Script/Engine.AnimSequence
+[2023.06.12-04.45.55:753][436]LogAssetEditorSubsystem: Opening Asset editor for Skeleton /Game/Characters/Mannequins/Meshes/SK_Mannequin.SK_Mannequin
+[2023.06.12-04.45.55:753][436]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2023.06.12-04.45.55:754][436]LogChaos: FPhysicsSolverBase::AsyncDt:-1.000000
+[2023.06.12-04.45.55:768][436]LogActorComponent: RegisterComponentWithWorld: (/Engine/Transient.World_55:PersistentLevel.AnimationEditorPreviewActor_0.DebugSkelMeshComponent_0) Already registered. Aborting.
+[2023.06.12-04.45.56:084][436]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2023.06.12-04.45.56:084][436]LogChaos: FPhysicsSolverBase::AsyncDt:-1.000000
+[2023.06.12-04.45.56:296][436]LogViewport: Scene viewport resized to 843x774, mode Windowed.
+[2023.06.12-04.45.56:412][437]LogContentBrowser: Verbose: The majority of assets in the view are of type: /Script/Engine.AnimSequence
+[2023.06.12-04.46.03:316][707]LogAssetEditorSubsystem: Opening Asset editor for AnimBlueprint /Game/Blueprints/Character/Animations/ABP_MPCharacterORG.ABP_MPCharacterORG
+[2023.06.12-04.46.03:316][707]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2023.06.12-04.46.03:316][707]LogChaos: FPhysicsSolverBase::AsyncDt:-1.000000
+[2023.06.12-04.46.03:335][707]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2023.06.12-04.46.03:335][707]LogChaos: FPhysicsSolverBase::AsyncDt:-1.000000
+[2023.06.12-04.46.03:350][707]LogActorComponent: RegisterComponentWithWorld: (/Engine/Transient.World_58:PersistentLevel.AnimationEditorPreviewActor_0.DebugSkelMeshComponent_0) Already registered. Aborting.
+[2023.06.12-04.46.03:734][707]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2023.06.12-04.46.03:734][707]LogChaos: FPhysicsSolverBase::AsyncDt:-1.000000
+[2023.06.12-04.46.04:011][707]LogViewport: Scene viewport resized to 408x360, mode Windowed.
+[2023.06.12-04.46.04:253][708]LogContentBrowser: Verbose: The majority of assets in the view are of type: /Script/Engine.AnimSequence
+[2023.06.12-04.46.05:689][765]LogViewport: Scene viewport resized to 408x389, mode Windowed.
+[2023.06.12-04.46.05:756][766]LogViewport: Scene viewport resized to 408x375, mode Windowed.
+[2023.06.12-04.46.05:801][767]LogViewport: Scene viewport resized to 408x364, mode Windowed.
+[2023.06.12-04.46.05:850][768]LogViewport: Scene viewport resized to 408x360, mode Windowed.
+[2023.06.12-04.46.07:740][827]LogViewport: Scene viewport resized to 408x362, mode Windowed.
+[2023.06.12-04.46.07:824][827]LogViewport: Scene viewport resized to 408x363, mode Windowed.
+[2023.06.12-04.46.07:908][827]LogViewport: Scene viewport resized to 408x364, mode Windowed.
+[2023.06.12-04.46.07:975][827]LogViewport: Scene viewport resized to 408x366, mode Windowed.
+[2023.06.12-04.46.09:620][877]LogAssetEditorSubsystem: Opening Asset editor for Skeleton /Game/Assets/LearningKit_Games/Assets/Characters/Character/Mesh/SK_EpicCharacter_Skeleton.SK_EpicCharacter_Skeleton
+[2023.06.12-04.46.09:620][877]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2023.06.12-04.46.09:620][877]LogChaos: FPhysicsSolverBase::AsyncDt:-1.000000
+[2023.06.12-04.46.09:633][877]LogActorComponent: RegisterComponentWithWorld: (/Engine/Transient.World_60:PersistentLevel.AnimationEditorPreviewActor_0.DebugSkelMeshComponent_0) Already registered. Aborting.
+[2023.06.12-04.46.09:949][877]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2023.06.12-04.46.09:949][877]LogChaos: FPhysicsSolverBase::AsyncDt:-1.000000
+[2023.06.12-04.46.10:053][877]LogViewport: Scene viewport resized to 980x885, mode Windowed.
+[2023.06.12-04.46.10:387][877]LogViewport: Scene viewport resized to 980x813, mode Windowed.
+[2023.06.12-04.46.10:414][877]LogContentBrowser: Verbose: The majority of assets in the view are of type: /Script/Engine.AnimSequence
+[2023.06.12-04.46.12:278][944]LogViewport: Scene viewport resized to 843x787, mode Windowed.
+[2023.06.12-04.46.16:830][100]LogViewport: Scene viewport resized to 408x366, mode Windowed.
+[2023.06.12-04.46.24:016][370]LogViewport: Scene viewport resized to 843x787, mode Windowed.
+[2023.06.12-04.46.59:042][576]LogWorld: UWorld::CleanupWorld for World_57, bSessionEnded=true, bCleanupResources=true
+[2023.06.12-04.46.59:042][576]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2023.06.12-04.46.59:065][576]LogWorld: UWorld::CleanupWorld for World_58, bSessionEnded=true, bCleanupResources=true
+[2023.06.12-04.46.59:065][576]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2023.06.12-04.46.59:174][576]LogWorld: UWorld::CleanupWorld for World_59, bSessionEnded=true, bCleanupResources=true
+[2023.06.12-04.46.59:174][576]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2023.06.12-04.46.59:788][598]BlueprintLog: New page: Compile ABP_MPCharacter
+[2023.06.12-04.47.00:120][598]LogUObjectHash: Compacting FUObjectHashTables data took   3.08ms
+[2023.06.12-04.47.00:993][621]LogFileHelpers: InternalPromptForCheckoutAndSave started...
+[2023.06.12-04.47.01:458][621]LogSavePackage: Moving output files for package: /Game/Blueprints/Character/Animations/ABP_MPCharacter
+[2023.06.12-04.47.01:458][621]LogSavePackage: Moving 'D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Saved/ABP_MPCharacterE37726044445170C055137A7C2E5E6B8.tmp' to 'D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Content/Blueprints/Character/Animations/ABP_MPCharacter.uasset'
+[2023.06.12-04.47.01:471][621]LogFileHelpers: InternalPromptForCheckoutAndSave took 478 ms (total: 8.73 sec)
+[2023.06.12-04.47.01:484][621]AssetCheck: New page: Asset Save: ABP_MPCharacter
+[2023.06.12-04.47.01:484][621]LogContentValidation: Display: Validating /Script/Engine.AnimBlueprint /Game/Blueprints/Character/Animations/ABP_MPCharacter.ABP_MPCharacter
+[2023.06.12-04.47.45:570][281]LogViewport: Scene viewport resized to 843x785, mode Windowed.
+[2023.06.12-04.47.45:647][281]LogViewport: Scene viewport resized to 840x767, mode Windowed.
+[2023.06.12-04.47.45:697][281]LogViewport: Scene viewport resized to 840x766, mode Windowed.
+[2023.06.12-04.47.45:763][281]LogViewport: Scene viewport resized to 839x766, mode Windowed.
+[2023.06.12-04.47.45:814][281]LogViewport: Scene viewport resized to 838x764, mode Windowed.
+[2023.06.12-04.47.45:881][281]LogViewport: Scene viewport resized to 838x762, mode Windowed.
+[2023.06.12-04.47.45:946][281]LogViewport: Scene viewport resized to 838x761, mode Windowed.
+[2023.06.12-04.47.49:333][366]LogViewport: Scene viewport resized to 838x761, mode Windowed.
+[2023.06.12-04.51.17:793][581]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2023.06.12-04.52.41:800][239]LogFileHelpers: InternalPromptForCheckoutAndSave started...
+[2023.06.12-04.52.41:974][239]LogSavePackage: Moving output files for package: /Game/Characters/Mannequins/Meshes/SK_Mannequin
+[2023.06.12-04.52.41:974][239]LogSavePackage: Moving 'D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Saved/SK_Mannequin69379DB44427EAFD03D43384670EE2F3.tmp' to 'D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Content/Characters/Mannequins/Meshes/SK_Mannequin.uasset'
+[2023.06.12-04.52.41:991][239]LogFileHelpers: InternalPromptForCheckoutAndSave took 191 ms (total: 8.92 sec)
+[2023.06.12-04.52.42:014][239]AssetCheck: New page: Asset Save: SK_Mannequin
+[2023.06.12-04.52.42:014][239]LogContentValidation: Display: Validating /Script/Engine.Skeleton /Game/Characters/Mannequins/Meshes/SK_Mannequin.SK_Mannequin
+[2023.06.12-04.54.02:997][805]LogFileHelpers: InternalPromptForCheckoutAndSave started...
+[2023.06.12-04.54.03:154][805]LogSavePackage: Moving output files for package: /Game/Characters/Mannequins/Meshes/SK_Mannequin
+[2023.06.12-04.54.03:155][805]LogSavePackage: Moving 'D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Saved/SK_MannequinFC2628A54A84B3E6B532B287740DBB2A.tmp' to 'D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Content/Characters/Mannequins/Meshes/SK_Mannequin.uasset'
+[2023.06.12-04.54.03:170][805]LogFileHelpers: InternalPromptForCheckoutAndSave took 172 ms (total: 9.09 sec)
+[2023.06.12-04.54.03:187][805]AssetCheck: New page: Asset Save: SK_Mannequin
+[2023.06.12-04.54.03:187][805]LogContentValidation: Display: Validating /Script/Engine.Skeleton /Game/Characters/Mannequins/Meshes/SK_Mannequin.SK_Mannequin
+[2023.06.12-04.54.12:461][ 90]LogWorld: UWorld::CleanupWorld for World_60, bSessionEnded=true, bCleanupResources=true
+[2023.06.12-04.54.12:461][ 90]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2023.06.12-04.54.12:543][ 90]LogWorld: UWorld::CleanupWorld for World_61, bSessionEnded=true, bCleanupResources=true
+[2023.06.12-04.54.12:543][ 90]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2023.06.12-04.54.14:049][138]LogWorld: UWorld::CleanupWorld for World_55, bSessionEnded=true, bCleanupResources=true
+[2023.06.12-04.54.14:049][138]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2023.06.12-04.54.14:132][138]LogWorld: UWorld::CleanupWorld for World_56, bSessionEnded=true, bCleanupResources=true
+[2023.06.12-04.54.14:132][138]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2023.06.12-04.54.14:179][138]LogViewport: Scene viewport resized to 406x353, mode Windowed.
+[2023.06.12-04.54.18:225][290]LogSlate: Window 'ABP_MPCharacter' being destroyed
+[2023.06.12-04.54.18:237][290]LogSlate: Window 'ABP_MPCharacter' being destroyed
+[2023.06.12-04.54.18:269][290]LogWorld: UWorld::CleanupWorld for World_52, bSessionEnded=true, bCleanupResources=true
+[2023.06.12-04.54.18:269][290]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2023.06.12-04.54.18:291][290]LogWorld: UWorld::CleanupWorld for World_53, bSessionEnded=true, bCleanupResources=true
+[2023.06.12-04.54.18:291][290]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2023.06.12-04.54.18:388][290]LogWorld: UWorld::CleanupWorld for World_54, bSessionEnded=true, bCleanupResources=true
+[2023.06.12-04.54.18:388][290]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
