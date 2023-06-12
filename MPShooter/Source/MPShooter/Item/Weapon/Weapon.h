@@ -60,6 +60,10 @@ struct FWeaponProperties
 	bool bHasPhysicsAttachment = false;
 	UPROPERTY(EditAnywhere, Category = "Weapon Properties  - Ranged", meta = (ToolTip = "Muzzle socket name on a weapon."))
 	FName MuzzleFlash = "MuzzleFlash";
+	UPROPERTY(EditAnywhere, Category = "Weapon Properties", meta = (ToolTip = "Animation played when a weapon is fired."))
+	class UAnimationAsset* FireAnimation;
+	UPROPERTY(EditAnywhere, Category = "Weapon Properties", meta = (ToolTip = "Montage that plays if a character is reloading a weapon."))
+	UAnimMontage* ReloadMontage;
 	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Damage dealt by the weapon."))
 	float Damage = 20.f;
 	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Damage dealt by the weapon if hit on the head."))
@@ -173,6 +177,7 @@ public:
 
 	void SetHUDAmmo();
 	void AddAmmo(int32 AmmoToAdd);
+	void PlayReloadMontage();
 	FVector TraceEndWithScatter(const FVector& HitTarget);
 
 protected:
@@ -193,6 +198,8 @@ protected:
 	FName MuzzleFlash = "MuzzleFlash";
 	UPROPERTY(EditAnywhere, Category = "Weapon Properties", meta = (ToolTip = "Animation played when a weapon is fired."))
 	class UAnimationAsset* FireAnimation;
+	UPROPERTY(EditAnywhere, Category = "Weapon Properties", meta = (ToolTip = "Montage that plays if a character is reloading a weapon."))
+	UAnimMontage* ReloadMontage;
 	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Damage dealt by the weapon."))
 	float Damage = 20.f;
 	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Damage dealt by the weapon if hit on the head."))

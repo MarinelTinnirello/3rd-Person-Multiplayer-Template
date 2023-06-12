@@ -10,6 +10,7 @@
 #include "Kismet/KismetMathLibrary.h"
 #include "Net/UnrealNetwork.h"
 #include "MPShooter/Character/MPCharacter.h"
+#include "MPShooter/Character/MPAnimInstance.h"
 #include "MPShooter/PlayerController/MPPlayerController.h"
 #include "MPShooter/MPComponents/CombatComponent.h"
 #include "MPShooter/Item/Weapon/Ranged/Projectile/Misc/Casing.h"
@@ -236,6 +237,20 @@ void AWeapon::AddAmmo(int32 AmmoToAdd)
 	Ammo = FMath::Clamp(Ammo + AmmoToAdd, 0, MagCapacity);
 	SetHUDAmmo();
 	ClientAddAmmo(AmmoToAdd);
+}
+
+void AWeapon::PlayReloadMontage()
+{
+	if (MPOwnerCharacter->GetCombat() == nullptr)
+	{
+		return;
+	}
+
+	UAnimInstance* AnimInstance = MPOwnerCharacter->GetMesh()->GetAnimInstance();
+	if (AnimInstance && ReloadMontage)
+	{
+		AnimInstance->Montage_Play(ReloadMontage);
+	}
 }
 
 void AWeapon::ClientAddAmmo_Implementation(int32 AmmoToAdd)

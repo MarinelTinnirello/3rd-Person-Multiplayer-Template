@@ -565,27 +565,6 @@ void AMPCharacter::PlayFireMontage(bool bIsAiming)
 	}
 }
 
-// TODO:
-// Might want to move the Reload Montages into individual weapons
-// If you do, grab the pieces already in there and throw them into their own weapons
-void AMPCharacter::PlayReloadMontage()
-{
-	if (Combat == nullptr || Combat->EquippedWeapon == nullptr)
-	{
-		return;
-	}
-
-	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
-
-	if (AnimInstance && ReloadMontage)
-	{
-		AnimInstance->Montage_Play(ReloadMontage);
-		FName SectionName;
-		SectionName = Combat->EquippedWeapon->GetWeaponTypeReloadMontageSection();
-		AnimInstance->Montage_JumpToSection(SectionName);
-	}
-}
-
 void AMPCharacter::PlaySwapMontage()
 {
 	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
@@ -1130,6 +1109,26 @@ void AMPCharacter::MulticastEliminated_Implementation(bool bPlayerLeftGame)
 		MPPlayerController->SetHUDWeaponAmmo(0);
 	}
 
+	// Hide sniper scope (if necessary)
+	bool bHideSniperScope = MPPlayerController &&
+		IsLocallyControlled() &&
+		Combat &&
+		Combat->bAiming &&
+		Combat->EquippedWeapon &&
+		Combat->EquippedWeapon->bUseSniperZoomedOverlay;
+	if (bHideSniperScope)
+	{
+		MPPlayerController->SetHUDSniperScope(false);
+	}
+
+	// Hide weapon wheel (if necessary)
+	bool bHideWeaponWheel = MPPlayerController &&
+		IsLocallyControlled();
+	if (bHideWeaponWheel)
+	{
+		MPPlayerController->SetHUDWeaponWheel(false);
+	}
+
 	bEliminated = true;
 	PlayEliminateMontage();
 
@@ -1178,26 +1177,6 @@ void AMPCharacter::MulticastEliminated_Implementation(bool bPlayerLeftGame)
 	if (CrownComponent)
 	{
 		CrownComponent->DestroyComponent();
-	}
-
-	// Hide sniper scope (if necessary)
-	bool bHideSniperScope = MPPlayerController &&
-		IsLocallyControlled() &&
-		Combat &&
-		Combat->bAiming &&
-		Combat->EquippedWeapon &&
-		Combat->EquippedWeapon->bUseSniperZoomedOverlay;
-	if (bHideSniperScope)
-	{
-		MPPlayerController->SetHUDSniperScope(false);
-	}
-
-	// Hide weapon wheel (if necessary)
-	bool bHideWeaponWheel = MPPlayerController &&
-		IsLocallyControlled();
-	if (bHideWeaponWheel)
-	{
-		MPPlayerController->SetHUDWeaponWheel(false);
 	}
 
 	GetWorldTimerManager().SetTimer(

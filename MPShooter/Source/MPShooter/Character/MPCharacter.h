@@ -89,7 +89,6 @@ public:
 	virtual void Destroyed() override;
 
 	void PlayFireMontage(bool bIsAiming);
-	void PlayReloadMontage();
 	void PlaySwapMontage();
 	void PlayThrowMontage();
 	void PlayEliminateMontage();
@@ -231,8 +230,6 @@ private:
 	//
 	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Montage that plays if a character fires a weapon."))
 	class UAnimMontage* FireWeaponMontage;
-	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Montage that plays if a character is reloading a weapon."))
-	UAnimMontage* ReloadMontage;
 	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Montage that plays if a character is swapping a weapon."))
 	UAnimMontage* SwapMontage;
 	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Montage that plays if a character is hit."))

@@ -229,7 +229,7 @@ void UCombatComponent::EndSwapAttachWeapons()
 	EquippedSecondaryWeapon = TempWeapon;
 
 	EquippedWeapon->SetItemState(EItemState::EIS_Equipped);
-	AttachActorToRightHand(EquippedWeapon);
+	CheckAttachedActorHand(EquippedWeapon);
 	EquippedWeapon->SetHUDAmmo();
 	UpdateCarriedAmmo();
 	PlayEquipWeaponSound(EquippedWeapon);
@@ -831,9 +831,9 @@ void UCombatComponent::ServerReload_Implementation()
 
 void UCombatComponent::HandleReload()
 {
-	if (Character)
+	if (EquippedWeapon)
 	{
-		Character->PlayReloadMontage();
+		EquippedWeapon->PlayReloadMontage();
 	}
 }
 
