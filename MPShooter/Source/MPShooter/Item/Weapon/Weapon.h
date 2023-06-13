@@ -108,8 +108,6 @@ struct FWeaponProperties
 	// 
 	// Weapon Properties - Ranged
 	//
-	UPROPERTY(EditAnywhere, Category = "Weapon Properties - Ranged", meta = (ToolTip = "Name of the section in the reload montage of a given weapon."))
-	FName WeaponTypeReloadMontageSection;
 	UPROPERTY(EditAnywhere, Category = "Weapon Properties - Ranged", meta = (ToolTip = "Casing shell for a weapon."))
 	TSubclassOf<class ACasing> CasingClass;
 	UPROPERTY(EditAnywhere, Category = "Weapon Properties - Ranged", meta = (ToolTip = "Ammo eject socket on a weapon."))
@@ -266,8 +264,6 @@ private:
 	// 
 	// Weapon Properties - Ranged
 	//
-	UPROPERTY(EditAnywhere, Category = "Weapon Properties - Ranged", meta = (ToolTip = "Name of the section in the reload montage of a given weapon."))
-	FName WeaponTypeReloadMontageSection;
 	UPROPERTY(EditAnywhere, Category = "Weapon Properties - Ranged", meta = (ToolTip = "Casing shell for a weapon."))
 	TSubclassOf<class ACasing> CasingClass;
 	UPROPERTY(EditAnywhere, Category = "Weapon Properties - Ranged", meta = (ToolTip = "Ammo eject socket on a weapon."))

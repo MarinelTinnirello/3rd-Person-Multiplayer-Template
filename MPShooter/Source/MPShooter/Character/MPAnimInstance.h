@@ -84,6 +84,10 @@ private:
 	FName ThrowableSocket;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Socket", meta = (AllowPrivateAccess = "true"), meta = (ToolTip = "Spine or back socket where weapons not currently in use are placed."))
 	FName BackSpineSocket;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Socket", meta = (AllowPrivateAccess = "true"), meta = (ToolTip = "Right hip socket where weapons not currently in use are placed."))
+	FName RightHipSocket;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Socket", meta = (AllowPrivateAccess = "true"), meta = (ToolTip = "Left hip socket where weapons not currently in use are placed."))
+	FName LefttHipSocket;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Bone", meta = (AllowPrivateAccess = "true"), meta = (ToolTip = "Character's head bone where head shots are traced against."))
 	FName HeadBone;
 
@@ -92,6 +96,8 @@ public:
 	FORCEINLINE FName GetSecondaryHandSocket() const { return SecondaryHandSocket; }
 	FORCEINLINE FName GetThrowableSocket() const { return ThrowableSocket; }
 	FORCEINLINE FName GetBackSpineSocket() const { return BackSpineSocket; }
+	FORCEINLINE FName GetRightHipSocket() const { return RightHipSocket; }
+	FORCEINLINE FName GetLeftHipSocket() const { return LeftHipSocket; }
 	FORCEINLINE FName GetHeadBone() const { return HeadBone; }
 
 };

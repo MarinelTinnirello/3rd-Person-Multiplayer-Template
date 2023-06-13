@@ -397,11 +397,12 @@ void UCombatComponent::CheckThrowSwappable(AActor* ActorToAttach)
 
 FName UCombatComponent::OnEquippedWeaponTypeAttachActorThrow()
 {
-	FName SocketName;
+	/*FName SocketName;
 	bool bUsePistolSocket =
 		EquippedWeapon->GetWeaponType() == EWeaponType::EWT_Pistol ||
 		EquippedWeapon->GetWeaponType() == EWeaponType::EWT_SubmachineGun;
-	return SocketName = bUsePistolSocket ? FName("PistolSocket") : FName(AnimInstance->GetSecondaryHandSocket());
+	return SocketName = bUsePistolSocket ? FName("PistolSocket") : FName(AnimInstance->GetSecondaryHandSocket());*/
+	return FName(AnimInstance->GetSecondaryHandSocket());
 }
 
 void UCombatComponent::UpdateCarriedAmmo()
