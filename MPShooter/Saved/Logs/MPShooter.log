@@ -1553,3 +1553,374 @@ Script Stack (0 frames) :
 [2023.06.14-02.04.56:550][512]LogUObjectHash: Compacting FUObjectHashTables data took   1.06ms
 [2023.06.14-02.04.56:578][513]LogPlayLevel: Display: Destroying online subsystem :Context_2
 [2023.06.14-02.04.56:578][513]LogPlayLevel: Display: Destroying online subsystem :Context_1
+[2023.06.14-02.05.12:843][883]LogDerivedDataCache: C:/Users/M T/AppData/Local/UnrealEngine/Common/DerivedDataCache: Maintenance finished in +00:00:17.718 and deleted 0 files with total size 0 MiB and 0 empty folders. Scanned 9507 files in 11919 folders with total size 582 MiB.
+[2023.06.14-02.05.56:200][ 58]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2023.06.14-02.05.56:240][ 60]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2023.06.14-02.05.56:333][ 63]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2023.06.14-02.05.56:378][ 64]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2023.06.14-02.05.56:403][ 65]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2023.06.14-02.05.56:433][ 66]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2023.06.14-02.05.56:462][ 67]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2023.06.14-02.09.25:395][786]LogFactory: FactoryCreateFile: StaticMesh with FbxFactory (0 0 C:\Users\M T\Downloads\Standing Idle.fbx)
+[2023.06.14-02.09.25:477][786]LogFbx: Loading FBX Scene from C:\Users\M T\Downloads\Standing Idle.fbx
+[2023.06.14-02.09.25:554][786]LogFbx: FBX Scene Loaded Succesfully
+[2023.06.14-02.09.28:061][786]LogSlate: Took 0.000613 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/Roboto-Light.ttf' (167K)
+[2023.06.14-02.09.28:303][786]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2023.06.14-02.09.28:564][786]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2023.06.14-02.09.28:639][786]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2023.06.14-02.09.28:708][786]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2023.06.14-02.09.28:759][786]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2023.06.14-02.09.28:892][786]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2023.06.14-02.09.29:093][786]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2023.06.14-02.09.29:203][786]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2023.06.14-02.09.29:313][786]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2023.06.14-02.09.58:823][786]LogSlate: Window 'FBX Import Options' being destroyed
+[2023.06.14-02.09.58:881][786]LogFbx: SortedLinks :(0) Hips
+[2023.06.14-02.09.58:881][786]LogFbx: SortedLinks :(1) Spine
+[2023.06.14-02.09.58:881][786]LogFbx: SortedLinks :(2) Spine1
+[2023.06.14-02.09.58:881][786]LogFbx: SortedLinks :(3) Spine2
+[2023.06.14-02.09.58:881][786]LogFbx: SortedLinks :(4) Neck
+[2023.06.14-02.09.58:881][786]LogFbx: SortedLinks :(5) Head
+[2023.06.14-02.09.58:881][786]LogFbx: SortedLinks :(6) HeadTop_End
+[2023.06.14-02.09.58:881][786]LogFbx: SortedLinks :(7) LeftShoulder
+[2023.06.14-02.09.58:881][786]LogFbx: SortedLinks :(8) LeftArm
+[2023.06.14-02.09.58:881][786]LogFbx: SortedLinks :(9) LeftForeArm
+[2023.06.14-02.09.58:881][786]LogFbx: SortedLinks :(10) LeftHand
+[2023.06.14-02.09.58:882][786]LogFbx: SortedLinks :(11) LeftHandThumb1
+[2023.06.14-02.09.58:882][786]LogFbx: SortedLinks :(12) LeftHandThumb2
+[2023.06.14-02.09.58:882][786]LogFbx: SortedLinks :(13) LeftHandThumb3
+[2023.06.14-02.09.58:882][786]LogFbx: SortedLinks :(14) LeftHandThumb4
+[2023.06.14-02.09.58:882][786]LogFbx: SortedLinks :(15) LeftHandIndex1
+[2023.06.14-02.09.58:882][786]LogFbx: SortedLinks :(16) LeftHandIndex2
+[2023.06.14-02.09.58:882][786]LogFbx: SortedLinks :(17) LeftHandIndex3
+[2023.06.14-02.09.58:882][786]LogFbx: SortedLinks :(18) LeftHandIndex4
+[2023.06.14-02.09.58:882][786]LogFbx: SortedLinks :(19) LeftHandMiddle1
+[2023.06.14-02.09.58:882][786]LogFbx: SortedLinks :(20) LeftHandMiddle2
+[2023.06.14-02.09.58:882][786]LogFbx: SortedLinks :(21) LeftHandMiddle3
+[2023.06.14-02.09.58:882][786]LogFbx: SortedLinks :(22) LeftHandMiddle4
+[2023.06.14-02.09.58:882][786]LogFbx: SortedLinks :(23) LeftHandRing1
+[2023.06.14-02.09.58:882][786]LogFbx: SortedLinks :(24) LeftHandRing2
+[2023.06.14-02.09.58:882][786]LogFbx: SortedLinks :(25) LeftHandRing3
+[2023.06.14-02.09.58:882][786]LogFbx: SortedLinks :(26) LeftHandRing4
+[2023.06.14-02.09.58:882][786]LogFbx: SortedLinks :(27) LeftHandPinky1
+[2023.06.14-02.09.58:882][786]LogFbx: SortedLinks :(28) LeftHandPinky2
+[2023.06.14-02.09.58:882][786]LogFbx: SortedLinks :(29) LeftHandPinky3
+[2023.06.14-02.09.58:882][786]LogFbx: SortedLinks :(30) LeftHandPinky4
+[2023.06.14-02.09.58:882][786]LogFbx: SortedLinks :(31) RightShoulder
+[2023.06.14-02.09.58:882][786]LogFbx: SortedLinks :(32) RightArm
+[2023.06.14-02.09.58:882][786]LogFbx: SortedLinks :(33) RightForeArm
+[2023.06.14-02.09.58:882][786]LogFbx: SortedLinks :(34) RightHand
+[2023.06.14-02.09.58:882][786]LogFbx: SortedLinks :(35) RightHandThumb1
+[2023.06.14-02.09.58:882][786]LogFbx: SortedLinks :(36) RightHandThumb2
+[2023.06.14-02.09.58:882][786]LogFbx: SortedLinks :(37) RightHandThumb3
+[2023.06.14-02.09.58:882][786]LogFbx: SortedLinks :(38) RightHandThumb4
+[2023.06.14-02.09.58:883][786]LogFbx: SortedLinks :(39) RightHandIndex1
+[2023.06.14-02.09.58:883][786]LogFbx: SortedLinks :(40) RightHandIndex2
+[2023.06.14-02.09.58:883][786]LogFbx: SortedLinks :(41) RightHandIndex3
+[2023.06.14-02.09.58:883][786]LogFbx: SortedLinks :(42) RightHandIndex4
+[2023.06.14-02.09.58:883][786]LogFbx: SortedLinks :(43) RightHandMiddle1
+[2023.06.14-02.09.58:883][786]LogFbx: SortedLinks :(44) RightHandMiddle2
+[2023.06.14-02.09.58:883][786]LogFbx: SortedLinks :(45) RightHandMiddle3
+[2023.06.14-02.09.58:883][786]LogFbx: SortedLinks :(46) RightHandMiddle4
+[2023.06.14-02.09.58:883][786]LogFbx: SortedLinks :(47) RightHandRing1
+[2023.06.14-02.09.58:883][786]LogFbx: SortedLinks :(48) RightHandRing2
+[2023.06.14-02.09.58:883][786]LogFbx: SortedLinks :(49) RightHandRing3
+[2023.06.14-02.09.58:883][786]LogFbx: SortedLinks :(50) RightHandRing4
+[2023.06.14-02.09.58:883][786]LogFbx: SortedLinks :(51) RightHandPinky1
+[2023.06.14-02.09.58:883][786]LogFbx: SortedLinks :(52) RightHandPinky2
+[2023.06.14-02.09.58:883][786]LogFbx: SortedLinks :(53) RightHandPinky3
+[2023.06.14-02.09.58:883][786]LogFbx: SortedLinks :(54) RightHandPinky4
+[2023.06.14-02.09.58:883][786]LogFbx: SortedLinks :(55) LeftUpLeg
+[2023.06.14-02.09.58:883][786]LogFbx: SortedLinks :(56) LeftLeg
+[2023.06.14-02.09.58:883][786]LogFbx: SortedLinks :(57) LeftFoot
+[2023.06.14-02.09.58:883][786]LogFbx: SortedLinks :(58) LeftToeBase
+[2023.06.14-02.09.58:883][786]LogFbx: SortedLinks :(59) LeftToe_End
+[2023.06.14-02.09.58:883][786]LogFbx: SortedLinks :(60) RightUpLeg
+[2023.06.14-02.09.58:883][786]LogFbx: SortedLinks :(61) RightLeg
+[2023.06.14-02.09.58:883][786]LogFbx: SortedLinks :(62) RightFoot
+[2023.06.14-02.09.58:883][786]LogFbx: SortedLinks :(63) RightToeBase
+[2023.06.14-02.09.58:883][786]LogFbx: SortedLinks :(64) RightToe_End
+[2023.06.14-02.09.58:883][786]LogFbx: Parsing AnimStack mixamo.com
+[2023.06.14-02.09.59:931][786]LogAnimationCompression: Display: Building compressed animation data for AnimSequence /Game/Assets/Mixamo/Animations/Standing_Idle.Standing_Idle
+[2023.06.14-02.09.59:934][786]LogScript: Warning: Accessed None trying to read property MPCharacter
+	ABP_MPCharacterORG_C /Engine/Transient.World_1:PersistentLevel.SkeletalMeshActor_0.SkeletalMeshComponent0.ABP_MPCharacterORG_C_0
+	Function /Game/Blueprints/Character/Animations/ABP_MPCharacterORG.ABP_MPCharacterORG_C:ExecuteUbergraph_ABP_MPCharacterORG:0CED
+[2023.06.14-02.09.59:935][786]LogScript: Warning: Accessed None trying to read property MPCharacter
+	ABP_MPCharacter_C /Engine/Transient.World_0:PersistentLevel.SkeletalMeshActor_0.SkeletalMeshComponent0.ABP_MPCharacter_C_0
+	Function /Game/Blueprints/Character/Animations/ABP_MPCharacter.ABP_MPCharacter_C:ExecuteUbergraph_ABP_MPCharacter:06A6
+[2023.06.14-02.10.00:198][786]LogAnimationCompression: Display: Building compressed animation data for AnimSequence /Game/Assets/Mixamo/Animations/Standing_Idle.Standing_Idle
+[2023.06.14-02.10.00:500][788]LogAnimationCompression: Display: Storing compressed animation data for /Game/Assets/Mixamo/Animations/Standing_Idle.Standing_Idle, at AnimationSequence/c317a2a43d565c45ec7df2bda38857ebead537e3
+[2023.06.14-02.10.00:640][789]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2023.06.14-02.10.00:943][789]LogSkeletalMesh: Display: Waiting for skinned assets to be ready 0/1 (SKM_ybot) ...
+[2023.06.14-02.10.01:143][791]LogShaderCompilers: Display: ================================================
+[2023.06.14-02.10.01:143][791]LogShaderCompilers: Display: === FShaderJobCache stats ===
+[2023.06.14-02.10.01:143][791]LogShaderCompilers: Display: Total job queries 131, among them cache hits 40 (30.53%)
+[2023.06.14-02.10.01:143][791]LogShaderCompilers: Display: Tracking 91 distinct input hashes that result in 82 distinct outputs (90.11%)
+[2023.06.14-02.10.01:143][791]LogShaderCompilers: Display: RAM used: 342.63 KiB of 819.20 MiB budget. Usage: 0.04%
+[2023.06.14-02.10.01:143][791]LogShaderCompilers: Display: === Shader Compilation stats ===
+[2023.06.14-02.10.01:143][791]LogShaderCompilers: Display: Shaders Compiled: 28
+[2023.06.14-02.10.01:143][791]LogShaderCompilers: Display: Jobs assigned 28, completed 28 (100.00%)
+[2023.06.14-02.10.01:143][791]LogShaderCompilers: Display: Average time worker was idle: 2.21 s
+[2023.06.14-02.10.01:143][791]LogShaderCompilers: Display: Time job spent in pending queue: average 1.15 s, longest 3.59 s
+[2023.06.14-02.10.01:143][791]LogShaderCompilers: Display: Job execution time: average 1.73 s, max 3.24 s
+[2023.06.14-02.10.01:143][791]LogShaderCompilers: Display: Job life time (pending + execution): average 2.88 s, max 5.54
+[2023.06.14-02.10.01:143][791]LogShaderCompilers: Display: Time at least one job was in flight (either pending or executed): 7.82 s
+[2023.06.14-02.10.01:143][791]LogShaderCompilers: Display: Jobs were issued in 28 batches (only local compilation was used), average 1.00 jobs/batch
+[2023.06.14-02.10.01:143][791]LogShaderCompilers: Display: Average processing rate: 3.58 jobs/sec
+[2023.06.14-02.10.01:143][791]LogShaderCompilers: Display: Total thread time: 36.635 s
+[2023.06.14-02.10.01:143][791]LogShaderCompilers: Display: Total thread preprocess time: 1.434 s
+[2023.06.14-02.10.01:143][791]LogShaderCompilers: Display: Percentage time preprocessing: 3.91%
+[2023.06.14-02.10.01:144][791]LogShaderCompilers: Display: Effective parallelization: 4.68 (times faster than compiling all shaders on one thread). Compare with number of workers: 8
+[2023.06.14-02.10.01:144][791]LogShaderCompilers: Display: Top 5 most expensive shader types by average time:
+[2023.06.14-02.10.01:144][791]LogShaderCompilers: Display:                                 TBasePassVSFNoLightMapPolicy (compiled    4 times, average 2.23 sec, max 2.39 sec, min 2.08 sec)
+[2023.06.14-02.10.01:144][791]LogShaderCompilers: Display:      TBasePassVSFPrecomputedVolumetricLightmapLightingPolicy (compiled    4 times, average 2.22 sec, max 2.45 sec, min 1.84 sec)
+[2023.06.14-02.10.01:144][791]LogShaderCompilers: Display: TBasePassPSFPrecomputedVolumetricLightmapLightingPolicySkylight (compiled    4 times, average 2.03 sec, max 2.65 sec, min 1.70 sec)
+[2023.06.14-02.10.01:144][791]LogShaderCompilers: Display:                                 TBasePassPSFNoLightMapPolicy (compiled    4 times, average 1.65 sec, max 1.71 sec, min 1.61 sec)
+[2023.06.14-02.10.01:144][791]LogShaderCompilers: Display:                                            FDistortionMeshVS (compiled    1 times, average 1.19 sec, max 1.19 sec, min 1.19 sec)
+[2023.06.14-02.10.01:144][791]LogShaderCompilers: Display: Top 5 shader types by total compile time:
+[2023.06.14-02.10.01:144][791]LogShaderCompilers: Display:                                 TBasePassVSFNoLightMapPolicy - 24.30% of total time (compiled    4 times, average 2.23 sec, max 2.39 sec, min 2.08 sec)
+[2023.06.14-02.10.01:144][791]LogShaderCompilers: Display:      TBasePassVSFPrecomputedVolumetricLightmapLightingPolicy - 24.21% of total time (compiled    4 times, average 2.22 sec, max 2.45 sec, min 1.84 sec)
+[2023.06.14-02.10.01:144][791]LogShaderCompilers: Display: TBasePassPSFPrecomputedVolumetricLightmapLightingPolicySkylight - 22.15% of total time (compiled    4 times, average 2.03 sec, max 2.65 sec, min 1.70 sec)
+[2023.06.14-02.10.01:144][791]LogShaderCompilers: Display:                                 TBasePassPSFNoLightMapPolicy - 18.02% of total time (compiled    4 times, average 1.65 sec, max 1.71 sec, min 1.61 sec)
+[2023.06.14-02.10.01:144][791]LogShaderCompilers: Display:                                               FNiagaraShader - 5.70% of total time (compiled   10 times, average 0.21 sec, max 0.31 sec, min 0.14 sec)
+[2023.06.14-02.10.01:144][791]LogShaderCompilers: Display: ================================================
+[2023.06.14-02.10.03:897][913]LogAssetEditorSubsystem: Opening Asset editor for AnimSequence /Game/Assets/Mixamo/Animations/Standing_Idle.Standing_Idle
+[2023.06.14-02.10.04:063][913]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2023.06.14-02.10.04:063][913]LogChaos: FPhysicsSolverBase::AsyncDt:-1.000000
+[2023.06.14-02.10.04:178][913]LogStaticMesh: Display: Waiting for static meshes to be ready 0/1 (/Engine/EditorMeshes/AssetViewer/Sphere_inversenormals) ...
+[2023.06.14-02.10.04:282][913]LogStaticMesh: Display: Waiting for static meshes to be ready 0/1 (/Engine/EditorMeshes/AssetViewer/Floor_Mesh) ...
+[2023.06.14-02.10.04:313][913]LogActorComponent: RegisterComponentWithWorld: (/Engine/Transient.World_19:PersistentLevel.AnimationEditorPreviewActor_0.DebugSkelMeshComponent_0) Already registered. Aborting.
+[2023.06.14-02.10.05:010][913]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2023.06.14-02.10.05:010][913]LogChaos: FPhysicsSolverBase::AsyncDt:-1.000000
+[2023.06.14-02.10.05:259][913]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2023.06.14-02.10.05:322][913]LogSlate: Took 0.014538 seconds to synchronously load lazily loaded font '../../../Engine/Content/Editor/Slate/Fonts/FontAwesome.ttf' (139K)
+[2023.06.14-02.10.05:354][913]LogUObjectGlobals: Warning: Failed to find object 'Class /Script/ApexDestruction.DestructibleMesh'
+[2023.06.14-02.10.05:372][913]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2023.06.14-02.10.05:372][913]LogChaos: FPhysicsSolverBase::AsyncDt:-1.000000
+[2023.06.14-02.10.05:418][913]LogViewport: Scene viewport resized to 877x484, mode Windowed.
+[2023.06.14-02.10.05:925][915]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2023.06.14-02.10.06:211][917]LogContentBrowser: Verbose: The majority of assets in the view are of type: /Script/Engine.AnimSequence
+[2023.06.14-02.10.12:668][142]LogSlate: Window 'Standing_Idle' being destroyed
+[2023.06.14-02.10.12:678][142]LogSlate: Window 'Standing_Idle' being destroyed
+[2023.06.14-02.10.12:734][142]LogWorld: UWorld::CleanupWorld for World_22, bSessionEnded=true, bCleanupResources=true
+[2023.06.14-02.10.12:735][142]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2023.06.14-02.10.12:749][142]LogWorld: UWorld::CleanupWorld for World_19, bSessionEnded=true, bCleanupResources=true
+[2023.06.14-02.10.12:749][142]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2023.06.14-02.10.12:835][142]LogWorld: UWorld::CleanupWorld for World_20, bSessionEnded=true, bCleanupResources=true
+[2023.06.14-02.10.12:835][142]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2023.06.14-02.10.18:340][383]LogUObjectHash: Compacting FUObjectHashTables data took   1.66ms
+[2023.06.14-02.10.20:425][383]LogSlate: Window 'Delete Assets' being destroyed
+[2023.06.14-02.10.20:558][383]LogUObjectGlobals: Force Deleting 1 Package(s):
+	Asset Name: /Game/Assets/Mixamo/Animations/Standing_Idle.Standing_Idle
+	Asset Type: AnimSequence
+[2023.06.14-02.10.21:825][383]LogUObjectHash: Compacting FUObjectHashTables data took   1.49ms
+[2023.06.14-02.10.21:866][383]LogUObjectHash: Compacting FUObjectHashTables data took   1.53ms
+[2023.06.14-02.10.21:887][383]LogUObjectHash: Compacting FUObjectHashTables data took   0.73ms
+[2023.06.14-02.10.49:533][104]LogContentBrowser: Attempting asset rename: Standing_Melee_Attack_Horizontal -> Standing_OneHand_Melee_Attack_Horizontal
+[2023.06.14-02.10.49:554][104]LogAnimationCompression: Display: Fetched compressed animation data for AnimSequence /Game/Assets/Mixamo/Animations/Standing_Melee_Attack_Horizontal.Standing_Melee_Attack_Horizontal
+[2023.06.14-02.10.49:601][104]LogFileHelpers: InternalPromptForCheckoutAndSave started...
+[2023.06.14-02.10.49:700][104]LogPackageLocalizationCache: Processed 44 localized package path(s) for 1 prioritized culture(s) in 0.013365 seconds
+[2023.06.14-02.10.49:705][104]LogSerialization: UsePackageTrailer: 'true'
+[2023.06.14-02.10.49:719][104]LogSavePackage: Moving output files for package: /Game/Assets/Mixamo/Animations/Standing_OneHand_Melee_Attack_Horizontal
+[2023.06.14-02.10.49:719][104]LogSavePackage: Moving 'D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Saved/Standing_OneHand_Melee_Attack_Ho1D92C9B444EAA209767D8D951D3C8F90.tmp' to 'D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Content/Assets/Mixamo/Animations/Standing_OneHand_Melee_Attack_Horizontal.uasset'
+[2023.06.14-02.10.49:735][104]LogFileHelpers: InternalPromptForCheckoutAndSave took 133 ms
+[2023.06.14-02.10.49:761][104]LogUObjectHash: Compacting FUObjectHashTables data took   0.99ms
+[2023.06.14-02.10.49:778][104]LogUObjectHash: Compacting FUObjectHashTables data took   1.02ms
+[2023.06.14-02.10.49:795][104]LogUObjectHash: Compacting FUObjectHashTables data took   0.57ms
+[2023.06.14-02.10.49:828][104]AssetCheck: New page: Asset Save: Standing_OneHand_Melee_Attack_Horizontal
+[2023.06.14-02.10.49:829][104]LogContentValidation: Display: Validating /Script/Engine.AnimSequence /Game/Assets/Mixamo/Animations/Standing_OneHand_Melee_Attack_Horizontal.Standing_OneHand_Melee_Attack_Horizontal
+[2023.06.14-02.11.07:690][611]LogAudioMixer: Display: Audio Buffer Underrun (starvation) detected. InstanceID=1
+[2023.06.14-02.14.25:469][277]LogFactory: FactoryCreateFile: StaticMesh with FbxFactory (0 0 C:\Users\M T\Downloads\Standing Idle.fbx)
+[2023.06.14-02.14.25:477][277]LogFbx: Loading FBX Scene from C:\Users\M T\Downloads\Standing Idle.fbx
+[2023.06.14-02.14.25:504][277]LogFbx: FBX Scene Loaded Succesfully
+[2023.06.14-02.15.19:390][277]LogSlate: Window 'FBX Import Options' being destroyed
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(0) Hips
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(1) Spine
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(2) Spine1
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(3) Spine2
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(4) Neck
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(5) Head
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(6) HeadTop_End
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(7) LeftShoulder
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(8) LeftArm
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(9) LeftForeArm
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(10) LeftHand
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(11) LeftHandThumb1
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(12) LeftHandThumb2
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(13) LeftHandThumb3
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(14) LeftHandThumb4
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(15) LeftHandIndex1
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(16) LeftHandIndex2
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(17) LeftHandIndex3
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(18) LeftHandIndex4
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(19) LeftHandMiddle1
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(20) LeftHandMiddle2
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(21) LeftHandMiddle3
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(22) LeftHandMiddle4
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(23) LeftHandRing1
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(24) LeftHandRing2
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(25) LeftHandRing3
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(26) LeftHandRing4
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(27) LeftHandPinky1
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(28) LeftHandPinky2
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(29) LeftHandPinky3
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(30) LeftHandPinky4
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(31) RightShoulder
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(32) RightArm
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(33) RightForeArm
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(34) RightHand
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(35) RightHandThumb1
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(36) RightHandThumb2
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(37) RightHandThumb3
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(38) RightHandThumb4
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(39) RightHandIndex1
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(40) RightHandIndex2
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(41) RightHandIndex3
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(42) RightHandIndex4
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(43) RightHandMiddle1
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(44) RightHandMiddle2
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(45) RightHandMiddle3
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(46) RightHandMiddle4
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(47) RightHandRing1
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(48) RightHandRing2
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(49) RightHandRing3
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(50) RightHandRing4
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(51) RightHandPinky1
+[2023.06.14-02.15.19:430][277]LogFbx: SortedLinks :(52) RightHandPinky2
+[2023.06.14-02.15.19:431][277]LogFbx: SortedLinks :(53) RightHandPinky3
+[2023.06.14-02.15.19:431][277]LogFbx: SortedLinks :(54) RightHandPinky4
+[2023.06.14-02.15.19:431][277]LogFbx: SortedLinks :(55) LeftUpLeg
+[2023.06.14-02.15.19:431][277]LogFbx: SortedLinks :(56) LeftLeg
+[2023.06.14-02.15.19:431][277]LogFbx: SortedLinks :(57) LeftFoot
+[2023.06.14-02.15.19:431][277]LogFbx: SortedLinks :(58) LeftToeBase
+[2023.06.14-02.15.19:431][277]LogFbx: SortedLinks :(59) LeftToe_End
+[2023.06.14-02.15.19:431][277]LogFbx: SortedLinks :(60) RightUpLeg
+[2023.06.14-02.15.19:431][277]LogFbx: SortedLinks :(61) RightLeg
+[2023.06.14-02.15.19:431][277]LogFbx: SortedLinks :(62) RightFoot
+[2023.06.14-02.15.19:431][277]LogFbx: SortedLinks :(63) RightToeBase
+[2023.06.14-02.15.19:431][277]LogFbx: SortedLinks :(64) RightToe_End
+[2023.06.14-02.15.19:431][277]LogFbx: Parsing AnimStack mixamo.com
+[2023.06.14-02.15.19:918][277]LogAnimationCompression: Display: Fetched compressed animation data for AnimSequence /Game/Assets/Mixamo/Animations/Standing_Idle.Standing_Idle
+[2023.06.14-02.15.19:919][277]LogScript: Warning: Accessed None trying to read property MPCharacter
+	ABP_MPCharacterORG_C /Engine/Transient.World_1:PersistentLevel.SkeletalMeshActor_0.SkeletalMeshComponent0.ABP_MPCharacterORG_C_0
+	Function /Game/Blueprints/Character/Animations/ABP_MPCharacterORG.ABP_MPCharacterORG_C:ExecuteUbergraph_ABP_MPCharacterORG:0CED
+[2023.06.14-02.15.19:920][277]LogScript: Warning: Accessed None trying to read property MPCharacter
+	ABP_MPCharacter_C /Engine/Transient.World_0:PersistentLevel.SkeletalMeshActor_0.SkeletalMeshComponent0.ABP_MPCharacter_C_0
+	Function /Game/Blueprints/Character/Animations/ABP_MPCharacter.ABP_MPCharacter_C:ExecuteUbergraph_ABP_MPCharacter:06A6
+[2023.06.14-02.15.22:110][397]LogAssetEditorSubsystem: Opening Asset editor for AnimSequence /Game/Assets/Mixamo/Animations/Standing_Idle.Standing_Idle
+[2023.06.14-02.15.22:118][397]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2023.06.14-02.15.22:118][397]LogChaos: FPhysicsSolverBase::AsyncDt:-1.000000
+[2023.06.14-02.15.22:130][397]LogActorComponent: RegisterComponentWithWorld: (/Engine/Transient.World_24:PersistentLevel.AnimationEditorPreviewActor_0.DebugSkelMeshComponent_0) Already registered. Aborting.
+[2023.06.14-02.15.22:429][397]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2023.06.14-02.15.22:429][397]LogChaos: FPhysicsSolverBase::AsyncDt:-1.000000
+[2023.06.14-02.15.22:554][397]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2023.06.14-02.15.22:555][397]LogChaos: FPhysicsSolverBase::AsyncDt:-1.000000
+[2023.06.14-02.15.22:576][397]LogViewport: Scene viewport resized to 878x485, mode Windowed.
+[2023.06.14-02.15.22:725][398]LogContentBrowser: Verbose: The majority of assets in the view are of type: /Script/Engine.AnimSequence
+[2023.06.14-02.16.01:667][844]LogUObjectHash: Compacting FUObjectHashTables data took   0.80ms
+[2023.06.14-02.16.01:668][844]LogFileHelpers: Editor autosave (incl. external actors) for '/Game/Maps/TEST_Map' took 0.017
+[2023.06.14-02.16.01:669][844]OBJ SavePackage: Generating thumbnails for [1] asset(s) in package [/Game/Assets/Mixamo/Animations/Standing_Idle] ([1] browsable assets)...
+[2023.06.14-02.16.01:718][844]OBJ SavePackage:     Rendered thumbnail for [AnimSequence /Game/Assets/Mixamo/Animations/Standing_Idle.Standing_Idle]
+[2023.06.14-02.16.01:718][844]OBJ SavePackage: Finished generating thumbnails for package [/Game/Assets/Mixamo/Animations/Standing_Idle]
+[2023.06.14-02.16.01:806][844]LogSavePackage: Moving output files for package: /Temp/Autosaves/Game/Assets/Mixamo/Animations/Standing_Idle_Auto1
+[2023.06.14-02.16.01:806][844]LogSavePackage: Moving 'D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Saved/Standing_Idle_Auto13A27C5514C45D2D01170EA98D61C98AA.tmp' to 'D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Saved/Autosaves/Game/Assets/Mixamo/Animations/Standing_Idle_Auto1.uasset'
+[2023.06.14-02.16.01:807][844]LogFileHelpers: Auto-saving content packages took 0.138
+[2023.06.14-02.19.09:377][573]LogAssetEditorSubsystem: Opening Asset editor for AnimBlueprint /Game/Blueprints/Character/Animations/ABP_MPCharacter.ABP_MPCharacter
+[2023.06.14-02.19.09:385][573]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2023.06.14-02.19.09:385][573]LogChaos: FPhysicsSolverBase::AsyncDt:-1.000000
+[2023.06.14-02.19.09:402][573]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2023.06.14-02.19.09:402][573]LogChaos: FPhysicsSolverBase::AsyncDt:-1.000000
+[2023.06.14-02.19.09:410][573]LogActorComponent: RegisterComponentWithWorld: (/Engine/Transient.World_28:PersistentLevel.AnimationEditorPreviewActor_0.DebugSkelMeshComponent_0) Already registered. Aborting.
+[2023.06.14-02.19.09:411][573]LogScript: Warning: Accessed None trying to read property MPCharacter
+	ABP_MPCharacter_C /Engine/Transient.World_28:PersistentLevel.AnimationEditorPreviewActor_0.DebugSkelMeshComponent_0.ABP_MPCharacter_C_0
+	Function /Game/Blueprints/Character/Animations/ABP_MPCharacter.ABP_MPCharacter_C:ExecuteUbergraph_ABP_MPCharacter:06A6
+[2023.06.14-02.19.10:694][573]LogBlueprintEditor: Perf: 1.2 total seconds to load all 7 blueprint libraries in project. Avoid references to content in blueprint libraries to shorten this time.
+[2023.06.14-02.19.10:694][573]LogBlueprintEditor: Perf: 1.0 seconds loading: /Game/Assets/LearningKit_Robots/Blueprints/Robots/Robot_MASTER/RobotFunctionLib
+[2023.06.14-02.19.11:378][573]LogStall: Stall detector 'UAssetEditorSubsystem::OpenEditorForAsset' exceeded budget of 2.000000s, reporting...
+[2023.06.14-02.19.13:706][573]LogStall: Stall detector 'UAssetEditorSubsystem::OpenEditorForAsset' report submitted, and took 0.049953s
+[2023.06.14-02.19.15:498][573]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2023.06.14-02.19.15:498][573]LogChaos: FPhysicsSolverBase::AsyncDt:-1.000000
+[2023.06.14-02.19.15:644][573]LogStall: Stall detector 'UAssetEditorSubsystem::OpenEditorForAsset' complete in 0.002932s (1.984792s overbudget)
+[2023.06.14-02.19.15:709][573]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2023.06.14-02.19.15:733][573]LogScript: Warning: Accessed None trying to read property MPCharacter
+	ABP_MPCharacter_C /Engine/Transient.World_28:PersistentLevel.AnimationEditorPreviewActor_0.DebugSkelMeshComponent_0.ABP_MPCharacter_C_0
+	Function /Game/Blueprints/Character/Animations/ABP_MPCharacter.ABP_MPCharacter_C:ExecuteUbergraph_ABP_MPCharacter:06A6
+[2023.06.14-02.19.15:761][573]LogSlate: Took 0.005879 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/Roboto-BoldCondensed.ttf' (158K)
+[2023.06.14-02.19.15:770][573]LogViewport: Scene viewport resized to 405x357, mode Windowed.
+[2023.06.14-02.19.15:983][573]LogContentBrowser: Verbose: The majority of assets in the view are of type: /Script/Engine.AnimSequence
+[2023.06.14-02.19.16:080][576]LogScript: Warning: Accessed None trying to read property MPCharacter
+	ABP_MPCharacter_C /Engine/Transient.World_28:PersistentLevel.AnimationEditorPreviewActor_0.DebugSkelMeshComponent_0.ABP_MPCharacter_C_0
+	Function /Game/Blueprints/Character/Animations/ABP_MPCharacter.ABP_MPCharacter_C:ExecuteUbergraph_ABP_MPCharacter:06A6
+[2023.06.14-02.19.16:106][577]LogScript: Warning: Accessed None trying to read property MPCharacter
+	ABP_MPCharacter_C /Engine/Transient.World_28:PersistentLevel.AnimationEditorPreviewActor_0.DebugSkelMeshComponent_0.ABP_MPCharacter_C_0
+	Function /Game/Blueprints/Character/Animations/ABP_MPCharacter.ABP_MPCharacter_C:ExecuteUbergraph_ABP_MPCharacter:06A6
+[2023.06.14-02.19.16:227][578]LogScript: Warning: Accessed None trying to read property MPCharacter
+	ABP_MPCharacter_C /Engine/Transient.World_28:PersistentLevel.AnimationEditorPreviewActor_0.DebugSkelMeshComponent_0.ABP_MPCharacter_C_0
+	Function /Game/Blueprints/Character/Animations/ABP_MPCharacter.ABP_MPCharacter_C:ExecuteUbergraph_ABP_MPCharacter:06A6
+[2023.06.14-02.19.16:253][579]LogScript: Warning: Accessed None trying to read property MPCharacter
+	ABP_MPCharacter_C /Engine/Transient.World_28:PersistentLevel.AnimationEditorPreviewActor_0.DebugSkelMeshComponent_0.ABP_MPCharacter_C_0
+	Function /Game/Blueprints/Character/Animations/ABP_MPCharacter.ABP_MPCharacter_C:ExecuteUbergraph_ABP_MPCharacter:06A6
+[2023.06.14-02.19.16:275][580]LogScript: Warning: Accessed None trying to read property MPCharacter
+	ABP_MPCharacter_C /Engine/Transient.World_28:PersistentLevel.AnimationEditorPreviewActor_0.DebugSkelMeshComponent_0.ABP_MPCharacter_C_0
+	Function /Game/Blueprints/Character/Animations/ABP_MPCharacter.ABP_MPCharacter_C:ExecuteUbergraph_ABP_MPCharacter:06A6
+[2023.06.14-02.19.16:299][581]LogScript: Warning: Accessed None trying to read property MPCharacter
+	ABP_MPCharacter_C /Engine/Transient.World_28:PersistentLevel.AnimationEditorPreviewActor_0.DebugSkelMeshComponent_0.ABP_MPCharacter_C_0
+	Function /Game/Blueprints/Character/Animations/ABP_MPCharacter.ABP_MPCharacter_C:ExecuteUbergraph_ABP_MPCharacter:06A6
+[2023.06.14-02.19.16:321][582]LogScript: Warning: Accessed None trying to read property MPCharacter
+	ABP_MPCharacter_C /Engine/Transient.World_28:PersistentLevel.AnimationEditorPreviewActor_0.DebugSkelMeshComponent_0.ABP_MPCharacter_C_0
+	Function /Game/Blueprints/Character/Animations/ABP_MPCharacter.ABP_MPCharacter_C:ExecuteUbergraph_ABP_MPCharacter:06A6
+[2023.06.14-02.19.16:356][583]LogScript: Warning: Accessed None trying to read property MPCharacter
+	ABP_MPCharacter_C /Engine/Transient.World_28:PersistentLevel.AnimationEditorPreviewActor_0.DebugSkelMeshComponent_0.ABP_MPCharacter_C_0
+	Function /Game/Blueprints/Character/Animations/ABP_MPCharacter.ABP_MPCharacter_C:ExecuteUbergraph_ABP_MPCharacter:06A6
+[2023.06.14-02.19.16:379][584]LogScript: Warning: Accessed None trying to read property MPCharacter
+	ABP_MPCharacter_C /Engine/Transient.World_28:PersistentLevel.AnimationEditorPreviewActor_0.DebugSkelMeshComponent_0.ABP_MPCharacter_C_0
+	Function /Game/Blueprints/Character/Animations/ABP_MPCharacter.ABP_MPCharacter_C:ExecuteUbergraph_ABP_MPCharacter:06A6
+[2023.06.14-02.19.16:401][585]LogScript: Warning: Accessed None trying to read property MPCharacter
+	ABP_MPCharacter_C /Engine/Transient.World_28:PersistentLevel.AnimationEditorPreviewActor_0.DebugSkelMeshComponent_0.ABP_MPCharacter_C_0
+	Function /Game/Blueprints/Character/Animations/ABP_MPCharacter.ABP_MPCharacter_C:ExecuteUbergraph_ABP_MPCharacter:06A6
+[2023.06.14-02.19.16:421][586]LogScript: Warning: Accessed None trying to read property MPCharacter
+	ABP_MPCharacter_C /Engine/Transient.World_28:PersistentLevel.AnimationEditorPreviewActor_0.DebugSkelMeshComponent_0.ABP_MPCharacter_C_0
+	Function /Game/Blueprints/Character/Animations/ABP_MPCharacter.ABP_MPCharacter_C:ExecuteUbergraph_ABP_MPCharacter:06A6
+[2023.06.14-02.19.33:508][376]BlueprintLog: New page: Compile ABP_MPCharacter
+[2023.06.14-02.19.33:711][376]LogUObjectHash: Compacting FUObjectHashTables data took   2.01ms
+[2023.06.14-02.19.34:229][393]LogFileHelpers: InternalPromptForCheckoutAndSave started...
+[2023.06.14-02.19.34:600][393]LogSavePackage: Moving output files for package: /Game/Blueprints/Character/Animations/ABP_MPCharacter
+[2023.06.14-02.19.34:601][393]LogSavePackage: Moving 'D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Saved/ABP_MPCharacter16FF9C884CEDEC8AA54DBABCD6583847.tmp' to 'D:/Documents/GitHub/3rd-Person-Multiplayer-Template/MPShooter/Content/Blueprints/Character/Animations/ABP_MPCharacter.uasset'
+[2023.06.14-02.19.34:612][393]LogFileHelpers: InternalPromptForCheckoutAndSave took 383 ms (total: 517 ms)
+[2023.06.14-02.19.34:624][393]AssetCheck: New page: Asset Save: ABP_MPCharacter
+[2023.06.14-02.19.34:624][393]LogContentValidation: Display: Validating /Script/Engine.AnimBlueprint /Game/Blueprints/Character/Animations/ABP_MPCharacter.ABP_MPCharacter
+[2023.06.14-02.19.37:381][519]LogSlate: Window 'ABP_MPCharacter' being destroyed
+[2023.06.14-02.19.37:389][519]LogSlate: Window 'ABP_MPCharacter' being destroyed
+[2023.06.14-02.19.37:402][519]LogWorld: UWorld::CleanupWorld for World_26, bSessionEnded=true, bCleanupResources=true
+[2023.06.14-02.19.37:402][519]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2023.06.14-02.19.37:413][519]LogWorld: UWorld::CleanupWorld for World_24, bSessionEnded=true, bCleanupResources=true
+[2023.06.14-02.19.37:413][519]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2023.06.14-02.19.37:462][519]LogWorld: UWorld::CleanupWorld for World_25, bSessionEnded=true, bCleanupResources=true
+[2023.06.14-02.19.37:463][519]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2023.06.14-02.19.37:488][519]LogWorld: UWorld::CleanupWorld for World_27, bSessionEnded=true, bCleanupResources=true
+[2023.06.14-02.19.37:488][519]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2023.06.14-02.19.37:502][519]LogWorld: UWorld::CleanupWorld for World_28, bSessionEnded=true, bCleanupResources=true
+[2023.06.14-02.19.37:502][519]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2023.06.14-02.19.37:562][519]LogWorld: UWorld::CleanupWorld for World_29, bSessionEnded=true, bCleanupResources=true
+[2023.06.14-02.19.37:562][519]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2023.06.14-02.19.38:392][566]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2023.06.14-02.19.39:128][605]LogAssetEditorSubsystem: Opening Asset editor for Blueprint /Game/Blueprints/Character/BP_MPCharacter.BP_MPCharacter
+[2023.06.14-02.19.39:129][605]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2023.06.14-02.19.39:129][605]LogChaos: FPhysicsSolverBase::AsyncDt:-1.000000
+[2023.06.14-02.19.39:820][606]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2023.06.14-02.19.41:089][648]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2023.06.14-02.24.13:392][345]LogAssetEditorSubsystem: Opening Asset editor for AnimMontage /Game/Blueprints/Character/Animations/Montages/AM_HitReact.AM_HitReact
+[2023.06.14-02.24.13:406][345]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2023.06.14-02.24.13:406][345]LogChaos: FPhysicsSolverBase::AsyncDt:-1.000000
+[2023.06.14-02.24.13:427][345]LogActorComponent: RegisterComponentWithWorld: (/Engine/Transient.World_35:PersistentLevel.AnimationEditorPreviewActor_0.DebugSkelMeshComponent_0) Already registered. Aborting.
+[2023.06.14-02.24.13:764][345]LogWorldSubsystemInput: UEnhancedInputDeveloperSettings::bEnableWorldSubsystem is false, the world subsystem will not be created!
+[2023.06.14-02.24.13:764][345]LogChaos: FPhysicsSolverBase::AsyncDt:-1.000000
+[2023.06.14-02.24.13:939][345]LogViewport: Scene viewport resized to 879x486, mode Windowed.
+[2023.06.14-02.24.17:297][485]LogWorld: UWorld::CleanupWorld for World_35, bSessionEnded=true, bCleanupResources=true
+[2023.06.14-02.24.17:297][485]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2023.06.14-02.24.17:358][485]LogWorld: UWorld::CleanupWorld for World_36, bSessionEnded=true, bCleanupResources=true
+[2023.06.14-02.24.17:358][485]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2023.06.14-02.34.34:733][659]LogSlate: Window 'BP_MPCharacter' being destroyed
+[2023.06.14-02.34.34:741][659]LogSlate: Window 'BP_MPCharacter' being destroyed
+[2023.06.14-02.34.34:747][659]LogWorld: UWorld::CleanupWorld for World_32, bSessionEnded=true, bCleanupResources=true
+[2023.06.14-02.34.34:747][659]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated

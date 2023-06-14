@@ -487,6 +487,9 @@ void AMPCharacter::ServerEquipButtonPressed_Implementation()
 		if (OverlappingWeapon)
 		{
 			Combat->EquipWeapon(OverlappingWeapon);
+			// TODO:
+			// Make Equip/Unequip montage
+			// Jump to different section names based on where they unequip to (back, hips)
 		}
 		else if (Combat->ShouldSwapWeapons())
 		{
@@ -551,7 +554,6 @@ void AMPCharacter::PlayFireMontage(bool bIsAiming)
 	}
 
 	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
-
 	// TODO:
 	// In the MeleeWeapon class, make another montage specifically for the weapon
 	//		then check the class for that montage
