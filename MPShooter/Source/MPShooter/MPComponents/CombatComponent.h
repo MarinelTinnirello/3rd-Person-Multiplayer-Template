@@ -153,6 +153,7 @@ private:
 	
 	UPROPERTY(ReplicatedUsing = OnRep_CombatState)
 	ECombatState CombatState = ECombatState::ECS_Unoccupied;
+	ECharacterCombatState CharacterCombatState = ECharacterCombatState::ECCS_Unequipped;
 
 	UFUNCTION()
 	void OnRep_CombatState();

@@ -331,6 +331,7 @@ public:
 	bool IsThrowableWeaponEquipped();
 
 	ECombatState GetCombatState() const;
+	ECharacterCombatState GetCharacterCombatState() const;
 	FORCEINLINE UCombatComponent* GetCombat() const { return Combat; }
 	FORCEINLINE UBuffComponent* GetBuff() const { return Buff; }
 	FORCEINLINE ULagComponent* GetLagCompensation() const { return LagCompensation; }

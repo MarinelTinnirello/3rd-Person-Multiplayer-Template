@@ -141,6 +141,21 @@ void UCombatComponent::EquipPrimaryWeapon(AWeapon* WeaponToEquip)
 	UpdateCarriedAmmo();
 	ReloadEmptyWeapon();
 	PlayEquipWeaponSound(WeaponToEquip);
+
+	switch (EquippedWeapon->GetWeaponHandiness())
+	{
+	case EWeaponLaterality::EWL_SingleHand:
+		CharacterCombatState = ECharacterCombatState::ECCS_EquippedOneHandedWeapon;
+		break;
+	case EWeaponLaterality::EWL_DoubleHand:
+		CharacterCombatState = ECharacterCombatState::ECCS_EquippedTwoHandedWeapon;
+		break;
+	case EWeaponLaterality::EWL_DualWield:
+		CharacterCombatState = ECharacterCombatState::ECCS_EquippedDualWieldedWeapon;
+		break;
+	default:
+		break;
+	}
 }
 
 void UCombatComponent::EquipSecondaryWeapon(AWeapon* WeaponToEquip)
@@ -171,6 +186,21 @@ void UCombatComponent::OnRep_EquippedWeapon()
 		UpdateWeaponType();
 		EquippedWeapon->EnableCustomDepth(false);
 		EquippedWeapon->SetHUDAmmo();
+
+		switch (EquippedWeapon->GetWeaponHandiness())
+		{
+		case EWeaponLaterality::EWL_SingleHand:
+			CharacterCombatState = ECharacterCombatState::ECCS_EquippedOneHandedWeapon;
+			break;
+		case EWeaponLaterality::EWL_DoubleHand:
+			CharacterCombatState = ECharacterCombatState::ECCS_EquippedTwoHandedWeapon;
+			break;
+		case EWeaponLaterality::EWL_DualWield:
+			CharacterCombatState = ECharacterCombatState::ECCS_EquippedDualWieldedWeapon;
+			break;
+		default:
+			break;
+		}
 	}
 }
 
@@ -190,6 +220,7 @@ void UCombatComponent::DropEquippedWeapon()
 	if (EquippedWeapon)
 	{
 		EquippedWeapon->Dropped();
+		CharacterCombatState = ECharacterCombatState::ECCS_Unequipped;
 	}
 }
 

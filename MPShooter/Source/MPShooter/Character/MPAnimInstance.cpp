@@ -7,6 +7,8 @@
 #include "Kismet/KismetMathLibrary.h"
 #include "MPShooter/Item/Weapon/Weapon.h"
 #include "MPShooter/MPTypes/CombatState.h"
+#include "MPShooter/MPTypes/WeaponTypes.h"
+#include "MPShooter/MPTypes/ActorAttachment.h"
 
 void UMPAnimInstance::NativeInitializeAnimation()
 {
@@ -43,6 +45,7 @@ void UMPAnimInstance::NativeUpdateAnimation(float DeltaTime)
 	bAiming = MPCharacter->IsAiming();
 	TurningInPlace = MPCharacter->GetTurningInPlace();
 	bRotateRootBone = MPCharacter->ShouldRotateRootBone();
+	CharacterCombatState = MPCharacter->GetCharacterCombatState();
 
 	// Offset for strafing
 	FRotator AimRot = MPCharacter->GetBaseAimRotation();
@@ -81,9 +84,13 @@ void UMPAnimInstance::NativeUpdateAnimation(float DeltaTime)
 	}
 
 	bUseFABRIK = MPCharacter->GetCombatState() == ECombatState::ECS_Unoccupied;
-	bool bFABRIKOverride = MPCharacter->IsLocallyControlled() &&
+	bool bFABRIKOverrideCombatState = MPCharacter->IsLocallyControlled() &&
 		MPCharacter->GetCombatState() != ECombatState::ECS_Throwing &&
 		MPCharacter->bFinishedSwapping;
+	bool bFABRIKOverrideWeaponState = EquippedWeapon &&
+		(CharacterCombatState == ECharacterCombatState::ECCS_Unequipped ||
+		CharacterCombatState != ECharacterCombatState::ECCS_EquippedTwoHandedWeapon);
+	bool bFABRIKOverride = bFABRIKOverrideCombatState || bFABRIKOverrideWeaponState;
 	if (bFABRIKOverride)
 	{
 		bUseFABRIK = !MPCharacter->IsLocallyReloading();

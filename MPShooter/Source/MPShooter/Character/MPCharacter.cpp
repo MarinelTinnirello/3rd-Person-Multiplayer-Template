@@ -1009,6 +1009,16 @@ ECombatState AMPCharacter::GetCombatState() const
 	return Combat->CombatState;
 }
 
+ECharacterCombatState AMPCharacter::GetCharacterCombatState() const
+{
+	if (Combat == nullptr)
+	{
+		return ECharacterCombatState::ECCS_MAX;
+	}
+
+	return Combat->CharacterCombatState;
+}
+
 FVector AMPCharacter::GetHitTarget() const
 {
 	if (Combat == nullptr)

@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Animation/AnimInstance.h"
 #include "MPShooter/MPTypes/TurningInPlace.h"
+#include "MPShooter/MPTypes/CombatState.h"
 
 #include "MPAnimInstance.generated.h"
 
@@ -35,6 +36,8 @@ private:
 	UPROPERTY(BlueprintReadOnly, Category = "Weapon", meta = (AllowPrivateAccess = "true"), meta = (ToolTip = "Checks if a character has a weapon equipped."))
 	bool bWeaponEquipped;
 	class AWeapon* EquippedWeapon;
+	UPROPERTY(BlueprintReadOnly, Category = "Weapon", meta = (AllowPrivateAccess = "true"), meta = (ToolTip = "Determines a character's weapon's laterality."))
+	ECharacterCombatState CharacterCombatState;
 	UPROPERTY(BlueprintReadOnly, Category = "Weapon", meta = (AllowPrivateAccess = "true"), meta = (ToolTip = "Checks if a character is aiming."))
 	bool bAiming;
 	UPROPERTY(BlueprintReadOnly, Category = "Movement", meta = (AllowPrivateAccess = "true"), meta = (ToolTip = "Checks if a character is locally controlled."))
