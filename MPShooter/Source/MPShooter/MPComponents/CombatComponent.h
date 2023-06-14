@@ -77,17 +77,21 @@ protected:
 	void DropEquippedWeapon();
 	void PlayEquipWeaponSound(AWeapon* WeaponToEquip);
 	void UpdateWeaponType();
-	void CheckAttachedActorHand(AActor* ActorToAttach);
-	void AttachActorToRightHand(AActor* ActorToAttach);
-	void AttachActorToLeftHand(AActor* ActorToAttach);
-	void AttachActorToBackSpine(AActor* ActorToAttach);
-	void AttachActorToThrowable(AActor* ActorToAttach);
-	void CheckThrowSwappable(AActor* ActorToAttach);
-	FName OnEquippedWeaponTypeAttachActorThrow();
 	void EquipPrimaryWeapon(AWeapon* WeaponToEquip);
 	void EquipSecondaryWeapon(AWeapon* WeaponToEquip);
 	void DropEquippedThrowableWeapon();
 	void PlayEquipThrowableWeaponSound(AThrowableWeapon* ThrowableWeaponToEquip);
+
+	void CheckAttachedActorHand(AActor* ActorToAttach);
+	void AttachActorToRightHand(AActor* ActorToAttach);
+	void AttachActorToLeftHand(AActor* ActorToAttach);
+	void CheckAttachedActorUnequipped(AActor* ActorToAttach);
+	void AttachActorToBackSpine(AActor* ActorToAttach);
+	void AttachActorToHips(AActor* ActorToAttach);
+	void AttachActorToThrowable(AActor* ActorToAttach);
+	void CheckThrowSwappable(AActor* ActorToAttach);
+	FName OnEquippedWeaponTypeAttachActorThrow();
+
 	// TODO:
 	// Instead of using the Throwable as an actual type like we tried with weapon, treat it as a class again
 	// - have it as a Pickup, 

@@ -87,7 +87,7 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Socket", meta = (AllowPrivateAccess = "true"), meta = (ToolTip = "Right hip socket where weapons not currently in use are placed."))
 	FName RightHipSocket;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Socket", meta = (AllowPrivateAccess = "true"), meta = (ToolTip = "Left hip socket where weapons not currently in use are placed."))
-	FName LefttHipSocket;
+	FName LeftHipSocket;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Bone", meta = (AllowPrivateAccess = "true"), meta = (ToolTip = "Character's head bone where head shots are traced against."))
 	FName HeadBone;
 

@@ -12,8 +12,9 @@
 #include "TimerManager.h"
 #include "MPShooter/GameMode/MPShooterGameMode.h"
 #include "MPShooter/Character/MPCharacter.h"
-#include "MPShooter/PlayerController/MPPlayerController.h"
 #include "MPShooter/Character/MPAnimInstance.h"
+#include "MPShooter/PlayerController/MPPlayerController.h"
+#include "MPShooter/MPTypes/ActorAttachment.h"
 #include "MPShooter/Item/Weapon/Weapon.h"
 #include "MPShooter/Item/Weapon/Throwable/ThrowableWeapon.h"
 #include "MPShooter/Item/Weapon/Ranged/Projectile/Projectile.h"
@@ -151,7 +152,7 @@ void UCombatComponent::EquipSecondaryWeapon(AWeapon* WeaponToEquip)
 
 	EquippedSecondaryWeapon = WeaponToEquip;
 	EquippedSecondaryWeapon->SetItemState(EItemState::EIS_EquippedSecondary);
-	AttachActorToBackSpine(WeaponToEquip);
+	CheckAttachedActorUnequipped(WeaponToEquip);
 	PlayEquipWeaponSound(WeaponToEquip);
 	EquippedSecondaryWeapon->SetOwner(Character);
 }
@@ -178,7 +179,7 @@ void UCombatComponent::OnRep_EquippedSecondaryWeapon()
 	if (EquippedSecondaryWeapon && Character)
 	{
 		EquippedSecondaryWeapon->SetItemState(EItemState::EIS_EquippedSecondary);
-		AttachActorToBackSpine(EquippedSecondaryWeapon);
+		CheckAttachedActorUnequipped(EquippedSecondaryWeapon);
 		PlayEquipWeaponSound(EquippedWeapon);
 	}
 }
@@ -235,7 +236,7 @@ void UCombatComponent::EndSwapAttachWeapons()
 	PlayEquipWeaponSound(EquippedWeapon);
 
 	EquippedSecondaryWeapon->SetItemState(EItemState::EIS_EquippedSecondary);
-	AttachActorToBackSpine(EquippedSecondaryWeapon);
+	CheckAttachedActorUnequipped(EquippedSecondaryWeapon);
 }
 
 void UCombatComponent::PlayEquipWeaponSound(AWeapon* WeaponToEquip)
@@ -272,13 +273,16 @@ void UCombatComponent::CheckAttachedActorHand(AActor* ActorToAttach)
 		return;
 	}
 
-	if (EquippedWeapon->IsAttachedToRightHand())
+	switch (EquippedWeapon->GetEquippedWeaponSocket())
 	{
+	case EWeaponAttachmentSocket::EWAS_RightHand:
 		AttachActorToRightHand(ActorToAttach);
-	}
-	else
-	{
+		break;
+	case EWeaponAttachmentSocket::EWAS_LeftHand:
 		AttachActorToLeftHand(ActorToAttach);
+		break;
+	default:
+		break;
 	}
 }
 
@@ -328,6 +332,32 @@ void UCombatComponent::AttachActorToLeftHand(AActor* ActorToAttach)
 	}
 }
 
+void UCombatComponent::CheckAttachedActorUnequipped(AActor* ActorToAttach)
+{
+	AnimInstance = AnimInstance == nullptr ? Cast<UMPAnimInstance>(Character->GetMesh()->GetAnimInstance()) : AnimInstance;
+	bool bIsValid = Character == nullptr ||
+		Character->GetMesh() == nullptr ||
+		AnimInstance == nullptr ||
+		ActorToAttach == nullptr ||
+		EquippedWeapon == nullptr;
+	if (bIsValid)
+	{
+		return;
+	}
+
+	switch (EquippedWeapon->GetUnequippedWeaponSocket())
+	{
+	case EWeaponAttachmentSocket::EWAS_BackSpine:
+		AttachActorToBackSpine(ActorToAttach);
+		break;
+	case EWeaponAttachmentSocket::EWAS_Hips:
+		AttachActorToHips(ActorToAttach);
+		break;
+	default:
+		break;
+	}
+}
+
 void UCombatComponent::AttachActorToBackSpine(AActor* ActorToAttach)
 {
 	AnimInstance = AnimInstance == nullptr ? Cast<UMPAnimInstance>(Character->GetMesh()->GetAnimInstance()) : AnimInstance;
@@ -344,6 +374,49 @@ void UCombatComponent::AttachActorToBackSpine(AActor* ActorToAttach)
 	if (BackSpine)
 	{
 		BackSpine->AttachActor(ActorToAttach, Character->GetMesh());
+	}
+}
+
+void UCombatComponent::AttachActorToHips(AActor* ActorToAttach)
+{
+	AnimInstance = AnimInstance == nullptr ? Cast<UMPAnimInstance>(Character->GetMesh()->GetAnimInstance()) : AnimInstance;
+	bool bIsValid = Character == nullptr ||
+		Character->GetMesh() == nullptr ||
+		AnimInstance == nullptr ||
+		ActorToAttach == nullptr;
+	if (bIsValid)
+	{
+		return;
+	}
+
+	// TODO:
+	// Depending on laterality of weapon, attach to that hand 1st
+	//		If the slot is filled, attach to the left
+	// If the weapon is dual-wielded, attach to right then left
+	const USkeletalMeshSocket* LeftHip = Character->GetMesh()->GetSocketByName(AnimInstance->GetLeftHipSocket());
+	const USkeletalMeshSocket* RightHip = Character->GetMesh()->GetSocketByName(AnimInstance->GetRightHipSocket());
+	AWeapon* WeaponActor = Cast<AWeapon>(ActorToAttach);
+	if (WeaponActor && RightHip && LeftHip)
+	{
+		if (WeaponActor->GetWeaponHandiness() != EWeaponLaterality::EWL_DualWield)
+		{
+			switch (WeaponActor->GetEquippedWeaponSocket())
+			{
+			case EWeaponAttachmentSocket::EWAS_RightHand:
+				RightHip->AttachActor(ActorToAttach, Character->GetMesh());
+				break;
+			case EWeaponAttachmentSocket::EWAS_LeftHand:
+				LeftHip->AttachActor(ActorToAttach, Character->GetMesh());
+				break;
+			default:
+				break;
+			}
+		}
+		else
+		{
+			// TODO:
+			// add 2nd actor to attach, but allow it to have a defined value
+		}
 	}
 }
 
@@ -383,25 +456,26 @@ void UCombatComponent::CheckThrowSwappable(AActor* ActorToAttach)
 
 	// swaps the weapon to the other hand if the weapon is double-handed
 	bool bThrowSwappable = bThrowable &&
-		!EquippedWeapon->IsDoubleHanded() ||
-		!EquippedWeapon->IsDualWield();
-	if (bThrowSwappable && EquippedWeapon->IsAttachedToRightHand())
+		EquippedWeapon->GetWeaponHandiness() != EWeaponLaterality::EWL_DoubleHand ||
+		EquippedWeapon->GetWeaponHandiness() != EWeaponLaterality::EWL_DualWield;
+	if (bThrowSwappable)
 	{
-		AttachActorToLeftHand(ActorToAttach);
-	}
-	else
-	{
-		AttachActorToRightHand(ActorToAttach);
+		switch (EquippedWeapon->GetEquippedWeaponSocket())
+		{
+		case EWeaponAttachmentSocket::EWAS_RightHand:
+			AttachActorToRightHand(ActorToAttach);
+			break;
+		case EWeaponAttachmentSocket::EWAS_LeftHand:
+			AttachActorToLeftHand(ActorToAttach);
+			break;
+		default:
+			break;
+		}
 	}
 }
 
 FName UCombatComponent::OnEquippedWeaponTypeAttachActorThrow()
 {
-	/*FName SocketName;
-	bool bUsePistolSocket =
-		EquippedWeapon->GetWeaponType() == EWeaponType::EWT_Pistol ||
-		EquippedWeapon->GetWeaponType() == EWeaponType::EWT_SubmachineGun;
-	return SocketName = bUsePistolSocket ? FName("PistolSocket") : FName(AnimInstance->GetSecondaryHandSocket());*/
 	return FName(AnimInstance->GetSecondaryHandSocket());
 }
 
@@ -810,7 +884,7 @@ void UCombatComponent::ShotgunShellReload()
 void UCombatComponent::JumpToShotgunEnd()
 {
 	AnimInstance = AnimInstance == nullptr ? Cast<UMPAnimInstance>(Character->GetMesh()->GetAnimInstance()) : AnimInstance;
-	if (AnimInstance && Character->GetReloadMontage())
+	if (AnimInstance && EquippedWeapon && EquippedWeapon->GetReloadMontage())
 	{
 		AnimInstance->Montage_JumpToSection(FName("ShotgunEnd"));
 	}

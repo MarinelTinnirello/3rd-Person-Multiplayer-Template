@@ -102,8 +102,6 @@ struct FWeaponProperties
 	bool bDoubleHanded = true;
 	UPROPERTY(EditAnywhere, Category = "Weapon Properties", meta = (ToolTip = "Checks if the weapon is dual-wielded."))
 	bool bDualWield = false;
-	UPROPERTY(EditAnywhere, Category = "Weapon Properties", meta = (ToolTip = "Animation played when a weapon is fired."))
-	class UAnimationAsset* FireAnimation;
 
 	// 
 	// Weapon Properties - Ranged
@@ -192,6 +190,7 @@ protected:
 	//
 	UPROPERTY(EditAnywhere, Category = "Weapon Properties", meta = (ToolTip = "Checks if the weapon has an attachment affected by physics (ex: strap, chain, charm, etc.)."))
 	bool bHasPhysicsAttachment = false;
+
 	UPROPERTY(EditAnywhere, Category = "Weapon Properties  - Ranged", meta = (ToolTip = "Muzzle socket name on a weapon."))
 	FName MuzzleFlash = "MuzzleFlash";
 	UPROPERTY(EditAnywhere, Category = "Weapon Properties", meta = (ToolTip = "Animation played when a weapon is fired."))
@@ -254,12 +253,6 @@ private:
 	EWeaponAttachmentSocket UnequippedWeaponSocket;
 	UPROPERTY(EditAnywhere, Category = "Weapon Properties", meta = (ToolTip = "Checks how many hands the weapon uses, based on the weapon animations."))
 	EWeaponLaterality WeaponHandiness;
-	UPROPERTY(EditAnywhere, Category = "Weapon Properties", meta = (ToolTip = "Checks if the weapon should attach to the right or left hand. Most animations (particularly for 2-handed weapons) are right-handed, so the default will be 'true'."))
-	bool bAttachToRightHand = true;
-	UPROPERTY(EditAnywhere, Category = "Weapon Properties", meta = (ToolTip = "Checks if the weapon is double-handed."))
-	bool bDoubleHanded = true;
-	UPROPERTY(EditAnywhere, Category = "Weapon Properties", meta = (ToolTip = "Checks if the weapon is dual-wielded."))
-	bool bDualWield = false;
 
 	// 
 	// Weapon Properties - Ranged
@@ -291,12 +284,13 @@ public:
 	// Weapon Properties
 	//
 	FORCEINLINE EWeaponType GetWeaponType() const { return WeaponType; }
+	FORCEINLINE EWeaponAttachmentSocket GetEquippedWeaponSocket() const { return EquippedWeaponSocket; }
+	FORCEINLINE EWeaponAttachmentSocket GetUnequippedWeaponSocket() const { return UnequippedWeaponSocket; }
+	FORCEINLINE EWeaponLaterality GetWeaponHandiness() const { return WeaponHandiness; }
+
 	FORCEINLINE EFireType GetFireType() const { return FireType; }
 	FORCEINLINE float GetDamage() const { return Damage; }
 	FORCEINLINE float GetHeadShotDamage() const { return HeadShotDamage; }
-	bool IsAttachedToRightHand();
-	bool IsDoubleHanded();
-	bool IsDualWield();
 
 	FORCEINLINE float GetZoomedFOV() const { return ZoomedFOV; }
 	FORCEINLINE float GetZoomedInterpSpeed() const { return ZoomedInterpSpeed; }
@@ -304,9 +298,9 @@ public:
 	// 
 	// Weapon Properties - Ranged
 	//
-	FORCEINLINE FName GetWeaponTypeReloadMontageSection() const { return WeaponTypeReloadMontageSection; }
 	FORCEINLINE int32 GetAmmo() const { return Ammo; }
 	FORCEINLINE int32 GetMagCapacity() const { return MagCapacity; }
+	FORCEINLINE UAnimMontage* GetReloadMontage() const { return ReloadMontage; }
 	void SetAmmoIcon(UTexture2D* Icon) { AmmoIcon = Icon; }
 	bool IsMagEmpty();
 	bool IsMagFull();

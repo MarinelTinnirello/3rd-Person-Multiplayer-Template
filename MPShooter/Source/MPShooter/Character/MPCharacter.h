@@ -354,7 +354,6 @@ public:
 	FORCEINLINE float GetShield() const { return Shield; }
 	FORCEINLINE void SetShield(float Amount) { Shield = Amount; }
 	FORCEINLINE float GetMaxShield() const { return MaxShield; }
-	FORCEINLINE UAnimMontage* GetReloadMontage() const { return ReloadMontage; }
 	/*FORCEINLINE UStaticMeshComponent* GetAttachedThrowable() const { return AttachedThrowable; }*/
 
 	FORCEINLINE bool GetDisableGameplay() const { return bDisableGameplay; }

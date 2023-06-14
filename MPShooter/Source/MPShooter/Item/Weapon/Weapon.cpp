@@ -76,21 +76,6 @@ void AWeapon::OnSphereEndOverlap(UPrimitiveComponent* OverlappedComponent, AActo
 	}
 }
 
-bool AWeapon::IsAttachedToRightHand()
-{
-	return bAttachToRightHand;
-}
-
-bool AWeapon::IsDoubleHanded()
-{
-	return bDoubleHanded;
-}
-
-bool AWeapon::IsDualWield()
-{
-	return bDualWield;
-}
-
 void AWeapon::OnPingTooHigh(bool bPingTooHigh)
 {
 	bUseServerSideRewind = !bPingTooHigh;
