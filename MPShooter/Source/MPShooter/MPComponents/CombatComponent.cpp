@@ -265,6 +265,20 @@ void UCombatComponent::EndSwapAttachWeapons()
 	EquippedWeapon->SetHUDAmmo();
 	UpdateCarriedAmmo();
 	PlayEquipWeaponSound(EquippedWeapon);
+	switch (EquippedWeapon->GetWeaponHandiness())
+	{
+	case EWeaponLaterality::EWL_SingleHand:
+		CharacterCombatState = ECharacterCombatState::ECCS_EquippedOneHandedWeapon;
+		break;
+	case EWeaponLaterality::EWL_DoubleHand:
+		CharacterCombatState = ECharacterCombatState::ECCS_EquippedTwoHandedWeapon;
+		break;
+	case EWeaponLaterality::EWL_DualWield:
+		CharacterCombatState = ECharacterCombatState::ECCS_EquippedDualWieldedWeapon;
+		break;
+	default:
+		break;
+	}
 
 	EquippedSecondaryWeapon->SetItemState(EItemState::EIS_EquippedSecondary);
 	CheckAttachedActorUnequipped(EquippedSecondaryWeapon);
@@ -370,13 +384,13 @@ void UCombatComponent::CheckAttachedActorUnequipped(AActor* ActorToAttach)
 		Character->GetMesh() == nullptr ||
 		AnimInstance == nullptr ||
 		ActorToAttach == nullptr ||
-		EquippedWeapon == nullptr;
+		EquippedSecondaryWeapon == nullptr;
 	if (bIsValid)
 	{
 		return;
 	}
 
-	switch (EquippedWeapon->GetUnequippedWeaponSocket())
+	switch (EquippedSecondaryWeapon->GetUnequippedWeaponSocket())
 	{
 	case EWeaponAttachmentSocket::EWAS_BackSpine:
 		AttachActorToBackSpine(ActorToAttach);
