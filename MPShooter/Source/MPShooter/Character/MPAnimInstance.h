@@ -35,6 +35,8 @@ private:
 	bool bIsCrouched;
 	UPROPERTY(BlueprintReadOnly, Category = "Weapon", meta = (AllowPrivateAccess = "true"), meta = (ToolTip = "Checks if a character has a weapon equipped."))
 	bool bWeaponEquipped;
+	UPROPERTY(BlueprintReadOnly, Category = "Weapon", meta = (AllowPrivateAccess = "true"), meta = (ToolTip = "Checks if a character has a weapon unequipped."))
+	bool bWeaponUnequipped;
 	class AWeapon* EquippedWeapon;
 	UPROPERTY(BlueprintReadOnly, Category = "Weapon", meta = (AllowPrivateAccess = "true"), meta = (ToolTip = "Determines a character's weapon's laterality."))
 	ECharacterCombatState CharacterCombatState;

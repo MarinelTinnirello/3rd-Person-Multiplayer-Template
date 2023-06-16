@@ -156,6 +156,7 @@ void AMPCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 
 				EnhancedInputComponent->BindAction(InputActions->InputJump, ETriggerEvent::Triggered, this, &AMPCharacter::Jump);
 				EnhancedInputComponent->BindAction(InputActions->InputEquip, ETriggerEvent::Triggered, this, &AMPCharacter::EquipButtonPressed);
+				EnhancedInputComponent->BindAction(InputActions->InputUnequip, ETriggerEvent::Triggered, this, &AMPCharacter::UnequipButtonPressed);
 				EnhancedInputComponent->BindAction(InputActions->InputCrouch, ETriggerEvent::Triggered, this, &AMPCharacter::CrouchButtonPressed);
 				EnhancedInputComponent->BindAction(InputActions->InputFire, ETriggerEvent::Triggered, this, &AMPCharacter::FireButtonPressed);
 				EnhancedInputComponent->BindAction(InputActions->InputFire, ETriggerEvent::Completed, this, &AMPCharacter::FireButtonReleased);
@@ -495,10 +496,57 @@ void AMPCharacter::ServerEquipButtonPressed_Implementation()
 		{
 			Combat->SwapWeapons();
 		}
+		else if (Combat->ShouldReequipWeapon())
+		{
+			Combat->EquipWeapon(Combat->EquippedWeapon);
+		}
 
 		if (OverlappingThrowableWeapon)
 		{
 			Combat->EquipThrowableWeapon(OverlappingThrowableWeapon);
+		}
+	}
+}
+
+void AMPCharacter::UnequipButtonPressed()
+{
+	if (bDisableGameplay)
+	{
+		return;
+	}
+
+	if (Combat)
+	{
+		bool bUnequip = Combat->ShouldUnequipWeapon() &&
+			!HasAuthority() &&
+			Combat->CombatState == ECombatState::ECS_Unoccupied &&
+			Combat->EquippedWeapon;
+		if (bUnequip)
+		{
+			ServerUnequipButtonPressed();
+
+			if (Combat->EquippedWeapon->GetUnequippedWeaponSocket() == EWeaponAttachmentSocket::EWAS_BackSpine)
+			{
+				PlayEquipMontage(FName("UnequipBackSpine"));
+			}
+			else if (Combat->EquippedWeapon->GetUnequippedWeaponSocket() == EWeaponAttachmentSocket::EWAS_Hips)
+			{
+				PlayEquipMontage(FName("UnequipHips"));
+			}
+
+			Combat->CombatState = ECombatState::ECS_Equipping;
+			bFinishedEquipping = false;
+		}
+	}
+}
+
+void AMPCharacter::ServerUnequipButtonPressed_Implementation()
+{
+	if (Combat)
+	{
+		if (Combat->ShouldUnequipWeapon())
+		{
+			Combat->UnequipWeapon();
 		}
 	}
 }
@@ -543,6 +591,22 @@ void AMPCharacter::FireButtonReleased()
 	if (Combat)
 	{
 		Combat->FireButtonPressed(false);
+	}
+}
+
+void AMPCharacter::PlayEquipMontage(const FName& SectionName)
+{
+	if (Combat == nullptr || Combat->EquippedWeapon == nullptr)
+	{
+		return;
+	}
+
+	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+	if (AnimInstance && EquipMontage)
+	{
+		AnimInstance->Montage_Play(EquipMontage);
+
+		AnimInstance->Montage_JumpToSection(SectionName);
 	}
 }
 
@@ -932,6 +996,11 @@ void AMPCharacter::OnRep_OverlappingWeapon(AWeapon* PrevWeapon)
 bool AMPCharacter::IsWeaponEquipped()
 {
 	return (Combat && Combat->EquippedWeapon);
+}
+
+bool AMPCharacter::IsWeaponUnequipped()
+{
+	return (Combat && Combat->IsWeaponUnequipped());
 }
 
 AWeapon* AMPCharacter::GetEquippedWeapon()

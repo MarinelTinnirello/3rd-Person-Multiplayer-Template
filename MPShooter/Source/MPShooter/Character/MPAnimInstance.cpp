@@ -41,6 +41,7 @@ void UMPAnimInstance::NativeUpdateAnimation(float DeltaTime)
 	bEliminated = MPCharacter->IsEliminated();
 
 	bWeaponEquipped = MPCharacter->IsWeaponEquipped();
+	bWeaponUnequipped = MPCharacter->IsWeaponUnequipped();
 	EquippedWeapon = MPCharacter->GetEquippedWeapon();
 	bAiming = MPCharacter->IsAiming();
 	TurningInPlace = MPCharacter->GetTurningInPlace();

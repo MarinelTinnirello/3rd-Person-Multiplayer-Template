@@ -54,6 +54,7 @@ public:
 	UPROPERTY(Replicated)
 	bool bDisableGameplay = false;
 	bool bFinishedSwapping = false;
+	bool bFinishedEquipping = false;
 
 	//
 	// Surfaces
@@ -88,6 +89,7 @@ public:
 	virtual void PostInitializeComponents() override;
 	virtual void Destroyed() override;
 
+	void PlayEquipMontage(const FName& SectionName);
 	void PlayFireMontage(bool bIsAiming);
 	void PlaySwapMontage();
 	void PlayThrowMontage();
@@ -128,6 +130,7 @@ protected:
 
 	virtual void Jump() override;
 	void EquipButtonPressed();
+	void UnequipButtonPressed();
 	void CrouchButtonPressed();
 	void FireButtonPressed();
 	void FireButtonReleased();
@@ -185,6 +188,8 @@ private:
 
 	UFUNCTION(Server, Reliable)
 	void ServerEquipButtonPressed();
+	UFUNCTION(Server, Reliable)
+	void ServerUnequipButtonPressed();
 
 	//
 	// Throwable Properties
@@ -228,8 +233,12 @@ private:
 	//
 	// Montages
 	//
+	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Montage that plays if a character equips or unequips a weapon."))
+	class UAnimMontage* EquipMontage;
+	//UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Montage that plays if a character fires a weapon."))
+	//UAnimMontage* FireWeaponMontage;
 	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Montage that plays if a character fires a weapon."))
-	class UAnimMontage* FireWeaponMontage;
+	UAnimMontage* FireWeaponMontage;
 	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Montage that plays if a character is swapping a weapon."))
 	UAnimMontage* SwapMontage;
 	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Montage that plays if a character is hit."))
@@ -323,6 +332,7 @@ public:
 	FVector GetHitTarget() const;
 	void SetOverlappingWeapon(AWeapon* Weapon);
 	bool IsWeaponEquipped();
+	bool IsWeaponUnequipped();
 	bool IsAiming();
 	bool IsLocallyReloading();
 

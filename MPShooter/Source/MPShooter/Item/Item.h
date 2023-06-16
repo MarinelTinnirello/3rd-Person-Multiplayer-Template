@@ -134,6 +134,8 @@ private:
 	class USoundCue* PickupSound;
 	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "SFX for when an item is equipped."))
 	USoundCue* EquipSound;
+	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "SFX for when an item is unequipped."))
+	USoundCue* UnequipSound;
 
 	UFUNCTION()
 	void OnRep_ItemState();
@@ -157,6 +159,7 @@ public:
 	void SetIconItem(UTexture2D* Icon) { ItemIcon = Icon; }
 	FORCEINLINE USoundCue* GetPickupSound() const { return PickupSound; }
 	FORCEINLINE USoundCue* GetEquipSound() const { return EquipSound; }
+	FORCEINLINE USoundCue* GetUnequipSound() const { return UnequipSound; }
 
 	virtual void EnableCustomDepth(bool bCanChangeCustomDepth);
 

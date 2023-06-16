@@ -214,6 +214,61 @@ void UCombatComponent::OnRep_EquippedSecondaryWeapon()
 	}
 }
 
+bool UCombatComponent::ShouldReequipWeapon()
+{
+	return (EquippedWeapon != nullptr && CharacterCombatState == ECharacterCombatState::ECCS_Unequipped);
+}
+
+void UCombatComponent::UnequipWeapon()
+{
+	if (CombatState != ECombatState::ECS_Unoccupied || Character == nullptr || !Character->HasAuthority() || EquippedWeapon == nullptr)
+	{
+		return;
+	}
+
+	if (EquippedWeapon->GetUnequippedWeaponSocket() == EWeaponAttachmentSocket::EWAS_BackSpine)
+	{
+		Character->PlayEquipMontage(FName("UnequipBackSpine"));
+	}
+	else if (EquippedWeapon->GetUnequippedWeaponSocket() == EWeaponAttachmentSocket::EWAS_Hips)
+	{
+		Character->PlayEquipMontage(FName("UnequipHips"));
+	}
+
+	CombatState = ECombatState::ECS_Equipping;
+	Character->bFinishedEquipping = false;
+}
+
+void UCombatComponent::EndUnequip()
+{
+	if (Character && Character->HasAuthority())
+	{
+		CombatState = ECombatState::ECS_Unoccupied;
+	}
+
+	if (Character)
+	{
+		Character->bFinishedEquipping = true;
+	}
+}
+
+void UCombatComponent::EndUnequipWeapon()
+{
+	CheckAttachedActorUnequipped(EquippedWeapon);
+	PlayUnequipWeaponSound(EquippedWeapon);
+	CharacterCombatState = ECharacterCombatState::ECCS_Unequipped;
+}
+
+bool UCombatComponent::IsWeaponUnequipped()
+{
+	return (EquippedWeapon != nullptr && CharacterCombatState == ECharacterCombatState::ECCS_Unequipped);
+}
+
+bool UCombatComponent::ShouldUnequipWeapon()
+{
+	return (EquippedWeapon != nullptr && CharacterCombatState != ECharacterCombatState::ECCS_Unequipped);
+}
+
 void UCombatComponent::DropEquippedWeapon()
 {
 	// Makes sure we only have 1 weapon equipped at a time
@@ -291,6 +346,18 @@ void UCombatComponent::PlayEquipWeaponSound(AWeapon* WeaponToEquip)
 		UGameplayStatics::PlaySoundAtLocation(
 			this,
 			WeaponToEquip->GetEquipSound(),
+			Character->GetActorLocation()
+		);
+	}
+}
+
+void UCombatComponent::PlayUnequipWeaponSound(AWeapon* WeaponToUnequip)
+{
+	if (Character && WeaponToUnequip && WeaponToUnequip->GetUnequipSound())
+	{
+		UGameplayStatics::PlaySoundAtLocation(
+			this,
+			WeaponToUnequip->GetUnequipSound(),
 			Character->GetActorLocation()
 		);
 	}
@@ -853,16 +920,29 @@ void UCombatComponent::OnRep_CombatState()
 {
 	switch (CombatState)
 	{
-	case ECombatState::ECS_Reloading:
-		if (Character && !Character->IsLocallyControlled())
-		{
-			HandleReload();
-		}
-		break;
 	case ECombatState::ECS_Unoccupied:
 		if (bFireButtonPressed)
 		{
 			Fire();
+		}
+		break;
+	case ECombatState::ECS_Equipping:
+		if (Character && !Character->IsLocallyControlled() && EquippedWeapon)
+		{
+			if (EquippedWeapon->GetUnequippedWeaponSocket() == EWeaponAttachmentSocket::EWAS_BackSpine)
+			{
+				Character->PlayEquipMontage(FName("UnequipBackSpine"));
+			}
+			else if (EquippedWeapon->GetUnequippedWeaponSocket() == EWeaponAttachmentSocket::EWAS_Hips)
+			{
+				Character->PlayEquipMontage(FName("UnequipHips"));
+			}
+		}
+		break;
+	case ECombatState::ECS_Reloading:
+		if (Character && !Character->IsLocallyControlled())
+		{
+			HandleReload();
 		}
 		break;
 	case ECombatState::ECS_Throwing:

@@ -27,7 +27,14 @@ public:
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
 	void SpawnDefaultWeapon();
+	UFUNCTION(BlueprintCallable)
 	void EquipWeapon(class AWeapon* WeaponToEquip);
+	UFUNCTION(BlueprintCallable)
+	void UnequipWeapon();
+	UFUNCTION(BlueprintCallable)
+	void EndUnequip();
+	UFUNCTION(BlueprintCallable)
+	void EndUnequipWeapon();
 	void SwapWeapons();
 	UFUNCTION(BlueprintCallable)
 	void EndSwap();
@@ -76,6 +83,7 @@ protected:
 
 	void DropEquippedWeapon();
 	void PlayEquipWeaponSound(AWeapon* WeaponToEquip);
+	void PlayUnequipWeaponSound(AWeapon* WeaponToUnequip);
 	void UpdateWeaponType();
 	void EquipPrimaryWeapon(AWeapon* WeaponToEquip);
 	void EquipSecondaryWeapon(AWeapon* WeaponToEquip);
@@ -278,6 +286,9 @@ private:
 
 public:	
 	/*FORCEINLINE int32 GetThrowables() const { return Throwables; }*/
+	bool IsWeaponUnequipped();
+	bool ShouldUnequipWeapon();
+	bool ShouldReequipWeapon();
 	bool ShouldSwapWeapons();
 
 };

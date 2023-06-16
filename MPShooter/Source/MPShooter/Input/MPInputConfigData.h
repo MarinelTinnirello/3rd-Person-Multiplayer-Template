@@ -22,6 +22,8 @@ public:
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
     UInputAction* InputEquip;
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+    UInputAction* InputUnequip;
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
     UInputAction* InputCrouch;
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
     UInputAction* InputFire;
