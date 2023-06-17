@@ -235,10 +235,6 @@ private:
 	//
 	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Montage that plays if a character equips or unequips a weapon."))
 	class UAnimMontage* EquipMontage;
-	//UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Montage that plays if a character fires a weapon."))
-	//UAnimMontage* FireWeaponMontage;
-	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Montage that plays if a character fires a weapon."))
-	UAnimMontage* FireWeaponMontage;
 	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Montage that plays if a character is swapping a weapon."))
 	UAnimMontage* SwapMontage;
 	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Montage that plays if a character is hit."))
@@ -328,6 +324,7 @@ private:
 	// Make socket on Combat Component
 
 public:	
+	UFUNCTION(BlueprintCallable)
 	AWeapon* GetEquippedWeapon();
 	FVector GetHitTarget() const;
 	void SetOverlappingWeapon(AWeapon* Weapon);

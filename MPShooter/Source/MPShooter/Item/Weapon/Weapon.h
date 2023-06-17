@@ -62,6 +62,14 @@ struct FWeaponProperties
 	FName MuzzleFlash = "MuzzleFlash";
 	UPROPERTY(EditAnywhere, Category = "Weapon Properties", meta = (ToolTip = "Animation played when a weapon is fired."))
 	class UAnimationAsset* FireAnimation;
+	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Montage that plays if a character fires a weapon and the weapon is one-handed and melee."))
+	class UAnimMontage* FireWeaponOneHandedMeleeMontage;
+	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Montage that plays if a character fires a weapon and the weapon is two-handed and melee."))
+	UAnimMontage* FireWeaponTwoHandedMeleeMontage;
+	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Montage that plays if a character fires a weapon and the weapon is one-handed and ranged."))
+	UAnimMontage* FireWeaponOneHandedRangedMontage;
+	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Montage that plays if a character fires a weapon and the weapon is two-handed and ranged."))
+	UAnimMontage* FireWeaponTwoHandedRangedMontage;
 	UPROPERTY(EditAnywhere, Category = "Weapon Properties", meta = (ToolTip = "Montage that plays if a character is reloading a weapon."))
 	UAnimMontage* ReloadMontage;
 	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Damage dealt by the weapon."))
@@ -195,6 +203,18 @@ protected:
 	FName MuzzleFlash = "MuzzleFlash";
 	UPROPERTY(EditAnywhere, Category = "Weapon Properties", meta = (ToolTip = "Animation played when a weapon is fired."))
 	class UAnimationAsset* FireAnimation;
+	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Montage that plays if a character fires a weapon and the weapon is one-handed and melee."))
+	class UAnimMontage* FireWeaponOneHandedMeleeMontage;
+	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Montage that plays if a character fires a weapon and the weapon is two-handed and melee."))
+	UAnimMontage* FireWeaponTwoHandedMeleeMontage;
+	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Montage that plays if a character fires a weapon and the weapon is one-handed and ranged."))
+	UAnimMontage* FireWeaponOneHandedRangedMontage;
+	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Montage that plays if a character fires a weapon and the weapon is two-handed and ranged."))
+	UAnimMontage* FireWeaponTwoHandedRangedMontage;
+	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Names of sections in the 'FireWeaponOneHandedMelee' montage."))
+	TArray<FName> FireWeaponOneHandedMeleeMontageSections;
+	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Names of sections in the 'FireWeaponOneHandedMelee' montage."))
+	TArray<FName> FireWeaponTwoHandedMeleeMontageSections;
 	UPROPERTY(EditAnywhere, Category = "Weapon Properties", meta = (ToolTip = "Montage that plays if a character is reloading a weapon."))
 	UAnimMontage* ReloadMontage;
 	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Damage dealt by the weapon."))
@@ -283,6 +303,7 @@ public:
 	// 
 	// Weapon Properties
 	//
+	UFUNCTION(BlueprintCallable)
 	FORCEINLINE EWeaponType GetWeaponType() const { return WeaponType; }
 	FORCEINLINE EWeaponAttachmentSocket GetEquippedWeaponSocket() const { return EquippedWeaponSocket; }
 	FORCEINLINE EWeaponAttachmentSocket GetUnequippedWeaponSocket() const { return UnequippedWeaponSocket; }
@@ -291,6 +312,13 @@ public:
 	FORCEINLINE EFireType GetFireType() const { return FireType; }
 	FORCEINLINE float GetDamage() const { return Damage; }
 	FORCEINLINE float GetHeadShotDamage() const { return HeadShotDamage; }
+
+	FORCEINLINE UAnimMontage* GetFireWeaponOneHandedMeleeMontage() const { return FireWeaponOneHandedMeleeMontage; }
+	FORCEINLINE UAnimMontage* GetFireWeaponTwoHandedMeleeMontage() const { return FireWeaponTwoHandedMeleeMontage; }
+	FORCEINLINE UAnimMontage* GetFireWeaponOneHandedRangedMontage() const { return FireWeaponOneHandedRangedMontage; }
+	FORCEINLINE UAnimMontage* GetFireWeaponTwoHandedRangedMontage() const { return FireWeaponTwoHandedRangedMontage; }
+	FORCEINLINE TArray<FName> GetFireWeaponOneHandedMeleeMontageSections() const { return FireWeaponOneHandedMeleeMontageSections; }
+	FORCEINLINE TArray<FName> GetFireWeaponTwoHandedMeleeMontageSections() const { return FireWeaponTwoHandedMeleeMontageSections; }
 
 	FORCEINLINE float GetZoomedFOV() const { return ZoomedFOV; }
 	FORCEINLINE float GetZoomedInterpSpeed() const { return ZoomedInterpSpeed; }

@@ -69,6 +69,7 @@ protected:
 	void FireProjectileWeapon();
 	void FireHitScanWeapon();
 	void FireShotgun();
+	void FireMeleeWeapon();
 	void LocalFire(const FVector_NetQuantize& TraceHitTarget);
 	void LocalFireShotgun(const TArray<FVector_NetQuantize>& TraceHitTargets);
 	void HandleReload();

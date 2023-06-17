@@ -650,6 +650,9 @@ void UCombatComponent::Fire()
 			case EFireType::EFT_Shotgun:
 				FireShotgun();
 				break;
+			case EFireType::EFT_Melee:
+				FireMeleeWeapon();
+				break;
 			}
 		}
 
@@ -701,6 +704,19 @@ void UCombatComponent::FireShotgun()
 	}
 }
 
+void UCombatComponent::FireMeleeWeapon()
+{
+	if (EquippedWeapon && Character)
+	{
+		if (!Character->HasAuthority())
+		{
+			LocalFire(HitTarget);
+		}
+
+		ServerFire(HitTarget, EquippedWeapon->FireDelay);
+	}
+}
+
 void UCombatComponent::MulticastFire_Implementation(const FVector_NetQuantize& TraceHitTarget)
 {
 	if (Character && Character->IsLocallyControlled() && !Character->HasAuthority()) 
@@ -733,6 +749,7 @@ bool UCombatComponent::ServerFire_Validate(const FVector_NetQuantize& TraceHitTa
 		bool bNearlyEqual = FMath::IsNearlyEqual(EquippedWeapon->FireDelay, FireDelay, 0.001f);
 		return bNearlyEqual;
 	}
+
 	return true;
 }
 
@@ -748,6 +765,7 @@ bool UCombatComponent::ServerFireShotgun_Validate(const TArray<FVector_NetQuanti
 		bool bNearlyEqual = FMath::IsNearlyEqual(EquippedWeapon->FireDelay, FireDelay, 0.001f);
 		return bNearlyEqual;
 	}
+
 	return true;
 }
 
