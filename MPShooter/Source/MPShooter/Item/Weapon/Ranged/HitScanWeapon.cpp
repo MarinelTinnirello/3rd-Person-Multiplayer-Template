@@ -45,6 +45,7 @@ void AHitScanWeapon::Fire(const FVector& HitTarget)
 					this,
 					UDamageType::StaticClass()
 				);
+				MPCharacter->DirectionalHitReact(FireHit.ImpactPoint);
 			}
 			if (!HasAuthority() && bUseServerSideRewind)
 			{
@@ -175,6 +176,7 @@ void AHitScanWeapon::FireMulti(const TArray<FVector_NetQuantize>& HitTargets)
 		{
 			if (DamagePair.Key && InstigatorController)
 			{
+				FHitResult FireHit;
 				bool bCauseAuthDamage = !bUseServerSideRewind || OwnerPawn->IsLocallyControlled();
 				if (HasAuthority() && bCauseAuthDamage)
 				{
@@ -185,6 +187,7 @@ void AHitScanWeapon::FireMulti(const TArray<FVector_NetQuantize>& HitTargets)
 						this,
 						UDamageType::StaticClass()
 					);
+					//HitCharacters[DamagePair.Key]->DirectionalHitReact(FireHit.ImpactPoint);
 				}
 			}
 		}

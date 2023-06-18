@@ -21,6 +21,9 @@ public:
 	void SetWeaponCollisionEnabled(ECollisionEnabled::Type CollisionEnabled);
 
 protected:
+	//
+	// Weapon Properties
+	//
 	UPROPERTY(VisibleAnywhere, Category = "Melee Weapon Properties", meta = (ToolTip = "Collision box for the weapon."))
 	class UBoxComponent* WeaponBox;
 	UPROPERTY(EditAnywhere, Category = "Melee Weapon Properties", meta = (ToolTip = "Extents for the box trace for the weapon."))
@@ -30,6 +33,9 @@ protected:
 	UPROPERTY(VisibleAnywhere, Category = "Melee Weapon Properties", meta = (ToolTip = "End for the box trace for the weapon."))
 	USceneComponent* BoxTraceEnd;
 
+	//
+	// Melee Properties
+	//
 	UPROPERTY(EditAnywhere, Category = "Melee Weapon Properties", meta = (ToolTip = "Particles seen on impact from the weapon."))
 	class UParticleSystem* ImpactParticles;
 	UPROPERTY(EditAnywhere, Category = "Melee Weapon Properties", meta = (ToolTip = "Sound that plays on impact with the environment or character."))
@@ -45,12 +51,6 @@ protected:
 	);
 
 private:
-	//
-	// Melee Properties
-	//
-	UPROPERTY(EditAnywhere, Category = "Melee Weapon Properties", meta = (ToolTip = "Particles trailing from the weapon."))
-	class UParticleSystem* BeamParticles;
-
 	void BoxTrace(FHitResult& BoxHit);
 
 public:

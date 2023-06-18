@@ -228,7 +228,7 @@ void AProjectile::ExplodeDamage()
 	if (FiringPawn && HasAuthority())
 	{
 		AController* FiringController = FiringPawn->GetController();
-
+		//AMPCharacter* MPCharacter = Cast<AMPCharacter>(FiringPawn);
 		if (FiringController)
 		{
 			UGameplayStatics::ApplyRadialDamageWithFalloff(
@@ -244,6 +244,7 @@ void AProjectile::ExplodeDamage()
 				this,
 				FiringController
 			);
+			//MPCharacter->DirectionalHitReact(GetActorLocation());
 		}
 	}
 }

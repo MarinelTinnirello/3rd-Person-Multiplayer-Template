@@ -132,6 +132,8 @@ class MPSHOOTER_API AWeapon : public AItem
 	GENERATED_BODY()
 	
 public:	
+	TArray<AActor*> IgnoreActors;
+
 	//
 	// Crosshairs
 	//

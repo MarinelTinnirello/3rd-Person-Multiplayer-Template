@@ -95,6 +95,7 @@ public:
 	void PlayThrowMontage();
 	void PlayEliminateMontage();
 
+	void DirectionalHitReact(const FVector& ImpactPoint);
 	void Eliminated(bool bPlayerLeftGame);
 	void UpdateHUDHealth();
 	void UpdateHUDShield();
@@ -150,7 +151,7 @@ protected:
 	void SimProxiesTurn();
 	void RotateInPlace(float DeltaTime);
 
-	void PlayHitReactMontage();
+	void PlayHitReactMontage(const FName& SectionName);
 	UFUNCTION()
 	void ReceiveDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, class AController* InstigatorController, AActor* DamageCauser);
 	void PollInit();

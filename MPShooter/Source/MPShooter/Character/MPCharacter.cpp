@@ -1140,7 +1140,7 @@ FVector AMPCharacter::GetHitTarget() const
 	return Combat->HitTarget;
 }
 
-void AMPCharacter::PlayHitReactMontage()
+void AMPCharacter::PlayHitReactMontage(const FName& SectionName)
 {
 	if (Combat == nullptr || Combat->EquippedWeapon == nullptr)
 	{
@@ -1152,7 +1152,6 @@ void AMPCharacter::PlayHitReactMontage()
 	{
 		AnimInstance->Montage_Play(HitReactMontage);
 
-		FName SectionName("FromFront");
 		AnimInstance->Montage_JumpToSection(SectionName);
 	}
 }
@@ -1183,7 +1182,7 @@ void AMPCharacter::ReceiveDamage(AActor* DamagedActor, float Damage, const UDama
 
 	UpdateHUDHealth();
 	UpdateHUDShield();
-	PlayHitReactMontage();
+	DirectionalHitReact(FVector(0.f, 0.f, 0.f));
 
 	if (Health == 0.f)
 	{
@@ -1202,7 +1201,7 @@ void AMPCharacter::OnRep_Health(float LastHealth)
 	UpdateHUDHealth();
 	if (Health < LastHealth)
 	{
-		PlayHitReactMontage();
+		DirectionalHitReact(FVector(0.f, 0.f, 0.f));
 	}
 }
 
@@ -1213,6 +1212,40 @@ void AMPCharacter::UpdateHUDHealth()
 	{
 		MPPlayerController->SetHUDHealth(Health, MaxHealth);
 	}
+}
+
+void AMPCharacter::DirectionalHitReact(const FVector& ImpactPoint)
+{
+	const FVector Forward = GetActorForwardVector();
+	const FVector ImpactLowered(ImpactPoint.X, ImpactPoint.Y, GetActorLocation().Z);
+	const FVector ToHit = (ImpactLowered - GetActorLocation()).GetSafeNormal();
+
+	const double CosTheta = FVector::DotProduct(Forward, ToHit);
+	double Theta = FMath::Acos(CosTheta);
+	Theta = FMath::RadiansToDegrees(Theta);
+
+	const FVector CrossProduct = FVector::CrossProduct(Forward, ToHit);
+	if (CrossProduct.Z < 0)
+	{
+		Theta *= -1.f;
+	}
+
+	FName SectionName("FromBack");
+
+	if (Theta >= -45.f && Theta < 45.f)
+	{
+		SectionName = FName("FromFront");
+	}
+	else if (Theta >= -135.f && Theta < -45.f)
+	{
+		SectionName = FName("FromLeft");
+	}
+	else if (Theta >= 45.f && Theta < 135.f)
+	{
+		SectionName = FName("FromRight");
+	}
+
+	PlayHitReactMontage(SectionName);
 }
 
 void AMPCharacter::Eliminated(bool bPlayerLeftGame)
@@ -1355,7 +1388,7 @@ void AMPCharacter::OnRep_Shield(float LastShield)
 	UpdateHUDShield();
 	if (Shield < LastShield)
 	{
-		PlayHitReactMontage();
+		DirectionalHitReact(FVector(0.f, 0.f, 0.f));
 	}
 }
 
