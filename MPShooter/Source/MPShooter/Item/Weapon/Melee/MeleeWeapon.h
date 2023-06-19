@@ -21,10 +21,20 @@ protected:
 	//
 	// Melee Properties
 	//
-	UPROPERTY(EditAnywhere, Category = "Melee Weapon Properties", meta = (ToolTip = "Particles seen on impact from the weapon."))
+	UPROPERTY(EditAnywhere, Category = "Melee Weapon Properties - Impact", meta = (ToolTip = "Particles seen on impact from the weapon."))
 	class UParticleSystem* ImpactParticles;
-	UPROPERTY(EditAnywhere, Category = "Melee Weapon Properties", meta = (ToolTip = "Sound that plays on impact with the environment or character."))
+	UPROPERTY(EditAnywhere, Category = "Melee Weapon Properties - Impact", meta = (ToolTip = "Sound that plays on impact with the environment or character."))
 	class USoundCue* ImpactSound;
+	UPROPERTY(EditAnywhere, Category = "Melee Weapon Properties - Impact", meta = (ToolTip = "Particles that play on impact with a character."))
+	UParticleSystem* ImpactCharacterParticles;
+	UPROPERTY(EditAnywhere, Category = "Melee Weapon Properties - Impact", meta = (ToolTip = "Sound that plays on impact with a character."))
+	USoundCue* ImpactCharacterSound;
+	UPROPERTY(EditAnywhere, Category = "Melee Weapon Properties - Impact", meta = (ToolTip = "Material decal that spawns on impact with the environment."))
+	class UMaterialInterface* ImpactDecalMaterial;
+	UPROPERTY(EditAnywhere, Category = "Melee Weapon Properties - Impact", meta = (ToolTip = "Size of the material decal."))
+	FVector DecalSize = FVector(16.f, 16.f, 16.f);
+	UPROPERTY(EditAnywhere, Category = "Melee Weapon Properties - Impact", meta = (ToolTip = "Life span of the material decal."))
+	float DecalLifeSpan = 10.f;
 
 private:
 	UPROPERTY(EditAnywhere, Category = "Melee Weapon Properties", meta = (ToolTip = "Start socket name for a line trace on a weapon."))

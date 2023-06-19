@@ -13,6 +13,7 @@
 #include "NiagaraFunctionLibrary.h"
 #include "NiagaraComponent.h"
 #include "MPShooter/MPShooter.h"
+#include "MPShooter/Interfaces/HitActorInterface.h"
 #include "MPShooter/Character/MPCharacter.h"
 
 AProjectile::AProjectile()

@@ -54,7 +54,6 @@ void AMeleeWeapon::Fire(const FVector& HitTarget)
 					this,
 					UDamageType::StaticClass()
 				);
-				UE_LOG(LogTemp, Warning, TEXT("Poo poo :)"));
 				MPCharacter->DirectionalHitReact(FireHit.ImpactPoint);
 			}
 			if (!HasAuthority() && bUseServerSideRewind)

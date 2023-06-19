@@ -5,10 +5,11 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "MPShooter/MPTypes/HitActor.h"
+#include "MPShooter/Interfaces/HitActorInterface.h"
 #include "Projectile.generated.h"
 
 UCLASS()
-class MPSHOOTER_API AProjectile : public AActor
+class MPSHOOTER_API AProjectile : public AActor, public IHitActorInterface
 {
 	GENERATED_BODY()
 	
@@ -21,7 +22,7 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Projectile Properties", meta = (ToolTip = "Amount of damage each projectile deals to whatever it hits. Doesn't need to be set for things like grenades and rockets, since they're explosives."))
 	float HeadShotDamage = 40.f;
 	UPROPERTY(EditAnywhere, Category = "Projectile Properties", meta = (ToolTip = "Amount of speed each projectile initially starts at. This will also set the MaxSpeed to be equal, although this can be changed in the ProjectileMovement properties."))
-	float InitialSpeed = 15000;
+	float InitialSpeed = 15000.f;
 
 	//
 	// Server-Side Rewind
@@ -43,19 +44,19 @@ protected:
 	//
 	// Projectile Properties
 	//
-	UPROPERTY(EditAnywhere, Category = "Projectile Properties", meta = (ToolTip = "Particles that play on impact with the environment."))
+	UPROPERTY(EditAnywhere, Category = "Projectile Properties - Impact", meta = (ToolTip = "Particles that play on impact with the environment."))
 	class UParticleSystem* ImpactParticles;
-	UPROPERTY(EditAnywhere, Category = "Projectile Properties", meta = (ToolTip = "Sound that plays on impact with the environment."))
+	UPROPERTY(EditAnywhere, Category = "Projectile Properties - Impact", meta = (ToolTip = "Sound that plays on impact with the environment."))
 	class USoundCue* ImpactSound;
-	UPROPERTY(EditAnywhere, Category = "Projectile Properties", meta = (ToolTip = "Particles that play on impact with a character."))
+	UPROPERTY(EditAnywhere, Category = "Projectile Properties - Impact", meta = (ToolTip = "Particles that play on impact with a character."))
 	UParticleSystem* ImpactCharacterParticles;
-	UPROPERTY(EditAnywhere, Category = "Projectile Properties", meta = (ToolTip = "Sound that plays on impact with a character."))
+	UPROPERTY(EditAnywhere, Category = "Projectile Properties - Impact", meta = (ToolTip = "Sound that plays on impact with a character."))
 	USoundCue* ImpactCharacterSound;
-	UPROPERTY(EditAnywhere, Category = "Projectile Properties", meta = (ToolTip = "Material decal that spawns on impact with the environment."))
+	UPROPERTY(EditAnywhere, Category = "Projectile Properties - Impact", meta = (ToolTip = "Material decal that spawns on impact with the environment."))
 	class UMaterialInterface* ImpactDecalMaterial;
-	UPROPERTY(EditAnywhere, Category = "Projectile Properties", meta = (ToolTip = "Size of the material decal."))
+	UPROPERTY(EditAnywhere, Category = "Projectile Properties - Impact", meta = (ToolTip = "Size of the material decal."))
 	FVector DecalSize = FVector(16.f, 16.f, 16.f);
-	UPROPERTY(EditAnywhere, Category = "Projectile Properties", meta = (ToolTip = "Life span of the material decal."))
+	UPROPERTY(EditAnywhere, Category = "Projectile Properties - Impact", meta = (ToolTip = "Life span of the material decal."))
 	float DecalLifeSpan = 10.f;
 
 	UPROPERTY()

@@ -128,8 +128,6 @@ class MPSHOOTER_API AWeapon : public AItem
 	GENERATED_BODY()
 	
 public:	
-	TArray<AActor*> IgnoreActors;
-
 	//
 	// Crosshairs
 	//
@@ -215,6 +213,8 @@ protected:
 	float Damage = 20.f;
 	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Damage dealt by the weapon if hit on the head."))
 	float HeadShotDamage = 40.f;
+	UPROPERTY(Replicated)
+	EHitActor HitActor;
 
 	//
 	// Weapon Scatter
