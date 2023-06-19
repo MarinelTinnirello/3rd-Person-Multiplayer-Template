@@ -619,53 +619,25 @@ void AMPCharacter::PlayFireMontage(bool bIsAiming)
 	}
 
 	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
-	bool bOneHandedMelee = AnimInstance &&
-		GetCharacterCombatState() == ECharacterCombatState::ECCS_EquippedOneHandedWeapon &&
+	bool bMelee = AnimInstance &&
 		Combat->EquippedWeapon->GetWeaponType() == EWeaponType::EWT_Melee &&
-		Combat->EquippedWeapon->GetFireWeaponOneHandedMeleeMontage() &&
-		Combat->EquippedWeapon->GetFireWeaponOneHandedMeleeMontageSections().Num() >= 0;
-	bool bTwoHandedMelee = AnimInstance &&
-		GetCharacterCombatState() == ECharacterCombatState::ECCS_EquippedTwoHandedWeapon &&
-		Combat->EquippedWeapon->GetWeaponType() == EWeaponType::EWT_Melee &&
-		Combat->EquippedWeapon->GetFireWeaponTwoHandedMeleeMontage() &&
-		Combat->EquippedWeapon->GetFireWeaponTwoHandedMeleeMontageSections().Num() >= 0;
-	bool bOneHandedRanged = AnimInstance &&
-		GetCharacterCombatState() == ECharacterCombatState::ECCS_EquippedOneHandedWeapon &&
-		Combat->EquippedWeapon->GetFireWeaponOneHandedRangedMontage();
-	bool bTwoHandedRanged = AnimInstance &&
-		GetCharacterCombatState() == ECharacterCombatState::ECCS_EquippedTwoHandedWeapon &&
-		Combat->EquippedWeapon->GetFireWeaponTwoHandedRangedMontage();
-	if (bOneHandedMelee)
+		Combat->EquippedWeapon->GetFireWeaponMontage() &&
+		Combat->EquippedWeapon->GetFireWeaponMontageSections().Num() >= 0;
+	bool bRanged = AnimInstance &&
+		Combat->EquippedWeapon->GetFireWeaponMontage();
+	if (bMelee)
 	{
-		AnimInstance->Montage_Play(Combat->EquippedWeapon->GetFireWeaponOneHandedMeleeMontage());
+		AnimInstance->Montage_Play(Combat->EquippedWeapon->GetFireWeaponMontage());
 
 		FName SectionName;
-		const int32 MaxSectionIndex = Combat->EquippedWeapon->GetFireWeaponOneHandedMeleeMontageSections().Num() - 1;
+		const int32 MaxSectionIndex = Combat->EquippedWeapon->GetFireWeaponMontageSections().Num() - 1;
 		const int32 Selection = FMath::RandRange(0, MaxSectionIndex);
-		SectionName = Combat->EquippedWeapon->GetFireWeaponOneHandedMeleeMontageSections()[Selection];
+		SectionName = Combat->EquippedWeapon->GetFireWeaponMontageSections()[Selection];
 		AnimInstance->Montage_JumpToSection(SectionName);
 	}
-	if (bTwoHandedMelee)
+	if (bRanged)
 	{
-		AnimInstance->Montage_Play(Combat->EquippedWeapon->GetFireWeaponTwoHandedMeleeMontage());
-
-		FName SectionName;
-		const int32 MaxSectionIndex = Combat->EquippedWeapon->GetFireWeaponTwoHandedMeleeMontageSections().Num() - 1;
-		const int32 Selection = FMath::RandRange(0, MaxSectionIndex);
-		SectionName = Combat->EquippedWeapon->GetFireWeaponTwoHandedMeleeMontageSections()[Selection];
-		AnimInstance->Montage_JumpToSection(SectionName);
-	}
-	if (bOneHandedRanged)
-	{
-		AnimInstance->Montage_Play(Combat->EquippedWeapon->GetFireWeaponOneHandedRangedMontage());
-
-		FName SectionName;
-		SectionName = bIsAiming ? FName("RifleAim") : FName("RifleHip");
-		AnimInstance->Montage_JumpToSection(SectionName);
-	}
-	if (bTwoHandedRanged)
-	{
-		AnimInstance->Montage_Play(Combat->EquippedWeapon->GetFireWeaponTwoHandedRangedMontage());
+		AnimInstance->Montage_Play(Combat->EquippedWeapon->GetFireWeaponMontage());
 
 		FName SectionName;
 		SectionName = bIsAiming ? FName("RifleAim") : FName("RifleHip");

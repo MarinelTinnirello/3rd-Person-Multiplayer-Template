@@ -62,14 +62,10 @@ struct FWeaponProperties
 	FName MuzzleFlash = "MuzzleFlash";
 	UPROPERTY(EditAnywhere, Category = "Weapon Properties", meta = (ToolTip = "Animation played when a weapon is fired."))
 	class UAnimationAsset* FireAnimation;
-	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Montage that plays if a character fires a weapon and the weapon is one-handed and melee."))
-	class UAnimMontage* FireWeaponOneHandedMeleeMontage;
-	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Montage that plays if a character fires a weapon and the weapon is two-handed and melee."))
-	UAnimMontage* FireWeaponTwoHandedMeleeMontage;
-	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Montage that plays if a character fires a weapon and the weapon is one-handed and ranged."))
-	UAnimMontage* FireWeaponOneHandedRangedMontage;
-	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Montage that plays if a character fires a weapon and the weapon is two-handed and ranged."))
-	UAnimMontage* FireWeaponTwoHandedRangedMontage;
+	UPROPERTY(EditAnywhere, Category = "Combat - Animation", meta = (ToolTip = "Montage that plays if a character fires a weapon."))
+	class UAnimMontage* FireWeaponMontage;
+	UPROPERTY(EditAnywhere, Category = "Combat - Animation", meta = (ToolTip = "Names of sections in the montage."))
+	TArray<FName> FireWeaponMontageSections;
 	UPROPERTY(EditAnywhere, Category = "Weapon Properties", meta = (ToolTip = "Montage that plays if a character is reloading a weapon."))
 	UAnimMontage* ReloadMontage;
 	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Damage dealt by the weapon."))
@@ -198,7 +194,7 @@ protected:
 	//
 	// Weapon Properties
 	//
-	UPROPERTY(EditAnywhere, Category = "Weapon Properties- Animation", meta = (ToolTip = "Checks if the weapon has an attachment affected by physics (ex: strap, chain, charm, etc.)."))
+	UPROPERTY(EditAnywhere, Category = "Weapon Properties - Animation", meta = (ToolTip = "Checks if the weapon has an attachment affected by physics (ex: strap, chain, charm, etc.)."))
 	bool bHasPhysicsAttachment = false;
 	UPROPERTY(EditAnywhere, Category = "Weapon Properties - Animation - Ranged", meta = (ToolTip = "Muzzle socket name on a weapon."))
 	FName MuzzleFlash = "MuzzleFlash";
@@ -207,21 +203,13 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Weapon Properties - Animation", meta = (ToolTip = "Socket name for an unequipped hand on a weapon. Basically, this is for if the weapon looks weird in play/animation and a new, custom socket is created."))
 	FName OverrideUnequipSocket = "";
 
-	UPROPERTY(EditAnywhere, Category = "Weapon Properties- Animation", meta = (ToolTip = "Animation played when a weapon is fired."))
+	UPROPERTY(EditAnywhere, Category = "Weapon Properties - Animation", meta = (ToolTip = "Animation played when a weapon is fired."))
 	class UAnimationAsset* FireAnimation;
-	UPROPERTY(EditAnywhere, Category = "Combat - Animation", meta = (ToolTip = "Montage that plays if a character fires a weapon and the weapon is one-handed and melee."))
-	class UAnimMontage* FireWeaponOneHandedMeleeMontage;
-	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Montage that plays if a character fires a weapon and the weapon is two-handed and melee."))
-	UAnimMontage* FireWeaponTwoHandedMeleeMontage;
-	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Montage that plays if a character fires a weapon and the weapon is one-handed and ranged."))
-	UAnimMontage* FireWeaponOneHandedRangedMontage;
-	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Montage that plays if a character fires a weapon and the weapon is two-handed and ranged."))
-	UAnimMontage* FireWeaponTwoHandedRangedMontage;
-	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Names of sections in the 'FireWeaponOneHandedMelee' montage."))
-	TArray<FName> FireWeaponOneHandedMeleeMontageSections;
-	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Names of sections in the 'FireWeaponOneHandedMelee' montage."))
-	TArray<FName> FireWeaponTwoHandedMeleeMontageSections;
-	UPROPERTY(EditAnywhere, Category = "Weapon Properties", meta = (ToolTip = "Montage that plays if a character is reloading a weapon."))
+	UPROPERTY(EditAnywhere, Category = "Combat - Animation", meta = (ToolTip = "Montage that plays if a character fires a weapon."))
+	class UAnimMontage* FireWeaponMontage;
+	UPROPERTY(EditAnywhere, Category = "Combat - Animation", meta = (ToolTip = "Names of sections in the montage."))
+	TArray<FName> FireWeaponMontageSections;
+	UPROPERTY(EditAnywhere, Category = "Weapon Properties - Animation - Ranged", meta = (ToolTip = "Montage that plays if a character is reloading a weapon."))
 	UAnimMontage* ReloadMontage;
 	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Damage dealt by the weapon."))
 	float Damage = 20.f;
@@ -326,12 +314,8 @@ public:
 	FORCEINLINE float GetDamage() const { return Damage; }
 	FORCEINLINE float GetHeadShotDamage() const { return HeadShotDamage; }
 
-	FORCEINLINE UAnimMontage* GetFireWeaponOneHandedMeleeMontage() const { return FireWeaponOneHandedMeleeMontage; }
-	FORCEINLINE UAnimMontage* GetFireWeaponTwoHandedMeleeMontage() const { return FireWeaponTwoHandedMeleeMontage; }
-	FORCEINLINE UAnimMontage* GetFireWeaponOneHandedRangedMontage() const { return FireWeaponOneHandedRangedMontage; }
-	FORCEINLINE UAnimMontage* GetFireWeaponTwoHandedRangedMontage() const { return FireWeaponTwoHandedRangedMontage; }
-	FORCEINLINE TArray<FName> GetFireWeaponOneHandedMeleeMontageSections() const { return FireWeaponOneHandedMeleeMontageSections; }
-	FORCEINLINE TArray<FName> GetFireWeaponTwoHandedMeleeMontageSections() const { return FireWeaponTwoHandedMeleeMontageSections; }
+	FORCEINLINE UAnimMontage* GetFireWeaponMontage() const { return FireWeaponMontage; }
+	FORCEINLINE TArray<FName> GetFireWeaponMontageSections() const { return FireWeaponMontageSections; }
 
 	FORCEINLINE float GetZoomedFOV() const { return ZoomedFOV; }
 	FORCEINLINE float GetZoomedInterpSpeed() const { return ZoomedInterpSpeed; }
