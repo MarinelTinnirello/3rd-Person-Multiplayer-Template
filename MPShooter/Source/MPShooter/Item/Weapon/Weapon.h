@@ -198,14 +198,18 @@ protected:
 	//
 	// Weapon Properties
 	//
-	UPROPERTY(EditAnywhere, Category = "Weapon Properties", meta = (ToolTip = "Checks if the weapon has an attachment affected by physics (ex: strap, chain, charm, etc.)."))
+	UPROPERTY(EditAnywhere, Category = "Weapon Properties- Animation", meta = (ToolTip = "Checks if the weapon has an attachment affected by physics (ex: strap, chain, charm, etc.)."))
 	bool bHasPhysicsAttachment = false;
-
-	UPROPERTY(EditAnywhere, Category = "Weapon Properties  - Ranged", meta = (ToolTip = "Muzzle socket name on a weapon."))
+	UPROPERTY(EditAnywhere, Category = "Weapon Properties - Animation - Ranged", meta = (ToolTip = "Muzzle socket name on a weapon."))
 	FName MuzzleFlash = "MuzzleFlash";
-	UPROPERTY(EditAnywhere, Category = "Weapon Properties", meta = (ToolTip = "Animation played when a weapon is fired."))
+	UPROPERTY(EditAnywhere, Category = "Weapon Properties - Animation", meta = (ToolTip = "Socket name for an equipped hand on a weapon. Basically, this is for if the weapon looks weird in play/animation and a new, custom socket is created."))
+	FName OverrideEquipSocket = "";
+	UPROPERTY(EditAnywhere, Category = "Weapon Properties - Animation", meta = (ToolTip = "Socket name for an unequipped hand on a weapon. Basically, this is for if the weapon looks weird in play/animation and a new, custom socket is created."))
+	FName OverrideUnequipSocket = "";
+
+	UPROPERTY(EditAnywhere, Category = "Weapon Properties- Animation", meta = (ToolTip = "Animation played when a weapon is fired."))
 	class UAnimationAsset* FireAnimation;
-	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Montage that plays if a character fires a weapon and the weapon is one-handed and melee."))
+	UPROPERTY(EditAnywhere, Category = "Combat - Animation", meta = (ToolTip = "Montage that plays if a character fires a weapon and the weapon is one-handed and melee."))
 	class UAnimMontage* FireWeaponOneHandedMeleeMontage;
 	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Montage that plays if a character fires a weapon and the weapon is two-handed and melee."))
 	UAnimMontage* FireWeaponTwoHandedMeleeMontage;
@@ -237,6 +241,12 @@ protected:
 	//
 	UPROPERTY(EditAnywhere, Replicated, Category = "Networking", meta = (ToolTip = "Checks to see if the weapon should use Server-Side Rewind."))
 	bool bUseServerSideRewind = false;
+
+	//
+	// DEBUG
+	//
+	UPROPERTY(EditAnywhere, Category = "DEBUG", meta = (ToolTip = "Checks whether or not to draw the hit collision."))
+	bool bDrawHitCollision = false;
 
 	virtual void OnSphereOverlap(
 		UPrimitiveComponent* OverlappedComponent,
@@ -289,7 +299,6 @@ private:
 	int32 MagCapacity;
 	UPROPERTY(EditAnywhere, Category = "Weapon Properties - Ranged", meta = (ToolTip = "Icon of a weapon's ammo in the inventory."))
 	class UTexture2D* AmmoIcon;
-
 	// The number of unprocessed server requests for Ammo.
 	// Incremented in SpendRound, decremented in ClientUpdateAmmo.
 	int32 Sequence = 0;
@@ -310,6 +319,8 @@ public:
 	FORCEINLINE EWeaponAttachmentSocket GetEquippedWeaponSocket() const { return EquippedWeaponSocket; }
 	FORCEINLINE EWeaponAttachmentSocket GetUnequippedWeaponSocket() const { return UnequippedWeaponSocket; }
 	FORCEINLINE EWeaponLaterality GetWeaponHandiness() const { return WeaponHandiness; }
+	FORCEINLINE FName GetOverrideEquipSocket() const { return OverrideEquipSocket; }
+	FORCEINLINE FName GetOverrideUnequipSocket() const { return OverrideUnequipSocket; }
 
 	FORCEINLINE EFireType GetFireType() const { return FireType; }
 	FORCEINLINE float GetDamage() const { return Damage; }

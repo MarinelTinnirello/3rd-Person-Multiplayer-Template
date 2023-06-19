@@ -184,10 +184,9 @@ private:
 	UPROPERTY()
 	class AMPPlayerController* Controller;
 
-	UPROPERTY(EditAnywhere, Category = "DEBUG", meta = (ToolTip = "Checks whether or not to draw the frame packages for Server-Side Rewind."))
-	bool bDrawSSRFramePkg = false;
-	UPROPERTY(EditAnywhere, Category = "DEBUG", meta = (ToolTip = "Checks whether or not to draw the hit confirmation."))
-	bool bDrawSSRConfirmHit = false;
+	//
+	// Frame Properties
+	//
 	TDoubleLinkedList<FFramePackage> FrameHistory;
 	UPROPERTY(EditAnywhere, Category = "Frame Properties", meta = (ToolTip = "Amount of time to draw debug lines for."))
 	float ShowFramePkgLifeSpan = 4.f;
@@ -195,5 +194,14 @@ private:
 	float MaxRecordTime = 4.f;
 	UPROPERTY(EditAnywhere, Category = "Frame Properties", meta = (ToolTip = "Name of the head bone, taken from one of the various hit collision types."))
 	FName HeadBone;
+
+
+	//
+	// DEBUG
+	//
+	UPROPERTY(EditAnywhere, Category = "DEBUG", meta = (ToolTip = "Checks whether or not to draw the frame packages for Server-Side Rewind."))
+	bool bDrawSSRFramePkg = false;
+	UPROPERTY(EditAnywhere, Category = "DEBUG", meta = (ToolTip = "Checks whether or not to draw the hit confirmation."))
+	bool bDrawSSRConfirmHit = false;
 	
 };

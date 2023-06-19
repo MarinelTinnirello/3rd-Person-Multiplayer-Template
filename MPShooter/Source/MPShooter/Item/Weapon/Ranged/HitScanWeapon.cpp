@@ -93,7 +93,6 @@ void AHitScanWeapon::FireMulti(const TArray<FVector_NetQuantize>& HitTargets)
 	}
 
 	AController* InstigatorController = OwnerPawn->GetController();
-
 	const USkeletalMeshSocket* MuzzleFlashSocket = GetItemMesh()->GetSocketByName(MuzzleFlash);
 	if (MuzzleFlashSocket && InstigatorController)
 	{

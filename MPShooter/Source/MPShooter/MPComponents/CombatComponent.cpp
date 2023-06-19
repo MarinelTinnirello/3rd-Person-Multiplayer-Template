@@ -378,14 +378,14 @@ void UCombatComponent::CheckAttachedActorHand(AActor* ActorToAttach)
 	bool bIsValid = Character == nullptr || 
 		Character->GetMesh() == nullptr ||
 		AnimInstance == nullptr ||
-		ActorToAttach == nullptr ||
-		EquippedWeapon == nullptr;
+		ActorToAttach == nullptr;
 	if (bIsValid)
 	{
 		return;
 	}
 
-	switch (EquippedWeapon->GetEquippedWeaponSocket())
+	AWeapon* WeaponActor = Cast<AWeapon>(ActorToAttach);
+	switch (WeaponActor->GetEquippedWeaponSocket())
 	{
 	case EWeaponAttachmentSocket::EWAS_RightHand:
 		AttachActorToRightHand(ActorToAttach);
@@ -414,7 +414,17 @@ void UCombatComponent::AttachActorToRightHand(AActor* ActorToAttach)
 		return;
 	}
 
-	const USkeletalMeshSocket* HandSocket = Character->GetMesh()->GetSocketByName(AnimInstance->GetEquippedHandSocket());
+	const USkeletalMeshSocket* HandSocket;
+	AWeapon* WeaponActor = Cast<AWeapon>(ActorToAttach);
+	if (WeaponActor->GetOverrideEquipSocket() != "")
+	{
+		HandSocket = Character->GetMesh()->GetSocketByName(Character->GetEquippedWeapon()->GetOverrideEquipSocket());
+	}
+	else
+	{
+		HandSocket = Character->GetMesh()->GetSocketByName(AnimInstance->GetEquippedHandSocket());
+	}
+
 	if (HandSocket)
 	{
 		HandSocket->AttachActor(ActorToAttach, Character->GetMesh());
@@ -437,7 +447,17 @@ void UCombatComponent::AttachActorToLeftHand(AActor* ActorToAttach)
 		return;
 	}
 
-	const USkeletalMeshSocket* HandSocket = Character->GetMesh()->GetSocketByName(AnimInstance->GetEquippedHandSocket());
+	const USkeletalMeshSocket* HandSocket;
+	AWeapon* WeaponActor = Cast<AWeapon>(ActorToAttach);
+	if (WeaponActor->GetOverrideEquipSocket() != "")
+	{
+		HandSocket = Character->GetMesh()->GetSocketByName(Character->GetEquippedWeapon()->GetOverrideEquipSocket());
+	}
+	else
+	{
+		HandSocket = Character->GetMesh()->GetSocketByName(AnimInstance->GetEquippedHandSocket());
+	}
+
 	if (HandSocket)
 	{
 		HandSocket->AttachActor(ActorToAttach, Character->GetMesh());
@@ -450,14 +470,14 @@ void UCombatComponent::CheckAttachedActorUnequipped(AActor* ActorToAttach)
 	bool bIsValid = Character == nullptr ||
 		Character->GetMesh() == nullptr ||
 		AnimInstance == nullptr ||
-		ActorToAttach == nullptr ||
-		EquippedSecondaryWeapon == nullptr;
+		ActorToAttach == nullptr;
 	if (bIsValid)
 	{
 		return;
 	}
 
-	switch (EquippedSecondaryWeapon->GetUnequippedWeaponSocket())
+	AWeapon* WeaponActor = Cast<AWeapon>(ActorToAttach);
+	switch (WeaponActor->GetUnequippedWeaponSocket())
 	{
 	case EWeaponAttachmentSocket::EWAS_BackSpine:
 		AttachActorToBackSpine(ActorToAttach);
@@ -482,10 +502,20 @@ void UCombatComponent::AttachActorToBackSpine(AActor* ActorToAttach)
 		return;
 	}
 
-	const USkeletalMeshSocket* BackSpine = Character->GetMesh()->GetSocketByName(AnimInstance->GetBackSpineSocket());
-	if (BackSpine)
+	const USkeletalMeshSocket* BackSpineSocket;
+	AWeapon* WeaponActor = Cast<AWeapon>(ActorToAttach);
+	if (WeaponActor->GetOverrideUnequipSocket() != "")
 	{
-		BackSpine->AttachActor(ActorToAttach, Character->GetMesh());
+		BackSpineSocket = Character->GetMesh()->GetSocketByName(Character->GetEquippedWeapon()->GetOverrideUnequipSocket());
+	}
+	else
+	{
+		BackSpineSocket = Character->GetMesh()->GetSocketByName(AnimInstance->GetBackSpineSocket());
+	}
+
+	if (BackSpineSocket)
+	{
+		BackSpineSocket->AttachActor(ActorToAttach, Character->GetMesh());
 	}
 }
 
@@ -505,20 +535,30 @@ void UCombatComponent::AttachActorToHips(AActor* ActorToAttach)
 	// Depending on laterality of weapon, attach to that hand 1st
 	//		If the slot is filled, attach to the left
 	// If the weapon is dual-wielded, attach to right then left
-	const USkeletalMeshSocket* LeftHip = Character->GetMesh()->GetSocketByName(AnimInstance->GetLeftHipSocket());
-	const USkeletalMeshSocket* RightHip = Character->GetMesh()->GetSocketByName(AnimInstance->GetRightHipSocket());
+	// Figure out dual override socket issue
+	const USkeletalMeshSocket* LeftHipSocket = Character->GetMesh()->GetSocketByName(AnimInstance->GetLeftHipSocket());
+	const USkeletalMeshSocket* RightHipSocket = Character->GetMesh()->GetSocketByName(AnimInstance->GetRightHipSocket());
 	AWeapon* WeaponActor = Cast<AWeapon>(ActorToAttach);
-	if (WeaponActor && RightHip && LeftHip)
+	if (WeaponActor->GetOverrideUnequipSocket() != "")
+	{
+		LeftHipSocket = Character->GetMesh()->GetSocketByName(Character->GetEquippedWeapon()->GetOverrideUnequipSocket());
+	}
+	else
+	{
+		LeftHipSocket = Character->GetMesh()->GetSocketByName(AnimInstance->GetLeftHipSocket());
+	}
+
+	if (WeaponActor && RightHipSocket && LeftHipSocket)
 	{
 		if (WeaponActor->GetWeaponHandiness() != EWeaponLaterality::EWL_DualWield)
 		{
 			switch (WeaponActor->GetEquippedWeaponSocket())
 			{
 			case EWeaponAttachmentSocket::EWAS_RightHand:
-				RightHip->AttachActor(ActorToAttach, Character->GetMesh());
+				RightHipSocket->AttachActor(ActorToAttach, Character->GetMesh());
 				break;
 			case EWeaponAttachmentSocket::EWAS_LeftHand:
-				LeftHip->AttachActor(ActorToAttach, Character->GetMesh());
+				LeftHipSocket->AttachActor(ActorToAttach, Character->GetMesh());
 				break;
 			default:
 				break;
