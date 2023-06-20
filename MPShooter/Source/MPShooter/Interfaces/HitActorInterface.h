@@ -29,14 +29,21 @@ public:
 		USoundCue* ImpactCharacterSound
 	);
 
-	UFUNCTION(Server, Reliable, WithValidation)
-	void ServerSpawnMaterialDecal(const FHitResult& Hit);
-
 	UFUNCTION(NetMulticast, Reliable)
-	void MulticastSpawnMaterialDecal(
-		const FHitResult& Hit, 
-		UWorld* World, 
-		class UMaterialInterface* ImpactDecalMaterial, 
+	virtual void MulticastSpawnMaterialDecal(
+		const FHitResult& Hit,
+		UWorld* World,
+		class UMaterialInterface* ImpactDecalMaterial,
+		FVector DecalSize,
+		float DecalLifeSpan
+	);
+
+	UFUNCTION(Server, Reliable, WithValidation)
+	virtual void ServerSpawnMaterialDecal(
+		const FHitResult& Hit,
+		UWorld* World,
+		AActor* Actor, 
+		UMaterialInterface* ImpactDecalMaterial, 
 		FVector DecalSize, 
 		float DecalLifeSpan
 	);

@@ -5,6 +5,7 @@
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Sound/SoundCue.h"
+#include "MPShooter/Interfaces/HitActorInterface.h"
 
 AProjectileGrenade::AProjectileGrenade()
 {
@@ -47,6 +48,17 @@ void AProjectileGrenade::Destroyed()
 	ExplodeDamage();
 	HitActor = EHitActor::EHA_Environment;
 	ActorHitType(HitActor);
+	/*IHitActorInterface* Interface = Cast<IHitActorInterface>(this);
+	Interface->ActorHitType(
+		HitActor,
+		GetWorld(),
+		this,
+		this,
+		ImpactParticles,
+		ImpactSound,
+		ImpactCharacterParticles,
+		ImpactCharacterSound
+	);*/
 
 	Super::Destroyed();
 }

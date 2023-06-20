@@ -10,6 +10,7 @@
 #include "Components/AudioComponent.h"
 #include "MPShooter/Item/Weapon/Ranged/Projectile/Movement/RocketMovementComponent.h"
 #include "MPShooter/Interfaces/InteractWithCrosshairsInterface.h"
+#include "MPShooter/Interfaces/HitActorInterface.h"
 
 AProjectileRocket::AProjectileRocket()
 {
@@ -81,8 +82,18 @@ void AProjectileRocket::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, 
 	HitActor = OtherActor->Implements<UInteractWithCrosshairsInterface>() ? EHitActor::EHA_Character : EHitActor::EHA_Environment;
 	ExplodeDamage();
 	StartDestroyTimer();
-
 	ActorHitType(HitActor);
+	/*IHitActorInterface* Interface = Cast<IHitActorInterface>(this);
+	Interface->ActorHitType(
+		HitActor,
+		GetWorld(),
+		this,
+		this,
+		ImpactParticles,
+		ImpactSound,
+		ImpactCharacterParticles,
+		ImpactCharacterSound
+	);*/
 
 	if (ProjectileMesh)
 	{

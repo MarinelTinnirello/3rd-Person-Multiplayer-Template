@@ -5,9 +5,11 @@
 #include "CoreMinimal.h"
 #include "MPShooter/Item/Item.h"
 #include "MPShooter/MPTypes/WeaponTypes.h"
+#include "MPShooter/MPTypes/HitActor.h"
 #include "MPShooter/MPTypes/ActorAttachment.h"
 #include "Weapon.generated.h"
 
+#pragma region Structs
 USTRUCT(BlueprintType)
 struct FWeaponProperties
 {
@@ -58,7 +60,7 @@ struct FWeaponProperties
 	//
 	UPROPERTY(EditAnywhere, Category = "Weapon Properties", meta = (ToolTip = "Checks if the weapon has an attachment affected by physics (ex: strap, chain, charm, etc.)."))
 	bool bHasPhysicsAttachment = false;
-	UPROPERTY(EditAnywhere, Category = "Weapon Properties  - Ranged", meta = (ToolTip = "Muzzle socket name on a weapon."))
+	UPROPERTY(EditAnywhere, Category = "Weapon Properties - Ranged", meta = (ToolTip = "Muzzle socket name on a weapon."))
 	FName MuzzleFlash = "MuzzleFlash";
 	UPROPERTY(EditAnywhere, Category = "Weapon Properties", meta = (ToolTip = "Animation played when a weapon is fired."))
 	class UAnimationAsset* FireAnimation;
@@ -66,8 +68,8 @@ struct FWeaponProperties
 	class UAnimMontage* FireWeaponMontage;
 	UPROPERTY(EditAnywhere, Category = "Combat - Animation", meta = (ToolTip = "Names of sections in the montage."))
 	TArray<FName> FireWeaponMontageSections;
-	UPROPERTY(EditAnywhere, Category = "Weapon Properties", meta = (ToolTip = "Montage that plays if a character is reloading a weapon."))
-	UAnimMontage* ReloadMontage;
+	UPROPERTY(EditAnywhere, Category = "Combat - Animation - Ranged", meta = (ToolTip = "Montage that plays if a character is reloading a weapon."))
+	UAnimMontage* ReloadWeaponMontage;
 	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Damage dealt by the weapon."))
 	float Damage = 20.f;
 	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Damage dealt by the weapon if hit on the head."))
@@ -121,6 +123,7 @@ struct FWeaponProperties
 	UPROPERTY(EditAnywhere, Category = "Weapon Properties - Ranged", meta = (ToolTip = "Icon of a weapon's ammo in the inventory."))
 	class UTexture2D* AmmoIcon;
 };
+#pragma endregion
 
 UCLASS()
 class MPSHOOTER_API AWeapon : public AItem
@@ -128,6 +131,8 @@ class MPSHOOTER_API AWeapon : public AItem
 	GENERATED_BODY()
 	
 public:	
+	#pragma region Crosshairs Properties
+	#pragma region Crosshairs
 	//
 	// Crosshairs
 	//
@@ -141,7 +146,9 @@ public:
 	UTexture2D* CrosshairsTop;
 	UPROPERTY(EditAnywhere, Category = "Crosshairs", meta = (ToolTip = "Image for the bottom of a crosshair."))
 	UTexture2D* CrosshairsBottom;
+	#pragma endregion
 
+	#pragma region Zoom & FoV
 	//
 	// Zoom & FoV
 	//
@@ -151,7 +158,11 @@ public:
 	float ZoomedInterpSpeed = 20.f;
 	UPROPERTY(EditAnywhere, Category = "Crosshairs", meta = (ToolTip = "Whether or not to use a zoomed screen overlay."))
 	bool bUseSniperZoomedOverlay = false;
+	#pragma endregion
 
+	#pragma endregion
+
+	#pragma region Firing Properties
 	//
 	// Automatic Fire
 	//
@@ -161,26 +172,33 @@ public:
 	bool bAutomatic = true;
 	UPROPERTY(EditAnywhere, Category = "Combat - Ranged", meta = (ToolTip = "Checks if a weapon uses scatter."))
 	bool bUseScatter = false;
+	#pragma endregion
 
 	bool bDestroyWeapon = false;
 
+	#pragma region Engine Overrides
 #if WITH_EDITOR
 	virtual void PostEditChangeProperty(struct FPropertyChangedEvent& Event) override;
-#endif
+	#endif
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	virtual void OnRep_Owner() override;
+	#pragma endregion
 
+	#pragma region Overrideable Actions
 	virtual void Fire(const FVector& HitTarget);
 	virtual void FireMulti(const TArray<FVector_NetQuantize>& HitTargets);
 	virtual void MultiTraceEndWithScatter(const FVector& HitTarget, TArray<FVector_NetQuantize>& HitTargets);
 	virtual void Dropped();
+	#pragma endregion
 
+	#pragma region Actions
 	void SetHUDAmmo();
 	void AddAmmo(int32 AmmoToAdd);
-	void PlayReloadMontage();
 	FVector TraceEndWithScatter(const FVector& HitTarget);
+	#pragma endregion
 
 protected:
+	#pragma region References
 	//
 	// Character Properties
 	//
@@ -188,10 +206,14 @@ protected:
 	class AMPCharacter* MPOwnerCharacter;
 	UPROPERTY()
 	class AMPPlayerController* MPOwnerController;
+	#pragma endregion
 
+	#pragma region Weapon Properties
 	//
 	// Weapon Properties
 	//
+	#pragma region Animation
+	#pragma region Weapon Properties - Animation
 	UPROPERTY(EditAnywhere, Category = "Weapon Properties - Animation", meta = (ToolTip = "Checks if the weapon has an attachment affected by physics (ex: strap, chain, charm, etc.)."))
 	bool bHasPhysicsAttachment = false;
 	UPROPERTY(EditAnywhere, Category = "Weapon Properties - Animation - Ranged", meta = (ToolTip = "Muzzle socket name on a weapon."))
@@ -200,22 +222,32 @@ protected:
 	FName OverrideEquipSocket = "";
 	UPROPERTY(EditAnywhere, Category = "Weapon Properties - Animation", meta = (ToolTip = "Socket name for an unequipped hand on a weapon. Basically, this is for if the weapon looks weird in play/animation and a new, custom socket is created."))
 	FName OverrideUnequipSocket = "";
+	#pragma endregion
 
-	UPROPERTY(EditAnywhere, Category = "Weapon Properties - Animation", meta = (ToolTip = "Animation played when a weapon is fired."))
+	#pragma region Combat - Animation
+	UPROPERTY(EditAnywhere, Category = "Combat - Animation", meta = (ToolTip = "Animation played when a weapon is fired."))
 	class UAnimationAsset* FireAnimation;
 	UPROPERTY(EditAnywhere, Category = "Combat - Animation", meta = (ToolTip = "Montage that plays if a character fires a weapon."))
 	class UAnimMontage* FireWeaponMontage;
 	UPROPERTY(EditAnywhere, Category = "Combat - Animation", meta = (ToolTip = "Names of sections in the montage."))
 	TArray<FName> FireWeaponMontageSections;
-	UPROPERTY(EditAnywhere, Category = "Weapon Properties - Animation - Ranged", meta = (ToolTip = "Montage that plays if a character is reloading a weapon."))
-	UAnimMontage* ReloadMontage;
+	UPROPERTY(EditAnywhere, Category = "Combat - Animation - Ranged", meta = (ToolTip = "Montage that plays if a character is reloading a weapon."))
+	UAnimMontage* ReloadWeaponMontage;
+	#pragma endregion
+
+	#pragma endregion
+
+	#pragma region Combat
+	#pragma region Combat
 	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Damage dealt by the weapon."))
 	float Damage = 20.f;
 	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Damage dealt by the weapon if hit on the head."))
 	float HeadShotDamage = 40.f;
 	UPROPERTY(Replicated)
 	EHitActor HitActor;
+	#pragma endregion
 
+	#pragma region Combat - Ranged
 	//
 	// Weapon Scatter
 	//
@@ -223,19 +255,29 @@ protected:
 	float DistanceToSphere = 800.f;
 	UPROPERTY(EditAnywhere, Category = "Combat - Ranged", meta = (ToolTip = "Radius around sphere where the weapon scatters."))
 	float SphereRadius = 75.f;
+	#pragma endregion
 
+	#pragma endregion
+
+	#pragma endregion
+
+	#pragma region Networking
 	//
 	// Networking
 	//
 	UPROPERTY(EditAnywhere, Replicated, Category = "Networking", meta = (ToolTip = "Checks to see if the weapon should use Server-Side Rewind."))
 	bool bUseServerSideRewind = false;
+	#pragma endregion
 
+	#pragma region DEBUG
 	//
 	// DEBUG
 	//
 	UPROPERTY(EditAnywhere, Category = "DEBUG", meta = (ToolTip = "Checks whether or not to draw the hit collision."))
 	bool bDrawHitCollision = false;
+	#pragma endregion
 
+	#pragma region Engine Overrides
 	virtual void OnSphereOverlap(
 		UPrimitiveComponent* OverlappedComponent,
 		AActor* OtherActor,
@@ -250,16 +292,24 @@ protected:
 		UPrimitiveComponent* OtherComponent,
 		int32 OtherBodyIndex
 	) override;
+	#pragma endregion
 
-	virtual void OnEquipped();
+	#pragma region Overridden Actions & Overrideable Actions
+	virtual void OnEquipped() override;
+	virtual void OnEquippedSecondary() override;
+	virtual void OnDropped() override;
+
 	virtual void OnEquippedWeaponType();
-	virtual void OnEquippedSecondary();
-	virtual void OnDropped();
+	#pragma endregion
 
+	#pragma region Networking
 	UFUNCTION()
 	void OnPingTooHigh(bool bPingTooHigh);
+	#pragma endregion
 
 private:
+	#pragma region Weapon Properties
+	#pragma region Weapon Properties
 	// 
 	// Weapon Properties
 	//
@@ -273,7 +323,9 @@ private:
 	EWeaponAttachmentSocket UnequippedWeaponSocket;
 	UPROPERTY(EditAnywhere, Category = "Weapon Properties", meta = (ToolTip = "Checks how many hands the weapon uses, based on the weapon animations."))
 	EWeaponLaterality WeaponHandiness;
+	#pragma endregion
 
+	#pragma region Weapon Properties - Ranged
 	// 
 	// Weapon Properties - Ranged
 	//
@@ -293,12 +345,21 @@ private:
 
 	void SpendRound();
 
+	#pragma region Client
 	UFUNCTION(Client, Reliable)
 	void ClientUpdateAmmo(int32 ServerAmmo);
 	UFUNCTION(Client, Reliable)
 	void ClientAddAmmo(int32 AmmoToAdd);
+	#pragma endregion
+
+	#pragma endregion
+
+	#pragma endregion
 
 public:
+	#pragma region Weapon Properties
+	#pragma region Weapon Properties
+	#pragma region Weapon Properties
 	// 
 	// Weapon Properties
 	//
@@ -309,25 +370,38 @@ public:
 	FORCEINLINE EWeaponLaterality GetWeaponHandiness() const { return WeaponHandiness; }
 	FORCEINLINE FName GetOverrideEquipSocket() const { return OverrideEquipSocket; }
 	FORCEINLINE FName GetOverrideUnequipSocket() const { return OverrideUnequipSocket; }
+	#pragma endregion
 
+	#pragma region Combat
 	FORCEINLINE EFireType GetFireType() const { return FireType; }
 	FORCEINLINE float GetDamage() const { return Damage; }
 	FORCEINLINE float GetHeadShotDamage() const { return HeadShotDamage; }
+	#pragma endregion
 
+	#pragma region Animation
 	FORCEINLINE UAnimMontage* GetFireWeaponMontage() const { return FireWeaponMontage; }
 	FORCEINLINE TArray<FName> GetFireWeaponMontageSections() const { return FireWeaponMontageSections; }
+	#pragma endregion
 
+	#pragma region Aiming & Zoomed FoV
 	FORCEINLINE float GetZoomedFOV() const { return ZoomedFOV; }
 	FORCEINLINE float GetZoomedInterpSpeed() const { return ZoomedInterpSpeed; }
+	#pragma endregion
 
+	#pragma endregion
+
+	#pragma region Weapon Properties - Ranged
 	// 
 	// Weapon Properties - Ranged
 	//
 	FORCEINLINE int32 GetAmmo() const { return Ammo; }
 	FORCEINLINE int32 GetMagCapacity() const { return MagCapacity; }
-	FORCEINLINE UAnimMontage* GetReloadMontage() const { return ReloadMontage; }
+	FORCEINLINE UAnimMontage* GetReloadWeaponMontage() const { return ReloadWeaponMontage; }
 	void SetAmmoIcon(UTexture2D* Icon) { AmmoIcon = Icon; }
 	bool IsMagEmpty();
 	bool IsMagFull();
+	#pragma endregion
+
+	#pragma endregion
 
 };

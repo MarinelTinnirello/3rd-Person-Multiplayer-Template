@@ -38,12 +38,18 @@ void IHitActorInterface::MulticastSpawnMaterialDecal_Implementation(const FHitRe
 	}
 }
 
-void IHitActorInterface::ServerSpawnMaterialDecal_Implementation(const FHitResult& Hit)
+void IHitActorInterface::ServerSpawnMaterialDecal_Implementation(const FHitResult& Hit, UWorld* World, AActor* Actor, UMaterialInterface* ImpactDecalMaterial, FVector DecalSize, float DecalLifeSpan)
 {
-	MulticastSpawnMaterialDecal(Hit);
+	MulticastSpawnMaterialDecal(
+		Hit,
+		World,
+		ImpactDecalMaterial,
+		DecalSize,
+		DecalLifeSpan
+	);
 }
 
-bool IHitActorInterface::ServerSpawnMaterialDecal_Validate(const FHitResult& Hit, AActor* Actor, UMaterialInterface* ImpactDecalMaterial)
+bool IHitActorInterface::ServerSpawnMaterialDecal_Validate(const FHitResult& Hit, UWorld* World, AActor* Actor, UMaterialInterface* ImpactDecalMaterial, FVector DecalSize, float DecalLifeSpan)
 {
 	if (ImpactDecalMaterial == nullptr) return false;
 	// hit data isn't null

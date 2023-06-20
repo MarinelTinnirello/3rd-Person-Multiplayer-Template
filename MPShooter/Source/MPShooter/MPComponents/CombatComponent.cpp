@@ -1067,7 +1067,7 @@ void UCombatComponent::ShotgunShellReload()
 void UCombatComponent::JumpToShotgunEnd()
 {
 	AnimInstance = AnimInstance == nullptr ? Cast<UMPAnimInstance>(Character->GetMesh()->GetAnimInstance()) : AnimInstance;
-	if (AnimInstance && EquippedWeapon && EquippedWeapon->GetReloadMontage())
+	if (AnimInstance && EquippedWeapon && EquippedWeapon->GetReloadWeaponMontage())
 	{
 		AnimInstance->Montage_JumpToSection(FName("ShotgunEnd"));
 	}
@@ -1089,9 +1089,9 @@ void UCombatComponent::ServerReload_Implementation()
 
 void UCombatComponent::HandleReload()
 {
-	if (EquippedWeapon)
+	if (Character)
 	{
-		EquippedWeapon->PlayReloadMontage();
+		Character->PlayReloadMontage();
 	}
 }
 

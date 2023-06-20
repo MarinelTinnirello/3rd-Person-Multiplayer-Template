@@ -101,11 +101,31 @@ void AProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimi
 	HitActor = OtherActor->Implements<UInteractWithCrosshairsInterface>() ? EHitActor::EHA_Character : EHitActor::EHA_Environment;
 	MulticastOnHit(HitActor);
 	ServerSpawnMaterialDecal(Hit);
+	/*IHitActorInterface* Interface = Cast<IHitActorInterface>(this);
+	Interface->ServerSpawnMaterialDecal(
+		Hit,
+		GetWorld(),
+		this,
+		ImpactDecalMaterial,
+		DecalSize,
+		DecalLifeSpan
+	);*/
 }
 
 void AProjectile::MulticastOnHit_Implementation(EHitActor HitActorType)
 {
 	ActorHitType(HitActorType);
+	/*IHitActorInterface* Interface = Cast<IHitActorInterface>(this);
+	Interface->ActorHitType(
+		HitActorType,
+		GetWorld(),
+		this,
+		this,
+		ImpactParticles,
+		ImpactSound,
+		ImpactCharacterParticles,
+		ImpactCharacterSound
+	);*/
 
 	Destroy();
 }

@@ -9,7 +9,7 @@
 #include "Projectile.generated.h"
 
 UCLASS()
-class MPSHOOTER_API AProjectile : public AActor, public IHitActorInterface
+class MPSHOOTER_API AProjectile : public AActor
 {
 	GENERATED_BODY()
 	
@@ -83,13 +83,13 @@ protected:
 	UFUNCTION()
 	virtual void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
 
-	UFUNCTION(Server, Reliable, WithValidation)
-	void ServerSpawnMaterialDecal(const FHitResult& Hit);
-
 	UFUNCTION(NetMulticast, Reliable)
 	void MulticastOnHit(EHitActor HitActorType);
 	UFUNCTION(NetMulticast, Reliable)
 	void MulticastSpawnMaterialDecal(const FHitResult& Hit);
+
+	UFUNCTION(Server, Reliable, WithValidation)
+	void ServerSpawnMaterialDecal(const FHitResult& Hit);
 
 	virtual void ActorHitType(EHitActor HitActorType);
 	void StartDestroyTimer();

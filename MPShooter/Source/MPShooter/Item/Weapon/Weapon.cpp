@@ -224,20 +224,6 @@ void AWeapon::AddAmmo(int32 AmmoToAdd)
 	ClientAddAmmo(AmmoToAdd);
 }
 
-void AWeapon::PlayReloadMontage()
-{
-	if (MPOwnerCharacter->GetCombat() == nullptr)
-	{
-		return;
-	}
-
-	UAnimInstance* AnimInstance = MPOwnerCharacter->GetMesh()->GetAnimInstance();
-	if (AnimInstance && ReloadMontage)
-	{
-		AnimInstance->Montage_Play(ReloadMontage);
-	}
-}
-
 void AWeapon::ClientAddAmmo_Implementation(int32 AmmoToAdd)
 {
 	if (HasAuthority())

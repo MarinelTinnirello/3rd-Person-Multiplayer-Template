@@ -645,6 +645,20 @@ void AMPCharacter::PlayFireMontage(bool bIsAiming)
 	}
 }
 
+void AMPCharacter::PlayReloadMontage()
+{
+	if (Combat == nullptr || Combat->EquippedWeapon == nullptr)
+	{
+		return;
+	}
+
+	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+	if (AnimInstance && Combat->EquippedWeapon->GetReloadWeaponMontage())
+	{
+		AnimInstance->Montage_Play(Combat->EquippedWeapon->GetReloadWeaponMontage());
+	}
+}
+
 void AMPCharacter::PlaySwapMontage()
 {
 	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
