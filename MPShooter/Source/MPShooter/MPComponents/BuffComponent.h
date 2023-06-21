@@ -15,40 +15,55 @@ class MPSHOOTER_API UBuffComponent : public UActorComponent
 public:	
 	friend class AMPCharacter;
 
+	#pragma region Constructor & Engine Overrides
 	UBuffComponent();
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+	#pragma endregion
 
+	#pragma region Actions
 	void Heal(float HealAmount, float HealingTime);
 	void ReplenishShield(float ShieldAmount, float ReplenishTime);
 	void BuffSpeed(float BuffBaseSpeed, float BuffCrouchSpeed, float BuffTime);
 	void SetInitialSpeeds(float BaseSpeed, float CrouchSpeed);
 	void BuffJump(float BuffJumpVelocity, float BuffTime);
 	void SetInitialJumpVelocity(float Velocity);
+	#pragma endregion
 
 protected:
+	#pragma region Engine Overrides
 	virtual void BeginPlay() override;
+	#pragma endregion
 
+	#pragma region Actions
 	void HealRampUp(float DeltaTime);
 	void ShieldRampUp(float DeltaTime);
+	#pragma endregion
 
 private:
+	#pragma region References
 	UPROPERTY()
 	class AMPCharacter* Character;
+	#pragma endregion
 
+	#pragma region Healing
 	//
 	// Healing
 	//
 	bool bHealing = false;
 	float HealingRate = 0.f;
 	float AmountToHeal = 0.f;
+	#pragma endregion
 
+	#pragma region Shield
 	//
 	// Shield
 	//
 	bool bReplenishingShield = false;
 	float ShieldReplenishRate = 0.f;
 	float ShieldReplenishAmount = 0.f;
+	#pragma endregion
 
+	#pragma region Speed
 	//
 	// Speed Buff
 	//
@@ -58,9 +73,14 @@ private:
 
 	void ResetSpeeds();
 
+	#pragma region Multicast
 	UFUNCTION(NetMulticast, Reliable)
 	void MulticastSpeedBuff(float BaseSpeed, float CrouchSpeed);
+	#pragma endregion
 
+	#pragma endregion
+
+	#pragma region Jump
 	//
 	// Jump Buff
 	//
@@ -68,8 +88,12 @@ private:
 	void ResetJump();
 	float InitialJumpVelocity;
 
+	#pragma region Multicast
 	UFUNCTION(NetMulticast, Reliable)
 	void MulticastJumpBuff(float JumpVelocity);
+	#pragma endregion
+
+	#pragma endregion
 
 public:	
 

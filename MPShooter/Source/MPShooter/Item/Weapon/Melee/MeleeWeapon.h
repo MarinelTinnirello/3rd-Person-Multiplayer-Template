@@ -12,34 +12,47 @@ class MPSHOOTER_API AMeleeWeapon : public AWeapon
 	GENERATED_BODY()
 
 public:
+	#pragma region Overriden Actions
 	virtual void Fire(const FVector& HitTarget) override;
-
-	void WeaponTraceHit(const FVector& TraceStart, const FVector& TraceEnd, FHitResult& OutHit);
-
+	virtual void WeaponTraceHit(const FVector& TraceStart, const FVector& HitTarget, FHitResult& OutHit) override;
+	#pragma endregion
 
 protected:
+	#pragma region Weapon Properties
 	//
 	// Melee Properties
 	//
-	UPROPERTY(EditAnywhere, Category = "Melee Weapon Properties - Impact", meta = (ToolTip = "Particles seen on impact from the weapon."))
+	#pragma region Impact
+	UPROPERTY(EditAnywhere, Category = "Melee Weapon Properties - Impact - Particles", meta = (ToolTip = "Particles seen on impact from the weapon."))
 	class UParticleSystem* ImpactParticles;
-	UPROPERTY(EditAnywhere, Category = "Melee Weapon Properties - Impact", meta = (ToolTip = "Sound that plays on impact with the environment or character."))
+	UPROPERTY(EditAnywhere, Category = "Melee Weapon Properties - Impact - Sounds", meta = (ToolTip = "Sound that plays on impact with the environment or character."))
 	class USoundCue* ImpactSound;
-	UPROPERTY(EditAnywhere, Category = "Melee Weapon Properties - Impact", meta = (ToolTip = "Particles that play on impact with a character."))
+	UPROPERTY(EditAnywhere, Category = "Melee Weapon Properties - Impact - Particles", meta = (ToolTip = "Particles that play on impact with a character."))
 	UParticleSystem* ImpactCharacterParticles;
-	UPROPERTY(EditAnywhere, Category = "Melee Weapon Properties - Impact", meta = (ToolTip = "Sound that plays on impact with a character."))
+	UPROPERTY(EditAnywhere, Category = "Melee Weapon Properties - Impact - Sounds", meta = (ToolTip = "Sound that plays on impact with a character."))
 	USoundCue* ImpactCharacterSound;
-	UPROPERTY(EditAnywhere, Category = "Melee Weapon Properties - Impact", meta = (ToolTip = "Material decal that spawns on impact with the environment."))
+	UPROPERTY(EditAnywhere, Category = "Melee Weapon Properties - Impact - Decal", meta = (ToolTip = "Material decal that spawns on impact with the environment."))
 	class UMaterialInterface* ImpactDecalMaterial;
-	UPROPERTY(EditAnywhere, Category = "Melee Weapon Properties - Impact", meta = (ToolTip = "Size of the material decal."))
+	UPROPERTY(EditAnywhere, Category = "Melee Weapon Properties - Impact - Decal", meta = (ToolTip = "Size of the material decal."))
 	FVector DecalSize = FVector(16.f, 16.f, 16.f);
-	UPROPERTY(EditAnywhere, Category = "Melee Weapon Properties - Impact", meta = (ToolTip = "Life span of the material decal."))
+	UPROPERTY(EditAnywhere, Category = "Melee Weapon Properties - Impact - Decal", meta = (ToolTip = "Life span of the material decal."))
 	float DecalLifeSpan = 10.f;
+	#pragma endregion
+
+	#pragma endregion
 
 private:
+	#pragma region Weapon Properties
+	//
+	// Melee Properties
+	//
+	#pragma region Sockets
 	UPROPERTY(EditAnywhere, Category = "Melee Weapon Properties", meta = (ToolTip = "Start socket name for a line trace on a weapon."))
 	FName StartSocket = "StartSocket";
 	UPROPERTY(EditAnywhere, Category = "Melee Weapon Properties", meta = (ToolTip = "Start socket name for a line trace on a weapon."))
 	FName EndSocket = "EndSocket";
+	#pragma endregion
+
+	#pragma endregion
 
 };

@@ -12,26 +12,38 @@ class MPSHOOTER_API AProjectileRocket : public AProjectile
 	GENERATED_BODY()
 	
 public:
+	#pragma region Constructors & Engine Overrides
 	AProjectileRocket();
 #if WITH_EDITOR
 	virtual void PostEditChangeProperty(struct FPropertyChangedEvent& Event) override;
 #endif
 	virtual void Destroyed() override;
+	#pragma endregion
 
 protected:
-	virtual void BeginPlay() override;
-	virtual void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit) override;
-
+	#pragma region Projectile Rocket Properties
 	//
 	// Projectile Rocket Properties
 	//
 	UPROPERTY(VisibleAnywhere)
 	class URocketMovementComponent* RocketMovementComponent;
 	UPROPERTY(EditAnywhere, Category = "Projectile Rocket Properties", meta = (ToolTip = "Looping sound that plays alongside projectile as it's flying."))
-	USoundCue* ProjectileLoop;
+	class USoundCue* ProjectileLoop;
 	UPROPERTY()
-	UAudioComponent* ProjectileLoopComponent;
+	class UAudioComponent* ProjectileLoopComponent;
 	UPROPERTY(EditAnywhere, Category = "Projectile Rocket Properties", meta = (ToolTip = "Attenuation sound that plays alongside projectile as it's flying."))
-	USoundAttenuation* LoopingSoundAttenuation;
+	class USoundAttenuation* LoopingSoundAttenuation;
+	#pragma endregion
+
+	#pragma region Engine Overrides
+	virtual void BeginPlay() override;
+	virtual void OnHit(
+		UPrimitiveComponent* HitComp, 
+		AActor* OtherActor, 
+		UPrimitiveComponent* OtherComp, 
+		FVector NormalImpulse, 
+		const FHitResult& Hit
+	) override;
+	#pragma endregion
 
 };

@@ -184,11 +184,13 @@ public:
 	virtual void OnRep_Owner() override;
 	#pragma endregion
 
-	#pragma region Overrideable Actions
+	#pragma region Overidden Actions & Overrideable Actions
 	virtual void Fire(const FVector& HitTarget);
 	virtual void FireMulti(const TArray<FVector_NetQuantize>& HitTargets);
+	virtual void WeaponTraceHit(const FVector& TraceStart, const FVector& HitTarget, FHitResult& OutHit);
 	virtual void MultiTraceEndWithScatter(const FVector& HitTarget, TArray<FVector_NetQuantize>& HitTargets);
-	virtual void Dropped();
+
+	virtual void Dropped() override;
 	#pragma endregion
 
 	#pragma region Actions

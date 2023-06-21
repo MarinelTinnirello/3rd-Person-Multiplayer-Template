@@ -4,6 +4,7 @@
 #include "MPShooter/Item/Weapon/Ranged/Projectile/Projectile.h"
 #include "Engine/SkeletalMeshSocket.h"
 
+#pragma region Overriden Actions
 void AProjectileWeapon::Fire(const FVector& HitTarget)
 {
 	Super::Fire(HitTarget);
@@ -100,3 +101,4 @@ void AProjectileWeapon::Fire(const FVector& HitTarget)
 		}
 	}
 }
+#pragma endregion

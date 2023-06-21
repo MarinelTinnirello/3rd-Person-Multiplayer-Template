@@ -15,13 +15,18 @@ class MPSHOOTER_API UMPAnimInstance : public UAnimInstance
 	GENERATED_BODY()
 	
 public:
+	#pragma region Engine Overrides
 	virtual void NativeInitializeAnimation() override;
 	virtual void NativeUpdateAnimation(float DeltaTime) override;
+	#pragma endregion
 
 private:
+	#pragma region References
 	UPROPERTY(BlueprintReadOnly, Category = Character, meta = (AllowPrivateAccess = "true"))
 	class AMPCharacter* MPCharacter;
+	#pragma endregion
 
+	#pragma region Character Properties
 	//
 	// Character Properties
 	//
@@ -46,7 +51,9 @@ private:
 	bool bLocallyControlled;
 	UPROPERTY(BlueprintReadOnly, Category = "Movement", meta = (AllowPrivateAccess = "true"), meta = (ToolTip = "Checks if a character is eliminated."))
 	bool bEliminated;
+	#pragma endregion
 
+	#pragma region Offsets for Movement
 	//
 	// Offsets for Movement
 	//
@@ -69,7 +76,9 @@ private:
 	bool bUseFABRIK;
 	UPROPERTY(BlueprintReadOnly, Category = "Weapon", meta = (AllowPrivateAccess = "true"), meta = (ToolTip = "Checks if we should use Aim Offset for a particular animation."))
 	bool bUseAimOffsets;
+	#pragma endregion
 
+	#pragma region Sockets, Bones, & Transforms
 	//
 	// Sockets, Bones, & Component Transforms
 	//
@@ -95,8 +104,10 @@ private:
 	FName LeftHipSocket;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Bone", meta = (AllowPrivateAccess = "true"), meta = (ToolTip = "Character's head bone where head shots are traced against."))
 	FName HeadBone;
+	#pragma endregion
 
 public:
+	#pragma region Getters
 	FORCEINLINE FName GetEquippedHandSocket() const { return EquippedHandSocket; }
 	FORCEINLINE FName GetSecondaryHandSocket() const { return SecondaryHandSocket; }
 	FORCEINLINE FName GetThrowableSocket() const { return ThrowableSocket; }
@@ -104,5 +115,6 @@ public:
 	FORCEINLINE FName GetRightHipSocket() const { return RightHipSocket; }
 	FORCEINLINE FName GetLeftHipSocket() const { return LeftHipSocket; }
 	FORCEINLINE FName GetHeadBone() const { return HeadBone; }
+	#pragma endregion
 
 };

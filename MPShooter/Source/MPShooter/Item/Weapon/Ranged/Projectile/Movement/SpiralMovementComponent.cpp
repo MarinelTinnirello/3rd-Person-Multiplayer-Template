@@ -3,6 +3,7 @@
 
 #include "SpiralMovementComponent.h"
 
+#pragma region Engine Overrides
 FVector USpiralMovementComponent::ComputeAcceleration(const FVector& InVelocity, float DeltaTime) const
 {
 	FVector ComputeAcceleration = Super::ComputeAcceleration(InVelocity, DeltaTime);
@@ -29,3 +30,4 @@ FVector USpiralMovementComponent::ComputeAcceleration(const FVector& InVelocity,
 
 	return ComputeAcceleration;
 }
+#pragma endregion

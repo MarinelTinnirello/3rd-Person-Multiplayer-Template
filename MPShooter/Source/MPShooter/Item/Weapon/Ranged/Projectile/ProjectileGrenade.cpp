@@ -7,6 +7,7 @@
 #include "Sound/SoundCue.h"
 #include "MPShooter/Interfaces/HitActorInterface.h"
 
+#pragma region Constructor
 AProjectileGrenade::AProjectileGrenade()
 {
 	ProjectileMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Grenade Mesh"));
@@ -20,7 +21,9 @@ AProjectileGrenade::AProjectileGrenade()
 	ProjectileMovementComponent->InitialSpeed = InitialSpeed;
 	ProjectileMovementComponent->MaxSpeed = InitialSpeed;
 }
+#pragma endregion
 
+#pragma region Engine Overrides
 void AProjectileGrenade::BeginPlay()
 {
 	AActor::BeginPlay();
@@ -62,3 +65,4 @@ void AProjectileGrenade::Destroyed()
 
 	Super::Destroyed();
 }
+#pragma endregion

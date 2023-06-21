@@ -14,6 +14,7 @@
 #include "MPShooter/Character/MPAnimInstance.h"
 #include "MPShooter/PlayerController/MPPlayerController.h"
 
+#pragma region Overriden Actions
 void AMeleeWeapon::Fire(const FVector& HitTarget)
 {
 	if (FireAnimation)
@@ -91,7 +92,7 @@ void AMeleeWeapon::Fire(const FVector& HitTarget)
 	}
 }
 
-void AMeleeWeapon::WeaponTraceHit(const FVector& TraceStart, const FVector& TraceEnd, FHitResult& OutHit)
+void AMeleeWeapon::WeaponTraceHit(const FVector& TraceStart, const FVector& HitTarget, FHitResult& OutHit)
 {
 	UWorld* World = GetWorld();
 	if (World)
@@ -99,10 +100,10 @@ void AMeleeWeapon::WeaponTraceHit(const FVector& TraceStart, const FVector& Trac
 		World->LineTraceSingleByChannel(
 			OutHit,
 			TraceStart,
-			TraceEnd,
+			HitTarget,
 			ECollisionChannel::ECC_Visibility
 		);
-		FVector BeamEnd = TraceEnd;
+		FVector BeamEnd = HitTarget;
 
 		if (OutHit.bBlockingHit)
 		{
@@ -110,7 +111,8 @@ void AMeleeWeapon::WeaponTraceHit(const FVector& TraceStart, const FVector& Trac
 		}
 		else
 		{
-			OutHit.ImpactPoint = TraceEnd;
+			OutHit.ImpactPoint = HitTarget;
 		}
 	}
 }
+#pragma endregion

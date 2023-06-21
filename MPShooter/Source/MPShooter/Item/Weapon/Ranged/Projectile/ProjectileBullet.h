@@ -12,10 +12,20 @@ class MPSHOOTER_API AProjectileBullet : public AProjectile
 	GENERATED_BODY()
 
 public:
+	#pragma region Constructor
 	AProjectileBullet();
+	#pragma endregion
 
 protected:
-	virtual void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit) override;
+	#pragma region Engine Overrides
 	virtual void BeginPlay() override;
+	virtual void OnHit(
+		UPrimitiveComponent* HitComp, 
+		AActor* OtherActor, 
+		UPrimitiveComponent* OtherComp, 
+		FVector NormalImpulse, 
+		const FHitResult& Hit
+	) override;
+	#pragma endregion
 
 };

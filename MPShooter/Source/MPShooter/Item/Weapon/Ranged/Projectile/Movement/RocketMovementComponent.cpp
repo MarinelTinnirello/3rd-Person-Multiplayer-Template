@@ -3,6 +3,7 @@
 
 #include "RocketMovementComponent.h"
 
+#pragma region Engine Overrides
 URocketMovementComponent::EHandleBlockingHitResult URocketMovementComponent::HandleBlockingHit(const FHitResult& Hit, float TimeTick, const FVector& MoveDelta, float& SubTickTimeRemaining)
 {
 	Super::HandleBlockingHit(Hit, TimeTick, MoveDelta, SubTickTimeRemaining);
@@ -14,3 +15,4 @@ void URocketMovementComponent::HandleImpact(const FHitResult& Hit, float TimeSli
 {
 	// Rockets shouldn't stop; only explode when their CollisionBox detects a hit
 }
+#pragma endregion

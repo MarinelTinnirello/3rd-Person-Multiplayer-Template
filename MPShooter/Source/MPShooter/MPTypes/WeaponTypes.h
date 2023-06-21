@@ -6,6 +6,7 @@
 #define CUSTOM_DEPTH_BLUE 251
 #define CUSTOM_DEPTH_TAN 252
 
+#pragma region Weapon Type
 UENUM(BlueprintType)
 enum class EWeaponType : uint8
 {
@@ -23,7 +24,9 @@ enum class EWeaponType : uint8
 
 	EWT_MAX UMETA(DisplayName = "DefaultMax")
 };
+#pragma endregion
 
+#pragma region Throwable Weapon Type
 UENUM(BlueprintType)
 enum class EThrowableWeaponType : uint8
 {
@@ -38,7 +41,9 @@ enum class EThrowableWeaponType : uint8
 
 	ETWT_MAX UMETA(DisplayName = "DefaultMax")
 };
+#pragma endregion
 
+#pragma region Fire Type
 UENUM(BlueprintType)
 enum class EFireType : uint8
 {
@@ -49,3 +54,4 @@ enum class EFireType : uint8
 
 	EFT_MAX UMETA(DisplayName = "DefaultMAX")
 };
+#pragma endregion

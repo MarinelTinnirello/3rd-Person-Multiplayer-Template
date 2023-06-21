@@ -12,6 +12,7 @@
 #include "MPShooter/Interfaces/InteractWithCrosshairsInterface.h"
 #include "MPShooter/Interfaces/HitActorInterface.h"
 
+#pragma region Constructor
 AProjectileRocket::AProjectileRocket()
 {
 	ProjectileMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Rocket Mesh"));
@@ -25,22 +26,9 @@ AProjectileRocket::AProjectileRocket()
 	RocketMovementComponent->MaxSpeed = InitialSpeed;
 	RocketMovementComponent->ProjectileGravityScale = 0.f;
 }
+#pragma endregion
 
-void AProjectileRocket::PostEditChangeProperty(FPropertyChangedEvent& Event)
-{
-	Super::PostEditChangeProperty(Event);
-
-	FName PropertyName = Event.Property != nullptr ? Event.Property->GetFName() : NAME_None;
-	if (PropertyName == GET_MEMBER_NAME_CHECKED(AProjectileRocket, InitialSpeed))
-	{
-		if (ProjectileMovementComponent)
-		{
-			ProjectileMovementComponent->InitialSpeed = InitialSpeed;
-			ProjectileMovementComponent->MaxSpeed = InitialSpeed;
-		}
-	}
-}
-
+#pragma region Engine Overrides
 void AProjectileRocket::BeginPlay()
 {
 	Super::BeginPlay();
@@ -71,6 +59,24 @@ void AProjectileRocket::BeginPlay()
 	}
 }
 
+#pragma region Initialization
+void AProjectileRocket::PostEditChangeProperty(FPropertyChangedEvent& Event)
+{
+	Super::PostEditChangeProperty(Event);
+
+	FName PropertyName = Event.Property != nullptr ? Event.Property->GetFName() : NAME_None;
+	if (PropertyName == GET_MEMBER_NAME_CHECKED(AProjectileRocket, InitialSpeed))
+	{
+		if (ProjectileMovementComponent)
+		{
+			ProjectileMovementComponent->InitialSpeed = InitialSpeed;
+			ProjectileMovementComponent->MaxSpeed = InitialSpeed;
+		}
+	}
+}
+#pragma endregion
+
+#pragma region Hit
 void AProjectileRocket::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
 	// if we hit ourselves with the rocket, don't stop
@@ -117,3 +123,6 @@ void AProjectileRocket::Destroyed()
 {
 	//
 }
+#pragma endregion
+
+#pragma endregion

@@ -6,12 +6,15 @@
 #include "MPShooter/Character/MPCharacter.h"
 #include "MPShooter/MPComponents/CombatComponent.h"
 
+#pragma region Constructor
 UBuffComponent::UBuffComponent()
 {
 	PrimaryComponentTick.bCanEverTick = true;
 
 }
+#pragma endregion
 
+#pragma region Engine Overrides
 void UBuffComponent::BeginPlay()
 {
 	Super::BeginPlay();
@@ -25,7 +28,9 @@ void UBuffComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 	HealRampUp(DeltaTime);
 	ShieldRampUp(DeltaTime);
 }
+#pragma endregion
 
+#pragma region Heal
 void UBuffComponent::Heal(float HealAmount, float HealingTime)
 {
 	bHealing = true;
@@ -51,7 +56,9 @@ void UBuffComponent::HealRampUp(float DeltaTime)
 		AmountToHeal = 0.f;
 	}
 }
+#pragma endregion
 
+#pragma region Shield
 void UBuffComponent::ReplenishShield(float ShieldAmount, float ReplenishTime)
 {
 	bReplenishingShield = true;
@@ -77,7 +84,9 @@ void UBuffComponent::ShieldRampUp(float DeltaTime)
 		ShieldReplenishAmount = 0.f;
 	}
 }
+#pragma endregion
 
+#pragma region Speed
 void UBuffComponent::BuffSpeed(float BuffBaseSpeed, float BuffCrouchSpeed, float BuffTime)
 {
 	if (Character == nullptr)
@@ -101,20 +110,6 @@ void UBuffComponent::BuffSpeed(float BuffBaseSpeed, float BuffCrouchSpeed, float
 	MulticastSpeedBuff(BuffBaseSpeed, BuffCrouchSpeed);
 }
 
-void UBuffComponent::MulticastSpeedBuff_Implementation(float BaseSpeed, float CrouchSpeed)
-{
-	if (Character && Character->GetCharacterMovement())
-	{
-		Character->GetCharacterMovement()->MaxWalkSpeed = BaseSpeed;
-		Character->GetCharacterMovement()->MaxWalkSpeedCrouched = CrouchSpeed;
-	}
-
-	if (Character->GetCombat())
-	{
-		Character->GetCombat()->SetSpeeds(CrouchSpeed, BaseSpeed);
-	}
-}
-
 void UBuffComponent::SetInitialSpeeds(float BaseSpeed, float CrouchSpeed)
 {
 	InitialBaseSpeed = BaseSpeed;
@@ -133,6 +128,25 @@ void UBuffComponent::ResetSpeeds()
 	MulticastSpeedBuff(InitialBaseSpeed, InitialCrouchSpeed);
 }
 
+#pragma region Multicast
+void UBuffComponent::MulticastSpeedBuff_Implementation(float BaseSpeed, float CrouchSpeed)
+{
+	if (Character && Character->GetCharacterMovement())
+	{
+		Character->GetCharacterMovement()->MaxWalkSpeed = BaseSpeed;
+		Character->GetCharacterMovement()->MaxWalkSpeedCrouched = CrouchSpeed;
+	}
+
+	if (Character->GetCombat())
+	{
+		Character->GetCombat()->SetSpeeds(CrouchSpeed, BaseSpeed);
+	}
+}
+#pragma endregion
+
+#pragma endregion
+
+#pragma region Jump
 void UBuffComponent::BuffJump(float BuffJumpVelocity, float BuffTime)
 {
 	if (Character == nullptr) return;
@@ -151,14 +165,6 @@ void UBuffComponent::BuffJump(float BuffJumpVelocity, float BuffTime)
 	MulticastJumpBuff(BuffJumpVelocity);
 }
 
-void UBuffComponent::MulticastJumpBuff_Implementation(float JumpVelocity)
-{
-	if (Character && Character->GetCharacterMovement())
-	{
-		Character->GetCharacterMovement()->JumpZVelocity = JumpVelocity;
-	}
-}
-
 void UBuffComponent::SetInitialJumpVelocity(float Velocity)
 {
 	InitialJumpVelocity = Velocity;
@@ -173,3 +179,15 @@ void UBuffComponent::ResetJump()
 
 	MulticastJumpBuff(InitialJumpVelocity);
 }
+
+#pragma region Multicast
+void UBuffComponent::MulticastJumpBuff_Implementation(float JumpVelocity)
+{
+	if (Character && Character->GetCharacterMovement())
+	{
+		Character->GetCharacterMovement()->JumpZVelocity = JumpVelocity;
+	}
+}
+#pragma endregion
+
+#pragma endregion

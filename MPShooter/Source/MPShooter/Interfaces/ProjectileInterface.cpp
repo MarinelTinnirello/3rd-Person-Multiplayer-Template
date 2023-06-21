@@ -6,6 +6,7 @@
 #include "MPShooter/Item/Weapon/Ranged/Projectile/Projectile.h"
 #include "MPShooter/Character/MPCharacter.h"
 
+#pragma region Overrideable Actors
 float IProjectileInterface::GetProjectileRadius(AWeapon* EquippedWeapon)
 {
 	if (EquippedWeapon)
@@ -20,3 +21,4 @@ float IProjectileInterface::GetProjectileRadius(AWeapon* EquippedWeapon)
 
 	return 0.f;
 }
+#pragma endregion

@@ -8,6 +8,7 @@
 #include "Net/UnrealNetwork.h"
 #include "MPShooter/MPTypes/WeaponTypes.h"
 
+#pragma region Constructor
 AItem::AItem()
 {
 	PrimaryActorTick.bCanEverTick = true;
@@ -40,7 +41,9 @@ AItem::AItem()
 	ItemMesh->MarkRenderStateDirty();
 	EnableCustomDepth(true);
 }
+#pragma endregion
 
+#pragma region Engine Overrides
 void AItem::BeginPlay()
 {
 	Super::BeginPlay();
@@ -67,13 +70,16 @@ void AItem::Tick(float DeltaTime)
 
 }
 
+#pragma region Replication
 void AItem::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
 	DOREPLIFETIME(AItem, ItemState);
 }
+#pragma endregion
 
+#pragma region Overlaps
 void AItem::OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 }
@@ -81,7 +87,11 @@ void AItem::OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Ot
 void AItem::OnSphereEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex)
 {
 }
+#pragma endregion
 
+#pragma endregion
+
+#pragma region Actions
 void AItem::SetActiveStars()
 {
 	// 0th element isn't used
@@ -120,6 +130,15 @@ void AItem::SetActiveStars()
 	}
 }
 
+void AItem::ShowPickupWidget(bool bShowWidget)
+{
+	if (PickupWidget)
+	{
+		PickupWidget->SetVisibility(bShowWidget);
+	}
+}
+
+#pragma region Custom Depth
 void AItem::EnableCustomDepth(bool bCanChangeCustomDepth)
 {
 	if (bCanChangeCustomDepth)
@@ -136,24 +155,14 @@ void AItem::InitializeCustomDepth()
 {
 	EnableCustomDepth(false);
 }
+#pragma endregion
 
+#pragma endregion
 
-void AItem::ShowPickupWidget(bool bShowWidget)
-{
-	if (PickupWidget)
-	{
-		PickupWidget->SetVisibility(bShowWidget);
-	}
-}
-
+#pragma region Setters
 void AItem::SetItemState(EItemState State)
 {
 	ItemState = State;
-	OnItemStateSet();
-}
-
-void AItem::OnRep_ItemState()
-{
 	OnItemStateSet();
 }
 
@@ -173,6 +182,16 @@ void AItem::OnItemStateSet()
 	}
 }
 
+#pragma region OnRep
+void AItem::OnRep_ItemState()
+{
+	OnItemStateSet();
+}
+#pragma endregion
+
+#pragma endregion
+
+#pragma region Overrideable Actions
 void AItem::OnEquipped()
 {
 	ShowPickupWidget(false);
@@ -216,3 +235,4 @@ void AItem::Dropped()
 	ItemMesh->DetachFromComponent(DetatchRules);
 	SetOwner(nullptr);
 }
+#pragma endregion

@@ -42,28 +42,42 @@ class MPSHOOTER_API AHitScanWeapon : public AWeapon
 	GENERATED_BODY()
 
 public:
+	#pragma region Overriden Actions
 	virtual void Fire(const FVector& HitTarget) override;
 	virtual void FireMulti(const TArray<FVector_NetQuantize>& HitTargets) override;
+	virtual void WeaponTraceHit(const FVector& TraceStart, const FVector& HitTarget, FHitResult& OutHit) override;
 	virtual void MultiTraceEndWithScatter(const FVector& HitTarget, TArray<FVector_NetQuantize>& HitTargets) override;
-
-	void WeaponTraceHit(const FVector& TraceStart, const FVector& HitTarget, FHitResult& OutHit);
+	#pragma endregion
 
 protected:
+	#pragma region Weapon Properties
+	//
+	// Hit Scan Properties
+	//
 	UPROPERTY(EditAnywhere, Category = "Hit Scan Weapon Properties", meta = (ToolTip = "Particles seen on impact from the weapon."))
 	class UParticleSystem* ImpactParticles;
 	UPROPERTY(EditAnywhere, Category = "Hit Scan Weapon Properties", meta = (ToolTip = "Sound that plays on impact with the environment or character."))
 	class USoundCue* ImpactSound;
+	#pragma endregion
 
 private:
+	#pragma region Weapon Properties
+	#pragma region Hit Scan
 	//
 	// Hit Scan Properties
 	//
 	UPROPERTY(EditAnywhere, Category = "Hit Scan Weapon Properties", meta = (ToolTip = "Particles trailing from the weapon."))
 	class UParticleSystem* BeamParticles;
+	#pragma endregion
 
+	#pragma region Shotgun
 	//
 	// Shotgun Properties
 	//
 	UPROPERTY(EditAnywhere, Category = "Shotgun Weapon Properties", meta = (ToolTip = "Number of slugs shot from the weapon."))
 	uint32 NumOfSlugs = 10;
+	#pragma endregion
+
+	#pragma endregion
+
 };

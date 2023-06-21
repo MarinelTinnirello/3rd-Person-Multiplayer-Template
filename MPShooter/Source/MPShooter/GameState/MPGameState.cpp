@@ -5,13 +5,19 @@
 #include "Net/UnrealNetwork.h"
 #include "MPShooter/PlayerState/MPPlayerState.h"
 
+#pragma region Engine Overrides
+#pragma region Replication
 void AMPGameState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
 	DOREPLIFETIME(AMPGameState, TopScoringPlayers);
 }
+#pragma endregion
 
+#pragma endregion
+
+#pragma region Actions
 void AMPGameState::UpdateTopScore(AMPPlayerState* ScoringPlayer)
 {
 	if (TopScoringPlayers.Num() == 0)
@@ -30,3 +36,4 @@ void AMPGameState::UpdateTopScore(AMPPlayerState* ScoringPlayer)
 		TopScore = ScoringPlayer->GetScore();
 	}
 }
+#pragma endregion

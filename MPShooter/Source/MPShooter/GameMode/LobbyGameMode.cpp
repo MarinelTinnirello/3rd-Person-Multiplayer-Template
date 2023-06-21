@@ -4,6 +4,7 @@
 #include "LobbyGameMode.h"
 #include "GameFramework/GameStateBase.h"
 
+#pragma region Engine Overrides
 void ALobbyGameMode::PostLogin(APlayerController* NewPlayer)
 {
 	Super::PostLogin(NewPlayer);
@@ -19,3 +20,4 @@ void ALobbyGameMode::PostLogin(APlayerController* NewPlayer)
 		}
 	}
 }
+#pragma endregion

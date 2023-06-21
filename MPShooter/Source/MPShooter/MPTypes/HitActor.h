@@ -1,5 +1,6 @@
 #pragma once
 
+#pragma region HitActor
 UENUM(BlueprintType)
 enum class EHitActor : uint8
 {
@@ -9,3 +10,4 @@ enum class EHitActor : uint8
 
 	EHA_MAX UMETA(DisplayName = "DefaultMAX")
 };
+#pragma endregion

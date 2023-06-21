@@ -8,6 +8,7 @@
 #include "MPShooter/Interfaces/ProjectileInterface.h"
 #include "ProjectileWeapon.generated.h"
 
+#pragma region Structs
 USTRUCT(BlueprintType)
 struct FProjectileWeaponDataTable : public FTableRowBase
 {
@@ -27,6 +28,7 @@ struct FProjectileWeaponDataTable : public FTableRowBase
 	UPROPERTY(EditAnywhere, Category = "Projectile", meta = (ToolTip = "Projectile for a weapon used during SSR. The only difference between the 2 classes are that SSR Projectiles won't be replicated, meaning they only spawn locally."))
 	TSubclassOf<AProjectile> ServerSideRewindProjectileClass;
 };
+#pragma endregion
 
 UCLASS()
 class MPSHOOTER_API AProjectileWeapon : public AWeapon, public IProjectileInterface
@@ -34,15 +36,24 @@ class MPSHOOTER_API AProjectileWeapon : public AWeapon, public IProjectileInterf
 	GENERATED_BODY()
 
 public:
+	#pragma region Overriden Actions
 	virtual void Fire(const FVector& HitTarget) override;
-	
+	#pragma endregion
+
 private:
+	#pragma region Projectiles
+	//
+	// Projectiles
+	//
 	UPROPERTY(EditAnywhere, Category = "Projectile", meta = (ToolTip = "Projectile for a weapon."))
 	TSubclassOf<class AProjectile> ProjectileClass;
 	UPROPERTY(EditAnywhere, Category = "Projectile", meta = (ToolTip = "Projectile for a weapon used during SSR. The only difference between the 2 classes are that SSR Projectiles won't be replicated, meaning they only spawn locally."))
 	TSubclassOf<AProjectile> ServerSideRewindProjectileClass;
+	#pragma endregion
 
 public:
+	#pragma region Projectiles
 	FORCEINLINE TSubclassOf<AProjectile> GetProjectileClass() { return ProjectileClass; }
+	#pragma endregion
 
 };

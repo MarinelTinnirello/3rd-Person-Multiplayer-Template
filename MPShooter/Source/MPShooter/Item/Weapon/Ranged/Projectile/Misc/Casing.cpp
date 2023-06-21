@@ -6,6 +6,7 @@
 #include "Kismet/KismetMathLibrary.h"
 #include "Sound/SoundCue.h"
 
+#pragma region Constructor
 ACasing::ACasing()
 {
 	PrimaryActorTick.bCanEverTick = false;
@@ -18,7 +19,9 @@ ACasing::ACasing()
 	CasingMesh->SetEnableGravity(true);
 	CasingMesh->SetNotifyRigidBodyCollision(true);
 }
+#pragma endregion
 
+#pragma region Engine Overrides
 void ACasing::BeginPlay()
 {
 	Super::BeginPlay();
@@ -39,5 +42,4 @@ void ACasing::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitive
 
 	Destroy();
 }
-
-
+#pragma endregion

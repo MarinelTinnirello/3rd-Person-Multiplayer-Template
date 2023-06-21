@@ -36,6 +36,7 @@
 #include "MPAnimInstance.h"
 #include "DrawDebugHelpers.h"
 
+#pragma region Constructor
 AMPCharacter::AMPCharacter()
 {
 	PrimaryActorTick.bCanEverTick = true;
@@ -87,7 +88,9 @@ AMPCharacter::AMPCharacter()
 	NetUpdateFrequency = 66.f;
 	MinNetUpdateFrequency = 33.f;
 }
+#pragma endregion
 
+#pragma region Engine Overrides
 void AMPCharacter::BeginPlay()
 {
 	Super::BeginPlay();
@@ -117,6 +120,37 @@ void AMPCharacter::Tick(float DeltaTime)
 	DrawHitPhysAsset();
 }
 
+#pragma region Initialization
+void AMPCharacter::PostInitializeComponents()
+{
+	Super::PostInitializeComponents();
+
+	if (Combat)
+	{
+		Combat->Character = this;
+	}
+	if (Buff)
+	{
+		Buff->Character = this;
+
+		Buff->SetInitialSpeeds(
+			GetCharacterMovement()->MaxWalkSpeed,
+			GetCharacterMovement()->MaxWalkSpeedCrouched
+		);
+		Buff->SetInitialJumpVelocity(GetCharacterMovement()->JumpZVelocity);
+	}
+	if (LagCompensation)
+	{
+		LagCompensation->Character = this;
+		if (Controller)
+		{
+			LagCompensation->Controller = Cast<AMPPlayerController>(Controller);
+		}
+	}
+}
+#pragma endregion
+
+#pragma region Replication
 void AMPCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
@@ -135,7 +169,27 @@ void AMPCharacter::OnRep_ReplicatedMovement()
 	SimProxiesTurn();
 	TimeSincePrevMovementReplication = 0.f;
 }
+#pragma endregion
 
+void AMPCharacter::Destroyed()
+{
+	Super::Destroyed();
+
+	if (EliminateComponent)
+	{
+		EliminateComponent->DestroyComponent();
+	}
+
+	AMPShooterGameMode* MPGameMode = Cast<AMPShooterGameMode>(UGameplayStatics::GetGameMode(this));
+	bool bMatchNotInProgress = MPGameMode && MPGameMode->GetMatchState() != MatchState::InProgress;
+
+	if (Combat && Combat->EquippedWeapon && bMatchNotInProgress)
+	{
+		Combat->EquippedWeapon->Destroy();
+	}
+}
+
+#pragma region Input
 void AMPCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
@@ -174,53 +228,11 @@ void AMPCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 		}
 	}
 }
+#pragma endregion
 
-void AMPCharacter::PostInitializeComponents()
-{
-	Super::PostInitializeComponents();
+#pragma endregion
 
-	if (Combat)
-	{
-		Combat->Character = this;
-	}
-	if (Buff)
-	{
-		Buff->Character = this;
-
-		Buff->SetInitialSpeeds(
-			GetCharacterMovement()->MaxWalkSpeed,
-			GetCharacterMovement()->MaxWalkSpeedCrouched
-		);
-		Buff->SetInitialJumpVelocity(GetCharacterMovement()->JumpZVelocity);
-	}
-	if (LagCompensation)
-	{
-		LagCompensation->Character = this;
-		if (Controller)
-		{
-			LagCompensation->Controller = Cast<AMPPlayerController>(Controller);
-		}
-	}
-}
-
-void AMPCharacter::Destroyed()
-{
-	Super::Destroyed();
-
-	if (EliminateComponent)
-	{
-		EliminateComponent->DestroyComponent();
-	}
-
-	AMPShooterGameMode* MPGameMode = Cast<AMPShooterGameMode>(UGameplayStatics::GetGameMode(this));
-	bool bMatchNotInProgress = MPGameMode && MPGameMode->GetMatchState() != MatchState::InProgress;
-
-	if (Combat && Combat->EquippedWeapon && bMatchNotInProgress)
-	{
-		Combat->EquippedWeapon->Destroy();
-	}
-}
-
+#pragma region Initialization
 void AMPCharacter::PollInit()
 {
 	// Polls for any classes not existing during the 1st couple of frames
@@ -243,37 +255,7 @@ void AMPCharacter::PollInit()
 	}
 }
 
-void AMPCharacter::ServerLeaveGame_Implementation()
-{
-	AMPShooterGameMode* MPShooterGameMode = GetWorld()->GetAuthGameMode<AMPShooterGameMode>();		
-	MPPlayerState = MPPlayerState == nullptr ? GetPlayerState<AMPPlayerState>() : MPPlayerState;
-	if (MPShooterGameMode && MPPlayerState)
-	{
-		MPShooterGameMode->PlayerLeftGame(MPPlayerState);
-	}
-}
-
-UPARAM(DisplayName = "Physical Surface")
-EPhysicalSurface AMPCharacter::GetSurfaceType()
-{
-	FHitResult HitResult;
-	const FVector Start{ GetActorLocation() };
-	const FVector End{ Start + FVector(0.f, 0.f, -400.f) };
-	FCollisionQueryParams QueryParams;
-	QueryParams.bReturnPhysicalMaterial = true;
-	QueryParams.AddIgnoredActor(this);
-
-	// Since our players ignore the Visibility channel, we have to use another channel
-	//		such as the ECC_SkeletalMesh
-	GetWorld()->LineTraceSingleByChannel(
-		HitResult,
-		Start,
-		End,
-		ECollisionChannel::ECC_Visibility,
-		QueryParams);
-	return UPhysicalMaterial::DetermineSurfaceType(HitResult.PhysMaterial.Get());
-}
-
+#pragma region Physics Assets
 void AMPCharacter::HitPhysAssetConstruction()
 {
 	if (GetMesh() == nullptr)
@@ -389,7 +371,35 @@ void AMPCharacter::DrawHitPhysAsset()
 		}
 	}
 }
+#pragma endregion
 
+#pragma endregion
+
+#pragma region Surfaces
+UPARAM(DisplayName = "Physical Surface")
+EPhysicalSurface AMPCharacter::GetSurfaceType()
+{
+	FHitResult HitResult;
+	const FVector Start{ GetActorLocation() };
+	const FVector End{ Start + FVector(0.f, 0.f, -400.f) };
+	FCollisionQueryParams QueryParams;
+	QueryParams.bReturnPhysicalMaterial = true;
+	QueryParams.AddIgnoredActor(this);
+
+	// Since our players ignore the Visibility channel, we have to use another channel
+	//		such as the ECC_SkeletalMesh
+	GetWorld()->LineTraceSingleByChannel(
+		HitResult,
+		Start,
+		End,
+		ECollisionChannel::ECC_Visibility,
+		QueryParams);
+	return UPhysicalMaterial::DetermineSurfaceType(HitResult.PhysMaterial.Get());
+}
+#pragma endregion
+
+#pragma region Input
+#pragma region Mouse and Stick
 void AMPCharacter::Move(const FInputActionValue& Value)
 {
 	if (bDisableGameplay)
@@ -436,7 +446,10 @@ void AMPCharacter::Look(const FInputActionValue& Value)
 		}
 	}
 }
+#pragma endregion
 
+#pragma region Button Presses
+#pragma region Jump
 void AMPCharacter::Jump()
 {
 	if (bDisableGameplay)
@@ -453,7 +466,9 @@ void AMPCharacter::Jump()
 		Super::Jump();
 	}
 }
+#pragma endregion
 
+#pragma region Equip
 void AMPCharacter::EquipButtonPressed()
 {
 	if (bDisableGameplay)
@@ -481,6 +496,7 @@ void AMPCharacter::EquipButtonPressed()
 	}
 }
 
+#pragma region Server
 void AMPCharacter::ServerEquipButtonPressed_Implementation()
 {
 	if (Combat)
@@ -508,7 +524,11 @@ void AMPCharacter::ServerEquipButtonPressed_Implementation()
 		}
 	}
 }
+#pragma endregion
 
+#pragma endregion
+
+#pragma region Unequip
 void AMPCharacter::UnequipButtonPressed()
 {
 	if (bDisableGameplay)
@@ -541,6 +561,7 @@ void AMPCharacter::UnequipButtonPressed()
 	}
 }
 
+#pragma region Server
 void AMPCharacter::ServerUnequipButtonPressed_Implementation()
 {
 	if (Combat)
@@ -551,7 +572,11 @@ void AMPCharacter::ServerUnequipButtonPressed_Implementation()
 		}
 	}
 }
+#pragma endregion
 
+#pragma endregion
+
+#pragma region Crouch
 void AMPCharacter::CrouchButtonPressed()
 {
 	if (bDisableGameplay)
@@ -568,7 +593,9 @@ void AMPCharacter::CrouchButtonPressed()
 		Crouch();
 	}
 }
+#pragma endregion
 
+#pragma region Fire
 void AMPCharacter::FireButtonPressed()
 {
 	if (bDisableGameplay)
@@ -594,7 +621,116 @@ void AMPCharacter::FireButtonReleased()
 		Combat->FireButtonPressed(false);
 	}
 }
+#pragma endregion
 
+#pragma region Reload
+void AMPCharacter::ReloadButtonPressed()
+{
+	if (bDisableGameplay)
+	{
+		return;
+	}
+
+	if (Combat)
+	{
+		Combat->Reload();
+	}
+}
+#pragma endregion
+
+#pragma region Aim
+void AMPCharacter::AimButtonPressed()
+{
+	if (bDisableGameplay)
+	{
+		return;
+	}
+
+	if (Combat)
+	{
+		Combat->SetAiming(true);
+	}
+}
+
+void AMPCharacter::AimButtonReleased()
+{
+	if (bDisableGameplay)
+	{
+		return;
+	}
+
+	if (Combat)
+	{
+		Combat->SetAiming(false);
+	}
+}
+#pragma endregion
+
+#pragma region Throw
+void AMPCharacter::ThrowButtonPressed()
+{
+	if (Combat)
+	{
+		Combat->Throw();
+	}
+}
+
+void AMPCharacter::ThrowButtonReleased()
+{
+}
+#pragma endregion
+
+#pragma region View Chat Box
+void AMPCharacter::ViewChatBoxButtonPressed()
+{
+	if (MPPlayerController == nullptr)
+	{
+		return;
+	}
+
+	MPPlayerController->ToggleChatBox();
+}
+#pragma endregion
+
+#pragma region Quit
+void AMPCharacter::QuitButtonPressed()
+{
+	if (bDisableGameplay || MPPlayerController == nullptr)
+	{
+		return;
+	}
+
+	MPPlayerController->ShowReturnToMainMenu();
+}
+#pragma endregion
+
+#pragma region Weapon Wheel
+void AMPCharacter::WeaponWheelButtonPressed()
+{
+	if (bDisableGameplay || MPPlayerController == nullptr)
+	{
+		return;
+	}
+
+	MPPlayerController->SetHUDWeaponWheel(true);
+}
+
+void AMPCharacter::WeaponWheelButtonReleased()
+{
+	if (bDisableGameplay || MPPlayerController == nullptr)
+	{
+		return;
+	}
+
+	MPPlayerController->SetHUDWeaponWheel(false);
+}
+#pragma endregion
+
+#pragma endregion
+
+#pragma endregion
+
+#pragma region Play Montages
 void AMPCharacter::PlayEquipMontage(const FName& SectionName)
 {
 	if (Combat == nullptr || Combat->EquippedWeapon == nullptr)
@@ -677,107 +813,33 @@ void AMPCharacter::PlayThrowMontage()
 	}
 }
 
-void AMPCharacter::ReloadButtonPressed()
+void AMPCharacter::PlayHitReactMontage(const FName& SectionName)
 {
-	if (bDisableGameplay)
+	if (Combat == nullptr || Combat->EquippedWeapon == nullptr)
 	{
 		return;
 	}
 
-	if (Combat)
+	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+	if (AnimInstance && HitReactMontage)
 	{
-		Combat->Reload();
+		AnimInstance->Montage_Play(HitReactMontage);
+
+		AnimInstance->Montage_JumpToSection(SectionName);
 	}
 }
 
-void AMPCharacter::AimButtonPressed()
+void AMPCharacter::PlayEliminateMontage()
 {
-	if (bDisableGameplay)
+	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+	if (AnimInstance && EliminateMontage)
 	{
-		return;
-	}
-
-	if (Combat)
-	{
-		Combat->SetAiming(true);
+		AnimInstance->Montage_Play(EliminateMontage);
 	}
 }
+#pragma endregion
 
-void AMPCharacter::AimButtonReleased()
-{
-	if (bDisableGameplay)
-	{
-		return;
-	}
-
-	if (Combat)
-	{
-		Combat->SetAiming(false);
-	}
-}
-
-void AMPCharacter::ThrowButtonPressed()
-{
-	if (Combat)
-	{
-		Combat->Throw();
-	}
-}
-
-void AMPCharacter::ThrowButtonReleased()
-{
-}
-
-void AMPCharacter::ViewChatBoxButtonPressed()
-{
-	if (MPPlayerController == nullptr)
-	{
-		return;
-	}
-
-	MPPlayerController->ToggleChatBox();
-}
-
-void AMPCharacter::QuitButtonPressed()
-{
-	if (bDisableGameplay || MPPlayerController == nullptr)
-	{
-		return;
-	}
-
-	MPPlayerController->ShowReturnToMainMenu();
-}
-
-void AMPCharacter::WeaponWheelButtonPressed()
-{
-	if (bDisableGameplay || MPPlayerController == nullptr)
-	{
-		return;
-	}
-
-	MPPlayerController->SetHUDWeaponWheel(true);
-}
-
-void AMPCharacter::WeaponWheelButtonReleased()
-{
-	if (bDisableGameplay || MPPlayerController == nullptr)
-	{
-		return;
-	}
-
-	MPPlayerController->SetHUDWeaponWheel(false);
-}
-
-bool AMPCharacter::IsLocallyReloading()
-{
-	if (Combat == nullptr)
-	{
-		return false;
-	}
-
-	return Combat->bLocallyReloading;
-}
-
+#pragma region Animation
 void AMPCharacter::AimOffset(float DeltaTime)
 {
 	if (Combat && Combat->EquippedWeapon == nullptr)
@@ -957,7 +1019,10 @@ void AMPCharacter::HideCameraIfCharacterIsClose()
 		}
 	}
 }
+#pragma endregion
 
+#pragma region Equipped Weapon
+#pragma region Drop
 void AMPCharacter::DropOrDestroyWeapon(AWeapon* Weapon)
 {
 	if (Weapon == nullptr)
@@ -989,7 +1054,21 @@ void AMPCharacter::DropOrDestroyWeapons()
 		}
 	}
 }
+#pragma endregion
 
+#pragma region Combat
+FVector AMPCharacter::GetHitTarget() const
+{
+	if (Combat == nullptr)
+	{
+		return FVector();
+	}
+
+	return Combat->HitTarget;
+}
+#pragma endregion
+
+#pragma region Getters & Setters
 void AMPCharacter::SetOverlappingWeapon(AWeapon* Weapon)
 {
 	if (OverlappingWeapon)
@@ -1008,6 +1087,18 @@ void AMPCharacter::SetOverlappingWeapon(AWeapon* Weapon)
 	}
 }
 
+AWeapon* AMPCharacter::GetEquippedWeapon()
+{
+	if (Combat == nullptr)
+	{
+		return nullptr;
+	}
+
+	return Combat->EquippedWeapon;
+}
+#pragma endregion
+
+#pragma region OnRep
 void AMPCharacter::OnRep_OverlappingWeapon(AWeapon* PrevWeapon)
 {
 	if (OverlappingWeapon)
@@ -1020,7 +1111,9 @@ void AMPCharacter::OnRep_OverlappingWeapon(AWeapon* PrevWeapon)
 		PrevWeapon->ShowPickupWidget(false);
 	}
 }
+#pragma endregion
 
+#pragma region Checkers
 bool AMPCharacter::IsWeaponEquipped()
 {
 	return (Combat && Combat->EquippedWeapon);
@@ -1031,20 +1124,23 @@ bool AMPCharacter::IsWeaponUnequipped()
 	return (Combat && Combat->IsWeaponUnequipped());
 }
 
-AWeapon* AMPCharacter::GetEquippedWeapon()
-{
-	if (Combat == nullptr)
-	{
-		return nullptr;
-	}
-
-	return Combat->EquippedWeapon;
-}
-
 bool AMPCharacter::IsAiming()
 {
 	return (Combat && Combat->bAiming);
 }
+
+bool AMPCharacter::IsLocallyReloading()
+{
+	if (Combat == nullptr)
+	{
+		return false;
+	}
+
+	return Combat->bLocallyReloading;
+}
+#pragma endregion
+
+#pragma endregion
 
 void AMPCharacter::SetOverlappingThrowableWeapon(AThrowableWeapon* ThrowableWeapon)
 {
@@ -1096,6 +1192,7 @@ AThrowableWeapon* AMPCharacter::GetEquippedThrowableWeapon()
 	return Combat->EquippedThrowableWeapon;
 }
 
+#pragma region States
 ECombatState AMPCharacter::GetCombatState() const
 {
 	if (Combat == nullptr)
@@ -1115,33 +1212,10 @@ ECharacterCombatState AMPCharacter::GetCharacterCombatState() const
 
 	return Combat->CharacterCombatState;
 }
+#pragma endregion
 
-FVector AMPCharacter::GetHitTarget() const
-{
-	if (Combat == nullptr)
-	{
-		return FVector();
-	}
-
-	return Combat->HitTarget;
-}
-
-void AMPCharacter::PlayHitReactMontage(const FName& SectionName)
-{
-	if (Combat == nullptr || Combat->EquippedWeapon == nullptr)
-	{
-		return;
-	}
-
-	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
-	if (AnimInstance && HitReactMontage)
-	{
-		AnimInstance->Montage_Play(HitReactMontage);
-
-		AnimInstance->Montage_JumpToSection(SectionName);
-	}
-}
-
+#pragma region Character Status & Stats
+#pragma region Health
 void AMPCharacter::ReceiveDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatorController, AActor* DamageCauser)
 {
 	if (bEliminated)
@@ -1182,6 +1256,7 @@ void AMPCharacter::ReceiveDamage(AActor* DamagedActor, float Damage, const UDama
 	}
 }
 
+#pragma region OnRep
 void AMPCharacter::OnRep_Health(float LastHealth)
 {
 	UpdateHUDHealth();
@@ -1190,7 +1265,9 @@ void AMPCharacter::OnRep_Health(float LastHealth)
 		DirectionalHitReact(FVector(0.f, 0.f, 0.f));
 	}
 }
+#pragma endregion
 
+#pragma region UI
 void AMPCharacter::UpdateHUDHealth()
 {
 	MPPlayerController = MPPlayerController == nullptr ? Cast<AMPPlayerController>(Controller) : MPPlayerController;
@@ -1199,7 +1276,9 @@ void AMPCharacter::UpdateHUDHealth()
 		MPPlayerController->SetHUDHealth(Health, MaxHealth);
 	}
 }
+#pragma endregion
 
+#pragma region Animation
 void AMPCharacter::DirectionalHitReact(const FVector& ImpactPoint)
 {
 	const FVector Forward = GetActorForwardVector();
@@ -1233,7 +1312,9 @@ void AMPCharacter::DirectionalHitReact(const FVector& ImpactPoint)
 
 	PlayHitReactMontage(SectionName);
 }
+#pragma endregion
 
+#pragma region Elimination
 void AMPCharacter::Eliminated(bool bPlayerLeftGame)
 {
 	DropOrDestroyWeapons();
@@ -1241,7 +1322,7 @@ void AMPCharacter::Eliminated(bool bPlayerLeftGame)
 	MulticastEliminated(bPlayerLeftGame);
 }
 
-
+#pragma region Multicast
 void AMPCharacter::MulticastEliminated_Implementation(bool bPlayerLeftGame)
 {
 	bLeftGame = bPlayerLeftGame;
@@ -1328,7 +1409,9 @@ void AMPCharacter::MulticastEliminated_Implementation(bool bPlayerLeftGame)
 		EliminateDelay
 	);
 }
+#pragma endregion
 
+#pragma region Elimination Effects
 void AMPCharacter::EliminateTimerFinished()
 {
 	AMPShooterGameMode* MPShooterGameMode = GetWorld()->GetAuthGameMode<AMPShooterGameMode>();	
@@ -1339,15 +1422,6 @@ void AMPCharacter::EliminateTimerFinished()
 	if (bLeftGame && IsLocallyControlled())
 	{
 		OnLeftGame.Broadcast();
-	}
-}
-
-void AMPCharacter::PlayEliminateMontage()
-{
-	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
-	if (AnimInstance && EliminateMontage)
-	{
-		AnimInstance->Montage_Play(EliminateMontage);
 	}
 }
 
@@ -1368,7 +1442,14 @@ void AMPCharacter::UpdateDissolveMaterial(float DissolveValue)
 		DynamicDissolveMaterialInstance->SetScalarParameterValue(TEXT("Dissolve"), DissolveValue);
 	}
 }
+#pragma endregion
 
+#pragma endregion
+
+#pragma endregion
+
+#pragma region Shield
+#pragma region OnRep
 void AMPCharacter::OnRep_Shield(float LastShield)
 {
 	UpdateHUDShield();
@@ -1377,7 +1458,9 @@ void AMPCharacter::OnRep_Shield(float LastShield)
 		DirectionalHitReact(FVector(0.f, 0.f, 0.f));
 	}
 }
+#pragma endregion
 
+#pragma region UI
 void AMPCharacter::UpdateHUDShield()
 {
 	MPPlayerController = MPPlayerController == nullptr ? Cast<AMPPlayerController>(Controller) : MPPlayerController;
@@ -1386,7 +1469,12 @@ void AMPCharacter::UpdateHUDShield()
 		MPPlayerController->SetHUDShield(Shield, MaxShield);
 	}
 }
+#pragma endregion
 
+#pragma endregion
+
+#pragma region Ammo
+#pragma region UI
 void AMPCharacter::UpdateHUDAmmo()
 {
 	MPPlayerController = MPPlayerController == nullptr ? Cast<AMPPlayerController>(Controller) : MPPlayerController;
@@ -1397,7 +1485,12 @@ void AMPCharacter::UpdateHUDAmmo()
 		MPPlayerController->SetHUDWeaponAmmo(Combat->EquippedWeapon->GetAmmo());
 	}
 }
+#pragma endregion
 
+#pragma endregion
+
+#pragma region Character Status in Match
+#pragma region Multicast
 void AMPCharacter::MulticastGainedTheLead_Implementation()
 {
 	if (CrownSystem == nullptr)
@@ -1431,3 +1524,20 @@ void AMPCharacter::MulticastLostTheLead_Implementation()
 		CrownComponent->DestroyComponent();
 	}
 }
+#pragma endregion
+
+#pragma region Server
+void AMPCharacter::ServerLeaveGame_Implementation()
+{
+	AMPShooterGameMode* MPShooterGameMode = GetWorld()->GetAuthGameMode<AMPShooterGameMode>();
+	MPPlayerState = MPPlayerState == nullptr ? GetPlayerState<AMPPlayerState>() : MPPlayerState;
+	if (MPShooterGameMode && MPPlayerState)
+	{
+		MPShooterGameMode->PlayerLeftGame(MPPlayerState);
+	}
+}
+#pragma endregion
+
+#pragma endregion
+
+#pragma endregion

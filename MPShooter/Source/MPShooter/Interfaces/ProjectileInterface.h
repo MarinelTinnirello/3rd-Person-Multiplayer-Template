@@ -17,6 +17,8 @@ class MPSHOOTER_API IProjectileInterface
 	GENERATED_BODY()
 
 public:
+	#pragma region Overrideable Actors
 	virtual float GetProjectileRadius(class AWeapon* EquippedWeapon);
+	#pragma endregion
 
 };

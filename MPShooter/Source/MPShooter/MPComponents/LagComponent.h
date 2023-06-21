@@ -6,6 +6,8 @@
 #include "Components/ActorComponent.h"
 #include "LagComponent.generated.h"
 
+#pragma region Structs
+#pragma region Physics Assets
 USTRUCT(BlueprintType)
 struct FBoxInformation
 {
@@ -33,7 +35,9 @@ struct FCapsuleInformation
 	UPROPERTY()
 	float CapsuleRadius;
 };
+#pragma endregion
 
+#pragma region Server-Side Rewind
 USTRUCT(BlueprintType)
 struct FFramePackage
 {
@@ -71,6 +75,9 @@ struct FServerSideRewindShotgunResult
 	TMap<AMPCharacter*, uint32> BodyShots;
 
 };
+#pragma endregion
+
+#pragma endregion
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class MPSHOOTER_API ULagComponent : public UActorComponent
@@ -80,11 +87,15 @@ class MPSHOOTER_API ULagComponent : public UActorComponent
 public:	
 	friend class AMPCharacter;
 
+	#pragma region Constructor & Engine Overrides
 	ULagComponent();
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+	#pragma endregion
 
+	#pragma region Actions
 	void ShowFramePackage(const FFramePackage& Package, const FColor& Color);
 
+	#pragma region Hit Scan
 	//
 	// Hit Scan
 	//
@@ -101,7 +112,9 @@ public:
 		const FVector_NetQuantize& HitLocation,
 		float HitTime
 	);
+	#pragma endregion
 
+	#pragma region Shotgun
 	//
 	// Shotgun
 	//
@@ -118,7 +131,9 @@ public:
 		const TArray<FVector_NetQuantize>& HitLocations,
 		float HitTime
 	);
+	#pragma endregion
 
+	#pragma region Projectile
 	//
 	// Projectile
 	//
@@ -135,19 +150,32 @@ public:
 		const FVector_NetQuantize100& InitialVelocity,
 		float HitTime
 	);
+	#pragma endregion
+
+	#pragma endregion
 
 protected:
+	#pragma region Engine Overrides
 	virtual void BeginPlay() override;
+	#pragma endregion
 
+	#pragma region Actions
+	#pragma region Frames
 	void SaveFramePackage();
 	void SaveFramePackage(FFramePackage& Package);
 	FFramePackage GetFrameToCheck(AMPCharacter* HitCharacter, float HitTime);
 	FFramePackage InterpBetweenFrames(const FFramePackage& OlderFrame, const FFramePackage& YoungerFrame, float HitTime);
+	#pragma endregion
+
+	#pragma region Collision
 	void CacheHitPositions(AMPCharacter* HitCharacter, FFramePackage& OutFramePackage);
 	void MoveHitColliders(AMPCharacter* HitCharacter, const FFramePackage& Package);
 	void ResetHitColliders(AMPCharacter* HitCharacter, const FFramePackage& Package);
 	void EnableCharacterMeshCollision(AMPCharacter* HitCharacter, ECollisionEnabled::Type CollisionEnabled);
+	#pragma endregion
 
+	#pragma region Server-Side Rewind
+	#pragma region Hit Scan
 	//
 	// Hit Scan
 	//
@@ -157,7 +185,9 @@ protected:
 		const FVector_NetQuantize& TraceStart,
 		const FVector_NetQuantize& HitLocation
 	);
+	#pragma endregion
 
+	#pragma region Shotgun
 	//
 	// Shotgun
 	//
@@ -166,7 +196,9 @@ protected:
 		const FVector_NetQuantize& TraceStart,
 		const TArray<FVector_NetQuantize>& HitLocations
 	);
+	#pragma endregion
 
+	#pragma region Projectile
 	//
 	// Projectile
 	//
@@ -177,13 +209,21 @@ protected:
 		const FVector_NetQuantize100& InitialVelocity,
 		float HitTime
 	);
+	#pragma endregion
+
+	#pragma endregion
+
+	#pragma endregion
 
 private:	
+	#pragma region References
 	UPROPERTY()
 	AMPCharacter* Character;
 	UPROPERTY()
 	class AMPPlayerController* Controller;
+	#pragma endregion
 
+	#pragma region Frame Properties
 	//
 	// Frame Properties
 	//
@@ -194,8 +234,9 @@ private:
 	float MaxRecordTime = 4.f;
 	UPROPERTY(EditAnywhere, Category = "Frame Properties", meta = (ToolTip = "Name of the head bone, taken from one of the various hit collision types."))
 	FName HeadBone;
+	#pragma endregion
 
-
+	#pragma region DEBUG
 	//
 	// DEBUG
 	//
@@ -203,5 +244,6 @@ private:
 	bool bDrawSSRFramePkg = false;
 	UPROPERTY(EditAnywhere, Category = "DEBUG", meta = (ToolTip = "Checks whether or not to draw the hit confirmation."))
 	bool bDrawSSRConfirmHit = false;
+	#pragma endregion
 	
 };

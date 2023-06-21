@@ -1,5 +1,6 @@
 #pragma once
 
+#pragma region Turning In Place
 UENUM(BlueprintType)
 enum class ETurningInPlace : uint8
 {
@@ -9,3 +10,4 @@ enum class ETurningInPlace : uint8
 
 	ETIP_MAX UMETA(DisplayName = "DefaultMAX")
 };
+#pragma endregion

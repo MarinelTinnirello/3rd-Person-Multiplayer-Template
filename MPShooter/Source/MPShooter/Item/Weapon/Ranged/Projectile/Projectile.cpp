@@ -16,6 +16,7 @@
 #include "MPShooter/Interfaces/HitActorInterface.h"
 #include "MPShooter/Character/MPCharacter.h"
 
+#pragma region Constructor
 AProjectile::AProjectile()
 {
 	PrimaryActorTick.bCanEverTick = true;
@@ -30,22 +31,9 @@ AProjectile::AProjectile()
 	CollisionBox->SetCollisionResponseToChannel(ECollisionChannel::ECC_WorldStatic, ECollisionResponse::ECR_Block);
 	CollisionBox->SetCollisionResponseToChannel(ECC_SkeletalMesh, ECollisionResponse::ECR_Block);
 }
+#pragma endregion
 
-void AProjectile::PostEditChangeProperty(FPropertyChangedEvent& Event)
-{
-	Super::PostEditChangeProperty(Event);
-
-	FName PropertyName = Event.Property != nullptr ? Event.Property->GetFName() : NAME_None;
-	if (PropertyName == GET_MEMBER_NAME_CHECKED(AProjectile, InitialSpeed))
-	{
-		if (ProjectileMovementComponent)
-		{
-			ProjectileMovementComponent->InitialSpeed = InitialSpeed;
-			ProjectileMovementComponent->MaxSpeed = InitialSpeed;
-		}
-	}
-}
-
+#pragma region Engine Overrides
 void AProjectile::BeginPlay()
 {
 	Super::BeginPlay();
@@ -74,28 +62,33 @@ void AProjectile::Tick(float DeltaTime)
 
 }
 
+#pragma region Initialization
+void AProjectile::PostEditChangeProperty(FPropertyChangedEvent& Event)
+{
+	Super::PostEditChangeProperty(Event);
+
+	FName PropertyName = Event.Property != nullptr ? Event.Property->GetFName() : NAME_None;
+	if (PropertyName == GET_MEMBER_NAME_CHECKED(AProjectile, InitialSpeed))
+	{
+		if (ProjectileMovementComponent)
+		{
+			ProjectileMovementComponent->InitialSpeed = InitialSpeed;
+			ProjectileMovementComponent->MaxSpeed = InitialSpeed;
+		}
+	}
+}
+#pragma endregion
+
+#pragma region Replication
 void AProjectile::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
 	DOREPLIFETIME(AProjectile, HitActor);
 }
+#pragma endregion
 
-float AProjectile::GetCollisionSphereRadius()
-{
-	float SphereRadius = 0.f;
-
-	if (CollisionBox)
-	{
-		FVector Origin;		// not used, but needed
-		FVector BoxExtent;	// not used, but needed
-
-		UKismetSystemLibrary::GetComponentBounds(CollisionBox, Origin, BoxExtent, SphereRadius);
-	}
-	
-	return SphereRadius;
-}
-
+#pragma region OnHit
 void AProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
 	HitActor = OtherActor->Implements<UInteractWithCrosshairsInterface>() ? EHitActor::EHA_Character : EHitActor::EHA_Environment;
@@ -112,6 +105,7 @@ void AProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimi
 	);*/
 }
 
+#pragma region Multicast
 void AProjectile::MulticastOnHit_Implementation(EHitActor HitActorType)
 {
 	ActorHitType(HitActorType);
@@ -129,48 +123,26 @@ void AProjectile::MulticastOnHit_Implementation(EHitActor HitActorType)
 
 	Destroy();
 }
+#pragma endregion
 
-void AProjectile::MulticastSpawnMaterialDecal_Implementation(const FHitResult& Hit)
+#pragma endregion
+
+#pragma endregion
+
+#pragma region Overrideable Actors
+float AProjectile::GetCollisionSphereRadius()
 {
-	if (ImpactDecalMaterial)
+	float SphereRadius = 0.f;
+
+	if (CollisionBox)
 	{
-		UWorld* World = GetWorld();
-		if (World)
-		{
-			FVector HitLocation = Hit.Location;
-			FVector HitNormal = Hit.ImpactNormal;
-			FRotator HitRotation = HitNormal.Rotation();
-			float Offset = FMath::RandRange(-180.f, 180.f);
-			HitRotation = FRotator(HitRotation.Pitch, HitRotation.Yaw, HitRotation.Roll + Offset);
-			UMaterialInterface* DecalMaterial = ImpactDecalMaterial;
-			UGameplayStatics::SpawnDecalAtLocation(
-				World,
-				DecalMaterial,
-				DecalSize,
-				HitLocation,
-				HitRotation,
-				DecalLifeSpan
-			);
-		}
+		FVector Origin;		// not used, but needed
+		FVector BoxExtent;	// not used, but needed
+
+		UKismetSystemLibrary::GetComponentBounds(CollisionBox, Origin, BoxExtent, SphereRadius);
 	}
-}
-
-void AProjectile::ServerSpawnMaterialDecal_Implementation(const FHitResult& Hit)
-{
-	MulticastSpawnMaterialDecal(Hit);
-}
-
-bool AProjectile::ServerSpawnMaterialDecal_Validate(const FHitResult& Hit)
-{
-	if (ImpactDecalMaterial == nullptr) return false;
-	// hit data isn't null
-	if (Hit.bBlockingHit == false) return false;
-	// hit location is in a reasonable range (1000 units squared) from projectile's current location
-	if (FVector::DistSquared(Hit.Location, GetActorLocation()) > 1000000.f) return false;
-	// player who fired projectile has authority to spawn projectiles on server
-	if (GetOwner()->HasAuthority() == false) return false;
-
-	return true;
+	
+	return SphereRadius;
 }
 
 void AProjectile::ActorHitType(EHitActor HitActorType)
@@ -209,24 +181,9 @@ void AProjectile::ActorHitType(EHitActor HitActorType)
 		}
 	}
 }
+#pragma endregion
 
-void AProjectile::StartDestroyTimer()
-{
-	// we want to delay the destruction of the projectile, but still have the impact components play
-	// so we use a timer instead of calling the Super()
-	GetWorldTimerManager().SetTimer(
-		DestroyTimer,
-		this,
-		&AProjectile::DestroyTimerFinished,
-		DestroyTime
-	);
-}
-
-void AProjectile::DestroyTimerFinished()
-{
-	Destroy();
-}
-
+#pragma region Actions
 void AProjectile::SpawnTrailSystem()
 {
 	if (TrailSystem)
@@ -270,3 +227,73 @@ void AProjectile::ExplodeDamage()
 	}
 }
 
+#pragma region Effects
+#pragma region Timers
+void AProjectile::StartDestroyTimer()
+{
+	// we want to delay the destruction of the projectile, but still have the impact components play
+	// so we use a timer instead of calling the Super()
+	GetWorldTimerManager().SetTimer(
+		DestroyTimer,
+		this,
+		&AProjectile::DestroyTimerFinished,
+		DestroyTime
+	);
+}
+
+void AProjectile::DestroyTimerFinished()
+{
+	Destroy();
+}
+#pragma endregion
+
+#pragma endregion
+
+#pragma region Multicast
+void AProjectile::MulticastSpawnMaterialDecal_Implementation(const FHitResult& Hit)
+{
+	if (ImpactDecalMaterial)
+	{
+		UWorld* World = GetWorld();
+		if (World)
+		{
+			FVector HitLocation = Hit.Location;
+			FVector HitNormal = Hit.ImpactNormal;
+			FRotator HitRotation = HitNormal.Rotation();
+			float Offset = FMath::RandRange(-180.f, 180.f);
+			HitRotation = FRotator(HitRotation.Pitch, HitRotation.Yaw, HitRotation.Roll + Offset);
+			UMaterialInterface* DecalMaterial = ImpactDecalMaterial;
+			UGameplayStatics::SpawnDecalAtLocation(
+				World,
+				DecalMaterial,
+				DecalSize,
+				HitLocation,
+				HitRotation,
+				DecalLifeSpan
+			);
+		}
+	}
+}
+#pragma endregion
+
+#pragma region Server
+void AProjectile::ServerSpawnMaterialDecal_Implementation(const FHitResult& Hit)
+{
+	MulticastSpawnMaterialDecal(Hit);
+}
+
+bool AProjectile::ServerSpawnMaterialDecal_Validate(const FHitResult& Hit)
+{
+	if (ImpactDecalMaterial == nullptr) return false;
+	// hit data isn't null
+	if (Hit.bBlockingHit == false) return false;
+	// hit location is in a reasonable range (1000 units squared) from projectile's current location
+	if (FVector::DistSquared(Hit.Location, GetActorLocation()) > 1000000.f) return false;
+	// player who fired projectile has authority to spawn projectiles on server
+	if (GetOwner()->HasAuthority() == false) return false;
+
+	return true;
+}
+#pragma endregion
+
+#pragma endregion

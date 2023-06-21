@@ -6,6 +6,8 @@
 #include "MPShooter/Character/MPCharacter.h"
 #include "MPShooter/PlayerController/MPPlayerController.h"
 
+#pragma region Engine Overrides
+#pragma region Replication
 void AMPPlayerState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
@@ -13,6 +15,7 @@ void AMPPlayerState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLi
 	DOREPLIFETIME(AMPPlayerState, Defeat);
 }
 
+#pragma region OnRep
 void AMPPlayerState::OnRep_Score()
 {
 	Super::OnRep_Score();
@@ -29,7 +32,13 @@ void AMPPlayerState::OnRep_Score()
 		}
 	}
 }
+#pragma endregion
 
+#pragma endregion
+
+#pragma endregion
+
+#pragma region Actions
 void AMPPlayerState::AddToScore(float ScoreAmount)
 {
 	SetScore(GetScore() + ScoreAmount);
@@ -42,21 +51,6 @@ void AMPPlayerState::AddToScore(float ScoreAmount)
 		if (Controller)
 		{
 			Controller->SetHUDScore(GetScore());
-		}
-	}
-}
-
-void AMPPlayerState::OnRep_Defeat()
-{
-	Character = Character == nullptr ? Cast<AMPCharacter>(GetPawn()) : Character;
-
-	if (Character)
-	{
-		Controller = Controller == nullptr ? Cast<AMPPlayerController>(Character->Controller) : Controller;
-
-		if (Controller)
-		{
-			Controller->SetHUDDefeat(Defeat);
 		}
 	}
 }
@@ -76,3 +70,22 @@ void AMPPlayerState::AddToDefeat(int32 DefeatAmount)
 		}
 	}
 }
+
+#pragma region OnRep
+void AMPPlayerState::OnRep_Defeat()
+{
+	Character = Character == nullptr ? Cast<AMPCharacter>(GetPawn()) : Character;
+
+	if (Character)
+	{
+		Controller = Controller == nullptr ? Cast<AMPPlayerController>(Character->Controller) : Controller;
+
+		if (Controller)
+		{
+			Controller->SetHUDDefeat(Defeat);
+		}
+	}
+}
+#pragma endregion
+
+#pragma endregion

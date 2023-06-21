@@ -16,6 +16,8 @@
 #include "MPShooter/Item/Weapon/Ranged/Projectile/Misc/Casing.h"
 #include "DrawDebugHelpers.h"
 
+#pragma region Engine Overrides
+#pragma region Initialization
 void AWeapon::PostEditChangeProperty(FPropertyChangedEvent& Event)
 {
 	FName PropertyName = Event.Property != nullptr ? Event.Property->GetFName() : NAME_None;
@@ -31,14 +33,18 @@ void AWeapon::PostEditChangeProperty(FPropertyChangedEvent& Event)
 		}
 	}
 }
+#pragma endregion
 
+#pragma region Replication
 void AWeapon::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
 	DOREPLIFETIME_CONDITION(AWeapon, bUseServerSideRewind, COND_OwnerOnly);
 }
+#pragma endregion
 
+#pragma region OnRep
 void AWeapon::OnRep_Owner()
 {
 	Super::OnRep_Owner();
@@ -57,7 +63,9 @@ void AWeapon::OnRep_Owner()
 		}
 	}
 }
+#pragma endregion
 
+#pragma region Overlaps
 void AWeapon::OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	AMPCharacter* MPCharacter = Cast<AMPCharacter>(OtherActor);
@@ -75,12 +83,11 @@ void AWeapon::OnSphereEndOverlap(UPrimitiveComponent* OverlappedComponent, AActo
 		MPCharacter->SetOverlappingWeapon(nullptr);
 	}
 }
+#pragma endregion
 
-void AWeapon::OnPingTooHigh(bool bPingTooHigh)
-{
-	bUseServerSideRewind = !bPingTooHigh;
-}
+#pragma endregion
 
+#pragma region Overridden Actions
 void AWeapon::OnEquipped()
 {
 	Super::OnEquipped();
@@ -95,16 +102,6 @@ void AWeapon::OnEquipped()
 		{
 			MPOwnerController->HighPingDelegate.AddDynamic(this, &AWeapon::OnPingTooHigh);
 		}
-	}
-}
-
-void AWeapon::OnEquippedWeaponType()
-{
-	if (bHasPhysicsAttachment == true)
-	{
-		GetItemMesh()->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
-		GetItemMesh()->SetEnableGravity(true);
-		GetItemMesh()->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
 	}
 }
 
@@ -149,6 +146,18 @@ void AWeapon::Dropped()
 	MPOwnerCharacter = nullptr;
 	MPOwnerController = nullptr;
 }
+#pragma endregion
+
+#pragma region Overrideable Actions
+void AWeapon::OnEquippedWeaponType()
+{
+	if (bHasPhysicsAttachment == true)
+	{
+		GetItemMesh()->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+		GetItemMesh()->SetEnableGravity(true);
+		GetItemMesh()->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
+	}
+}
 
 void AWeapon::Fire(const FVector& HitTarget)
 {
@@ -185,6 +194,16 @@ void AWeapon::FireMulti(const TArray<FVector_NetQuantize>& HitTargets)
 	Fire(FVector());
 }
 
+void AWeapon::WeaponTraceHit(const FVector& TraceStart, const FVector& HitTarget, FHitResult& OutHit)
+{
+}
+
+void AWeapon::MultiTraceEndWithScatter(const FVector& HitTarget, TArray<FVector_NetQuantize>& HitTargets)
+{
+}
+#pragma endregion
+
+#pragma region Actions
 void AWeapon::SpendRound()
 {
 	// we're only spending 1 ammo per fire
@@ -202,6 +221,34 @@ void AWeapon::SpendRound()
 	}
 }
 
+void AWeapon::AddAmmo(int32 AmmoToAdd)
+{
+	Ammo = FMath::Clamp(Ammo + AmmoToAdd, 0, MagCapacity);
+	SetHUDAmmo();
+	ClientAddAmmo(AmmoToAdd);
+}
+
+FVector AWeapon::TraceEndWithScatter(const FVector& HitTarget)
+{
+	const USkeletalMeshSocket* MuzzleFlashSocket = GetItemMesh()->GetSocketByName(MuzzleFlash);
+	if (MuzzleFlashSocket == nullptr)
+	{
+		return FVector();
+	}
+
+	const FTransform SocketTransform = MuzzleFlashSocket->GetSocketTransform(GetItemMesh());
+	const FVector TraceStart = SocketTransform.GetLocation();
+
+	const FVector ToTargetNormalized = (HitTarget - TraceStart).GetSafeNormal();
+	const FVector SphereCenter = TraceStart + ToTargetNormalized * DistanceToSphere;
+	const FVector RandVec = UKismetMathLibrary::RandomUnitVector() * FMath::FRandRange(0.f, SphereRadius);
+	const FVector EndLoc = SphereCenter + RandVec;
+	const FVector ToEndLoc = EndLoc - TraceStart;
+
+	return FVector(TraceStart + ToEndLoc * TRACE_LENGTH / ToEndLoc.Size());
+}
+
+#pragma region UI
 void AWeapon::SetHUDAmmo()
 {
 	MPOwnerCharacter = MPOwnerCharacter == nullptr ? Cast<AMPCharacter>(GetOwner()) : MPOwnerCharacter;
@@ -216,14 +263,9 @@ void AWeapon::SetHUDAmmo()
 		}
 	}
 }
+#pragma endregion
 
-void AWeapon::AddAmmo(int32 AmmoToAdd)
-{
-	Ammo = FMath::Clamp(Ammo + AmmoToAdd, 0, MagCapacity);
-	SetHUDAmmo();
-	ClientAddAmmo(AmmoToAdd);
-}
-
+#pragma region Client
 void AWeapon::ClientAddAmmo_Implementation(int32 AmmoToAdd)
 {
 	if (HasAuthority())
@@ -253,7 +295,11 @@ void AWeapon::ClientUpdateAmmo_Implementation(int32 ServerAmmo)
 	Ammo -= Sequence;
 	SetHUDAmmo();
 }
+#pragma endregion
 
+#pragma endregion
+
+#pragma region Checkers
 bool AWeapon::IsMagEmpty()
 {
 	return Ammo <= 0;
@@ -263,28 +309,11 @@ bool AWeapon::IsMagFull()
 {
 	return Ammo == MagCapacity;
 }
+#pragma endregion
 
-FVector AWeapon::TraceEndWithScatter(const FVector& HitTarget)
+#pragma region Networking
+void AWeapon::OnPingTooHigh(bool bPingTooHigh)
 {
-	const USkeletalMeshSocket* MuzzleFlashSocket = GetItemMesh()->GetSocketByName(MuzzleFlash);
-	if (MuzzleFlashSocket == nullptr)
-	{
-		return FVector();
-	}
-
-	const FTransform SocketTransform = MuzzleFlashSocket->GetSocketTransform(GetItemMesh());
-	const FVector TraceStart = SocketTransform.GetLocation();
-
-	const FVector ToTargetNormalized = (HitTarget - TraceStart).GetSafeNormal();
-	const FVector SphereCenter = TraceStart + ToTargetNormalized * DistanceToSphere;
-	const FVector RandVec = UKismetMathLibrary::RandomUnitVector() * FMath::FRandRange(0.f, SphereRadius);
-	const FVector EndLoc = SphereCenter + RandVec;
-	const FVector ToEndLoc = EndLoc - TraceStart;
-
-	return FVector(TraceStart + ToEndLoc * TRACE_LENGTH / ToEndLoc.Size());
+	bUseServerSideRewind = !bPingTooHigh;
 }
-
-void AWeapon::MultiTraceEndWithScatter(const FVector& HitTarget, TArray<FVector_NetQuantize>& HitTargets)
-{
-	// done in HitScanWeapon
-}
+#pragma endregion

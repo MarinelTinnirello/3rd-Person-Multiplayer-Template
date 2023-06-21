@@ -11,11 +11,14 @@
 #include "MPShooter/Character/MPCharacter.h"
 #include "DrawDebugHelpers.h"
 
+#pragma region Constructor
 ULagComponent::ULagComponent()
 {
 	PrimaryComponentTick.bCanEverTick = true;
 }
+#pragma endregion
 
+#pragma region Engine Overrides
 void ULagComponent::BeginPlay()
 {
 	Super::BeginPlay();
@@ -28,7 +31,10 @@ void ULagComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorCo
 
 	SaveFramePackage();
 }
+#pragma endregion
 
+#pragma region Actions
+#pragma region Frames
 void ULagComponent::SaveFramePackage()
 {
 	if (Character == nullptr || !Character->HasAuthority())
@@ -229,7 +235,9 @@ void ULagComponent::ShowFramePackage(const FFramePackage& Package, const FColor&
 		}
 	}
 }
+#pragma endregion
 
+#pragma region Collisions
 void ULagComponent::CacheHitPositions(AMPCharacter* HitCharacter, FFramePackage& OutFramePackage)
 {
 	if (HitCharacter == nullptr)
@@ -327,7 +335,10 @@ void ULagComponent::EnableCharacterMeshCollision(AMPCharacter* HitCharacter, ECo
 		HitCharacter->GetMesh()->SetCollisionEnabled(CollisionEnabled);
 	}
 }
+#pragma endregion
 
+#pragma region Server-Side Rewind
+#pragma region Hit Scan
 FServerSideRewindResult ULagComponent::ServerSideRewind(AMPCharacter* HitCharacter, const FVector_NetQuantize& TraceStart, const FVector_NetQuantize& HitLocation, float HitTime)
 {
 	FFramePackage FrameToCheck = GetFrameToCheck(HitCharacter, HitTime);
@@ -467,7 +478,9 @@ FServerSideRewindResult ULagComponent::ConfirmHit(const FFramePackage& Package, 
 	EnableCharacterMeshCollision(HitCharacter, ECollisionEnabled::QueryAndPhysics);
 	return FServerSideRewindResult{ false, false };
 }
+#pragma endregion
 
+#pragma region Shotgun
 FServerSideRewindShotgunResult ULagComponent::ServerSideRewindShotgun(const TArray<AMPCharacter*>& HitCharacters, const FVector_NetQuantize& TraceStart, const TArray<FVector_NetQuantize>& HitLocations, float HitTime)
 {
 	TArray<FFramePackage> FramesToCheck;
@@ -677,7 +690,9 @@ FServerSideRewindShotgunResult ULagComponent::ConfirmHitShotgun(const TArray<FFr
 
 	return ShotgunResult;
 }
+#pragma endregion
 
+#pragma region Projectile
 FServerSideRewindResult ULagComponent::ServerSideRewindProjectile(AMPCharacter* HitCharacter, const FVector_NetQuantize& TraceStart, const FVector_NetQuantize100& InitialVelocity, float HitTime)
 {
 	FFramePackage FrameToCheck = GetFrameToCheck(HitCharacter, HitTime);
@@ -813,4 +828,8 @@ FServerSideRewindResult ULagComponent::ConfirmHitProjectile(const FFramePackage&
 	EnableCharacterMeshCollision(HitCharacter, ECollisionEnabled::QueryAndPhysics);
 	return FServerSideRewindResult{ false, false };
 }
+#pragma endregion
 
+#pragma endregion
+
+#pragma endregion

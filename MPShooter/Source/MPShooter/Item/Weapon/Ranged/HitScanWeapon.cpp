@@ -11,6 +11,8 @@
 #include "MPShooter/Character/MPAnimInstance.h"
 #include "MPShooter/PlayerController/MPPlayerController.h"
 
+#pragma region Overriden Actions
+#pragma region Fire
 void AHitScanWeapon::Fire(const FVector& HitTarget)
 {
 	Super::Fire(HitTarget);
@@ -207,7 +209,9 @@ void AHitScanWeapon::FireMulti(const TArray<FVector_NetQuantize>& HitTargets)
 		}
 	}
 }
+#pragma endregion
 
+#pragma region Trace
 void AHitScanWeapon::WeaponTraceHit(const FVector& TraceStart, const FVector& HitTarget, FHitResult& OutHit)
 {
 	UWorld* World = GetWorld();
@@ -272,3 +276,6 @@ void AHitScanWeapon::MultiTraceEndWithScatter(const FVector& HitTarget, TArray<F
 		HitTargets.Add(ToEndLoc);
 	}
 }
+#pragma endregion
+
+#pragma endregion

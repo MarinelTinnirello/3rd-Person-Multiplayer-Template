@@ -12,13 +12,22 @@ class MPSHOOTER_API AMPGameState : public AGameState
 	GENERATED_BODY()
 	
 public:
+	#pragma region Game State Properties
 	UPROPERTY(Replicated)
-		TArray<class AMPPlayerState*> TopScoringPlayers;
+	TArray<class AMPPlayerState*> TopScoringPlayers;
+	#pragma endregion
 
+	#pragma region Engine Overrides
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+	#pragma endregion
 
+	#pragma region Actions
 	void UpdateTopScore(class AMPPlayerState* ScoringPlayer);
+	#pragma endregion
 
 private:
+	#pragma region Game State Properties
 	float TopScore = 0.f;
+	#pragma endregion
+
 };

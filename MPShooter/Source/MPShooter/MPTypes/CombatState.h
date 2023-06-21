@@ -1,5 +1,6 @@
 #pragma once
 
+#pragma region Combat State
 UENUM(BlueprintType)
 enum class ECombatState : uint8
 {
@@ -11,7 +12,9 @@ enum class ECombatState : uint8
 
 	ECS_MAX UMETA(DisplayName = "DefaultMAX")
 };
+#pragma endregion
 
+#pragma region Character Combat State
 UENUM(BlueprintType)
 enum class ECharacterCombatState : uint8
 {
@@ -22,3 +25,4 @@ enum class ECharacterCombatState : uint8
 
 	ECCS_MAX UMETA(DisplayName = "DefaultMAX")
 };
+#pragma endregion

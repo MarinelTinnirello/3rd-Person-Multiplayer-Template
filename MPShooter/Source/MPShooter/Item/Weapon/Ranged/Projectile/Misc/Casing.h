@@ -12,14 +12,22 @@ class MPSHOOTER_API ACasing : public AActor
 	GENERATED_BODY()
 	
 public:	
+	#pragma region Constructor
 	ACasing();
+	#pragma endregion
 
 protected:
+	#pragma region Engine Overrides
 	virtual void BeginPlay() override;
 	UFUNCTION()
 	virtual void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
+	#pragma endregion
 
 private:
+	#pragma region Casing Properties
+	//
+	// Casing Properties
+	//
 	UPROPERTY(VisibleAnywhere, Category = "Casing Properties", meta = (ToolTip = "Mesh of a casing shell."))
 	UStaticMeshComponent* CasingMesh;
 	UPROPERTY(EditAnywhere, Category = "Casing Properties", meta = (ToolTip = "Impulse of a casing shell when it's ejected from a weapon."))
@@ -28,5 +36,6 @@ private:
 	class USoundCue* ShellSound;
 	UPROPERTY(EditAnywhere, Category = "Casing Properties", meta = (ToolTip = "Lifetime of a casing shell when spawned."))
 	float LifeSpan = 3.f;
+	#pragma endregion
 
 };

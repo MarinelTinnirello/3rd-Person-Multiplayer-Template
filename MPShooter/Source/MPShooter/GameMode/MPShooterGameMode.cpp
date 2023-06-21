@@ -15,12 +15,15 @@ namespace MatchState
 	const FName Cooldown = FName("Cooldown");
 }
 
+#pragma region Constructor
 AMPShooterGameMode::AMPShooterGameMode()
 {
 	// Allows free cam movement since a pawn isn't possessed yet, before SetMatchState() is called
 	bDelayedStart = true;
 }
+#pragma endregion
 
+#pragma region Engine Overrides
 void AMPShooterGameMode::BeginPlay()
 {
 	Super::BeginPlay();
@@ -71,7 +74,10 @@ void AMPShooterGameMode::OnMatchStateSet()
 		}
 	}
 }
+#pragma endregion
 
+#pragma region Actions
+#pragma region Elimination
 void AMPShooterGameMode::CharacterEliminated(class AMPCharacter* ElimmedCharacter, class AMPPlayerController* ElimmedController, class AMPPlayerController* AttackterController)
 {
 	AMPPlayerState* AttackerPlayerState = AttackterController ? Cast<AMPPlayerState>(AttackterController->PlayerState) : nullptr;
@@ -178,7 +184,9 @@ void AMPShooterGameMode::RequestRespawn(class ACharacter* ElimmedCharacter, clas
 		RestartPlayerAtTransform(ElimmedController, FTransform(DefaultRotation, DefaultLocation));
 	}
 }
+#pragma endregion
 
+#pragma region Character State
 void AMPShooterGameMode::PlayerLeftGame(AMPPlayerState* PlayerLeaving)
 {
 	if (PlayerLeaving == nullptr)
@@ -198,7 +206,9 @@ void AMPShooterGameMode::PlayerLeftGame(AMPPlayerState* PlayerLeaving)
 		CharacterLeaving->Eliminated(true);
 	}
 }
+#pragma endregion
 
+#pragma region Chat
 void AMPShooterGameMode::BroadcastChatMessage(APlayerState* Sender, const FString& Msg)
 {
 	// Chat checks & safety
@@ -212,3 +222,6 @@ void AMPShooterGameMode::BroadcastChatMessage(APlayerState* Sender, const FStrin
 		}
 	}
 }
+#pragma endregion
+
+#pragma endregion

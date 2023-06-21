@@ -9,6 +9,7 @@
 #include "MPShooter/PlayerController/MPPlayerController.h"
 #include "MPShooter/MPComponents/LagComponent.h"
 
+#pragma region Constructor
 AProjectileBullet::AProjectileBullet()
 {
 	ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovementComponent"));
@@ -17,13 +18,16 @@ AProjectileBullet::AProjectileBullet()
 	ProjectileMovementComponent->InitialSpeed = InitialSpeed;
 	ProjectileMovementComponent->MaxSpeed = InitialSpeed;
 }
+#pragma endregion
 
+#pragma region Engine Overrides
 void AProjectileBullet::BeginPlay()
 {
 	Super::BeginPlay();
 
 }
 
+#pragma region OnHit
 void AProjectileBullet::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
 	AMPCharacter* OwnerCharacter = Cast<AMPCharacter>(GetOwner());
@@ -57,3 +61,6 @@ void AProjectileBullet::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, 
 		}
 	}
 }
+#pragma endregion
+
+#pragma endregion

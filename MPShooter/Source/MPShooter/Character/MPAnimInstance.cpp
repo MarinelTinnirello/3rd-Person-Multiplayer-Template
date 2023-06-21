@@ -10,6 +10,7 @@
 #include "MPShooter/MPTypes/WeaponTypes.h"
 #include "MPShooter/MPTypes/ActorAttachment.h"
 
+#pragma region Engine Overrides
 void UMPAnimInstance::NativeInitializeAnimation()
 {
 	Super::NativeInitializeAnimation();
@@ -100,3 +101,4 @@ void UMPAnimInstance::NativeUpdateAnimation(float DeltaTime)
 	bUseAimOffsets = MPCharacter->GetCombatState() == ECombatState::ECS_Unoccupied && !MPCharacter->GetDisableGameplay();
 	bTransformEquippedHand = MPCharacter->GetCombatState() == ECombatState::ECS_Unoccupied && !MPCharacter->GetDisableGameplay();
 }
+#pragma endregion

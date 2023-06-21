@@ -1,5 +1,6 @@
 #pragma once
 
+#pragma region Attachment Sockets
 UENUM(BlueprintType)
 enum class EWeaponAttachmentSocket : uint8
 {
@@ -12,7 +13,9 @@ enum class EWeaponAttachmentSocket : uint8
 
 	EWAS_MAX UMETA(DisplayName = "DefaultMAX")
 };
+#pragma endregion
 
+#pragma region Weapon Handiness
 UENUM(BlueprintType)
 enum class EWeaponLaterality : uint8
 {
@@ -23,3 +26,4 @@ enum class EWeaponLaterality : uint8
 
 	EWL_MAX UMETA(DisplayName = "DefaultMAX")
 };
+#pragma endregion
