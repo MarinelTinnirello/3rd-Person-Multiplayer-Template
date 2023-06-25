@@ -15,8 +15,7 @@ void AThrowableWeaponPickup::OnSphereOverlap(UPrimitiveComponent* OverlappedComp
 		UCombatComponent* Combat = MPCharacter->GetCombat();
 		if (Combat)
 		{
-			//Combat->PickupAmmo(WeaponType, AmmoAmount);
-			//Combat->EquipThrowableWeapon(ThrowableClass->GetDefaultObject<AThrowableWeapon>());
+			Combat->PickupThrowableAmmo(ThrowableClass, AmmoAmount);
 		}
 	}
 

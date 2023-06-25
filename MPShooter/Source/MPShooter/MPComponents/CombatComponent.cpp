@@ -78,7 +78,7 @@ void UCombatComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Out
 	DOREPLIFETIME(UCombatComponent, EquippedSecondaryWeapon);
 	DOREPLIFETIME(UCombatComponent, bAiming);
 	DOREPLIFETIME_CONDITION(UCombatComponent, CarriedAmmo, COND_OwnerOnly);
-	//DOREPLIFETIME_CONDITION(UCombatComponent, CarriedThrowableAmmo, COND_OwnerOnly);
+	DOREPLIFETIME_CONDITION(UCombatComponent, CarriedThrowableAmmo, COND_OwnerOnly);
 	DOREPLIFETIME(UCombatComponent, CombatState);
 	/*DOREPLIFETIME(UCombatComponent, Throwables);*/
 }
@@ -145,6 +145,11 @@ void UCombatComponent::EquipPrimaryWeapon(AWeapon* WeaponToEquip)
 		break;
 	default:
 		break;
+	}
+
+	if (ThrowableClass)
+	{
+		UpdateCarriedThrowableAmmo(ThrowableClass);
 	}
 }
 
@@ -951,8 +956,7 @@ void UCombatComponent::AttachActorToThrowable(AActor* ActorToAttach)
 	bool bIsValid = Character == nullptr ||
 		Character->GetMesh() == nullptr ||
 		AnimInstance == nullptr ||
-		ActorToAttach == nullptr ||
-		EquippedThrowableWeapon == nullptr;
+		ActorToAttach == nullptr;
 	if (bIsValid)
 	{
 		return;
@@ -962,7 +966,8 @@ void UCombatComponent::AttachActorToThrowable(AActor* ActorToAttach)
 	if (ThrowableSocket)
 	{
 		ThrowableSocket->AttachActor(ActorToAttach, Character->GetMesh());
-		EquippedThrowableWeapon->GetItemMesh()->SetVisibility(false);
+		//EquippedThrowableWeapon->GetItemMesh()->SetVisibility(false);
+		ShowAttachedThrowable(false);
 	}
 }
 
@@ -1455,139 +1460,70 @@ void UCombatComponent::SetSpeeds(float BaseSpeed, float CrouchSpeed)
 }
 #pragma endregion
 
-void UCombatComponent::EquipThrowableWeapon(AThrowableWeapon* ThrowableWeaponToEquip)
-{
-	if (Character == nullptr || ThrowableWeaponToEquip == nullptr)
-	{
-		return;
-	}
-
-	if (CombatState != ECombatState::ECS_Unoccupied)
-	{
-		return;
-	}
-
-	if (EquippedThrowableWeapon != nullptr)
-	{
-		DropEquippedThrowableWeapon();
-
-		EquippedThrowableWeapon = ThrowableWeaponToEquip;
-		EquippedThrowableWeapon->SetItemState(EItemState::EIS_Equipped);
-		AttachActorToThrowable(EquippedThrowableWeapon);
-		EquippedThrowableWeapon->SetOwner(Character);
-		EquippedThrowableWeapon->SetHUDAmmo();
-		//UpdateCarriedThrowableAmmo();
-		PlayEquipThrowableWeaponSound(ThrowableWeaponToEquip);
-	}
-}
-
-void UCombatComponent::OnRep_EquippedThrowableWeapon()
-{
-	if (EquippedThrowableWeapon && Character)
-	{
-		EquippedThrowableWeapon->SetItemState(EItemState::EIS_Equipped);
-		AttachActorToThrowable(EquippedThrowableWeapon);
-
-		Character->GetCharacterMovement()->bOrientRotationToMovement = false;
-		Character->bUseControllerRotationYaw = true;
-
-		PlayEquipThrowableWeaponSound(EquippedThrowableWeapon);
-		EquippedThrowableWeapon->EnableCustomDepth(false);
-		EquippedThrowableWeapon->SetHUDAmmo();
-	}
-}
-
-void UCombatComponent::DropEquippedThrowableWeapon()
-{
-	if (EquippedThrowableWeapon)
-	{
-		EquippedThrowableWeapon->Dropped();
-	}
-}
-
-void UCombatComponent::PlayEquipThrowableWeaponSound(AThrowableWeapon* ThrowableWeaponToEquip)
-{
-	if (Character && ThrowableWeaponToEquip && ThrowableWeaponToEquip->GetEquipSound())
-	{
-		UGameplayStatics::PlaySoundAtLocation(
-			this,
-			ThrowableWeaponToEquip->GetEquipSound(),
-			Character->GetActorLocation()
-		);
-	}
-}
-
 void UCombatComponent::ShowAttachedThrowable(bool bShowThrowable)
 {
-	/*if (Character && Character->GetAttachedThrowable())
+	if (Character && Character->GetAttachedThrowable())
 	{
 		Character->GetAttachedThrowable()->SetVisibility(bShowThrowable);
-	}*/
-	if (EquippedThrowableWeapon)
-	{
-		EquippedThrowableWeapon->GetItemMesh()->SetVisibility(true);
 	}
 }
 
-//void UCombatComponent::UpdateCarriedThrowableAmmo()
-//{
-//	if (EquippedThrowableWeapon == nullptr)
-//	{
-//		return;
-//	}
-//
-//	if (CarriedThrowableAmmoMap.Contains(EquippedThrowableWeapon->GetThrowableWeaponType()))
-//	{
-//		CarriedThrowableAmmo = CarriedThrowableAmmoMap[EquippedThrowableWeapon->GetThrowableWeaponType()];
-//	}
-//
-//	Controller = Controller == nullptr ? Cast<AMPPlayerController>(Character->Controller) : Controller;
-//	if (Controller)
-//	{
-//		Controller->SetHUDCarriedThrowables(CarriedThrowableAmmo);
-//	}
-//}
+void UCombatComponent::UpdateCarriedThrowableAmmo(TSubclassOf<class AProjectile> ThrowableWeaponType)
+{
+	if (EquippedWeapon == nullptr)
+	{
+		return;
+	}
 
-//void UCombatComponent::OnRep_CarriedThrowableAmmo()
-//{
-//	Controller = Controller == nullptr ? Cast<AMPPlayerController>(Character->Controller) : Controller;
-//	if (Controller)
-//	{
-//		Controller->SetHUDCarriedThrowables(CarriedThrowableAmmo);
-//	}
-//}
-//
-//void UCombatComponent::UpdateThrowableAmmoValues()
-//{
-//	if (Character == nullptr || EquippedWeapon == nullptr || EquippedThrowableWeapon == nullptr)
-//	{
-//		return;
-//	}
-//
-//	/*int32 ReloadAmount = AmountToReload();
-//	if (CarriedThrowableAmmoMap.Contains(EquippedThrowableWeapon->GetThrowableWeaponType()))
-//	{
-//		CarriedThrowableAmmoMap[EquippedThrowableWeapon->GetThrowableWeaponType()] -= ReloadAmount;
-//		CarriedThrowableAmmo = CarriedThrowableAmmoMap[EquippedThrowableWeapon->GetThrowableWeaponType()];
-//	}*/
-//
-//	Controller = Controller == nullptr ? Cast<AMPPlayerController>(Character->Controller) : Controller;
-//	if (Controller)
-//	{
-//		Controller->SetHUDCarriedThrowables(CarriedThrowableAmmo);
-//	}
-//
-//	//EquippedThrowableWeapon->AddAmmo(-ReloadAmount);
-//}
+	if (CarriedThrowableAmmoMap.Contains(ThrowableWeaponType))
+	{
+		CarriedThrowableAmmo = CarriedThrowableAmmoMap[ThrowableWeaponType];
+	}
 
-//void UCombatComponent::PickupThrowableAmmo(EThrowableWeaponType ThrowableWeaponType, int32 AmmoAmount)
-//{
-//	/*if (CarriedThrowableAmmoMap.Contains(ThrowableWeaponType))
-//	{
-//		CarriedThrowableAmmoMap[ThrowableWeaponType] = FMath::Clamp(CarriedThrowableAmmoMap[ThrowableWeaponType] + AmmoAmount, 0, MaxCarriedThrowableAmmo);
-//		UpdateCarriedThrowableAmmo();
-//	}*/
-//}
+	Controller = Controller == nullptr ? Cast<AMPPlayerController>(Character->Controller) : Controller;
+	if (Controller)
+	{
+		Controller->SetHUDCarriedThrowables(CarriedThrowableAmmo);
+	}
+}
+
+void UCombatComponent::OnRep_CarriedThrowableAmmo()
+{
+	Controller = Controller == nullptr ? Cast<AMPPlayerController>(Character->Controller) : Controller;
+	if (Controller)
+	{
+		Controller->SetHUDCarriedThrowables(CarriedThrowableAmmo);
+	}
+}
+
+void UCombatComponent::UpdateThrowableAmmoValues()
+{
+	if (Character == nullptr || EquippedWeapon == nullptr)
+	{
+		return;
+	}
+
+	if (CarriedThrowableAmmoMap.Contains(ThrowableClass))
+	{
+		CarriedThrowableAmmoMap[ThrowableClass] -= 1.0f;
+		CarriedThrowableAmmo = CarriedThrowableAmmoMap[ThrowableClass];
+	}
+
+	Controller = Controller == nullptr ? Cast<AMPPlayerController>(Character->Controller) : Controller;
+	if (Controller)
+	{
+		Controller->SetHUDCarriedThrowables(CarriedThrowableAmmo);
+	}
+}
+
+void UCombatComponent::PickupThrowableAmmo(TSubclassOf<class AProjectile> ThrowableWeaponType, int32 AmmoAmount)
+{
+	if (CarriedThrowableAmmoMap.Contains(ThrowableWeaponType))
+	{
+		CarriedThrowableAmmoMap[ThrowableWeaponType] = FMath::Clamp(CarriedThrowableAmmoMap[ThrowableWeaponType] + AmmoAmount, 0, MaxCarriedThrowableAmmo);
+		UpdateCarriedThrowableAmmo(ThrowableWeaponType);
+	}
+}
 
 void UCombatComponent::Throw()
 {
@@ -1596,12 +1532,12 @@ void UCombatComponent::Throw()
 		return;
 	}*/
 
-	if (CombatState != ECombatState::ECS_Unoccupied || EquippedWeapon == nullptr || EquippedThrowableWeapon == nullptr)
+	if (CarriedThrowableAmmo <= 0)
 	{
 		return;
 	}
 
-	if (EquippedThrowableWeapon->IsMagEmpty())
+	if (CombatState != ECombatState::ECS_Unoccupied || EquippedWeapon == nullptr)
 	{
 		return;
 	}
@@ -1621,8 +1557,8 @@ void UCombatComponent::Throw()
 	{
 		//Throwables = FMath::Clamp(Throwables - 1, 0, MaxThrowables);
 		//UpdateHUDThrowables();
-		EquippedThrowableWeapon->SpendRound();
-		//UpdateThrowableAmmoValues();
+
+		UpdateThrowableAmmoValues();
 	}
 }
 
@@ -1632,7 +1568,8 @@ void UCombatComponent::ServerThrow_Implementation()
 	{
 		return;
 	}*/
-	if (EquippedThrowableWeapon->IsMagEmpty())
+
+	if (CarriedThrowableAmmo <= 0)
 	{
 		return;
 	}
@@ -1647,8 +1584,8 @@ void UCombatComponent::ServerThrow_Implementation()
 
 	/*Throwables = FMath::Clamp(Throwables - 1, 0, MaxThrowables);
 	UpdateHUDThrowables();*/
-	EquippedThrowableWeapon->SpendRound();
-	//UpdateThrowableAmmoValues();
+
+	UpdateThrowableAmmoValues();
 }
 
 void UCombatComponent::EndThrow()
@@ -1668,52 +1605,28 @@ void UCombatComponent::LaunchThrowable()
 
 void UCombatComponent::ServerLaunchThrowable_Implementation(const FVector_NetQuantize& Target)
 {
-	/*if (Character && ThrowableClass && Character->GetAttachedThrowable())
-	{
-		const FVector StartingLocation = Character->GetAttachedThrowable()->GetComponentLocation();
-		FVector ToTarget = Target - StartingLocation;
-		FActorSpawnParameters SpawnParams;
-		SpawnParams.Owner = Character;
-		SpawnParams.Instigator = Character;
-		UWorld* World = GetWorld();
-		if (World)
-		{
-			World->SpawnActor<AProjectile>(
-				ThrowableClass,
-				StartingLocation,
-				ToTarget.Rotation(),
-				SpawnParams
-			);
-		}
-	}*/
-	if (Character && EquippedThrowableWeapon)
+	if (Character && ThrowableClass && Character->GetAttachedThrowable())
 	{
 		AnimInstance = AnimInstance == nullptr ? Cast<UMPAnimInstance>(Character->GetMesh()->GetAnimInstance()) : AnimInstance;
-		bool bIsValid = Character == nullptr ||
-			Character->GetMesh() == nullptr ||
-			AnimInstance == nullptr;
-		if (bIsValid)
+		if (AnimInstance)
 		{
-			return;
+			//const FVector StartingLocation = Character->GetAttachedThrowable()->GetComponentLocation();
+			const FVector StartingLocation = Character->GetMesh()->GetSocketLocation(AnimInstance->GetThrowableSocket());
+			FVector ToTarget = Target - StartingLocation;
+			FActorSpawnParameters SpawnParams;
+			SpawnParams.Owner = Character;
+			SpawnParams.Instigator = Character;
+			UWorld* World = GetWorld();
+			if (World)
+			{
+				World->SpawnActor<AProjectile>(
+					ThrowableClass,
+					StartingLocation,
+					ToTarget.Rotation(),
+					SpawnParams
+				);
+			}
 		}
-
-		const FVector StartingLocation = Character->GetMesh()->GetSocketLocation(AnimInstance->GetThrowableSocket());
-		FVector ToTarget = Target - StartingLocation;
-		FActorSpawnParameters SpawnParams;
-		SpawnParams.Owner = Character;
-		SpawnParams.Instigator = Character;
-		UWorld* World = GetWorld();
-		if (World)
-		{
-			World->SpawnActor<AThrowableWeapon>(
-				EquippedThrowableWeapon->GetClass(),
-				StartingLocation,
-				ToTarget.Rotation(),
-				SpawnParams
-			);
-		}
-
-		EquippedThrowableWeapon->OnSpawn();
 	}
 }
 

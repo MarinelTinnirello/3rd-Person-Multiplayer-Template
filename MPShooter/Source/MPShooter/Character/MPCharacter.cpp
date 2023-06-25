@@ -81,9 +81,9 @@ AMPCharacter::AMPCharacter()
 
 	DissolveTimeline = CreateDefaultSubobject<UTimelineComponent>("DissolveTimelineComponent");
 
-	/*AttachedThrowable = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Attached Throwable"));
+	AttachedThrowable = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Attached Throwable"));
 	AttachedThrowable->SetupAttachment(GetMesh(), FName("ThrowableSocket"));
-	AttachedThrowable->SetCollisionEnabled(ECollisionEnabled::NoCollision);*/
+	AttachedThrowable->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
 	NetUpdateFrequency = 66.f;
 	MinNetUpdateFrequency = 33.f;
@@ -156,7 +156,6 @@ void AMPCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLife
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
 	DOREPLIFETIME_CONDITION(AMPCharacter, OverlappingWeapon, COND_OwnerOnly);
-	DOREPLIFETIME_CONDITION(AMPCharacter, OverlappingThrowableWeapon, COND_OwnerOnly);
 	DOREPLIFETIME(AMPCharacter, Health);
 	DOREPLIFETIME(AMPCharacter, Shield);
 	DOREPLIFETIME(AMPCharacter, bDisableGameplay)
@@ -505,9 +504,6 @@ void AMPCharacter::ServerEquipButtonPressed_Implementation()
 		if (OverlappingWeapon)
 		{
 			Combat->EquipWeapon(OverlappingWeapon);
-			// TODO:
-			// Make Equip/Unequip montage
-			// Jump to different section names based on where they unequip to (back, hips)
 		}
 		else if (Combat->ShouldSwapWeapons())
 		{
@@ -516,11 +512,6 @@ void AMPCharacter::ServerEquipButtonPressed_Implementation()
 		else if (Combat->ShouldReequipWeapon())
 		{
 			Combat->EquipWeapon(Combat->EquippedWeapon);
-		}
-
-		if (OverlappingThrowableWeapon)
-		{
-			Combat->EquipThrowableWeapon(OverlappingThrowableWeapon);
 		}
 	}
 }
@@ -1141,56 +1132,6 @@ bool AMPCharacter::IsLocallyReloading()
 #pragma endregion
 
 #pragma endregion
-
-void AMPCharacter::SetOverlappingThrowableWeapon(AThrowableWeapon* ThrowableWeapon)
-{
-	if (OverlappingThrowableWeapon)
-	{
-		OverlappingThrowableWeapon->ShowPickupWidget(false);
-		//OverlappingThrowableWeapon->GetItemMesh()->SetVisibility(false);
-	}
-
-	OverlappingThrowableWeapon = ThrowableWeapon;
-
-	if (IsLocallyControlled())
-	{
-		if (OverlappingThrowableWeapon)
-		{
-			OverlappingThrowableWeapon->ShowPickupWidget(true);
-			//OverlappingThrowableWeapon->GetItemMesh()->SetVisibility(false);
-		}
-	}
-}
-
-void AMPCharacter::OnRep_OverlappingThrowableWeapon(AThrowableWeapon* PrevThrowableWeapon)
-{
-	if (OverlappingThrowableWeapon)
-	{
-		OverlappingThrowableWeapon->ShowPickupWidget(true);
-		//OverlappingThrowableWeapon->GetItemMesh()->SetVisibility(false);
-	}
-
-	if (PrevThrowableWeapon)
-	{
-		PrevThrowableWeapon->ShowPickupWidget(false);
-		//PrevThrowableWeapon->GetItemMesh()->SetVisibility(false);
-	}
-}
-
-bool AMPCharacter::IsThrowableWeaponEquipped()
-{
-	return (Combat && Combat->EquippedThrowableWeapon);
-}
-
-AThrowableWeapon* AMPCharacter::GetEquippedThrowableWeapon()
-{
-	if (Combat == nullptr)
-	{
-		return nullptr;
-	}
-
-	return Combat->EquippedThrowableWeapon;
-}
 
 #pragma region States
 ECombatState AMPCharacter::GetCombatState() const

@@ -25,8 +25,6 @@ protected:
 private:
 	UPROPERTY(EditAnywhere, Category = "Throwable Pickup Properties", meta = (ToolTip = "Amount of ammo contained in the pickup."))
 	int32 AmmoAmount = 3;
-	UPROPERTY(EditAnywhere, Category = "Throwable Pickup Properties", meta = (ToolTip = "Type of weapon associated with the ammo."))
-	EThrowableWeaponType ThrowableWeaponType;
 	UPROPERTY(EditAnywhere, Category = "Throwable Pickup Properties", meta = (ToolTip = "Throwable class."))
-	TSubclassOf<class AThrowableWeapon> ThrowableClass;
+	TSubclassOf<class AProjectile> ThrowableClass;
 };

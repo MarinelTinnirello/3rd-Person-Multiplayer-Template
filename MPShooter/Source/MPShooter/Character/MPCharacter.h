@@ -252,15 +252,6 @@ private:
 
 	#pragma endregion
 
-	//
-	// Throwable Properties
-	//
-	UPROPERTY(ReplicatedUsing = OnRep_OverlappingThrowableWeapon)
-	class AThrowableWeapon* OverlappingThrowableWeapon;
-
-	UFUNCTION()
-	void OnRep_OverlappingThrowableWeapon(AThrowableWeapon* PrevThrowableWeapon);
-
 	#pragma region Components
 	//
 	// Components
@@ -411,6 +402,8 @@ private:
 	// .... might want to move the EWeaponState stuff out into the Item class
 	//		write overrides as necessary (e.g. Equip(), Drop(), etc)
 	// Make socket on Combat Component
+	UPROPERTY(VisibleAnywhere)
+	UStaticMeshComponent* AttachedThrowable;
 
 public:	
 	#pragma region Equipped Weapon
@@ -424,10 +417,7 @@ public:
 	bool IsLocallyReloading();
 	#pragma endregion
 
-	AThrowableWeapon* GetEquippedThrowableWeapon();
-	void SetOverlappingThrowableWeapon(AThrowableWeapon* ThrowableWeapon);
-	bool IsThrowableWeaponEquipped();
-	/*FORCEINLINE UStaticMeshComponent* GetAttachedThrowable() const { return AttachedThrowable; }*/
+	FORCEINLINE UStaticMeshComponent* GetAttachedThrowable() const { return AttachedThrowable; }
 
 	#pragma region Components & States
 	ECombatState GetCombatState() const;

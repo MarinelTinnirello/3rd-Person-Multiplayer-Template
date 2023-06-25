@@ -56,7 +56,6 @@ public:
 	#pragma endregion
 
 	void FireButtonPressed(bool bIsPressed);
-	//void ThrowButtonPressed(bool bIsPressed);
 
 	#pragma region Reload
 	void Reload();
@@ -67,12 +66,15 @@ public:
 	void JumpToShotgunEnd();
 	#pragma endregion
 
+	#pragma region Ammo
 	void PickupAmmo(EWeaponType WeaponType, int32 AmmoAmount);
+	#pragma endregion
 
+	#pragma region Movement
 	void SetSpeeds(float BaseSpeed, float CrouchSpeed);
+	#pragma endregion
 
-	void EquipThrowableWeapon(class AThrowableWeapon* ThrowableWeaponToEquip);
-	//void PickupThrowableAmmo(EThrowableWeaponType ThrowableWeaponType, int32 AmmoAmount);
+	void PickupThrowableAmmo(TSubclassOf<class AProjectile> ThrowableWeaponType, int32 AmmoAmount);
 
 	UFUNCTION(BlueprintCallable)
 	void EndThrow();
@@ -144,7 +146,7 @@ protected:
 
 	void Throw();
 	void ShowAttachedThrowable(bool bShowThrowable);
-	//void UpdateCarriedThrowableAmmo();
+	void UpdateCarriedThrowableAmmo(TSubclassOf<class AProjectile> ThrowableWeaponType);
 
 	UFUNCTION(Server, Reliable)
 	void ServerThrow();
@@ -158,8 +160,6 @@ protected:
 	void UpdateWeaponType();
 	void EquipPrimaryWeapon(AWeapon* WeaponToEquip);
 	void EquipSecondaryWeapon(AWeapon* WeaponToEquip);
-	void DropEquippedThrowableWeapon();
-	void PlayEquipThrowableWeaponSound(AThrowableWeapon* ThrowableWeaponToEquip);
 	#pragma endregion
 
 	#pragma region Animation Checks
@@ -179,8 +179,6 @@ protected:
 	void OnRep_EquippedWeapon();
 	UFUNCTION()
 	void OnRep_EquippedSecondaryWeapon();
-	UFUNCTION()
-	void OnRep_EquippedThrowableWeapon();
 	#pragma endregion
 
 	#pragma endregion
@@ -210,6 +208,9 @@ protected:
 	UFUNCTION()
 	void OnRep_Throwables();
 	void UpdateHUDThrowables();*/
+
+	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Throwable class."))
+	TSubclassOf<class AProjectile> ThrowableClass;
 
 private:
 	#pragma region References
@@ -283,7 +284,7 @@ private:
 	//
 	// Ammo Properties
 	//
-	UPROPERTY(ReplicatedUsing = OnRep_CarriedAmmo)
+	UPROPERTY(VisibleAnywhere, ReplicatedUsing = OnRep_CarriedAmmo)
 	int32 CarriedAmmo;
 	// couldn't map TMaps in 4, but this saves on all the initializing
 	UPROPERTY(EditDefaultsOnly, Category = "Weapon - Ammo", meta = (ToolTip = "Amount of ammo at start for a weapon."))
@@ -291,22 +292,23 @@ private:
 	// could be a max for each type, but this is a total
 	UPROPERTY(EditAnywhere, Category = "Weapon - Ammo", meta = (ToolTip = "Max amount of ammo that can be carried."))
 	int32 MaxCarriedAmmo = 500;
-	//UPROPERTY(ReplicatedUsing = OnRep_CarriedThrowableAmmo)
-	//int32 CarriedThrowableAmmo;
-	//UPROPERTY(EditDefaultsOnly, Category = "Weapon - Ammo", meta = (ToolTip = "Amount of ammo at start for a throwable weapon."))
-	//TMap <EThrowableWeaponType, int32 > CarriedThrowableAmmoMap;
-	//UPROPERTY(EditAnywhere, Category = "Weapon - Ammo", meta = (ToolTip = "Max amount of ammo that can be carried."))
-	//int32 MaxCarriedThrowableAmmo = 200;
+
+	UPROPERTY(VisibleAnywhere, ReplicatedUsing = OnRep_CarriedThrowableAmmo)
+	int32 CarriedThrowableAmmo;
+	UPROPERTY(EditDefaultsOnly, Category = "Weapon - Ammo", meta = (ToolTip = "Amount of ammo at start for a throwable weapon."))
+	TMap<TSubclassOf<AProjectile>, int32 > CarriedThrowableAmmoMap;
+	UPROPERTY(EditAnywhere, Category = "Weapon - Ammo", meta = (ToolTip = "Max amount of ammo that can be carried."))
+	int32 MaxCarriedThrowableAmmo = 200;
 
 	void UpdateAmmoValues();
 	void UpdateShotgunAmmoValues();
-	//void UpdateThrowableAmmoValues();
+	void UpdateThrowableAmmoValues();
 
 	#pragma region OnRep
 	UFUNCTION()
 	void OnRep_CarriedAmmo();
-	/*UFUNCTION()
-	void OnRep_CarriedThrowableAmmo();*/
+	UFUNCTION()
+	void OnRep_CarriedThrowableAmmo();
 	#pragma endregion
 
 	#pragma endregion
@@ -314,18 +316,7 @@ private:
 	//
 	// Throwable Weapon
 	//
-	UPROPERTY(ReplicatedUsing = OnRep_EquippedThrowableWeapon)
-	class AThrowableWeapon* EquippedThrowableWeapon;
 	bool bThrowable = false;
-	//bool bThrowButtonPressed;
-	//FTimerHandle ThrowTimer;
-	//bool bCanThrow = true;
-	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Throwable classes available to equip."))
-	TArray<TSubclassOf<class AThrowableWeapon>> ThrowableClasses;
-
-	/*void StartThrowTimer();
-	void EndThrowTimer();*/
-	//bool CanThrow();
 
 	#pragma region Aiming & Crosshairs
 	#pragma region HUD & Crosshairs Properties

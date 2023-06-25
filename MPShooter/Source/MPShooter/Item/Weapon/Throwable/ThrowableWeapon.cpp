@@ -81,7 +81,7 @@ void AThrowableWeapon::OnSphereOverlap(UPrimitiveComponent* OverlappedComponent,
 	AMPCharacter* MPCharacter = Cast<AMPCharacter>(OtherActor);
 	if (MPCharacter)
 	{
-		MPCharacter->SetOverlappingThrowableWeapon(this);
+		//MPCharacter->SetOverlappingThrowableWeapon(this);
 	}
 }
 
@@ -90,7 +90,7 @@ void AThrowableWeapon::OnSphereEndOverlap(UPrimitiveComponent* OverlappedCompone
 	AMPCharacter* MPCharacter = Cast<AMPCharacter>(OtherActor);
 	if (MPCharacter)
 	{
-		MPCharacter->SetOverlappingThrowableWeapon(nullptr);
+		//MPCharacter->SetOverlappingThrowableWeapon(nullptr);
 	}
 }
 
