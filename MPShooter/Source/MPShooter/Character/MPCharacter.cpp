@@ -11,6 +11,8 @@
 #include "Components/WidgetComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/BoxComponent.h"
+#include "Components/StaticMeshComponent.h"
+#include "Components/SplineComponent.h"
 #include "Net/UnrealNetwork.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetMathLibrary.h"
@@ -23,12 +25,12 @@
 #include "MPShooter/MPShooter.h"
 #include "MPShooter/Input/MPInputConfigData.h"
 #include "MPShooter/Item/Weapon/Weapon.h"
-#include "MPShooter/Item/Weapon/Throwable/ThrowableWeapon.h"
 #include "MPShooter/MPTypes/WeaponTypes.h"
 #include "MPShooter/MPTypes/CombatState.h"
 #include "MPShooter/MPComponents/CombatComponent.h"
 #include "MPShooter/MPComponents/BuffComponent.h"
 #include "MPShooter/MPComponents/LagComponent.h"
+#include "MPShooter/Interfaces/GridSphereInterface.h"
 #include "MPShooter/PlayerController/MPPlayerController.h"
 #include "MPShooter/PlayerState/MPPlayerState.h"
 #include "MPShooter/GameMode/MPShooterGameMode.h"
@@ -85,6 +87,14 @@ AMPCharacter::AMPCharacter()
 	AttachedThrowable->SetupAttachment(GetMesh(), FName("ThrowableSocket"));
 	AttachedThrowable->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
+	AimRangeGridSphere = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Aim Range Grid Sphere"));
+	AimRangeGridSphere->SetupAttachment(GetMesh(), FName("ThrowableSocket"));
+	AimRangeGridSphere->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+
+	AimPathSpline = CreateDefaultSubobject<USplineComponent>(TEXT("Aim Path Spline"));
+	AimPathSpline->SetupAttachment(GetMesh(), FName("ThrowableSocket"));
+	AimPathSpline->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+
 	NetUpdateFrequency = 66.f;
 	MinNetUpdateFrequency = 33.f;
 }
@@ -103,10 +113,19 @@ void AMPCharacter::BeginPlay()
 		OnTakeAnyDamage.AddDynamic(this, &AMPCharacter::ReceiveDamage);
 	}
 
-	/*if (AttachedThrowable)
+	if (AttachedThrowable)
 	{
 		AttachedThrowable->SetVisibility(false);
-	}*/
+	}
+	if (AimRangeGridSphere)
+	{
+		AimRangeGridSphere->SetVisibility(false);
+	}
+	if (AimPathSpline)
+	{
+		AimPathSpline->SetVisibility(false);
+	}
+
 	HitPhysAssetConstruction();
 }
 
@@ -662,12 +681,19 @@ void AMPCharacter::ThrowButtonPressed()
 {
 	if (Combat)
 	{
-		Combat->Throw();
+		//Combat->SetPredictPath(true);
+		Combat->ShowPredictPath(true);
 	}
 }
 
 void AMPCharacter::ThrowButtonReleased()
 {
+	if (Combat)
+	{
+		//Combat->SetPredictPath(false);
+		Combat->ShowPredictPath(false);
+		Combat->Throw();
+	}
 }
 #pragma endregion
 

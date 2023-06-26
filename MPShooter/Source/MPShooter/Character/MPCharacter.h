@@ -391,19 +391,12 @@ private:
 	//
 	// Throwable
 	//
-	/*UPROPERTY(VisibleAnywhere)
-	UStaticMeshComponent* AttachedThrowable;
-	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Character's socket where the throwable item will be attached to the free hand. Most animation packs will be right handed, so the right hand is what you're likely to fill in."))
-	FName ThrowableSocket;*/
-	// Turn this into a Weapon
-	// .... actually, turn it into an Item, as making it into a conventional weapon would mean dropping the current
-	//		add a mesh and particle system component
-	//		implement similar to Weapon (e.g. Ammo, Replication, etc)
-	// .... might want to move the EWeaponState stuff out into the Item class
-	//		write overrides as necessary (e.g. Equip(), Drop(), etc)
-	// Make socket on Combat Component
 	UPROPERTY(VisibleAnywhere)
-	UStaticMeshComponent* AttachedThrowable;
+	class UStaticMeshComponent* AttachedThrowable;
+	UPROPERTY(VisibleAnywhere)
+	UStaticMeshComponent* AimRangeGridSphere;
+	UPROPERTY(VisibleAnywhere)
+	class USplineComponent* AimPathSpline;
 
 public:	
 	#pragma region Equipped Weapon
@@ -418,6 +411,8 @@ public:
 	#pragma endregion
 
 	FORCEINLINE UStaticMeshComponent* GetAttachedThrowable() const { return AttachedThrowable; }
+	FORCEINLINE UStaticMeshComponent* GetAimRangeGridSphere() const { return AimRangeGridSphere; }
+	FORCEINLINE USplineComponent* GetAimPathSpline() const { return AimPathSpline; }
 
 	#pragma region Components & States
 	ECombatState GetCombatState() const;

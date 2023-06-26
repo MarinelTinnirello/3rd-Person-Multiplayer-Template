@@ -31,7 +31,9 @@ public:
 	#pragma endregion
 
 	#pragma region Actions & Anim Notifies
+	#pragma region Spawn
 	void SpawnDefaultWeapon();
+	#pragma endregion
 
 	#pragma region Equip
 	UFUNCTION(BlueprintCallable)
@@ -41,24 +43,29 @@ public:
 	#pragma region Unequip
 	UFUNCTION(BlueprintCallable)
 	void UnequipWeapon();
+
 	UFUNCTION(BlueprintCallable)
 	void EndUnequip();
 	UFUNCTION(BlueprintCallable)
 	void EndUnequipWeapon();
 	#pragma endregion
 
+	#pragma region Fire
+	void FireButtonPressed(bool bIsPressed);
+	#pragma endregion
+
 	#pragma region Swap
 	void SwapWeapons();
+
 	UFUNCTION(BlueprintCallable)
 	void EndSwap();
 	UFUNCTION(BlueprintCallable)
 	void EndSwapAttachWeapons();
 	#pragma endregion
 
-	void FireButtonPressed(bool bIsPressed);
-
 	#pragma region Reload
 	void Reload();
+
 	UFUNCTION(BlueprintCallable)
 	void EndReloading();
 	UFUNCTION(BlueprintCallable)
@@ -68,25 +75,34 @@ public:
 
 	#pragma region Ammo
 	void PickupAmmo(EWeaponType WeaponType, int32 AmmoAmount);
+	void PickupThrowableAmmo(TSubclassOf<class AProjectile> ThrowableWeaponType, int32 AmmoAmount);
+	#pragma endregion
+
+	#pragma region Throw
+	void ShowPredictPath(float DeltaTime);
+	UFUNCTION(BlueprintCallable)
+	void LaunchThrowable();
+
+	UFUNCTION(BlueprintCallable)
+	void EndThrow();
+
+	#pragma region Server
+	UFUNCTION(Server, Reliable)
+		void ServerLaunchThrowable(const FVector_NetQuantize& Target);
+	#pragma endregion
+
 	#pragma endregion
 
 	#pragma region Movement
 	void SetSpeeds(float BaseSpeed, float CrouchSpeed);
 	#pragma endregion
 
-	void PickupThrowableAmmo(TSubclassOf<class AProjectile> ThrowableWeaponType, int32 AmmoAmount);
-
-	UFUNCTION(BlueprintCallable)
-	void EndThrow();
-	UFUNCTION(BlueprintCallable)
-	void LaunchThrowable();
-
-	UFUNCTION(Server, Reliable)
-	void ServerLaunchThrowable(const FVector_NetQuantize& Target);
 	#pragma endregion
 
 protected:
+	#pragma region Engine Overrides
 	virtual void BeginPlay() override;
+	#pragma endregion
 
 	#pragma region Actions
 	#pragma region Aim & Crosshairs
@@ -144,12 +160,18 @@ protected:
 
 	#pragma endregion
 
+	#pragma region Throw
 	void Throw();
 	void ShowAttachedThrowable(bool bShowThrowable);
 	void UpdateCarriedThrowableAmmo(TSubclassOf<class AProjectile> ThrowableWeaponType);
 
+	#pragma region Server
 	UFUNCTION(Server, Reliable)
 	void ServerThrow();
+	#pragma endregion
+
+	#pragma endregion
+
 	#pragma endregion
 
 	#pragma region Equipped Weapon
@@ -183,34 +205,14 @@ protected:
 
 	#pragma endregion
 
-	// TODO:
-	// Instead of using the Throwable as an actual type like we tried with weapon, treat it as a class again
-	// - have it as a Pickup, 
-	//		- grab the type associated, add it to carried ammo
-	//		- grab the class associated, add it to array of throwables
-	//			- make sure class associated is unique (get rid of dupes)
-	//			- if so, just add onto ammo
-	// - if we have ammo, reload automatically
-	// - add button to swap equipped throwable class, play equip sound
-	// - do the throw the way it was being done previous
-	// Once this works, add the Projectile Path
-
-	//
-	// Throwable
-	//
-	/*UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Throwable class."))
+	#pragma region Throwable Weapon
+	UPROPERTY(EditAnywhere, Category = "Combat - Throw", meta = (ToolTip = "Throwable class."))
 	TSubclassOf<class AProjectile> ThrowableClass;
-	UPROPERTY(ReplicatedUsing = OnRep_Throwables, EditAnywhere, Category = "Combat", meta = (ToolTip = "Amount of throwables."))
-	int32 Throwables;
-	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Max amount of throwables."))
-	int32 MaxThrowables;
-
-	UFUNCTION()
-	void OnRep_Throwables();
-	void UpdateHUDThrowables();*/
-
-	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Throwable class."))
-	TSubclassOf<class AProjectile> ThrowableClass;
+	bool bThrowable = false;
+	UPROPERTY(EditAnywhere, Category = "Combat - Throw", meta = (ToolTip = "Radius of the virtual projectile to sweep against the environment."))
+	float PredictProjectileRadius = 20.0f;
+	bool bPredictPath = false;
+	#pragma endregion
 
 private:
 	#pragma region References
@@ -313,11 +315,6 @@ private:
 
 	#pragma endregion
 
-	//
-	// Throwable Weapon
-	//
-	bool bThrowable = false;
-
 	#pragma region Aiming & Crosshairs
 	#pragma region HUD & Crosshairs Properties
 	//
@@ -369,12 +366,18 @@ private:
 	#pragma endregion
 
 public:	
-	/*FORCEINLINE int32 GetThrowables() const { return Throwables; }*/
 	#pragma region Weapon Checks
 	bool IsWeaponUnequipped();
 	bool ShouldUnequipWeapon();
 	bool ShouldReequipWeapon();
 	bool ShouldSwapWeapons();
+	#pragma endregion
+
+	#pragma region Getters & Setters
+	void ShowPredictPath(bool bShowPath);
+
+	FORCEINLINE bool GetPredictPath() const { return bPredictPath; }
+	FORCEINLINE void SetPredictPath(bool bPredict) { bPredictPath = bPredict; }
 	#pragma endregion
 
 };
