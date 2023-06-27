@@ -104,6 +104,8 @@ private:
 	FName LeftHipSocket;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Bone", meta = (AllowPrivateAccess = "true"), meta = (ToolTip = "Character's head bone where head shots are traced against."))
 	FName HeadBone;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Socket", meta = (AllowPrivateAccess = "true"), meta = (ToolTip = "Character's head socket where throwable aiming stems from."))
+	FName HeadSocket;
 	#pragma endregion
 
 public:
@@ -114,6 +116,9 @@ public:
 	FORCEINLINE FName GetBackSpineSocket() const { return BackSpineSocket; }
 	FORCEINLINE FName GetRightHipSocket() const { return RightHipSocket; }
 	FORCEINLINE FName GetLeftHipSocket() const { return LeftHipSocket; }
+	UFUNCTION(BlueprintCallable)
+	FORCEINLINE FName GetHeadSocket() const { return HeadSocket; }
+
 	FORCEINLINE FName GetHeadBone() const { return HeadBone; }
 	#pragma endregion
 

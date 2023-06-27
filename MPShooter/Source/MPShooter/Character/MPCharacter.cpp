@@ -13,6 +13,7 @@
 #include "Components/BoxComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "Components/SplineComponent.h"
+#include "Components/DecalComponent.h"
 #include "Net/UnrealNetwork.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetMathLibrary.h"
@@ -88,11 +89,14 @@ AMPCharacter::AMPCharacter()
 	AttachedThrowable->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
 	AimRangeGridSphere = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Aim Range Grid Sphere"));
-	AimRangeGridSphere->SetupAttachment(GetMesh(), FName("ThrowableSocket"));
+	AimRangeGridSphere->SetupAttachment(GetMesh(), FName("HeadSocket"));
 	AimRangeGridSphere->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
+	AimDecal = CreateDefaultSubobject<UDecalComponent>(TEXT("Aim Decal"));
+	AimDecal->SetupAttachment(AimRangeGridSphere);
+
 	AimPathSpline = CreateDefaultSubobject<USplineComponent>(TEXT("Aim Path Spline"));
-	AimPathSpline->SetupAttachment(GetMesh(), FName("ThrowableSocket"));
+	AimPathSpline->SetupAttachment(GetMesh(), FName("HeadSocket"));
 	AimPathSpline->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
 	NetUpdateFrequency = 66.f;
@@ -120,6 +124,10 @@ void AMPCharacter::BeginPlay()
 	if (AimRangeGridSphere)
 	{
 		AimRangeGridSphere->SetVisibility(false);
+	}
+	if (AimDecal)
+	{
+		AimDecal->SetVisibility(false);
 	}
 	if (AimPathSpline)
 	{
@@ -681,7 +689,6 @@ void AMPCharacter::ThrowButtonPressed()
 {
 	if (Combat)
 	{
-		//Combat->SetPredictPath(true);
 		Combat->ShowPredictPath(true);
 	}
 }
@@ -690,7 +697,6 @@ void AMPCharacter::ThrowButtonReleased()
 {
 	if (Combat)
 	{
-		//Combat->SetPredictPath(false);
 		Combat->ShowPredictPath(false);
 		Combat->Throw();
 	}

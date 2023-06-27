@@ -79,7 +79,9 @@ public:
 	#pragma endregion
 
 	#pragma region Throw
-	void ShowPredictPath(float DeltaTime);
+	void ShowPredictPath(bool bShowPath);
+	/*UFUNCTION(BlueprintImplementableEvent)
+	void SetPredictPath(float DeltaTime);*/
 	UFUNCTION(BlueprintCallable)
 	void LaunchThrowable();
 
@@ -163,6 +165,8 @@ protected:
 	#pragma region Throw
 	void Throw();
 	void ShowAttachedThrowable(bool bShowThrowable);
+	UFUNCTION(BlueprintCallable)
+	void ClearPredictPath();
 	void UpdateCarriedThrowableAmmo(TSubclassOf<class AProjectile> ThrowableWeaponType);
 
 	#pragma region Server
@@ -209,9 +213,9 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Combat - Throw", meta = (ToolTip = "Throwable class."))
 	TSubclassOf<class AProjectile> ThrowableClass;
 	bool bThrowable = false;
-	UPROPERTY(EditAnywhere, Category = "Combat - Throw", meta = (ToolTip = "Radius of the virtual projectile to sweep against the environment."))
-	float PredictProjectileRadius = 20.0f;
 	bool bPredictPath = false;
+	UPROPERTY(BlueprintReadWrite)
+	TArray<class USplineMeshComponent*> SplineMeshes;
 	#pragma endregion
 
 private:
@@ -374,10 +378,10 @@ public:
 	#pragma endregion
 
 	#pragma region Getters & Setters
-	void ShowPredictPath(bool bShowPath);
-
+	UFUNCTION(BlueprintCallable)
+	FORCEINLINE TSubclassOf<AProjectile> GetThrowableClass() const { return ThrowableClass; }
+	UFUNCTION(BlueprintCallable)
 	FORCEINLINE bool GetPredictPath() const { return bPredictPath; }
-	FORCEINLINE void SetPredictPath(bool bPredict) { bPredictPath = bPredict; }
 	#pragma endregion
 
 };

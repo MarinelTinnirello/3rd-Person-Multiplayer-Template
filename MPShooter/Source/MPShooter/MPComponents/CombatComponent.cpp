@@ -6,6 +6,8 @@
 #include "Engine/SkeletalMeshSocket.h"
 #include "Components/SphereComponent.h"
 #include "Components/SplineComponent.h"
+#include "Components/SplineMeshComponent.h"
+#include "Components/DecalComponent.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
@@ -67,7 +69,7 @@ void UCombatComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 
 		SetHUDCrosshairs(DeltaTime);
 		InterpFOV(DeltaTime);
-		ShowPredictPath(DeltaTime);
+		//SetPredictPath(DeltaTime);
 	}
 }
 
@@ -1521,22 +1523,6 @@ void UCombatComponent::ShowAttachedThrowable(bool bShowThrowable)
 	}
 }
 
-void UCombatComponent::ShowPredictPath(bool bShowPath)
-{
-	bool bIsValid = Character &&
-		Character->IsLocallyControlled() &&
-		Character->GetAttachedThrowable() &&
-		Character->GetAimRangeGridSphere() &&
-		Character->GetAimPathSpline() &&
-		ThrowableClass;
-	if (bIsValid)
-	{
-		bPredictPath = bShowPath;
-
-		Character->GetAimRangeGridSphere()->SetVisibility(bShowPath);
-	}
-}
-
 void UCombatComponent::EndThrow()
 {
 	CombatState = ECombatState::ECS_Unoccupied;
@@ -1552,45 +1538,143 @@ void UCombatComponent::LaunchThrowable()
 	}
 }
 
-void UCombatComponent::ShowPredictPath(float DeltaTime)
+void UCombatComponent::ShowPredictPath(bool bShowPath)
 {
-	bool bIsValid = bPredictPath &&
-		Character &&
+	bool bIsValid = Character &&
+		Character->IsLocallyControlled() &&
 		Character->GetAttachedThrowable() &&
+		Character->GetAimRangeGridSphere() &&
+		Character->GetAimDecal() &&
 		Character->GetAimPathSpline() &&
-		ThrowableClass;
+		ThrowableClass &&
+		EquippedWeapon;
 	if (bIsValid)
 	{
-		AnimInstance = AnimInstance == nullptr ? Cast<UMPAnimInstance>(Character->GetMesh()->GetAnimInstance()) : AnimInstance;
-		if (AnimInstance)
+		bPredictPath = bShowPath;
+
+		Character->GetAimRangeGridSphere()->SetVisibility(bShowPath);
+		Character->GetAimDecal()->SetVisibility(bShowPath);
+		Character->GetAimPathSpline()->SetVisibility(bShowPath);
+
+		if (bShowPath)
 		{
-			UWorld* World = GetWorld();
-			if (World)
-			{
-				FPredictProjectilePathParams PredictParams;
-				PredictParams.StartLocation = Character->GetMesh()->GetSocketLocation(AnimInstance->GetThrowableSocket());
-				PredictParams.LaunchVelocity = Character->GetMesh()->GetSocketRotation(AnimInstance->GetThrowableSocket()).Vector() * 
-					ThrowableClass->GetDefaultObject<AProjectile>()->GetInitialSpeed();
-				PredictParams.ProjectileRadius = PredictProjectileRadius;
-
-				FPredictProjectilePathResult PredictResult;
-
-				bool bHit = UGameplayStatics::PredictProjectilePath(
-					World,
-					PredictParams,
-					PredictResult
-				);
-
-				TArray<FVector> PointLocations;
-				for (auto PathPoint : PredictResult.PathData)
-				{
-					PointLocations.Add(PathPoint.Location);
-				}
-				Character->GetAimPathSpline()->SetSplinePoints(PointLocations, ESplineCoordinateSpace::World);
-			}
+			Character->bUseControllerRotationYaw = true;
+		}
+		if (!bShowPath)
+		{
+			Character->bUseControllerRotationYaw = false;
+			ClearPredictPath();
 		}
 	}
 }
+
+void UCombatComponent::ClearPredictPath()
+{
+	if (SplineMeshes.IsValidIndex(0))
+	{
+		while (SplineMeshes.IsValidIndex(0))
+		{
+			SplineMeshes[0]->DestroyComponent();
+			SplineMeshes.RemoveAt(0);
+		}
+	}
+	/*if (SplinePointLocations.IsValidIndex(0))
+	{
+		SplinePointLocations.Empty();
+	}*/
+
+	Character->GetAimPathSpline()->ClearSplinePoints(true);
+}
+
+//void UCombatComponent::SetPredictPath(float DeltaTime)
+//{
+//	//bool bIsValid = bPredictPath &&
+//	//	Character &&
+//	//	Character->GetAttachedThrowable() &&
+//	//	Character->GetAimRangeGridSphere() &&
+//	//	Character->GetAimSplineMesh() &&
+//	//	Character->GetAimPathSpline() &&
+//	//	ThrowableClass;
+//	//if (bIsValid)
+//	//{
+//	//	AnimInstance = AnimInstance == nullptr ? Cast<UMPAnimInstance>(Character->GetMesh()->GetAnimInstance()) : AnimInstance;
+//	//	if (AnimInstance)
+//	//	{
+//	//		UWorld* World = GetWorld();
+//	//		if (World)
+//	//		{
+//	//			// Clears spline before adding to it
+//	//			ClearPredictPath();
+//
+//	//			// So we can trace along the ground
+//	//			// NOTE: Doesn't trace Blueprints, since those are WorldDynamic
+//	//			TArray<TEnumAsByte<EObjectTypeQuery>> ObjectTypesToHit;
+//	//			ObjectTypesToHit.Add(UEngineTypes::ConvertToObjectType(ECC_WorldStatic));
+//
+//	//			FPredictProjectilePathParams PredictParams;
+//	//			PredictParams.StartLocation = Character->GetMesh()->GetSocketLocation(AnimInstance->GetHeadSocket());
+//	//			PredictParams.LaunchVelocity = Character->GetMesh()->GetSocketRotation(AnimInstance->GetHeadSocket()).Vector() *
+//	//				ThrowableClass->GetDefaultObject<AProjectile>()->GetInitialSpeed();
+//	//			PredictParams.ProjectileRadius = PredictProjectileRadius;
+//	//			//PredictParams.bTraceWithCollision = true;
+//	//			PredictParams.ObjectTypes = ObjectTypesToHit;
+//	//			PredictParams.MaxSimTime = PredictProjectileMaxTime;
+//
+//	//			FPredictProjectilePathResult PredictResult;
+//
+//	//			bool bHit = UGameplayStatics::PredictProjectilePath(
+//	//				World,
+//	//				PredictParams,
+//	//				PredictResult
+//	//			);
+//
+//	//			// Add points to the spline mesh
+//	//			for (auto PathPoint : PredictResult.PathData)
+//	//			{
+//	//				SplinePointLocations.Add(PathPoint.Location);
+//	//			}
+//
+//	//			Character->GetAimPathSpline()->SetSplinePoints(SplinePointLocations, ESplineCoordinateSpace::World);
+//	//			Character->GetAimPathSpline()->SetSplinePointType(PredictResult.PathData.Num() - 1, ESplinePointType::CurveClamped);
+//	//			for (int i = 0; i < Character->GetAimPathSpline()->GetNumberOfSplinePoints() - 2; i++)
+//	//			{
+//	//				USplineMeshComponent* SplineMesh = NewObject<USplineMeshComponent>(Character->GetAimPathSpline(), USplineMeshComponent::StaticClass());
+//	//				SplineMesh->SetStaticMesh(Character->GetAimSplineMesh());
+//	//				SplineMesh->SetForwardAxis(ESplineMeshAxis::Z);
+//	//				SplineMeshes.Add(SplineMesh);
+//
+//	//				// Initialize the object in the world
+//	//				SplineMesh->RegisterComponentWithWorld(GetWorld());
+//	//				SplineMesh->CreationMethod = EComponentCreationMethod::UserConstructionScript;
+//	//				SplineMesh->SetMobility(EComponentMobility::Movable);
+//	//				SplineMesh->AttachToComponent(Character->GetAimPathSpline(), FAttachmentTransformRules::KeepRelativeTransform);
+//
+//	//				const FVector StartPoint = PredictResult.PathData[i].Location; //SplinePointLocations[i]; //
+//	//				const FVector StartTangent = Character->GetAimPathSpline()->GetTangentAtSplinePoint(i, ESplineCoordinateSpace::Type::World);
+//	//				const FVector EndPoint = PredictResult.PathData[i++].Location; //SplinePointLocations[i++]; //
+//	//				const FVector EndTangent = Character->GetAimPathSpline()->GetTangentAtSplinePoint(i++, ESplineCoordinateSpace::Type::World);
+//	//				SplineMesh->SetStartAndEnd(
+//	//					StartPoint, 
+//	//					StartTangent, 
+//	//					EndPoint, 
+//	//					EndTangent, 
+//	//					true
+//	//				);
+//	//			}
+//
+//	//			FVector TraceDestination = FMath::VInterpTo(
+//	//				Character->GetAimRangeGridSphere()->GetComponentLocation(),
+//	//				PredictResult.LastTraceDestination.Location,
+//	//				//SplinePointLocations.Last(),
+//	//				World->GetDeltaSeconds(),
+//	//				10.f
+//	//			);
+//
+//	//			Character->GetAimRangeGridSphere()->SetWorldLocation(TraceDestination);
+//	//		}
+//	//	}
+//	//}
+//}
 
 #pragma region Server
 void UCombatComponent::ServerLaunchThrowable_Implementation(const FVector_NetQuantize& Target)

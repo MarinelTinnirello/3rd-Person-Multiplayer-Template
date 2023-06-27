@@ -148,9 +148,4 @@ private:
 	float DestroyTime = 3.f;
 	#pragma endregion
 
-public:
-	#pragma region Getters
-	FORCEINLINE float GetInitialSpeed() const { return InitialSpeed; }
-	#pragma endregion
-
 };

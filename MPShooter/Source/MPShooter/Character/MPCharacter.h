@@ -396,6 +396,8 @@ private:
 	UPROPERTY(VisibleAnywhere)
 	UStaticMeshComponent* AimRangeGridSphere;
 	UPROPERTY(VisibleAnywhere)
+	class UDecalComponent* AimDecal;
+	UPROPERTY(VisibleAnywhere)
 	class USplineComponent* AimPathSpline;
 
 public:	
@@ -409,9 +411,13 @@ public:
 	bool IsAiming();
 	bool IsLocallyReloading();
 	#pragma endregion
-
+	UFUNCTION(BlueprintCallable)
 	FORCEINLINE UStaticMeshComponent* GetAttachedThrowable() const { return AttachedThrowable; }
+	UFUNCTION(BlueprintCallable)
 	FORCEINLINE UStaticMeshComponent* GetAimRangeGridSphere() const { return AimRangeGridSphere; }
+	UFUNCTION(BlueprintCallable)
+	FORCEINLINE UDecalComponent* GetAimDecal() const { return AimDecal; }
+	UFUNCTION(BlueprintCallable)
 	FORCEINLINE USplineComponent* GetAimPathSpline() const { return AimPathSpline; }
 
 	#pragma region Components & States
