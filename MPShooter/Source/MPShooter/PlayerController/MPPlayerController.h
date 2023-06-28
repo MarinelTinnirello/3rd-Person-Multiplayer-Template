@@ -5,9 +5,14 @@
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
 #include "MPShooter/MPTypes/WeaponTypes.h"
-
 #include "MPPlayerController.generated.h"
 
+#pragma region Forward Declarations
+class AMPShooterGameMode;
+class AMPHUD;
+class UUserWidget;
+class UReturnToMainMenu;
+#pragma endregion
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FHighPingDelegate, bool, bPingTooHigh);
 
@@ -100,9 +105,9 @@ protected:
 
 private:
 	UPROPERTY()
-	class AMPShooterGameMode* MPShooterGameMode;
+	AMPShooterGameMode* MPShooterGameMode;
 	UPROPERTY()
-	class AMPHUD* MPHUD;
+	AMPHUD* MPHUD;
 
 	//
 	// Match Properties
@@ -160,9 +165,9 @@ private:
 	// Return to Main Menu
 	//
 	UPROPERTY(EditAnywhere, Category = "HUD", meta = (ToolTip = "Widget for returning to the main menu."))
-	TSubclassOf<class UUserWidget> ReturnToMainMenuWidget;
+	TSubclassOf<UUserWidget> ReturnToMainMenuWidget;
 	UPROPERTY()
-	class UReturnToMainMenu* ReturnToMainMenu;
+	UReturnToMainMenu* ReturnToMainMenu;
 	bool bReturnToMainMenuOpen = false;
 
 };

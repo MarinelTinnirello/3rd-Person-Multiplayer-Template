@@ -147,6 +147,24 @@ void AMPCharacter::Tick(float DeltaTime)
 	DrawHitPhysAsset();
 }
 
+void AMPCharacter::Destroyed()
+{
+	Super::Destroyed();
+
+	if (EliminateComponent)
+	{
+		EliminateComponent->DestroyComponent();
+	}
+
+	AMPShooterGameMode* MPGameMode = Cast<AMPShooterGameMode>(UGameplayStatics::GetGameMode(this));
+	bool bMatchNotInProgress = MPGameMode && MPGameMode->GetMatchState() != MatchState::InProgress;
+
+	if (Combat && Combat->EquippedWeapon && bMatchNotInProgress)
+	{
+		Combat->EquippedWeapon->Destroy();
+	}
+}
+
 #pragma region Initialization
 void AMPCharacter::PostInitializeComponents()
 {
@@ -196,24 +214,6 @@ void AMPCharacter::OnRep_ReplicatedMovement()
 	TimeSincePrevMovementReplication = 0.f;
 }
 #pragma endregion
-
-void AMPCharacter::Destroyed()
-{
-	Super::Destroyed();
-
-	if (EliminateComponent)
-	{
-		EliminateComponent->DestroyComponent();
-	}
-
-	AMPShooterGameMode* MPGameMode = Cast<AMPShooterGameMode>(UGameplayStatics::GetGameMode(this));
-	bool bMatchNotInProgress = MPGameMode && MPGameMode->GetMatchState() != MatchState::InProgress;
-
-	if (Combat && Combat->EquippedWeapon && bMatchNotInProgress)
-	{
-		Combat->EquippedWeapon->Destroy();
-	}
-}
 
 #pragma region Input
 void AMPCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)

@@ -48,6 +48,28 @@ struct FPhysAssetInformation
 
 #pragma endregion
 
+#pragma region Forward Declarations
+class AMPPlayerController;
+class AMPPlayerState;
+class USpringArmComponent;
+class UCameraComponent;
+class UWidgetComponent;
+class UInputMappingContext;
+class UMPInputConfigData;
+class USoundCue;
+class UParticleSystem;
+class UBoxComponent;
+class UCapsuleComponent;
+class AWeapon;
+class UCombatComponent;
+class UBuffComponent;
+class ULagComponent;
+class UAnimMontage;
+class UStaticMeshComponent;
+class UDecalComponent;
+class USplineComponent;
+#pragma endregion
+
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnLeftGame);
 
 UCLASS()
@@ -71,9 +93,9 @@ public:
 	// Surfaces
 	//
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Surface", meta = (ToolTip = "Sound that plays when a character walks on different physical surface materials."))
-	TMap<TEnumAsByte<EPhysicalSurface>, class USoundCue*> SurfaceSoundMap;
+	TMap<TEnumAsByte<EPhysicalSurface>, USoundCue*> SurfaceSoundMap;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Surface", meta = (ToolTip = "Particles made by a character walking on different physical surface materials."))
-	TMap<TEnumAsByte<EPhysicalSurface>, class UParticleSystem*> SurfaceParticleMap;
+	TMap<TEnumAsByte<EPhysicalSurface>, UParticleSystem*> SurfaceParticleMap;
 	// Change Particle System into Niagara one (do it when you convert the AnimNotify into C++)
 	#pragma endregion
 
@@ -87,9 +109,9 @@ public:
 	UPROPERTY(EditAnywhere, Category = "DEBUG", meta = (ToolTip = "Checks whether or not to draw the meshes' physics assets."))
 	bool bDrawPhysAssets = false;
 	UPROPERTY()
-	TMap<FName, class UBoxComponent*> HitCollisionBoxes;
+	TMap<FName, UBoxComponent*> HitCollisionBoxes;
 	UPROPERTY()
-	TMap<FName, class UCapsuleComponent*> HitCollisionCapsules;
+	TMap<FName, UCapsuleComponent*> HitCollisionCapsules;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DEBUG", meta = (ToolTip = "Checks whether or not to draw the capsule components derirved from the meshes' physics assets."))
 	TArray<UCapsuleComponent*> hitCapsuleBones;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DEBUG", meta = (ToolTip = "Checks whether or not to draw the box components derirved from the meshes' physics assets."))
@@ -150,9 +172,9 @@ protected:
 	// Enhanced Input
 	//
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enhanced Input")
-	class UInputMappingContext* InputMapping;
+	UInputMappingContext* InputMapping;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enhanced Input")
-	class UMPInputConfigData* InputActions;
+	UMPInputConfigData* InputActions;
 	#pragma endregion
 
 	#pragma region Engine Overrides
@@ -220,15 +242,15 @@ private:
 	// Character Properties
 	//
 	UPROPERTY()
-	class AMPPlayerController* MPPlayerController;
+	AMPPlayerController* MPPlayerController;
 	UPROPERTY()
-	class AMPPlayerState* MPPlayerState;
+	AMPPlayerState* MPPlayerState;
 	UPROPERTY(VisibleAnywhere, Category = "Camera")
-	class USpringArmComponent* CameraBoom;
+	USpringArmComponent* CameraBoom;
 	UPROPERTY(VisibleAnywhere, Category = "Camera")
-	class UCameraComponent* FollowCamera;
+	UCameraComponent* FollowCamera;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"), meta = (ToolTip = "Displays information above character."))
-	class UWidgetComponent* OverheadWidget;
+	UWidgetComponent* OverheadWidget;
 	#pragma endregion
 
 	#pragma region Weapon Properties
@@ -236,7 +258,7 @@ private:
 	// Weapon Properties
 	//
 	UPROPERTY(ReplicatedUsing = OnRep_OverlappingWeapon)
-	class AWeapon* OverlappingWeapon;
+	AWeapon* OverlappingWeapon;
 
 	#pragma region OnRep
 	UFUNCTION()
@@ -252,16 +274,30 @@ private:
 
 	#pragma endregion
 
+	#pragma region Throwable Properties
+	//
+	// Throwable Properties
+	//
+	UPROPERTY(VisibleAnywhere)
+	UStaticMeshComponent* AttachedThrowable;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = true))
+	UStaticMeshComponent* AimRangeGridSphere;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = true))
+	UDecalComponent* AimDecal;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = true))
+	USplineComponent* AimPathSpline;
+	#pragma endregion
+
 	#pragma region Components
 	//
 	// Components
 	//
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"), meta = (ToolTip = "Handles logic to anything related to combat."))
-	class UCombatComponent* Combat;
+	UCombatComponent* Combat;
 	UPROPERTY(VisibleAnywhere, meta = (ToolTip = "Handles logic to anything related to buffs."))
-	class UBuffComponent* Buff;
+	UBuffComponent* Buff;
 	UPROPERTY(VisibleAnywhere, meta = (ToolTip = "Handles logic to anything related to lag compensation."))
-	class ULagComponent* LagCompensation;
+	ULagComponent* LagCompensation;
 	#pragma endregion
 
 	#pragma region Animation
@@ -291,7 +327,7 @@ private:
 	// Montages
 	//
 	UPROPERTY(EditAnywhere, Category = "Combat - Animation", meta = (ToolTip = "Montage that plays if a character equips or unequips a weapon."))
-	class UAnimMontage* EquipMontage;
+	UAnimMontage* EquipMontage;
 	UPROPERTY(EditAnywhere, Category = "Combat - Animation", meta = (ToolTip = "Montage that plays if a character is swapping a weapon."))
 	UAnimMontage* SwapMontage;
 	UPROPERTY(EditAnywhere, Category = "Combat - Animation", meta = (ToolTip = "Montage that plays if a character is hit."))
@@ -388,18 +424,6 @@ private:
 	bool bLeftGame = false;
 	#pragma endregion
 
-	//
-	// Throwable
-	//
-	UPROPERTY(VisibleAnywhere)
-	class UStaticMeshComponent* AttachedThrowable;
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = true))
-	UStaticMeshComponent* AimRangeGridSphere;
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = true))
-	class UDecalComponent* AimDecal;
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = true))
-	class USplineComponent* AimPathSpline;
-
 public:	
 	#pragma region Equipped Weapon
 	UFUNCTION(BlueprintCallable)
@@ -412,11 +436,12 @@ public:
 	bool IsLocallyReloading();
 	#pragma endregion
 
-	UFUNCTION(BlueprintCallable)
+	#pragma region Throwable
 	FORCEINLINE UStaticMeshComponent* GetAttachedThrowable() const { return AttachedThrowable; }
 	FORCEINLINE UStaticMeshComponent* GetAimRangeGridSphere() const { return AimRangeGridSphere; }
 	FORCEINLINE UDecalComponent* GetAimDecal() const { return AimDecal; }
 	FORCEINLINE USplineComponent* GetAimPathSpline() const { return AimPathSpline; }
+	#pragma endregion
 
 	#pragma region Components & States
 	ECombatState GetCombatState() const;

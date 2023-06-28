@@ -6,6 +6,10 @@
 #include "GameFramework/GameState.h"
 #include "MPGameState.generated.h"
 
+#pragma region Forward Declarations
+class AMPPlayerState;
+#pragma endregion
+
 UCLASS()
 class MPSHOOTER_API AMPGameState : public AGameState
 {
@@ -14,7 +18,7 @@ class MPSHOOTER_API AMPGameState : public AGameState
 public:
 	#pragma region Game State Properties
 	UPROPERTY(Replicated)
-	TArray<class AMPPlayerState*> TopScoringPlayers;
+	TArray<AMPPlayerState*> TopScoringPlayers;
 	#pragma endregion
 
 	#pragma region Engine Overrides

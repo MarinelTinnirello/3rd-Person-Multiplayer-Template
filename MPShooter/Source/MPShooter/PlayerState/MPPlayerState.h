@@ -6,6 +6,11 @@
 #include "GameFramework/PlayerState.h"
 #include "MPPlayerState.generated.h"
 
+#pragma region Forward Declarations
+class AMPCharacter;
+class AMPPlayerController;
+#pragma endregion
+
 UCLASS()
 class MPSHOOTER_API AMPPlayerState : public APlayerState
 {
@@ -31,9 +36,9 @@ public:
 private:
 	#pragma region References
 	UPROPERTY()
-	class AMPCharacter* Character;
+	AMPCharacter* Character;
 	UPROPERTY()
-	class AMPPlayerController* Controller;
+	AMPPlayerController* Controller;
 	#pragma endregion
 
 	#pragma region Player State Properties

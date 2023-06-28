@@ -7,10 +7,19 @@
 #include "MPShooter/HUD/MPHUD.h"
 #include "MPShooter/MPTypes/WeaponTypes.h"
 #include "MPShooter/MPTypes/CombatState.h"
-
 #include "CombatComponent.generated.h"
 
 #define TRACE_LENGTH 80000.f
+
+#pragma region Forward Declarations
+class UMPAnimInstance;
+class AMPPlayerController;
+class AMPHUD;
+class AWeapon;
+class AProjectile;
+class USplineMeshComponent;
+class USoundCue;
+#pragma endregion
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class MPSHOOTER_API UCombatComponent : public UActorComponent
@@ -209,24 +218,24 @@ protected:
 
 	#pragma region Throwable Weapon
 	UPROPERTY(EditAnywhere, Category = "Combat - Throw", meta = (ToolTip = "Throwable class."))
-	TSubclassOf<class AProjectile> ThrowableClass;
+	TSubclassOf<AProjectile> ThrowableClass;
 	bool bThrowable = false;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Combat - Throw", meta = (ToolTip = "Checks if we should currently be predicting the path."))
 	bool bPredictPath = false;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Combat - Throw", meta = (ToolTip = "Array of spline meshes for when aiming a throwable."))
-	TArray<class USplineMeshComponent*> SplineMeshes;
+	TArray<USplineMeshComponent*> SplineMeshes;
 	#pragma endregion
 
 private:
 	#pragma region References
 	UPROPERTY()
-	class AMPCharacter* Character;
+	AMPCharacter* Character;
 	UPROPERTY()
-	class UMPAnimInstance* AnimInstance;
+	UMPAnimInstance* AnimInstance;
 	UPROPERTY()
-	class AMPPlayerController* Controller;
+	AMPPlayerController* Controller;
 	UPROPERTY()
-	class AMPHUD* HUD;
+	AMPHUD* HUD;
 	#pragma endregion
 	
 	#pragma region States
@@ -270,7 +279,7 @@ private:
 
 	#pragma region Weapon
 	UPROPERTY(EditAnywhere, Category = "Weapon", meta = (ToolTip = "Sound to make while zooming in with a sniper weapon."))
-	class USoundCue* ZoomInSniperRifle;
+	USoundCue* ZoomInSniperRifle;
 	UPROPERTY(EditAnywhere, Category = "Weapon", meta = (ToolTip = "Sound to make while zooming out with a sniper weapon."))
 	USoundCue* ZoomOutSniperRifle;
 	#pragma endregion

@@ -6,8 +6,11 @@
 #include "Animation/AnimInstance.h"
 #include "MPShooter/MPTypes/TurningInPlace.h"
 #include "MPShooter/MPTypes/CombatState.h"
-
 #include "MPAnimInstance.generated.h"
+
+#pragma region Forward Declarations
+class AMPCharacter;
+#pragma endregion
 
 UCLASS()
 class MPSHOOTER_API UMPAnimInstance : public UAnimInstance
@@ -23,7 +26,7 @@ public:
 private:
 	#pragma region References
 	UPROPERTY(BlueprintReadOnly, Category = Character, meta = (AllowPrivateAccess = "true"))
-	class AMPCharacter* MPCharacter;
+	AMPCharacter* MPCharacter;
 	#pragma endregion
 
 	#pragma region Character Properties

@@ -6,6 +6,9 @@
 #include "Components/ActorComponent.h"
 #include "BuffComponent.generated.h"
 
+#pragma region Forward Declarations
+class AMPCharacter;
+#pragma endregion
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class MPSHOOTER_API UBuffComponent : public UActorComponent
@@ -42,7 +45,7 @@ protected:
 private:
 	#pragma region References
 	UPROPERTY()
-	class AMPCharacter* Character;
+	AMPCharacter* Character;
 	#pragma endregion
 
 	#pragma region Healing

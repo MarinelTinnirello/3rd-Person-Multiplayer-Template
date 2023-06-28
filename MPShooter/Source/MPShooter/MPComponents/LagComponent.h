@@ -79,6 +79,10 @@ struct FServerSideRewindShotgunResult
 
 #pragma endregion
 
+#pragma region Forward Declarations
+class AMPPlayerController;
+#pragma endregion
+
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class MPSHOOTER_API ULagComponent : public UActorComponent
 {
@@ -220,7 +224,7 @@ private:
 	UPROPERTY()
 	AMPCharacter* Character;
 	UPROPERTY()
-	class AMPPlayerController* Controller;
+	AMPPlayerController* Controller;
 	#pragma endregion
 
 	#pragma region Frame Properties
