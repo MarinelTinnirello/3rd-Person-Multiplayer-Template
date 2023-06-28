@@ -79,9 +79,9 @@ public:
 	#pragma endregion
 
 	#pragma region Throw
+	UFUNCTION(BlueprintCallable)
+	void ClearPredictPath();
 	void ShowPredictPath(bool bShowPath);
-	/*UFUNCTION(BlueprintImplementableEvent)
-	void SetPredictPath(float DeltaTime);*/
 	UFUNCTION(BlueprintCallable)
 	void LaunchThrowable();
 
@@ -165,8 +165,6 @@ protected:
 	#pragma region Throw
 	void Throw();
 	void ShowAttachedThrowable(bool bShowThrowable);
-	UFUNCTION(BlueprintCallable)
-	void ClearPredictPath();
 	void UpdateCarriedThrowableAmmo(TSubclassOf<class AProjectile> ThrowableWeaponType);
 
 	#pragma region Server
@@ -213,8 +211,9 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Combat - Throw", meta = (ToolTip = "Throwable class."))
 	TSubclassOf<class AProjectile> ThrowableClass;
 	bool bThrowable = false;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Combat - Throw", meta = (ToolTip = "Checks if we should currently be predicting the path."))
 	bool bPredictPath = false;
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Combat - Throw", meta = (ToolTip = "Array of spline meshes for when aiming a throwable."))
 	TArray<class USplineMeshComponent*> SplineMeshes;
 	#pragma endregion
 
@@ -375,13 +374,6 @@ public:
 	bool ShouldUnequipWeapon();
 	bool ShouldReequipWeapon();
 	bool ShouldSwapWeapons();
-	#pragma endregion
-
-	#pragma region Getters & Setters
-	UFUNCTION(BlueprintCallable)
-	FORCEINLINE TSubclassOf<AProjectile> GetThrowableClass() const { return ThrowableClass; }
-	UFUNCTION(BlueprintCallable)
-	FORCEINLINE bool GetPredictPath() const { return bPredictPath; }
 	#pragma endregion
 
 };

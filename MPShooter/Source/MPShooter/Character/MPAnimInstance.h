@@ -116,7 +116,6 @@ public:
 	FORCEINLINE FName GetBackSpineSocket() const { return BackSpineSocket; }
 	FORCEINLINE FName GetRightHipSocket() const { return RightHipSocket; }
 	FORCEINLINE FName GetLeftHipSocket() const { return LeftHipSocket; }
-	UFUNCTION(BlueprintCallable)
 	FORCEINLINE FName GetHeadSocket() const { return HeadSocket; }
 
 	FORCEINLINE FName GetHeadBone() const { return HeadBone; }
