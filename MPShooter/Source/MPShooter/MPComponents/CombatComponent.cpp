@@ -242,6 +242,8 @@ void UCombatComponent::UnequipWeapon()
 
 	CombatState = ECombatState::ECS_Equipping;
 	Character->bFinishedEquipping = false;
+	Character->GetCharacterMovement()->bOrientRotationToMovement = true;
+	Character->bUseControllerRotationYaw = false;
 }
 
 #pragma region Anim Notifies
@@ -272,7 +274,7 @@ bool UCombatComponent::IsWeaponUnequipped()
 	return (EquippedWeapon != nullptr && CharacterCombatState == ECharacterCombatState::ECCS_Unequipped);
 }
 
-bool UCombatComponent::ShouldUnequipWeapon()
+bool UCombatComponent::IsWeaponEquipped()
 {
 	return (EquippedWeapon != nullptr && CharacterCombatState != ECharacterCombatState::ECCS_Unequipped);
 }

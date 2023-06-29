@@ -561,7 +561,7 @@ void AMPCharacter::UnequipButtonPressed()
 			ServerUnequipButtonPressed();
 		}
 
-		bool bUnequip = Combat->ShouldUnequipWeapon() &&
+		bool bUnequip = Combat->IsWeaponEquipped() &&
 			!HasAuthority() &&
 			Combat->CombatState == ECombatState::ECS_Unoccupied &&
 			Combat->EquippedWeapon;
@@ -587,7 +587,7 @@ void AMPCharacter::ServerUnequipButtonPressed_Implementation()
 {
 	if (Combat)
 	{
-		if (Combat->ShouldUnequipWeapon())
+		if (Combat->IsWeaponEquipped())
 		{
 			Combat->UnequipWeapon();
 		}
@@ -1142,7 +1142,7 @@ void AMPCharacter::OnRep_OverlappingWeapon(AWeapon* PrevWeapon)
 #pragma region Checkers
 bool AMPCharacter::IsWeaponEquipped()
 {
-	return (Combat && Combat->EquippedWeapon);
+	return (Combat && Combat->IsWeaponEquipped());
 }
 
 bool AMPCharacter::IsWeaponUnequipped()

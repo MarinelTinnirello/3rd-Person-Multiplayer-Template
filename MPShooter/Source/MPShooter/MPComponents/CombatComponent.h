@@ -383,7 +383,7 @@ private:
 public:	
 	#pragma region Weapon Checks
 	bool IsWeaponUnequipped();
-	bool ShouldUnequipWeapon();
+	bool IsWeaponEquipped();
 	bool ShouldReequipWeapon();
 	bool ShouldSwapWeapons();
 	#pragma endregion
