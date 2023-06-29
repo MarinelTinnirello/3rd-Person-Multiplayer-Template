@@ -27,11 +27,11 @@ class MPSHOOTER_API UCombatComponent : public UActorComponent
 	GENERATED_BODY()
 
 public:	
+	friend class AMPCharacter;
+
 	#pragma region Animation Checks
 	bool bLocallyReloading = false;
 	#pragma endregion
-
-	friend class AMPCharacter;
 
 	#pragma region Constructors & Engine Overrides
 	UCombatComponent();
@@ -241,11 +241,14 @@ private:
 	#pragma region States
 	UPROPERTY(ReplicatedUsing = OnRep_CombatState)
 	ECombatState CombatState = ECombatState::ECS_Unoccupied;
+	UPROPERTY(ReplicatedUsing = OnRep_CharacterCombatState)
 	ECharacterCombatState CharacterCombatState = ECharacterCombatState::ECCS_Unequipped;
 
 	#pragma region OnRep
 	UFUNCTION()
 	void OnRep_CombatState();
+	UFUNCTION()
+	void OnRep_CharacterCombatState();
 	#pragma endregion
 
 	#pragma endregion

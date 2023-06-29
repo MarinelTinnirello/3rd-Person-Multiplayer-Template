@@ -83,6 +83,7 @@ void UCombatComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Out
 	DOREPLIFETIME_CONDITION(UCombatComponent, CarriedAmmo, COND_OwnerOnly);
 	DOREPLIFETIME_CONDITION(UCombatComponent, CarriedThrowableAmmo, COND_OwnerOnly);
 	DOREPLIFETIME(UCombatComponent, CombatState);
+	DOREPLIFETIME(UCombatComponent, CharacterCombatState);
 }
 #pragma endregion
 
@@ -1001,6 +1002,7 @@ void UCombatComponent::AttachActorToHips(AActor* ActorToAttach)
 
 #pragma endregion
 
+#pragma region Throw
 void UCombatComponent::AttachActorToThrowable(AActor* ActorToAttach)
 {
 	AnimInstance = AnimInstance == nullptr ? Cast<UMPAnimInstance>(Character->GetMesh()->GetAnimInstance()) : AnimInstance;
@@ -1059,6 +1061,8 @@ FName UCombatComponent::OnEquippedWeaponTypeAttachActorThrow()
 {
 	return FName(AnimInstance->GetSecondaryHandSocket());
 }
+#pragma endregion
+
 #pragma endregion
 
 #pragma region Weapon
@@ -1660,6 +1664,32 @@ void UCombatComponent::OnRep_CombatState()
 		{
 			Character->PlaySwapMontage();
 		}
+		break;
+	}
+}
+
+void UCombatComponent::OnRep_CharacterCombatState()
+{
+	switch (CharacterCombatState)
+	{
+	case ECharacterCombatState::ECCS_Unequipped:
+		if (Character && !Character->IsLocallyControlled() && EquippedWeapon)
+		{
+			if (EquippedWeapon->GetUnequippedWeaponSocket() == EWeaponAttachmentSocket::EWAS_BackSpine)
+			{
+				Character->PlayEquipMontage(FName("UnequipBackSpine"));
+			}
+			else if (EquippedWeapon->GetUnequippedWeaponSocket() == EWeaponAttachmentSocket::EWAS_Hips)
+			{
+				Character->PlayEquipMontage(FName("UnequipHips"));
+			}
+		}
+		break;
+	case ECharacterCombatState::ECCS_EquippedOneHandedWeapon:
+		break;
+	case ECharacterCombatState::ECCS_EquippedTwoHandedWeapon:
+		break;
+	case ECharacterCombatState::ECCS_EquippedDualWieldedWeapon:
 		break;
 	}
 }

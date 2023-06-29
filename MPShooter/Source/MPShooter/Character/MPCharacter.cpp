@@ -556,14 +556,17 @@ void AMPCharacter::UnequipButtonPressed()
 
 	if (Combat)
 	{
+		if (Combat->CombatState == ECombatState::ECS_Unoccupied)
+		{
+			ServerUnequipButtonPressed();
+		}
+
 		bool bUnequip = Combat->ShouldUnequipWeapon() &&
 			!HasAuthority() &&
 			Combat->CombatState == ECombatState::ECS_Unoccupied &&
 			Combat->EquippedWeapon;
 		if (bUnequip)
 		{
-			ServerUnequipButtonPressed();
-
 			if (Combat->EquippedWeapon->GetUnequippedWeaponSocket() == EWeaponAttachmentSocket::EWAS_BackSpine)
 			{
 				PlayEquipMontage(FName("UnequipBackSpine"));
