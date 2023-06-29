@@ -84,8 +84,12 @@ public:
 	//
 	UPROPERTY(Replicated)
 	bool bDisableGameplay = false;
+
 	bool bFinishedSwapping = false;
 	bool bFinishedEquipping = false;
+
+	bool bEquipButtonPressed = false;
+	bool bThrowButtonPressed = false;
 	#pragma endregion
 
 	#pragma region Surfaces

@@ -47,12 +47,18 @@ private:
 	// Melee Properties
 	//
 	#pragma region Sockets
-	UPROPERTY(EditAnywhere, Category = "Melee Weapon Properties", meta = (ToolTip = "Start socket name for a line trace on a weapon."))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Melee Weapon Properties", meta = (AllowPrivateAccess = "true"), meta = (ToolTip = "Start socket name for a line trace on a weapon."))
 	FName StartSocket = "StartSocket";
-	UPROPERTY(EditAnywhere, Category = "Melee Weapon Properties", meta = (ToolTip = "Start socket name for a line trace on a weapon."))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Melee Weapon Properties", meta = (AllowPrivateAccess = "true"), meta = (ToolTip = "Start socket name for a line trace on a weapon."))
 	FName EndSocket = "EndSocket";
 	#pragma endregion
 
+	#pragma endregion
+
+public:
+	#pragma region Getters
+	FORCEINLINE FName GetStartSocket() const { return StartSocket; }
+	FORCEINLINE FName GetEndSocket() const { return EndSocket; }
 	#pragma endregion
 
 };

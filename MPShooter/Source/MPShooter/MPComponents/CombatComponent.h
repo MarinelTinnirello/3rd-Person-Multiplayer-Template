@@ -261,7 +261,6 @@ private:
 	float BaseWalkSpd;
 	UPROPERTY(EditAnywhere, Category = "Character", meta = (ToolTip = "Aim walk speed of a character when a weapon is equipped."))
 	float AimWalkSpd;
-	// TODO: add a FName for SecondaryThrowHand, just in case we have a dual wield or something
 	#pragma endregion
 
 	#pragma region Weapon Properties
