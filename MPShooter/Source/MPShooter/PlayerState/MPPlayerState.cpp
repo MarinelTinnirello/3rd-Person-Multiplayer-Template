@@ -13,6 +13,7 @@ void AMPPlayerState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLi
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
 	DOREPLIFETIME(AMPPlayerState, Defeat);
+	DOREPLIFETIME(AMPPlayerState, Team);
 }
 
 #pragma region OnRep
@@ -47,7 +48,6 @@ void AMPPlayerState::AddToScore(float ScoreAmount)
 	if (Character)
 	{
 		Controller = Controller == nullptr ? Cast<AMPPlayerController>(Character->Controller) : Controller;
-
 		if (Controller)
 		{
 			Controller->SetHUDScore(GetScore());
@@ -59,7 +59,6 @@ void AMPPlayerState::AddToDefeat(int32 DefeatAmount)
 {
 	Defeat += DefeatAmount;
 	Character = Character == nullptr ? Cast<AMPCharacter>(GetPawn()) : Character;
-
 	if (Character)
 	{
 		Controller = Controller == nullptr ? Cast<AMPPlayerController>(Character->Controller) : Controller;
@@ -68,6 +67,17 @@ void AMPPlayerState::AddToDefeat(int32 DefeatAmount)
 		{
 			Controller->SetHUDDefeat(Defeat);
 		}
+	}
+}
+
+void AMPPlayerState::SetTeam(ETeam TeamToSet)
+{
+	Team = TeamToSet;
+
+	AMPCharacter* MPCharacter = Cast <AMPCharacter>(GetPawn());
+	if (MPCharacter)
+	{
+		MPCharacter->SetTeamColor(Team);
 	}
 }
 
@@ -84,6 +94,15 @@ void AMPPlayerState::OnRep_Defeat()
 		{
 			Controller->SetHUDDefeat(Defeat);
 		}
+	}
+}
+
+void AMPPlayerState::OnRep_Team()
+{
+	AMPCharacter* MPCharacter = Cast <AMPCharacter>(GetPawn());
+	if (MPCharacter)
+	{
+		MPCharacter->SetTeamColor(Team);
 	}
 }
 #pragma endregion

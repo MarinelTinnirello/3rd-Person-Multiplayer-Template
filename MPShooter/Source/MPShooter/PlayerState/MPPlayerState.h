@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerState.h"
+#include "MPShooter/MPTypes/Team.h"
 #include "MPPlayerState.generated.h"
 
 #pragma region Forward Declarations
@@ -44,6 +45,20 @@ private:
 	#pragma region Player State Properties
 	UPROPERTY(ReplicatedUsing = OnRep_Defeat)
 	int32 Defeat;
+	UPROPERTY(ReplicatedUsing = OnRep_Team)	
+	ETeam Team = ETeam::ET_NoTeam;
+
+	#pragma region OnRep
+	UFUNCTION()
+	void OnRep_Team();
+	#pragma endregion
+
+	#pragma endregion
+
+public:
+	#pragma region Getters & Setters
+	FORCEINLINE ETeam GetTeam() const { return Team; }
+	void SetTeam(ETeam TeamToSet);
 	#pragma endregion
 
 };

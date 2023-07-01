@@ -8,12 +8,14 @@
 #include "Components/TimelineComponent.h"
 #include "MPShooter/MPTypes/TurningInPlace.h"
 #include "MPShooter/MPTypes/CombatState.h"
+#include "MPShooter/MPTypes/Team.h"
 #include "MPShooter/Interfaces/InteractWithCrosshairsInterface.h"
 #include "MPCharacter.generated.h"
 
 #pragma region Forward Declarations
 class AMPPlayerController;
 class AMPPlayerState;
+class AMPShooterGameMode;
 class USpringArmComponent;
 class UCameraComponent;
 class UWidgetComponent;
@@ -21,7 +23,9 @@ class UInputMappingContext;
 class UMPInputConfigData;
 class USoundCue;
 class UParticleSystem;
+class UParticleSystemComponent;
 class UNiagaraSystem;
+class UNiagaraComponent;
 class UBoxComponent;
 class UCapsuleComponent;
 class AWeapon;
@@ -150,6 +154,9 @@ public:
 	#pragma region Character Status & Stats
 	void DirectionalHitReact(const FVector& ImpactPoint);
 	void Eliminated(bool bPlayerLeftGame);
+	void SetTeamColor(ETeam Team);
+
+	void SpawnDefaultWeapon();
 	void UpdateHUDHealth();
 	void UpdateHUDShield();
 	void UpdateHUDAmmo();
@@ -243,6 +250,10 @@ protected:
 	#pragma endregion
 
 private:
+	#pragma region References
+	AMPShooterGameMode* MPShooterGameMode;
+	#pragma endregion
+
 	#pragma region Character Properties
 	//
 	// Character Properties
@@ -265,6 +276,11 @@ private:
 	//
 	UPROPERTY(ReplicatedUsing = OnRep_OverlappingWeapon)
 	AWeapon* OverlappingWeapon;
+
+	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Checks if a character spawns in with a default weapon."))
+	bool bSpawnWithDefaultWeapon = false;
+	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Default weapon a character spawns in with."))
+	TSubclassOf<AWeapon> DefaultWeaponClass;
 
 	#pragma region OnRep
 	UFUNCTION()
@@ -355,7 +371,7 @@ private:
 	float Health = 100.f;
 	bool bEliminated = false;
 	FTimerHandle EliminateTimer;
-	UPROPERTY(EditDefaultsOnly, Category = "Eliminated", meta = (ToolTip = "Amount of time before respawn."))
+	UPROPERTY(EditDefaultsOnly, Category = "Character Stats - Eliminated", meta = (ToolTip = "Amount of time before respawn."))
 	float EliminateDelay = 3.f;
 
 	void EliminateTimerFinished();
@@ -373,11 +389,11 @@ private:
 	UPROPERTY(VisibleAnywhere)
 	UTimelineComponent* DissolveTimeline;
 	FOnTimelineFloat DissolveTrack;
-	UPROPERTY(EditAnywhere, Category = "Eliminated", meta = (ToolTip = "Curve of a timeline where an eliminated character is dissolved."))
+	UPROPERTY(EditAnywhere, Category = "Character Stats - Eliminated", meta = (ToolTip = "Curve of a timeline where an eliminated character is dissolved."))
 	UCurveFloat* DissolveCurve;
-	UPROPERTY(EditAnywhere, Category = "Eliminated", meta = (ToolTip = "Material for when an eliminated character is dissolved."))
+	UPROPERTY(VisibleAnywhere, Category = "Character Stats - Eliminated", meta = (ToolTip = "Material for when an eliminated character is dissolved."))
 	UMaterialInstance* DissolveMaterialInstance;
-	UPROPERTY(VisibleAnywhere, Category = "Eliminated", meta = (ToolTip = "Dynamic instanced material (made at runtime) for when an eliminated character is dissolved."))
+	UPROPERTY(VisibleAnywhere, Category = "Character Stats - Eliminated", meta = (ToolTip = "Dynamic instanced material (made at runtime) for when an eliminated character is dissolved."))
 	UMaterialInstanceDynamic* DynamicDissolveMaterialInstance;
 
 	void StartDissolve();
@@ -389,16 +405,16 @@ private:
 	//
 	// Elimination Effects
 	//
-	UPROPERTY(EditAnywhere, Category = "Eliminated", meta = (ToolTip = "Particle system generated on elimination."))
-	class UParticleSystem* EliminateFX;
-	UPROPERTY(VisibleAnywhere, Category = "Eliminated", meta = (ToolTip = "Particle system component generated on elimination."))
-	class UParticleSystemComponent* EliminateComponent;
-	UPROPERTY(EditAnywhere, Category = "Eliminated", meta = (ToolTip = "Sound effect played on elimination."))
-	class USoundCue* EliminateSFX;
-	UPROPERTY(EditAnywhere, Category = "Eliminated", meta = (ToolTip = "Particle system generated when character takes the lead."))
-	class UNiagaraSystem* CrownSystem;
+	UPROPERTY(EditAnywhere, Category = "Character Stats - Eliminated", meta = (ToolTip = "Particle system generated on elimination."))
+	UParticleSystem* EliminateFX;
+	UPROPERTY(VisibleAnywhere, Category = "Character Stats - Eliminated", meta = (ToolTip = "Particle system component generated on elimination."))
+	UParticleSystemComponent* EliminateComponent;
+	UPROPERTY(EditAnywhere, Category = "Character Stats - Eliminated", meta = (ToolTip = "Sound effect played on elimination."))
+	USoundCue* EliminateSFX;
+	UPROPERTY(EditAnywhere, Category = "Character Stats - Eliminated", meta = (ToolTip = "Particle system generated when character takes the lead."))
+	UNiagaraSystem* CrownSystem;
 	UPROPERTY()
-	class UNiagaraComponent* CrownComponent;
+	UNiagaraComponent* CrownComponent;
 	#pragma endregion
 
 	#pragma endregion
@@ -419,6 +435,16 @@ private:
 	void OnRep_Shield(float LastShield);
 	#pragma endregion
 
+	#pragma endregion
+
+	#pragma region Team Colors
+	//
+	// Team Colors
+	//
+	UPROPERTY(EditAnywhere, Category = "Character Stats - Team Colors", meta = (ToolTip = "Material instance of character's team color."))
+	TArray<UMaterialInstance*> TeamColors;
+	UPROPERTY(EditAnywhere, Category = "Character Stats - Team Colors", meta = (ToolTip = "Material instance of character's team color for the dissolve effect."))
+	TArray<UMaterialInstance*> TeamColorsDissolve;
 	#pragma endregion
 
 	#pragma endregion

@@ -4,6 +4,7 @@
 #include "MPGameState.h"
 #include "Net/UnrealNetwork.h"
 #include "MPShooter/PlayerState/MPPlayerState.h"
+#include "MPShooter/PlayerController/MPPlayerController.h"
 
 #pragma region Engine Overrides
 #pragma region Replication
@@ -12,6 +13,8 @@ void AMPGameState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLife
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
 	DOREPLIFETIME(AMPGameState, TopScoringPlayers);
+	DOREPLIFETIME(AMPGameState, RedTeamScore);
+	DOREPLIFETIME(AMPGameState, BlueTeamScore);
 }
 #pragma endregion
 
@@ -36,4 +39,59 @@ void AMPGameState::UpdateTopScore(AMPPlayerState* ScoringPlayer)
 		TopScore = ScoringPlayer->GetScore();
 	}
 }
+
+void AMPGameState::RedTeamScores()
+{
+	++RedTeamScore;
+}
+
+void AMPGameState::BlueTeamScores()
+{
+	++BlueTeamScore;
+}
+
+void AMPGameState::RedTeamLosesPoint()
+{
+	--RedTeamScore;
+	RedTeamScore = RedTeamScore < 0 ? 0 : RedTeamScore;
+
+	AMPPlayerController* MPPlayerController = Cast<AMPPlayerController>(GetWorld()->GetFirstPlayerController());
+	if (MPPlayerController)
+	{
+		MPPlayerController->SetHUDRedTeamScore(RedTeamScore);
+	}
+}
+
+void AMPGameState::BlueTeamLosesPoint()
+{
+    --BlueTeamScore;
+    BlueTeamScore = BlueTeamScore < 0 ? 0 : BlueTeamScore;
+
+    AMPPlayerController* MPPlayerController = Cast<AMPPlayerController>(GetWorld()->GetFirstPlayerController());
+    if (MPPlayerController)
+    {
+        MPPlayerController->SetHUDBlueTeamScore(BlueTeamScore);
+    }
+}
+
+#pragma region OnRep
+void AMPGameState::OnRep_RedTeamScore()
+{
+	AMPPlayerController* MPPlayerController = Cast<AMPPlayerController>(GetWorld()->GetFirstPlayerController());
+	if (MPPlayerController)
+	{
+		MPPlayerController->SetHUDRedTeamScore(RedTeamScore);
+	}
+}
+
+void AMPGameState::OnRep_BlueTeamScore()
+{
+	AMPPlayerController* MPPlayerController = Cast<AMPPlayerController>(GetWorld()->GetFirstPlayerController());
+	if (MPPlayerController)
+	{
+		MPPlayerController->SetHUDBlueTeamScore(BlueTeamScore);
+	}
+}
+#pragma endregion
+
 #pragma endregion

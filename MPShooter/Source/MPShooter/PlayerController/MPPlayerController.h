@@ -9,8 +9,11 @@
 
 #pragma region Forward Declarations
 class AMPShooterGameMode;
+class AMPGameState;
+class AMPPlayerState;
 class AMPHUD;
 class UUserWidget;
+class UCharacterOverlay;
 class UReturnToMainMenu;
 #pragma endregion
 
@@ -32,16 +35,24 @@ public:
 
 	void SetHUDHealth(float Health, float MaxHealth);
 	void SetHUDShield(float Shield, float MaxShield);
+
 	void SetHUDScore(float Score);
 	void SetHUDDefeat(int32 Defeat);
 	void ShowEliminatedText();
+	void HideTeamScores();
+	void InitTeamScores();
+	void SetHUDRedTeamScore(int32 RedScore);
+	void SetHUDBlueTeamScore(int32 BlueScore);
+
 	void SetHUDWeaponAmmo(int32 Ammo);
 	void SetHUDCarriedAmmo(int32 Ammo);
 	void SetHUDCarriedThrowables(int32 Throwables);
 	void SetHUDWeaponType(EWeaponType WeaponType);
 	void SetHUDSniperScope(bool bIsAiming);
+
 	void SetHUDMatchCountdown(float CountdownTime, float MatchWarningTime);
 	void SetHUDAnnouncementCountdown(float CountdownTime);
+
 	void ShowReturnToMainMenu();
 	void SetHUDWeaponWheel(bool bIsVisible);
 	void SetHUDWeaponWheelIcon();
@@ -58,8 +69,8 @@ public:
 
 	virtual float GetServerTime();
 
-	void OnMatchStateSet(FName State);
-	void HandleMatchHasStarted();
+	void OnMatchStateSet(FName State, bool bTeamsMatch = false);
+	void HandleMatchHasStarted(bool bTeamsMatch = false);
 	void HandleCooldownMatch();
 	void BroadcastEliminate(APlayerState* Attacker, APlayerState* Victim);
 
@@ -103,6 +114,18 @@ protected:
 	UFUNCTION(Client, Reliable)
 	void ClientEliminateAnnouncement(APlayerState* Attacker, APlayerState* Victim);
 
+	UPROPERTY(ReplicatedUsing = OnRep_ShowTeamScores)
+	bool bShowTeamScores = false;
+
+	UFUNCTION()
+	void OnRep_ShowTeamScores();
+
+	//
+	// Announcements
+	//
+	FString GetInfoText(const TArray<AMPPlayerState*>& Players);
+	FString GetTeamsInfoText(AMPGameState* MPGameState);
+
 private:
 	UPROPERTY()
 	AMPShooterGameMode* MPShooterGameMode;
@@ -129,13 +152,16 @@ private:
 	// it updates late in the process, so it's best to separate what updates
 	//
 	UPROPERTY()
-	class UCharacterOverlay* CharacterOverlay;
+	UCharacterOverlay* CharacterOverlay;
+
 	float HUDHealth;
 	float HUDMaxHealh;
 	bool bInitHealth = false;
+
 	float HUDShield;
 	float HUDMaxShield;
 	bool bInitShield = false;
+
 	EWeaponType HUDWeaponType;
 	bool bInitWeaponType = false;
 	float HUDCarriedAmmo;
@@ -144,10 +170,12 @@ private:
 	bool bInitWeaponAmmo = false;
 	int32 HUDThrowables;
 	bool bInitThrowables = false;
+
 	float HUDScore;
 	bool bInitScore = false;
 	int32 HUDDefeat;
 	bool bInitDefeat = false;
+	bool bInitTeamScores = false;
 
 	//
 	// Ping

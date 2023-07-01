@@ -67,24 +67,30 @@ void AMPShooterGameMode::OnMatchStateSet()
 
 	for (FConstPlayerControllerIterator iterator = GetWorld()->GetPlayerControllerIterator(); iterator; iterator++)
 	{
-		AMPPlayerController* MPPlayer = Cast<AMPPlayerController>(*iterator);
-		if (MPPlayer)
+		AMPPlayerController* MPPlayerController = Cast<AMPPlayerController>(*iterator);
+		if (MPPlayerController)
 		{
-			MPPlayer->OnMatchStateSet(MatchState);
+			MPPlayerController->OnMatchStateSet(MatchState);
 		}
 	}
 }
 #pragma endregion
 
-#pragma region Actions
-#pragma region Elimination
-void AMPShooterGameMode::CharacterEliminated(class AMPCharacter* ElimmedCharacter, class AMPPlayerController* ElimmedController, class AMPPlayerController* AttackterController)
+#pragma region Overrideable Actions
+#pragma region Health
+float AMPShooterGameMode::CalculateDamage(AController* Attacker, AController* Victim, float BaseDamage)
 {
-	AMPPlayerState* AttackerPlayerState = AttackterController ? Cast<AMPPlayerState>(AttackterController->PlayerState) : nullptr;
-	AMPPlayerState* ElimmedPlayerState = ElimmedController ? Cast<AMPPlayerState>(ElimmedController->PlayerState) : nullptr;
+	return BaseDamage;
+}
+
+#pragma region Elimination
+void AMPShooterGameMode::CharacterEliminated(AMPCharacter* VictimCharacter, AMPPlayerController* VictimController, AMPPlayerController* AttackerController)
+{
+	AMPPlayerState* AttackerPlayerState = AttackerController ? Cast<AMPPlayerState>(AttackerController->PlayerState) : nullptr;
+	AMPPlayerState* VictimPlayerState = VictimController ? Cast<AMPPlayerState>(VictimController->PlayerState) : nullptr;
 	AMPGameState* MPGameState = GetGameState<AMPGameState>();
 	// Makes sure if the player eliminates themself, that the attacker won't get a free point
-	if (AttackerPlayerState && AttackerPlayerState != ElimmedPlayerState && MPGameState)
+	if (AttackerPlayerState && AttackerPlayerState != VictimPlayerState && MPGameState)
 	{
 		TArray<AMPPlayerState*> PlayersCurrentlyInTheLead;
 		for (auto LeadPlayer : MPGameState->TopScoringPlayers)
@@ -116,35 +122,35 @@ void AMPShooterGameMode::CharacterEliminated(class AMPCharacter* ElimmedCharacte
 		}
 	}
 
-	if (ElimmedPlayerState)
+	if (VictimPlayerState)
 	{
-		ElimmedPlayerState->AddToDefeat(1);
+		VictimPlayerState->AddToDefeat(1);
 	}
 
-	if (ElimmedCharacter)
+	if (VictimCharacter)
 	{
-		ElimmedCharacter->Eliminated(false);
+		VictimCharacter->Eliminated(false);
 	}
 
 	for (FConstPlayerControllerIterator It = GetWorld()->GetPlayerControllerIterator(); It; ++It)
 	{
 		AMPPlayerController* MPPlayer = Cast<AMPPlayerController>(*It);
-		if (MPPlayer && AttackerPlayerState && ElimmedPlayerState)
+		if (MPPlayer && AttackerPlayerState && VictimPlayerState)
 		{
-			MPPlayer->BroadcastEliminate(AttackerPlayerState, ElimmedPlayerState);
+			MPPlayer->BroadcastEliminate(AttackerPlayerState, VictimPlayerState);
 		}
 	}
 }
 
-void AMPShooterGameMode::RequestRespawn(class ACharacter* ElimmedCharacter, class AController* ElimmedController)
+void AMPShooterGameMode::RequestRespawn(class ACharacter* VictimCharacter, class AController* VictimController)
 {
-	if (ElimmedCharacter)
+	if (VictimCharacter)
 	{
-		ElimmedCharacter->Reset();
-		ElimmedCharacter->Destroy();
+		VictimCharacter->Reset();
+		VictimCharacter->Destroy();
 	}
 
-	if (ElimmedController)
+	if (VictimController)
 	{
 		TArray<AActor*> PlayerStarts;
 		UGameplayStatics::GetAllActorsOfClass(this, APlayerStart::StaticClass(), PlayerStarts);
@@ -156,7 +162,7 @@ void AMPShooterGameMode::RequestRespawn(class ACharacter* ElimmedCharacter, clas
 
 			TArray<FOverlapResult> Overlaps;
 			FCollisionQueryParams QueryParams;
-			QueryParams.AddIgnoredActor(ElimmedCharacter);
+			QueryParams.AddIgnoredActor(VictimCharacter);
 			QueryParams.bTraceComplex = true;
 			UWorld* World = GetWorld();
 			if (World)
@@ -174,19 +180,24 @@ void AMPShooterGameMode::RequestRespawn(class ACharacter* ElimmedCharacter, clas
 			// if there's no nearby players, respawn at current player start
 			if (Overlaps.Num() == 0)
 			{
-				RestartPlayerAtPlayerStart(ElimmedController, PlayerStarts[Selection]);
+				RestartPlayerAtPlayerStart(VictimController, PlayerStarts[Selection]);
 				return;
 			}
 		}
 
 		// if there's no suitable spawn locations, spawn at the default
 		FRotator DefaultRotation = FRotator(0.f, 0.f, 0.f);
-		RestartPlayerAtTransform(ElimmedController, FTransform(DefaultRotation, DefaultLocation));
+		RestartPlayerAtTransform(VictimController, FTransform(DefaultRotation, DefaultLocation));
 	}
 }
 #pragma endregion
 
-#pragma region Character State
+#pragma endregion
+
+#pragma endregion
+
+#pragma region Actions
+#pragma region Character Match State
 void AMPShooterGameMode::PlayerLeftGame(AMPPlayerState* PlayerLeaving)
 {
 	if (PlayerLeaving == nullptr)

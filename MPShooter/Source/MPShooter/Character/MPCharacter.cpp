@@ -28,6 +28,7 @@
 #include "MPShooter/Item/Weapon/Weapon.h"
 #include "MPShooter/MPTypes/WeaponTypes.h"
 #include "MPShooter/MPTypes/CombatState.h"
+#include "MPShooter/MPTypes/Team.h"
 #include "MPShooter/MPComponents/CombatComponent.h"
 #include "MPShooter/MPComponents/BuffComponent.h"
 #include "MPShooter/MPComponents/LagComponent.h"
@@ -265,18 +266,28 @@ void AMPCharacter::PollInit()
 	if (MPPlayerState == nullptr)
 	{
 		MPPlayerState = GetPlayerState<AMPPlayerState>();
-
 		if (MPPlayerState)
 		{
 			MPPlayerState->AddToScore(0.f);
 			MPPlayerState->AddToDefeat(0);
+			SetTeamColor(MPPlayerState->GetTeam());
 
 			AMPGameState* MPGameState = Cast<AMPGameState>(UGameplayStatics::GetGameState(this));
-
 			if (MPGameState && MPGameState->TopScoringPlayers.Contains(MPPlayerState))
 			{
 				MulticastGainedTheLead();
 			}
+		}
+	}
+	if (MPPlayerController == nullptr)
+	{
+		MPPlayerController = MPPlayerController == nullptr ? Cast<AMPPlayerController>(Controller) : MPPlayerController;
+		if (MPPlayerController)
+		{
+			SpawnDefaultWeapon();
+			UpdateHUDAmmo();
+			UpdateHUDHealth();
+			UpdateHUDShield();
 		}
 	}
 }
@@ -1194,10 +1205,13 @@ ECharacterCombatState AMPCharacter::GetCharacterCombatState() const
 #pragma region Health
 void AMPCharacter::ReceiveDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatorController, AActor* DamageCauser)
 {
-	if (bEliminated)
+	MPShooterGameMode == nullptr ? GetWorld()->GetAuthGameMode<AMPShooterGameMode>() : MPShooterGameMode;
+	if (bEliminated || MPShooterGameMode == nullptr)
 	{
 		return;
 	}
+
+	Damage = MPShooterGameMode->CalculateDamage(InstigatorController, Controller, Damage);
 
 	float DamageToHealth = Damage;
 	if (Shield > 0.f)
@@ -1222,7 +1236,6 @@ void AMPCharacter::ReceiveDamage(AActor* DamagedActor, float Damage, const UDama
 
 	if (Health == 0.f)
 	{
-		AMPShooterGameMode* MPShooterGameMode = GetWorld()->GetAuthGameMode<AMPShooterGameMode>();
 		if (MPShooterGameMode)
 		{
 			MPPlayerController = MPPlayerController == nullptr ? Cast<AMPPlayerController>(Controller) : MPPlayerController;
@@ -1351,6 +1364,7 @@ void AMPCharacter::MulticastEliminated_Implementation(bool bPlayerLeftGame)
 
 	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	AttachedThrowable->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
 	// Spawn eliminate FX (if necessary)
 	if (EliminateFX)
@@ -1390,7 +1404,7 @@ void AMPCharacter::MulticastEliminated_Implementation(bool bPlayerLeftGame)
 #pragma region Elimination Effects
 void AMPCharacter::EliminateTimerFinished()
 {
-	AMPShooterGameMode* MPShooterGameMode = GetWorld()->GetAuthGameMode<AMPShooterGameMode>();	
+	MPShooterGameMode == nullptr ? GetWorld()->GetAuthGameMode<AMPShooterGameMode>() : MPShooterGameMode;
 	if (MPShooterGameMode && !bLeftGame)
 	{
 		MPShooterGameMode->RequestRespawn(this, Controller);
@@ -1450,6 +1464,24 @@ void AMPCharacter::UpdateHUDShield()
 #pragma endregion
 
 #pragma region Ammo
+void AMPCharacter::SpawnDefaultWeapon()
+{
+	// stops us from spawning a weapon in say LobbyGameMode
+	MPShooterGameMode == nullptr ? Cast<AMPShooterGameMode>(UGameplayStatics::GetGameMode(this)) : MPShooterGameMode;
+	UWorld* World = GetWorld();
+	bool bIsValid = MPShooterGameMode &&
+		World &&
+		!bEliminated &&
+		bSpawnWithDefaultWeapon &&
+		DefaultWeaponClass;
+	if (bIsValid)
+	{
+		AWeapon* StartingWeapon = World->SpawnActor<AWeapon>(DefaultWeaponClass);
+		StartingWeapon->bDestroyWeapon = true;
+		Combat->EquipWeapon(StartingWeapon);
+	}
+}
+
 #pragma region UI
 void AMPCharacter::UpdateHUDAmmo()
 {
@@ -1466,6 +1498,30 @@ void AMPCharacter::UpdateHUDAmmo()
 #pragma endregion
 
 #pragma region Character Status in Match
+void AMPCharacter::SetTeamColor(ETeam Team)
+{
+	if (GetMesh() == nullptr || TeamColors[0] == nullptr || TeamColorsDissolve[0] == nullptr)
+	{
+		return;
+	}
+
+	switch (Team)
+	{
+	case ETeam::ET_NoTeam:
+		GetMesh()->SetMaterial(0, TeamColors[0]);
+		DissolveMaterialInstance = TeamColorsDissolve[0];
+		break;
+	case ETeam::ET_BlueTeam:
+		GetMesh()->SetMaterial(0, TeamColors[1]);
+		DissolveMaterialInstance = TeamColorsDissolve[1];
+		break;
+	case ETeam::ET_RedTeam:
+		GetMesh()->SetMaterial(0, TeamColors[2]);
+		DissolveMaterialInstance = TeamColorsDissolve[2];
+		break;
+	}
+}
+
 #pragma region Multicast
 void AMPCharacter::MulticastGainedTheLead_Implementation()
 {
@@ -1476,9 +1532,12 @@ void AMPCharacter::MulticastGainedTheLead_Implementation()
 
 	if (CrownComponent == nullptr)
 	{
+		// TODO:
+		// Consider replacing where we set the crown to the head socket, cause it starts to go
+		// the mesh if we crouch
 		CrownComponent = UNiagaraFunctionLibrary::SpawnSystemAttached(
 			CrownSystem,
-			GetCapsuleComponent(),
+			GetMesh(),
 			FName(),
 			GetActorLocation() + FVector(0.f, 0.f, 110.f),
 			GetActorRotation(),
@@ -1505,7 +1564,7 @@ void AMPCharacter::MulticastLostTheLead_Implementation()
 #pragma region Server
 void AMPCharacter::ServerLeaveGame_Implementation()
 {
-	AMPShooterGameMode* MPShooterGameMode = GetWorld()->GetAuthGameMode<AMPShooterGameMode>();
+	MPShooterGameMode == nullptr ? GetWorld()->GetAuthGameMode<AMPShooterGameMode>() : MPShooterGameMode;
 	MPPlayerState = MPPlayerState == nullptr ? GetPlayerState<AMPPlayerState>() : MPPlayerState;
 	if (MPShooterGameMode && MPPlayerState)
 	{

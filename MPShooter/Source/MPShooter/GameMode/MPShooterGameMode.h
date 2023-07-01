@@ -11,6 +11,14 @@ namespace MatchState
 	extern MPSHOOTER_API const FName Cooldown;	// Match duration reached, display winner, begin cooldown timer
 }
 
+#pragma region Forward Declarations
+class ACharacter;
+class AController;
+class AMPCharacter;
+class AMPPlayerController;
+class AMPPlayerState;
+#pragma endregion
+
 UCLASS()
 class MPSHOOTER_API AMPShooterGameMode : public AGameMode
 {
@@ -30,6 +38,7 @@ public:
 	float CooldownTime = 10.f;
 	UPROPERTY(EditDefaultsOnly)
 	float MatchWarningTime = 10.f;
+	bool bTeamsMatch = false;
 	#pragma endregion
 
 	#pragma region Constructor & Engine Overrides
@@ -38,12 +47,24 @@ public:
 	#pragma endregion
 
 	#pragma region Overrideable Actions
-	virtual void CharacterEliminated(class AMPCharacter* ElimmedCharacter, class AMPPlayerController* ElimmedController, class AMPPlayerController* AttackterController);
-	virtual void RequestRespawn(class ACharacter* ElimmedCharacter, class AController* ElimmedController);
+	virtual float CalculateDamage(
+		AController* Attacker, 
+		AController* Victim, 
+		float BaseDamage
+	);
+	virtual void CharacterEliminated(
+		AMPCharacter* VictimCharacter,
+		AMPPlayerController* VictimController,
+		AMPPlayerController* AttackerController
+	);
+	virtual void RequestRespawn(
+		ACharacter* VictimCharacter,
+		AController* VictimController
+	);
 	#pragma endregion
 
 	#pragma region Actions
-	void PlayerLeftGame(class AMPPlayerState* PlayerLeaving);
+	void PlayerLeftGame(AMPPlayerState* PlayerLeaving);
 	void BroadcastChatMessage(APlayerState* Sender, const FString& Msg);
 	#pragma endregion
 
