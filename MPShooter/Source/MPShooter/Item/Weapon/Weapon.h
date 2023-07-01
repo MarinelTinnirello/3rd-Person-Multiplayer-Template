@@ -9,6 +9,15 @@
 #include "MPShooter/MPTypes/ActorAttachment.h"
 #include "Weapon.generated.h"
 
+#pragma region Forward Declarations
+class AMPCharacter;
+class AMPPlayerController;
+class UTexture2D;
+class UAnimationAsset;
+class UAnimMontage;
+class ACasing;
+#pragma endregion
+
 #pragma region Structs
 USTRUCT(BlueprintType)
 struct FWeaponProperties
@@ -137,7 +146,7 @@ public:
 	// Crosshairs
 	//
 	UPROPERTY(EditAnywhere, Category = "Crosshairs", meta = (ToolTip = "Image for the center of a crosshair."))
-	class UTexture2D* CrosshairsCenter;
+	UTexture2D* CrosshairsCenter;
 	UPROPERTY(EditAnywhere, Category = "Crosshairs", meta = (ToolTip = "Image for the right of a crosshair."))
 	UTexture2D* CrosshairsRight;
 	UPROPERTY(EditAnywhere, Category = "Crosshairs", meta = (ToolTip = "Image for the left of a crosshair."))
@@ -205,9 +214,9 @@ protected:
 	// Character Properties
 	//
 	UPROPERTY()
-	class AMPCharacter* MPOwnerCharacter;
+	AMPCharacter* MPOwnerCharacter;
 	UPROPERTY()
-	class AMPPlayerController* MPOwnerController;
+	AMPPlayerController* MPOwnerController;
 	#pragma endregion
 
 	#pragma region Weapon Properties
@@ -228,9 +237,9 @@ protected:
 
 	#pragma region Combat - Animation
 	UPROPERTY(EditAnywhere, Category = "Combat - Animation", meta = (ToolTip = "Animation played when a weapon is fired."))
-	class UAnimationAsset* FireAnimation;
+	UAnimationAsset* FireAnimation;
 	UPROPERTY(EditAnywhere, Category = "Combat - Animation", meta = (ToolTip = "Montage that plays if a character fires a weapon."))
-	class UAnimMontage* FireWeaponMontage;
+	UAnimMontage* FireWeaponMontage;
 	UPROPERTY(EditAnywhere, Category = "Combat - Animation", meta = (ToolTip = "Names of sections in the montage."))
 	TArray<FName> FireWeaponMontageSections;
 	UPROPERTY(EditAnywhere, Category = "Combat - Animation - Ranged", meta = (ToolTip = "Montage that plays if a character is reloading a weapon."))
@@ -332,7 +341,7 @@ private:
 	// Weapon Properties - Ranged
 	//
 	UPROPERTY(EditAnywhere, Category = "Weapon Properties - Ranged", meta = (ToolTip = "Casing shell for a weapon."))
-	TSubclassOf<class ACasing> CasingClass;
+	TSubclassOf<ACasing> CasingClass;
 	UPROPERTY(EditAnywhere, Category = "Weapon Properties - Ranged", meta = (ToolTip = "Ammo eject socket on a weapon."))
 	FName AmmoEject = "AmmoEject";
 	UPROPERTY(EditAnywhere, Category = "Weapon Properties - Ranged", meta = (ToolTip = "Amount of ammo in a weapon."))
@@ -340,7 +349,7 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Weapon Properties - Ranged", meta = (ToolTip = "Max capacity in a weapon's magazine."))
 	int32 MagCapacity;
 	UPROPERTY(EditAnywhere, Category = "Weapon Properties - Ranged", meta = (ToolTip = "Icon of a weapon's ammo in the inventory."))
-	class UTexture2D* AmmoIcon;
+	UTexture2D* AmmoIcon;
 	// The number of unprocessed server requests for Ammo.
 	// Incremented in SpendRound, decremented in ClientUpdateAmmo.
 	int32 Sequence = 0;

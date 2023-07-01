@@ -8,23 +8,21 @@
 #include "MPShooter/Interfaces/ProjectileInterface.h"
 #include "ProjectileWeapon.generated.h"
 
+#pragma region Forward Declarations
+class AProjectile;
+#pragma endregion
+
 #pragma region Structs
 USTRUCT(BlueprintType)
-struct FProjectileWeaponDataTable : public FTableRowBase
+struct FProjectileWeaponDataTable : public FWeaponProperties
 {
 	GENERATED_BODY()
-
-	//
-	// Weapon Properties
-	// 
-	UPROPERTY(EditAnywhere, Category = "Weapon Properties", meta = (ToolTip = "General weapon properties of a weapon."))
-	FWeaponProperties WeaponProperties;
 
 	//
 	// Projectile Properties
 	//
 	UPROPERTY(EditAnywhere, Category = "Projectile", meta = (ToolTip = "Projectile for a weapon."))
-	TSubclassOf<class AProjectile> ProjectileClass;
+	TSubclassOf<AProjectile> ProjectileClass;
 	UPROPERTY(EditAnywhere, Category = "Projectile", meta = (ToolTip = "Projectile for a weapon used during SSR. The only difference between the 2 classes are that SSR Projectiles won't be replicated, meaning they only spawn locally."))
 	TSubclassOf<AProjectile> ServerSideRewindProjectileClass;
 };
@@ -46,7 +44,7 @@ private:
 	// Projectiles
 	//
 	UPROPERTY(EditAnywhere, Category = "Projectile", meta = (ToolTip = "Projectile for a weapon."))
-	TSubclassOf<class AProjectile> ProjectileClass;
+	TSubclassOf<AProjectile> ProjectileClass;
 	UPROPERTY(EditAnywhere, Category = "Projectile", meta = (ToolTip = "Projectile for a weapon used during SSR. The only difference between the 2 classes are that SSR Projectiles won't be replicated, meaning they only spawn locally."))
 	TSubclassOf<AProjectile> ServerSideRewindProjectileClass;
 	#pragma endregion

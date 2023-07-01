@@ -11,6 +11,29 @@
 #include "MPShooter/Interfaces/InteractWithCrosshairsInterface.h"
 #include "MPCharacter.generated.h"
 
+#pragma region Forward Declarations
+class AMPPlayerController;
+class AMPPlayerState;
+class USpringArmComponent;
+class UCameraComponent;
+class UWidgetComponent;
+class UInputMappingContext;
+class UMPInputConfigData;
+class USoundCue;
+class UParticleSystem;
+class UNiagaraSystem;
+class UBoxComponent;
+class UCapsuleComponent;
+class AWeapon;
+class UCombatComponent;
+class UBuffComponent;
+class ULagComponent;
+class UAnimMontage;
+class UStaticMeshComponent;
+class UDecalComponent;
+class USplineComponent;
+#pragma endregion
+
 #pragma region Class-based Enums & Structs
 #pragma region Physics Assets
 UENUM(BlueprintType)
@@ -48,28 +71,6 @@ struct FPhysAssetInformation
 
 #pragma endregion
 
-#pragma region Forward Declarations
-class AMPPlayerController;
-class AMPPlayerState;
-class USpringArmComponent;
-class UCameraComponent;
-class UWidgetComponent;
-class UInputMappingContext;
-class UMPInputConfigData;
-class USoundCue;
-class UParticleSystem;
-class UBoxComponent;
-class UCapsuleComponent;
-class AWeapon;
-class UCombatComponent;
-class UBuffComponent;
-class ULagComponent;
-class UAnimMontage;
-class UStaticMeshComponent;
-class UDecalComponent;
-class USplineComponent;
-#pragma endregion
-
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnLeftGame);
 
 UCLASS()
@@ -98,9 +99,10 @@ public:
 	//
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Surface", meta = (ToolTip = "Sound that plays when a character walks on different physical surface materials."))
 	TMap<TEnumAsByte<EPhysicalSurface>, USoundCue*> SurfaceSoundMap;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Surface", meta = (ToolTip = "Particles made by a character walking on different physical surface materials."))
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Surface", meta = (ToolTip = "Particles made by a character walking on different physical surface materials. Can use instead of the Niagara particles."))
 	TMap<TEnumAsByte<EPhysicalSurface>, UParticleSystem*> SurfaceParticleMap;
-	// Change Particle System into Niagara one (do it when you convert the AnimNotify into C++)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Surface", meta = (ToolTip = "Particles made by a character walking on different physical surface materials. Can use instead of the regular particles."))
+	TMap<TEnumAsByte<EPhysicalSurface>, UNiagaraSystem*> SurfaceNiagaraParticleMap;
 	#pragma endregion
 
 	#pragma region Hit Boxes

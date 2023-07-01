@@ -1,12 +1,17 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "HitScanWeapon.h"
+#include "Net/UnrealNetwork.h"
 #include "Engine/SkeletalMeshSocket.h"
 #include "Kismet/GameplayStatics.h"
+#include "Kismet/KismetSystemLibrary.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Particles/ParticleSystemComponent.h"
+#include "NiagaraFunctionLibrary.h"
+#include "NiagaraComponent.h"
 #include "Sound/SoundCue.h"
 #include "MPShooter/MPComponents/LagComponent.h"
+#include "MPShooter/Interfaces/InteractWithCrosshairsInterface.h"
 #include "MPShooter/Character/MPCharacter.h"
 #include "MPShooter/Character/MPAnimInstance.h"
 #include "MPShooter/PlayerController/MPPlayerController.h"
@@ -31,6 +36,13 @@ void AHitScanWeapon::Fire(const FVector& HitTarget)
 		FVector Start = SocketTransform.GetLocation();
 		FHitResult FireHit;
 		WeaponTraceHit(Start, HitTarget, FireHit);
+
+		HitActor = FireHit.GetActor()->Implements<UInteractWithCrosshairsInterface>() ? EHitActor::EHA_Character : EHitActor::EHA_Environment;
+		MulticastActorOnHit(HitActor);
+		if (HitActor == EHitActor::EHA_Environment)
+		{
+			ServerSpawnMaterialDecal(FireHit);
+		}
 
 		AMPCharacter* MPCharacter = Cast<AMPCharacter>(FireHit.GetActor());
 		if (MPCharacter && InstigatorController)
@@ -73,6 +85,15 @@ void AHitScanWeapon::Fire(const FVector& HitTarget)
 				FireHit.ImpactNormal.Rotation()
 			);
 		}
+		if (ImpactNiagaraParticles)
+		{
+			UNiagaraFunctionLibrary::SpawnSystemAtLocation(
+				GetWorld(),
+				ImpactNiagaraParticles,
+				FireHit.ImpactPoint,
+				FireHit.ImpactNormal.Rotation()
+			);
+		}
 		if (ImpactSound)
 		{
 			UGameplayStatics::PlaySoundAtLocation(
@@ -108,6 +129,13 @@ void AHitScanWeapon::FireMulti(const TArray<FVector_NetQuantize>& HitTargets)
 			FHitResult FireHit;
 			WeaponTraceHit(Start, HitTarget, FireHit);
 
+			HitActor = FireHit.GetActor()->Implements<UInteractWithCrosshairsInterface>() ? EHitActor::EHA_Character : EHitActor::EHA_Environment;
+			MulticastActorOnHit(HitActor);
+			if (HitActor == EHitActor::EHA_Environment)
+			{
+				ServerSpawnMaterialDecal(FireHit);
+			}
+
 			AMPCharacter* MPCharacter = Cast<AMPCharacter>(FireHit.GetActor());
 			if (MPCharacter)
 			{
@@ -133,6 +161,15 @@ void AHitScanWeapon::FireMulti(const TArray<FVector_NetQuantize>& HitTargets)
 				UGameplayStatics::SpawnEmitterAtLocation(
 					GetWorld(),
 					ImpactParticles,
+					FireHit.ImpactPoint,
+					FireHit.ImpactNormal.Rotation()
+				);
+			}
+			if (ImpactNiagaraParticles)
+			{
+				UNiagaraFunctionLibrary::SpawnSystemAtLocation(
+					GetWorld(),
+					ImpactNiagaraParticles,
 					FireHit.ImpactPoint,
 					FireHit.ImpactNormal.Rotation()
 				);
@@ -249,6 +286,19 @@ void AHitScanWeapon::WeaponTraceHit(const FVector& TraceStart, const FVector& Hi
 				Beam->SetVectorParameter(FName("Target"), BeamEnd);
 			}
 		}
+		if (BeamNiagaraParticles)
+		{
+			UNiagaraComponent* Beam = UNiagaraFunctionLibrary::SpawnSystemAtLocation(
+				World,
+				ImpactNiagaraParticles,
+				TraceStart,
+				FRotator::ZeroRotator
+			);
+			if (Beam)
+			{
+				Beam->SetVectorParameter(FName("Target"), BeamEnd);
+			}
+		}
 	}
 }
 
@@ -277,5 +327,134 @@ void AHitScanWeapon::MultiTraceEndWithScatter(const FVector& HitTarget, TArray<F
 	}
 }
 #pragma endregion
+
+#pragma endregion
+
+#pragma region Overrideable Actions
+void AHitScanWeapon::ActorHitType(EHitActor HitActorType)
+{
+	UWorld* World = GetWorld();
+	if (World)
+	{
+		switch (HitActorType)
+		{
+		case EHitActor::EHA_None:
+			break;
+		case EHitActor::EHA_Character:
+			if (ImpactCharacterParticles)
+			{
+				UGameplayStatics::SpawnEmitterAtLocation(
+					World,
+					ImpactCharacterParticles,
+					GetActorTransform()
+				);
+			}
+			if (ImpactCharacterNiagaraParticles)
+			{
+				UNiagaraFunctionLibrary::SpawnSystemAtLocation(
+					GetWorld(),
+					ImpactCharacterNiagaraParticles,
+					GetActorLocation(),
+					GetActorRotation()
+				);
+			}
+			if (ImpactCharacterSound)
+			{
+				UGameplayStatics::PlaySoundAtLocation(
+					this,
+					ImpactCharacterSound,
+					GetActorLocation()
+				);
+			}
+			break;
+		case EHitActor::EHA_Environment:
+			if (ImpactParticles)
+			{
+				UGameplayStatics::SpawnEmitterAtLocation(
+					World,
+					ImpactParticles,
+					GetActorTransform()
+				);
+			}
+			if (ImpactNiagaraParticles)
+			{
+				UNiagaraFunctionLibrary::SpawnSystemAtLocation(
+					GetWorld(),
+					ImpactNiagaraParticles,
+					GetActorLocation(),
+					GetActorRotation()
+				);
+			}
+			if (ImpactSound)
+			{
+				UGameplayStatics::PlaySoundAtLocation(
+					this,
+					ImpactSound,
+					GetActorLocation()
+				);
+			}
+			break;
+		case EHitActor::EHA_MAX:
+			break;
+		default:
+			break;
+		}
+	}
+}
+#pragma endregion
+
+#pragma region Actions
+#pragma region Multicast
+void AHitScanWeapon::MulticastActorOnHit_Implementation(EHitActor HitActorType)
+{
+	ActorHitType(HitActorType);
+}
+
+void AHitScanWeapon::MulticastSpawnMaterialDecal_Implementation(const FHitResult& Hit)
+{
+	if (ImpactDecalMaterial)
+	{
+		UWorld* World = GetWorld();
+		if (World)
+		{
+			FVector HitLocation = Hit.Location;
+			FVector HitNormal = Hit.ImpactNormal;
+			FRotator HitRotation = HitNormal.Rotation();
+			float Offset = FMath::RandRange(-180.f, 180.f);
+			HitRotation = FRotator(HitRotation.Pitch, HitRotation.Yaw, HitRotation.Roll + Offset);
+			UMaterialInterface* DecalMaterial = ImpactDecalMaterial;
+			UGameplayStatics::SpawnDecalAtLocation(
+				World,
+				DecalMaterial,
+				DecalSize,
+				HitLocation,
+				HitRotation,
+				DecalLifeSpan
+			);
+		}
+	}
+}
+#pragma endregion
+
+#pragma region Server
+void AHitScanWeapon::ServerSpawnMaterialDecal_Implementation(const FHitResult& Hit)
+{
+	MulticastSpawnMaterialDecal(Hit);
+}
+
+bool AHitScanWeapon::ServerSpawnMaterialDecal_Validate(const FHitResult& Hit)
+{
+	if (ImpactDecalMaterial == nullptr) return false;
+	// hit data isn't null
+	if (Hit.bBlockingHit == false) return false;
+	// hit location is in a reasonable range (1000 units squared) from projectile's current location
+	if (FVector::DistSquared(Hit.Location, GetActorLocation()) > 1000000.f) return false;
+	// player who fired projectile has authority to spawn projectiles on server
+	if (GetOwner()->HasAuthority() == false) return false;
+
+	return true;
+}
+#pragma endregion
+
 
 #pragma endregion

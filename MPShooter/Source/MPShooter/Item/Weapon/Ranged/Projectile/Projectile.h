@@ -8,6 +8,18 @@
 #include "MPShooter/Interfaces/HitActorInterface.h"
 #include "Projectile.generated.h"
 
+#pragma region Forward Declarations
+class UNiagaraSystem;
+class UNiagaraComponent;
+class UStaticMeshComponent;
+class UParticleSystem;
+class UParticleSystemComponent;
+class USoundCue;
+class UMaterialInterface;
+class UBoxComponent;
+class UProjectileMovementComponent;
+#pragma endregion
+
 UCLASS()
 class MPSHOOTER_API AProjectile : public AActor
 {
@@ -54,9 +66,9 @@ protected:
 	// Projectile Properties
 	//
 	UPROPERTY()
-	class UNiagaraComponent* TrailSystemComponent;
+	UNiagaraComponent* TrailSystemComponent;
 	UPROPERTY(EditAnywhere, Category = "Projectile Properties", meta = (ToolTip = "Trail system component for the projectile."))
-	class UNiagaraSystem* TrailSystem;
+	UNiagaraSystem* TrailSystem;
 	UPROPERTY(VisibleAnywhere, Category = "Projectile Properties", meta = (ToolTip = "Mesh component for the projectile."))
 	UStaticMeshComponent* ProjectileMesh;
 	UPROPERTY(EditAnywhere, Category = "Projectile Properties", meta = (ToolTip = "Minimum amount of damage applied to an actor from the falloff."))
@@ -67,16 +79,20 @@ protected:
 	float DamageOuterRadius = 500.f;
 
 	#pragma region Impact
-	UPROPERTY(EditAnywhere, Category = "Projectile Properties - Impact", meta = (ToolTip = "Particles that play on impact with the environment."))
-	class UParticleSystem* ImpactParticles;
+	UPROPERTY(EditAnywhere, Category = "Projectile Properties - Impact", meta = (ToolTip = "Particles that play on impact with the environment. Can use instead of Niagara Impact particles."))
+	UParticleSystem* ImpactParticles;
+	UPROPERTY(EditAnywhere, Category = "Projectile Properties - Impact", meta = (ToolTip = "Particles that play on impact with the environment. Can use instead of regular Impact particles."))
+	UNiagaraSystem* ImpactNiagaraParticles;
 	UPROPERTY(EditAnywhere, Category = "Projectile Properties - Impact", meta = (ToolTip = "Sound that plays on impact with the environment."))
-	class USoundCue* ImpactSound;
-	UPROPERTY(EditAnywhere, Category = "Projectile Properties - Impact", meta = (ToolTip = "Particles that play on impact with a character."))
+	USoundCue* ImpactSound;
+	UPROPERTY(EditAnywhere, Category = "Projectile Properties - Impact", meta = (ToolTip = "Particles that play on impact with a character. Can use instead of Niagara Impact particles."))
 	UParticleSystem* ImpactCharacterParticles;
+	UPROPERTY(EditAnywhere, Category = "Projectile Properties - Impact", meta = (ToolTip = "Particles that play on impact with a character. Can use instead of regular Impact particles."))
+	UNiagaraSystem* ImpactCharacterNiagaraParticles;
 	UPROPERTY(EditAnywhere, Category = "Projectile Properties - Impact", meta = (ToolTip = "Sound that plays on impact with a character."))
 	USoundCue* ImpactCharacterSound;
 	UPROPERTY(EditAnywhere, Category = "Projectile Properties - Impact", meta = (ToolTip = "Material decal that spawns on impact with the environment."))
-	class UMaterialInterface* ImpactDecalMaterial;
+	UMaterialInterface* ImpactDecalMaterial;
 	UPROPERTY(EditAnywhere, Category = "Projectile Properties - Impact", meta = (ToolTip = "Size of the material decal."))
 	FVector DecalSize = FVector(16.f, 16.f, 16.f);
 	UPROPERTY(EditAnywhere, Category = "Projectile Properties - Impact", meta = (ToolTip = "Life span of the material decal."))
@@ -85,11 +101,11 @@ protected:
 
 	#pragma region Components
 	UPROPERTY(EditAnywhere)
-	class UBoxComponent* CollisionBox;
+	UBoxComponent* CollisionBox;
 	UPROPERTY(Replicated)
 	EHitActor HitActor;
 	UPROPERTY(VisibleAnywhere)
-	class UProjectileMovementComponent* ProjectileMovementComponent;
+	UProjectileMovementComponent* ProjectileMovementComponent;
 	#pragma endregion
 
 	#pragma endregion
@@ -142,7 +158,11 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Projectile Properties", meta = (ToolTip = "Tracer particles for a projectile."))
 	UParticleSystem* Tracer;
 	UPROPERTY()
-	class UParticleSystemComponent* TracerComponent;
+	UParticleSystemComponent* TracerComponent;
+	UPROPERTY(EditAnywhere, Category = "Projectile Properties", meta = (ToolTip = "Tracer particles for a projectile."))
+	UNiagaraSystem* TracerNiagara;
+	UPROPERTY()
+	UNiagaraComponent* TracerNiagaraComponent;
 	FTimerHandle DestroyTimer;
 	UPROPERTY(EditAnywhere, Category = "Projectile Properties", meta = (ToolTip = "Time until the projectile is destroyed."))
 	float DestroyTime = 3.f;

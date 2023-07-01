@@ -49,6 +49,18 @@ void AProjectile::BeginPlay()
 			EAttachLocation::KeepWorldPosition
 		);
 	}
+	if (TracerNiagara)
+	{
+		TracerNiagaraComponent = UNiagaraFunctionLibrary::SpawnSystemAttached(
+			TracerNiagara,
+			CollisionBox,
+			FName(),
+			GetActorLocation(),
+			GetActorRotation(),
+			EAttachLocation::KeepWorldPosition,
+			false
+		);
+	}
 
 	if (HasAuthority())
 	{
@@ -93,7 +105,10 @@ void AProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimi
 {
 	HitActor = OtherActor->Implements<UInteractWithCrosshairsInterface>() ? EHitActor::EHA_Character : EHitActor::EHA_Environment;
 	MulticastOnHit(HitActor);
-	ServerSpawnMaterialDecal(Hit);
+	if (HitActor == EHitActor::EHA_Environment)
+	{
+		ServerSpawnMaterialDecal(Hit);
+	}
 	/*IHitActorInterface* Interface = Cast<IHitActorInterface>(this);
 	Interface->ServerSpawnMaterialDecal(
 		Hit,
@@ -129,7 +144,7 @@ void AProjectile::MulticastOnHit_Implementation(EHitActor HitActorType)
 
 #pragma endregion
 
-#pragma region Overrideable Actors
+#pragma region Overrideable Actions
 float AProjectile::GetCollisionSphereRadius()
 {
 	float SphereRadius = 0.f;
@@ -157,21 +172,55 @@ void AProjectile::ActorHitType(EHitActor HitActorType)
 		case EHitActor::EHA_Character:
 			if (ImpactCharacterParticles)
 			{
-				UGameplayStatics::SpawnEmitterAtLocation(World, ImpactCharacterParticles, GetActorTransform());
+				UGameplayStatics::SpawnEmitterAtLocation(
+					World, 
+					ImpactCharacterParticles, 
+					GetActorTransform()
+				);
+			}
+			if (ImpactCharacterNiagaraParticles)
+			{
+				UNiagaraFunctionLibrary::SpawnSystemAtLocation(
+					GetWorld(),
+					ImpactCharacterNiagaraParticles,
+					GetActorLocation(),
+					GetActorRotation()
+				);
 			}
 			if (ImpactCharacterSound)
 			{
-				UGameplayStatics::PlaySoundAtLocation(this, ImpactCharacterSound, GetActorLocation());
+				UGameplayStatics::PlaySoundAtLocation(
+					this, 
+					ImpactCharacterSound, 
+					GetActorLocation()
+				);
 			}
 			break;
 		case EHitActor::EHA_Environment:
 			if (ImpactParticles)
 			{
-				UGameplayStatics::SpawnEmitterAtLocation(World, ImpactParticles, GetActorTransform());
+				UGameplayStatics::SpawnEmitterAtLocation(
+					World, 
+					ImpactParticles, 
+					GetActorTransform()
+				);
+			}
+			if (ImpactNiagaraParticles)
+			{
+				UNiagaraFunctionLibrary::SpawnSystemAtLocation(
+					GetWorld(),
+					ImpactNiagaraParticles,
+					GetActorLocation(),
+					GetActorRotation()
+				);
 			}
 			if (ImpactSound)
 			{
-				UGameplayStatics::PlaySoundAtLocation(this, ImpactSound, GetActorLocation());
+				UGameplayStatics::PlaySoundAtLocation(
+					this, 
+					ImpactSound, 
+					GetActorLocation()
+				);
 			}
 			break;
 		case EHitActor::EHA_MAX:
