@@ -32,7 +32,6 @@
 #include "MPShooter/MPComponents/CombatComponent.h"
 #include "MPShooter/MPComponents/BuffComponent.h"
 #include "MPShooter/MPComponents/LagComponent.h"
-#include "MPShooter/Interfaces/GridSphereInterface.h"
 #include "MPShooter/PlayerController/MPPlayerController.h"
 #include "MPShooter/PlayerState/MPPlayerState.h"
 #include "MPShooter/GameMode/MPShooterGameMode.h"

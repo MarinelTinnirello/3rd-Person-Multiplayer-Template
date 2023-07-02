@@ -129,12 +129,12 @@ void AHitScanWeapon::FireMulti(const TArray<FVector_NetQuantize>& HitTargets)
 			FHitResult FireHit;
 			WeaponTraceHit(Start, HitTarget, FireHit);
 
-			HitActor = FireHit.GetActor()->Implements<UInteractWithCrosshairsInterface>() ? EHitActor::EHA_Character : EHitActor::EHA_Environment;
+			/*HitActor = FireHit.GetActor()->Implements<UInteractWithCrosshairsInterface>() ? EHitActor::EHA_Character : EHitActor::EHA_Environment;
 			MulticastActorOnHit(HitActor);
 			if (HitActor == EHitActor::EHA_Environment)
 			{
 				ServerSpawnMaterialDecal(FireHit);
-			}
+			}*/
 
 			AMPCharacter* MPCharacter = Cast<AMPCharacter>(FireHit.GetActor());
 			if (MPCharacter)

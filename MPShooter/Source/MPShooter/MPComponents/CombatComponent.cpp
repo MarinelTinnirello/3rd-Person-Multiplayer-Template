@@ -19,7 +19,6 @@
 #include "MPShooter/PlayerController/MPPlayerController.h"
 #include "MPShooter/MPTypes/ActorAttachment.h"
 #include "MPShooter/Item/Weapon/Weapon.h"
-#include "MPShooter/Item/Weapon/Throwable/ThrowableWeapon.h"
 #include "MPShooter/Item/Weapon/Ranged/Projectile/Projectile.h"
 
 #pragma region Constructor
