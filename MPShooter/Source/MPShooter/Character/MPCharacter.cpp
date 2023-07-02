@@ -156,8 +156,8 @@ void AMPCharacter::Destroyed()
 		EliminateComponent->DestroyComponent();
 	}
 
-	AMPShooterGameMode* MPGameMode = Cast<AMPShooterGameMode>(UGameplayStatics::GetGameMode(this));
-	bool bMatchNotInProgress = MPGameMode && MPGameMode->GetMatchState() != MatchState::InProgress;
+	MPShooterGameMode = MPShooterGameMode == nullptr ? GetWorld()->GetAuthGameMode<AMPShooterGameMode>() : MPShooterGameMode;
+	bool bMatchNotInProgress = MPShooterGameMode && MPShooterGameMode->GetMatchState() != MatchState::InProgress;
 
 	if (Combat && Combat->EquippedWeapon && bMatchNotInProgress)
 	{
@@ -277,6 +277,17 @@ void AMPCharacter::PollInit()
 			{
 				MulticastGainedTheLead();
 			}
+		}
+	}
+	if (MPPlayerController == nullptr)
+	{
+		MPPlayerController = MPPlayerController == nullptr ? Cast<AMPPlayerController>(Controller) : MPPlayerController;
+		if (MPPlayerController)
+		{
+			SpawnDefaultWeapon();
+			UpdateHUDAmmo();
+			UpdateHUDHealth();
+			UpdateHUDShield();
 		}
 	}
 }
@@ -1194,11 +1205,13 @@ ECharacterCombatState AMPCharacter::GetCharacterCombatState() const
 #pragma region Health
 void AMPCharacter::ReceiveDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatorController, AActor* DamageCauser)
 {
-	if (bEliminated)
+	MPShooterGameMode = MPShooterGameMode == nullptr ? GetWorld()->GetAuthGameMode<AMPShooterGameMode>() : MPShooterGameMode;
+	if (bEliminated || MPShooterGameMode == nullptr)
 	{
 		return;
 	}
 
+	//Damage = MPShooterGameMode->CalculateDamage(InstigatorController, Controller, Damage);
 	float DamageToHealth = Damage;
 	if (Shield > 0.f)
 	{
@@ -1222,7 +1235,6 @@ void AMPCharacter::ReceiveDamage(AActor* DamagedActor, float Damage, const UDama
 
 	if (Health == 0.f)
 	{
-		AMPShooterGameMode* MPShooterGameMode = GetWorld()->GetAuthGameMode<AMPShooterGameMode>();
 		if (MPShooterGameMode)
 		{
 			MPPlayerController = MPPlayerController == nullptr ? Cast<AMPPlayerController>(Controller) : MPPlayerController;
@@ -1351,6 +1363,7 @@ void AMPCharacter::MulticastEliminated_Implementation(bool bPlayerLeftGame)
 
 	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	AttachedThrowable->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
 	// Spawn eliminate FX (if necessary)
 	if (EliminateFX)
@@ -1390,7 +1403,7 @@ void AMPCharacter::MulticastEliminated_Implementation(bool bPlayerLeftGame)
 #pragma region Elimination Effects
 void AMPCharacter::EliminateTimerFinished()
 {
-	AMPShooterGameMode* MPShooterGameMode = GetWorld()->GetAuthGameMode<AMPShooterGameMode>();	
+	MPShooterGameMode = MPShooterGameMode == nullptr ? GetWorld()->GetAuthGameMode<AMPShooterGameMode>() : MPShooterGameMode;
 	if (MPShooterGameMode && !bLeftGame)
 	{
 		MPShooterGameMode->RequestRespawn(this, Controller);
@@ -1450,6 +1463,24 @@ void AMPCharacter::UpdateHUDShield()
 #pragma endregion
 
 #pragma region Ammo
+void AMPCharacter::SpawnDefaultWeapon()
+{
+	// stops us from spawning a weapon in say LobbyGameMode
+	MPShooterGameMode = MPShooterGameMode == nullptr ? GetWorld()->GetAuthGameMode<AMPShooterGameMode>() : MPShooterGameMode;
+	UWorld* World = GetWorld();
+	bool bIsValid = MPShooterGameMode &&
+		World &&
+		!bEliminated &&
+		bSpawnWithDefaultWeapon &&
+		DefaultWeaponClass;
+	if (bIsValid)
+	{
+		AWeapon* StartingWeapon = World->SpawnActor<AWeapon>(DefaultWeaponClass);
+		StartingWeapon->bDestroyWeapon = true;
+		Combat->EquipWeapon(StartingWeapon);
+	}
+}
+
 #pragma region UI
 void AMPCharacter::UpdateHUDAmmo()
 {
@@ -1458,6 +1489,7 @@ void AMPCharacter::UpdateHUDAmmo()
 	{
 		MPPlayerController->SetHUDWeaponType(Combat->EquippedWeapon->GetWeaponType());
 		MPPlayerController->SetHUDCarriedAmmo(Combat->CarriedAmmo);
+		MPPlayerController->SetHUDCarriedThrowables(Combat->CarriedThrowableAmmo);
 		MPPlayerController->SetHUDWeaponAmmo(Combat->EquippedWeapon->GetAmmo());
 	}
 }
@@ -1476,9 +1508,12 @@ void AMPCharacter::MulticastGainedTheLead_Implementation()
 
 	if (CrownComponent == nullptr)
 	{
+		// TODO:
+		// Might want to change the GetMesh() to getting the Head Socket.
+		// since it looks weird on crouch
 		CrownComponent = UNiagaraFunctionLibrary::SpawnSystemAttached(
 			CrownSystem,
-			GetCapsuleComponent(),
+			GetMesh(),
 			FName(),
 			GetActorLocation() + FVector(0.f, 0.f, 110.f),
 			GetActorRotation(),
@@ -1505,7 +1540,7 @@ void AMPCharacter::MulticastLostTheLead_Implementation()
 #pragma region Server
 void AMPCharacter::ServerLeaveGame_Implementation()
 {
-	AMPShooterGameMode* MPShooterGameMode = GetWorld()->GetAuthGameMode<AMPShooterGameMode>();
+	MPShooterGameMode = MPShooterGameMode == nullptr ? GetWorld()->GetAuthGameMode<AMPShooterGameMode>() : MPShooterGameMode;
 	MPPlayerState = MPPlayerState == nullptr ? GetPlayerState<AMPPlayerState>() : MPPlayerState;
 	if (MPShooterGameMode && MPPlayerState)
 	{

@@ -40,13 +40,9 @@ public:
 	#pragma endregion
 
 	#pragma region Actions & Anim Notifies
-	#pragma region Spawn
-	void SpawnDefaultWeapon();
-	#pragma endregion
-
 	#pragma region Equip
 	UFUNCTION(BlueprintCallable)
-	void EquipWeapon(class AWeapon* WeaponToEquip);
+	void EquipWeapon(AWeapon* WeaponToEquip);
 	#pragma endregion
 
 	#pragma region Unequip
@@ -271,13 +267,6 @@ private:
 	AWeapon* EquippedWeapon;
 	UPROPERTY(ReplicatedUsing = OnRep_EquippedSecondaryWeapon)
 	AWeapon* EquippedSecondaryWeapon;
-
-	#pragma region Character
-	UPROPERTY(EditAnywhere, Category = "Character", meta = (ToolTip = "Checks if a character spawns in with a default weapon."))
-	bool bSpawnWithDefaultWeapon = false;
-	UPROPERTY(EditAnywhere, Category = "Character", meta = (ToolTip = "Default weapon a character spawns in with."))
-	TSubclassOf<AWeapon> DefaultWeaponClass;
-	#pragma endregion
 
 	#pragma region Weapon
 	UPROPERTY(EditAnywhere, Category = "Weapon", meta = (ToolTip = "Sound to make while zooming in with a sniper weapon."))

@@ -14,6 +14,7 @@
 #pragma region Forward Declarations
 class AMPPlayerController;
 class AMPPlayerState;
+class AMPShooterGameMode;
 class USpringArmComponent;
 class UCameraComponent;
 class UWidgetComponent;
@@ -154,6 +155,7 @@ public:
 	void UpdateHUDHealth();
 	void UpdateHUDShield();
 	void UpdateHUDAmmo();
+	void SpawnDefaultWeapon();
 
 	#pragma region Multicast
 	UFUNCTION(NetMulticast, Reliable)
@@ -252,6 +254,8 @@ private:
 	AMPPlayerController* MPPlayerController;
 	UPROPERTY()
 	AMPPlayerState* MPPlayerState;
+	UPROPERTY()
+	AMPShooterGameMode* MPShooterGameMode;
 	UPROPERTY(VisibleAnywhere, Category = "Camera")
 	USpringArmComponent* CameraBoom;
 	UPROPERTY(VisibleAnywhere, Category = "Camera")
@@ -266,6 +270,11 @@ private:
 	//
 	UPROPERTY(ReplicatedUsing = OnRep_OverlappingWeapon)
 	AWeapon* OverlappingWeapon;
+
+	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Checks if a character spawns in with a default weapon."))
+	bool bSpawnWithDefaultWeapon = false;
+	UPROPERTY(EditAnywhere, Category = "Combat", meta = (ToolTip = "Default weapon a character spawns in with."))
+	TSubclassOf<AWeapon> DefaultWeaponClass;
 
 	#pragma region OnRep
 	UFUNCTION()

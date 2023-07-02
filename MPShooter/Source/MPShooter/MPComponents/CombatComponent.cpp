@@ -51,9 +51,6 @@ void UCombatComponent::BeginPlay()
 		{
 			Controller->SetHUDWeaponType(EWeaponType::EWT_Unequipped);
 		}
-
-		SpawnDefaultWeapon();
-		Character->UpdateHUDAmmo();
 	}
 }
 
@@ -734,28 +731,6 @@ void UCombatComponent::ServerThrow_Implementation()
 #pragma endregion
 
 #pragma region Utilities
-#pragma region Spawn
-void UCombatComponent::SpawnDefaultWeapon()
-{
-	// stops us from spawning a weapon in say LobbyGameMode
-	AMPShooterGameMode* MPShooterGameMode = Cast<AMPShooterGameMode>(UGameplayStatics::GetGameMode(this));
-	UWorld* World = GetWorld();
-	bool bIsValid = MPShooterGameMode &&
-		World &&
-		Character &&
-		!Character->IsEliminated() &&
-		bSpawnWithDefaultWeapon &&
-		DefaultWeaponClass;
-	if (bIsValid)
-	{
-		AWeapon* StartingWeapon = World->SpawnActor<AWeapon>(DefaultWeaponClass);
-		StartingWeapon->bDestroyWeapon = true;
-		EquipWeapon(StartingWeapon);
-	}
-}
-
-#pragma endregion
-
 #pragma region Sound
 void UCombatComponent::PlayEquipWeaponSound(AWeapon* WeaponToEquip)
 {
