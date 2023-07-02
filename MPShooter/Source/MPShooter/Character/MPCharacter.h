@@ -17,6 +17,7 @@ class AMPPlayerState;
 class USpringArmComponent;
 class UCameraComponent;
 class UWidgetComponent;
+class UInputComponent;
 class UInputMappingContext;
 class UMPInputConfigData;
 class USoundCue;
@@ -127,7 +128,7 @@ public:
 	#pragma region Constructor & Engine Overrides
 	AMPCharacter();
 	virtual void Tick(float DeltaTime) override;
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	virtual void PostInitializeComponents() override;
 	virtual void Destroyed() override;
