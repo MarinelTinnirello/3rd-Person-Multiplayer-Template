@@ -32,9 +32,9 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Character Stats", meta = (ToolTip = "Character overlay to be displayed."))
 	TSubclassOf<class UUserWidget> CharacterOverlayClass;
 	UPROPERTY()
-	class UAnnoucement* Annoucement;
+	class UAnnouncement* Announcement;
 	UPROPERTY(EditAnywhere, Category = "Annoucements", meta = (ToolTip = "Annoucement overlay to be displayed."))
-	TSubclassOf<class UUserWidget> AnnoucementClass;
+	TSubclassOf<class UUserWidget> AnnouncementClass;
 	UPROPERTY()
 	class UPlayerChatBox* PlayerChatBox;
 	UPROPERTY(EditAnywhere, Category = "Announcements - Chat Box", meta = (ToolTip = "Player chat box during matches."))
@@ -51,7 +51,7 @@ public:
 	virtual void DrawHUD() override;
 
 	void AddCharacterOverlay();
-	void AddAnnoucement();
+	void AddAnnouncement();
 	void AddEliminateAnnouncement(FString Attacker, FString Victim);
 	void AddWeaponWheel();
 	void AddSniperScopeOverlay();

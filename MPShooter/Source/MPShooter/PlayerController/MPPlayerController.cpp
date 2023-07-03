@@ -11,7 +11,7 @@
 #include "MPShooter/MPTypes/Announcement.h"
 #include "MPShooter/HUD/MPHUD.h"
 #include "MPShooter/HUD/CharacterOverlay.h"
-#include "MPShooter/HUD/Annoucement.h"
+#include "MPShooter/HUD/Announcement.h"
 #include "MPShooter/HUD/WeaponWheelWidget.h"
 #include "MPShooter/HUD/SniperScopeOverlay.h"
 #include "MPShooter/HUD/PlayerChatBox.h"
@@ -98,7 +98,7 @@ void AMPPlayerController::ClientJoinMidGame_Implementation(FName StateOfMatch, f
 
 	if (MPHUD && MatchState == MatchState::WaitingToStart)
 	{
-		MPHUD->AddAnnoucement();
+		MPHUD->AddAnnouncement();
 	}
 }
 
@@ -560,20 +560,20 @@ void AMPPlayerController::SetHUDAnnouncementCountdown(float CountdownTime)
 {
 	MPHUD = MPHUD == nullptr ? Cast<AMPHUD>(GetHUD()) : MPHUD;
 	bool bHUDValid = MPHUD &&
-		MPHUD->Annoucement &&
-		MPHUD->Annoucement->WarmupTimeText;
+		MPHUD->Announcement &&
+		MPHUD->Announcement->WarmupTimeText;
 	if (bHUDValid)
 	{
 		if (CountdownTime < 0.f)
 		{
-			MPHUD->Annoucement->WarmupTimeText->SetText(FText());
+			MPHUD->Announcement->WarmupTimeText->SetText(FText());
 			return;
 		}
 
 		int32 Minutes = FMath::FloorToInt(CountdownTime / 60.f);
 		int32 Seconds = CountdownTime - (Minutes * 60.f);
 		FString CountdownText = FString::Printf(TEXT("%02d:%02d"), Minutes, Seconds);
-		MPHUD->Annoucement->WarmupTimeText->SetText(FText::FromString(CountdownText));
+		MPHUD->Announcement->WarmupTimeText->SetText(FText::FromString(CountdownText));
 	}
 }
 
@@ -666,9 +666,9 @@ void AMPPlayerController::HandleMatchHasStarted(bool bTeamsMatch)
 			MPHUD->AddCharacterOverlay();
 		}
 
-		if (MPHUD->Annoucement)
+		if (MPHUD->Announcement)
 		{
-			MPHUD->Annoucement->SetVisibility(ESlateVisibility::Hidden);
+			MPHUD->Announcement->SetVisibility(ESlateVisibility::Hidden);
 		}
 
 		if (IsLocalPlayerController())
@@ -698,15 +698,15 @@ void AMPPlayerController::HandleCooldownMatch()
 	MPHUD = MPHUD == nullptr ? Cast<AMPHUD>(GetHUD()) : MPHUD;
 	if (MPHUD)
 	{
-		bool bHUDValid = MPHUD->Annoucement && 
-			MPHUD->Annoucement->AnnoucementText && 
-			MPHUD->Annoucement->InfoText;
+		bool bHUDValid = MPHUD->Announcement && 
+			MPHUD->Announcement->AnnouncementText && 
+			MPHUD->Announcement->InfoText;
 		MPHUD->CharacterOverlay->RemoveFromParent();
 		if (bHUDValid)
 		{
-			MPHUD->Annoucement->SetVisibility(ESlateVisibility::Visible);
+			MPHUD->Announcement->SetVisibility(ESlateVisibility::Visible);
 			FString AnnouncementText = Announcement::NewMatchStartsIn;
-			MPHUD->Annoucement->AnnoucementText->SetText(FText::FromString(AnnouncementText));
+			MPHUD->Announcement->AnnouncementText->SetText(FText::FromString(AnnouncementText));
 
 			AMPGameState* MPGameState = Cast<AMPGameState>(UGameplayStatics::GetGameState(this));
 			AMPPlayerState* MPPlayerState = GetPlayerState<AMPPlayerState>();
@@ -714,7 +714,7 @@ void AMPPlayerController::HandleCooldownMatch()
 			{
 				TArray<AMPPlayerState*> TopPlayers = MPGameState->TopScoringPlayers;
 				FString InfoText = bShowTeamScores ? GetTeamsInfoText(MPGameState) : GetInfoText(TopPlayers);
-				MPHUD->Annoucement->InfoText->SetText(FText::FromString(InfoText));
+				MPHUD->Announcement->InfoText->SetText(FText::FromString(InfoText));
 			}
 		}
 	}

@@ -1204,7 +1204,7 @@ ECharacterCombatState AMPCharacter::GetCharacterCombatState() const
 #pragma region Health
 void AMPCharacter::ReceiveDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatorController, AActor* DamageCauser)
 {
-	MPShooterGameMode == nullptr ? GetWorld()->GetAuthGameMode<AMPShooterGameMode>() : MPShooterGameMode;
+	MPShooterGameMode = MPShooterGameMode == nullptr ? GetWorld()->GetAuthGameMode<AMPShooterGameMode>() : MPShooterGameMode;
 	if (bEliminated || MPShooterGameMode == nullptr)
 	{
 		return;
@@ -1403,7 +1403,7 @@ void AMPCharacter::MulticastEliminated_Implementation(bool bPlayerLeftGame)
 #pragma region Elimination Effects
 void AMPCharacter::EliminateTimerFinished()
 {
-	MPShooterGameMode == nullptr ? GetWorld()->GetAuthGameMode<AMPShooterGameMode>() : MPShooterGameMode;
+	MPShooterGameMode = MPShooterGameMode == nullptr ? GetWorld()->GetAuthGameMode<AMPShooterGameMode>() : MPShooterGameMode;
 	if (MPShooterGameMode && !bLeftGame)
 	{
 		MPShooterGameMode->RequestRespawn(this, Controller);
@@ -1466,7 +1466,7 @@ void AMPCharacter::UpdateHUDShield()
 void AMPCharacter::SpawnDefaultWeapon()
 {
 	// stops us from spawning a weapon in say LobbyGameMode
-	MPShooterGameMode == nullptr ? Cast<AMPShooterGameMode>(UGameplayStatics::GetGameMode(this)) : MPShooterGameMode;
+	MPShooterGameMode = MPShooterGameMode == nullptr ? Cast<AMPShooterGameMode>(UGameplayStatics::GetGameMode(this)) : MPShooterGameMode;
 	UWorld* World = GetWorld();
 	bool bIsValid = MPShooterGameMode &&
 		World &&
@@ -1563,7 +1563,7 @@ void AMPCharacter::MulticastLostTheLead_Implementation()
 #pragma region Server
 void AMPCharacter::ServerLeaveGame_Implementation()
 {
-	MPShooterGameMode == nullptr ? GetWorld()->GetAuthGameMode<AMPShooterGameMode>() : MPShooterGameMode;
+	MPShooterGameMode = MPShooterGameMode == nullptr ? GetWorld()->GetAuthGameMode<AMPShooterGameMode>() : MPShooterGameMode;
 	MPPlayerState = MPPlayerState == nullptr ? GetPlayerState<AMPPlayerState>() : MPPlayerState;
 	if (MPShooterGameMode && MPPlayerState)
 	{

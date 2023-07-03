@@ -7,7 +7,7 @@
 #include "Components/HorizontalBox.h"
 #include "Components/CanvasPanelSlot.h"
 #include "CharacterOverlay.h"
-#include "Annoucement.h"
+#include "Announcement.h"
 #include "EliminateAnnouncement.h"
 #include "WeaponWheelWidget.h"
 #include "SniperScopeOverlay.h"
@@ -28,13 +28,13 @@ void AMPHUD::AddCharacterOverlay()
 	}
 }
 
-void AMPHUD::AddAnnoucement()
+void AMPHUD::AddAnnouncement()
 {
 	OwningPlayer = OwningPlayer == nullptr ? GetOwningPlayerController() : OwningPlayer;
-	if (OwningPlayer && AnnoucementClass)
+	if (OwningPlayer && AnnouncementClass)
 	{
-		Annoucement = CreateWidget<UAnnoucement>(OwningPlayer, AnnoucementClass);
-		Annoucement->AddToViewport();
+		Announcement = CreateWidget<UAnnouncement>(OwningPlayer, AnnouncementClass);
+		Announcement->AddToViewport();
 	}
 }
 
