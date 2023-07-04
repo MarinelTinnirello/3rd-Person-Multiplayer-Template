@@ -123,14 +123,10 @@ private:
 	FName StartSocket = "StartSocket";
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Melee Weapon Properties", meta = (AllowPrivateAccess = "true"), meta = (ToolTip = "Start socket name for a line trace on a weapon."))
 	FName EndSocket = "EndSocket";
+	UPROPERTY(EditAnywhere, Category = "Melee Weapon Properties", meta = (ToolTip = "Radius of the sphere trace for the weapon's trace hit."))
+	float Radius = 50.f;
 	#pragma endregion
 
-	#pragma endregion
-
-public:
-	#pragma region Getters
-	FORCEINLINE FName GetStartSocket() const { return StartSocket; }
-	FORCEINLINE FName GetEndSocket() const { return EndSocket; }
 	#pragma endregion
 
 };

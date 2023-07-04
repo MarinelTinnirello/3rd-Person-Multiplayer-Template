@@ -169,108 +169,87 @@ void AMeleeWeapon::HitActorDamage()
 		FVector End = EndSocketTransform.GetLocation();
 		FHitResult FireHit;
 
-		FVector HalfSize(8.f, 8.f, 45.f);
-		float Radius = 50.f;
-		/*bool bHitActor = UKismetSystemLibrary::BoxTraceSingleForObjects(
-			GetWorld(),
-			Start,
-			End,
-			HalfSize,
-			GetActorRotation(),
-			TArray<TEnumAsByte<EObjectTypeQuery>>(),
-			true,
-			TArray<AActor*>(),
-			EDrawDebugTrace::None,
-			FireHit,
-			true
-		);*/
-		bool bHitActor = UKismetSystemLibrary::SphereTraceSingleForObjects(
+		TArray<AActor*> IgnoreActors;
+		IgnoreActors.Add(OwnerPawn);
+		bool bHitActor = UKismetSystemLibrary::SphereTraceSingle(
 			GetWorld(),
 			Start,
 			End,
 			Radius,
-			TArray<TEnumAsByte<EObjectTypeQuery>>(),
-			true,
-			TArray<AActor*>(),
-			EDrawDebugTrace::None,
+			UEngineTypes::ConvertToTraceType(ECollisionChannel::ECC_Visibility),
+			false,
+			IgnoreActors,
+			bDrawHitCollision ? EDrawDebugTrace::ForDuration : EDrawDebugTrace::None,
 			FireHit,
 			true
 		);
 		if (bHitActor)
 		{
-			if (GEngine)
-				GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Blue, TEXT("Hit shit!"));
-		}
-		else
-		{
-			if (GEngine)
-				GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Blue, TEXT("Hit nothing... die :("));
-		}
-
-		//HitActor = FireHit.GetActor()->Implements<UInteractWithCrosshairsInterface>() ? EHitActor::EHA_Character : EHitActor::EHA_Environment;
-		//MulticastActorOnHit(HitActor);
-		//if (HitActor == EHitActor::EHA_Environment)
-		//{
-		//	ServerSpawnMaterialDecal(FireHit);
-		//}
-
-		AMPCharacter* MPCharacter = Cast<AMPCharacter>(FireHit.GetActor());
-		if (MPCharacter && InstigatorController)
-		{
-			bool bCauseAuthDamage = !bUseServerSideRewind || OwnerPawn->IsLocallyControlled();
-			UMPAnimInstance* AnimInstance = Cast<UMPAnimInstance>(MPCharacter->GetMesh()->GetAnimInstance());
-			if (HasAuthority() && bCauseAuthDamage && AnimInstance)
+			HitActor = FireHit.GetActor()->Implements<UInteractWithCrosshairsInterface>() ? EHitActor::EHA_Character : EHitActor::EHA_Environment;
+			MulticastActorOnHit(HitActor);
+			if (HitActor == EHitActor::EHA_Environment)
 			{
-				const float DamageToCause = FireHit.BoneName == AnimInstance->GetHeadBone() ? HeadShotDamage : Damage;
-				UGameplayStatics::ApplyDamage(
-					MPCharacter,
-					DamageToCause,
-					InstigatorController,
-					this,
-					UDamageType::StaticClass()
-				);
-				MPCharacter->DirectionalHitReact(FireHit.ImpactPoint);
+				ServerSpawnMaterialDecal(FireHit);
 			}
-			if (!HasAuthority() && bUseServerSideRewind)
+
+			AMPCharacter* MPCharacter = Cast<AMPCharacter>(FireHit.GetActor());
+			if (MPCharacter && InstigatorController)
 			{
-				MPOwnerCharacter = MPOwnerCharacter == nullptr ? Cast<AMPCharacter>(OwnerPawn) : MPOwnerCharacter;
-				MPOwnerController = MPOwnerController == nullptr ? Cast<AMPPlayerController>(InstigatorController) : MPOwnerController;
-				if (MPOwnerController && MPOwnerCharacter && MPOwnerCharacter->GetLagCompensation())
+				bool bCauseAuthDamage = !bUseServerSideRewind || OwnerPawn->IsLocallyControlled();
+				UMPAnimInstance* AnimInstance = Cast<UMPAnimInstance>(MPCharacter->GetMesh()->GetAnimInstance());
+				if (HasAuthority() && bCauseAuthDamage && AnimInstance)
 				{
-					MPOwnerCharacter->GetLagCompensation()->ServerScoreRequest(
+					const float DamageToCause = FireHit.BoneName == AnimInstance->GetHeadBone() ? HeadShotDamage : Damage;
+					UGameplayStatics::ApplyDamage(
 						MPCharacter,
-						Start,
-						FireHit.ImpactPoint,
-						MPOwnerController->GetServerTime() - MPOwnerController->SingleTripTime
+						DamageToCause,
+						InstigatorController,
+						this,
+						UDamageType::StaticClass()
 					);
+					MPCharacter->DirectionalHitReact(FireHit.ImpactPoint);
+				}
+				if (!HasAuthority() && bUseServerSideRewind)
+				{
+					MPOwnerCharacter = MPOwnerCharacter == nullptr ? Cast<AMPCharacter>(OwnerPawn) : MPOwnerCharacter;
+					MPOwnerController = MPOwnerController == nullptr ? Cast<AMPPlayerController>(InstigatorController) : MPOwnerController;
+					if (MPOwnerController && MPOwnerCharacter && MPOwnerCharacter->GetLagCompensation())
+					{
+						MPOwnerCharacter->GetLagCompensation()->ServerScoreRequest(
+							MPCharacter,
+							Start,
+							FireHit.ImpactPoint,
+							MPOwnerController->GetServerTime() - MPOwnerController->SingleTripTime
+						);
+					}
 				}
 			}
-		}
-		if (ImpactParticles)
-		{
-			UGameplayStatics::SpawnEmitterAtLocation(
-				GetWorld(),
-				ImpactParticles,
-				FireHit.ImpactPoint,
-				FireHit.ImpactNormal.Rotation()
-			);
-		}
-		if (ImpactNiagaraParticles)
-		{
-			UNiagaraFunctionLibrary::SpawnSystemAtLocation(
-				GetWorld(),
-				ImpactNiagaraParticles,
-				FireHit.ImpactPoint,
-				FireHit.ImpactNormal.Rotation()
-			);
-		}
-		if (ImpactSound)
-		{
-			UGameplayStatics::PlaySoundAtLocation(
-				this,
-				ImpactSound,
-				FireHit.ImpactPoint
-			);
+			if (ImpactParticles)
+			{
+				UGameplayStatics::SpawnEmitterAtLocation(
+					GetWorld(),
+					ImpactParticles,
+					FireHit.ImpactPoint,
+					FireHit.ImpactNormal.Rotation()
+				);
+			}
+			if (ImpactNiagaraParticles)
+			{
+				UNiagaraFunctionLibrary::SpawnSystemAtLocation(
+					GetWorld(),
+					ImpactNiagaraParticles,
+					FireHit.ImpactPoint,
+					FireHit.ImpactNormal.Rotation()
+				);
+			}
+			if (ImpactSound)
+			{
+				UGameplayStatics::PlaySoundAtLocation(
+					this,
+					ImpactSound,
+					FireHit.ImpactPoint
+				);
+			}
 		}
 	}
 }
