@@ -1344,10 +1344,14 @@ void AMPCharacter::MulticastEliminated_Implementation(bool bPlayerLeftGame)
 	PlayEliminateMontage();
 
 	// Sets Dissolve material (if it exists)
-	if (DissolveMaterialInstance)
+	if (!DissolveMaterialInstance.IsEmpty())
 	{
-		DynamicDissolveMaterialInstance = UMaterialInstanceDynamic::Create(DissolveMaterialInstance, this);
-		GetMesh()->SetMaterial(0, DynamicDissolveMaterialInstance);
+		for (int i = 0; i < DissolveMaterialInstance.Num(); i++)
+		{
+			UMaterialInstanceDynamic* DynamicMaterial = UMaterialInstanceDynamic::Create(DissolveMaterialInstance[i], this);
+			DynamicDissolveMaterialInstance.Add(DynamicMaterial);
+			GetMesh()->SetMaterial(i, DynamicDissolveMaterialInstance[i]);
+		}
 	}
 
 	StartDissolve();
@@ -1426,9 +1430,12 @@ void AMPCharacter::StartDissolve()
 
 void AMPCharacter::UpdateDissolveMaterial(float DissolveValue)
 {
-	if (DynamicDissolveMaterialInstance)
+	if (!DynamicDissolveMaterialInstance.IsEmpty())
 	{
-		DynamicDissolveMaterialInstance->SetScalarParameterValue(TEXT("Dissolve"), DissolveValue);
+		for (int i = 0; i < DynamicDissolveMaterialInstance.Num(); i++)
+		{
+			DynamicDissolveMaterialInstance[i]->SetScalarParameterValue(DissolveCurveParam, DissolveValue);
+		}
 	}
 }
 #pragma endregion
@@ -1499,40 +1506,57 @@ void AMPCharacter::UpdateHUDAmmo()
 #pragma region Character Status in Match
 void AMPCharacter::SetTeamColor(ETeam Team)
 {
-	if (GetMesh() == nullptr || TeamColors[0] == nullptr || TeamColorsDissolve[0] == nullptr)
+	if (GetMesh() == nullptr || TeamColors.IsEmpty() || TeamColorsDissolve.IsEmpty())
 	{
 		return;
 	}
 
-	switch (Team)
+	// it's assumed that the length of TeamColors and TeamColorsDissolve is the same
+	for (int i = 0; i < TeamColors.Num(); i++)
 	{
-	case ETeam::ET_NoTeam:
-		GetMesh()->SetMaterial(0, TeamColors[0]);
-		DissolveMaterialInstance = TeamColorsDissolve[0];
-		break;
-	case ETeam::ET_BlueTeam:
-		GetMesh()->SetMaterial(0, TeamColors[1]);
-		DissolveMaterialInstance = TeamColorsDissolve[1];
-		break;
-	case ETeam::ET_RedTeam:
-		GetMesh()->SetMaterial(0, TeamColors[2]);
-		DissolveMaterialInstance = TeamColorsDissolve[2];
-		break;
+		FLinearColor Color;
+		switch (Team)
+		{
+		case ETeam::ET_NoTeam:
+			Color = TeamColor::NoTeam;
+			SetTeamColorMaterial(TeamColors[i], i, Color, true);
+			SetTeamColorMaterial(TeamColorsDissolve[i], i, Color, false);
+			DissolveMaterialInstance.Add(TeamColorsDissolve[i].Material);
+			break;
+		case ETeam::ET_RedTeam:
+			Color = TeamColor::RedTeam;
+			SetTeamColorMaterial(TeamColors[i], i, Color, true);
+			SetTeamColorMaterial(TeamColorsDissolve[i], i, Color, false);
+			DissolveMaterialInstance.Add(TeamColorsDissolve[i].Material);
+			break;
+		case ETeam::ET_BlueTeam:
+			Color = TeamColor::BlueTeam;
+			SetTeamColorMaterial(TeamColors[i], i, Color, true);
+			SetTeamColorMaterial(TeamColorsDissolve[i], i, Color, false);
+			DissolveMaterialInstance.Add(TeamColorsDissolve[i].Material);
+			break;
+		}
 	}
 }
 
-void AMPCharacter::SetTeamColorMaterial(FTeamColorInformation TeamColorInfo, int Element, FLinearColor Color)
+void AMPCharacter::SetTeamColorMaterial(FTeamColorInformation TeamColorInfo, int Element, FLinearColor Color, bool bSetMesh)
 {
-	GetMesh()->SetMaterial(Element, TeamColorInfo.Material);
 	UMaterialInstanceDynamic* DynamicMaterial = UMaterialInstanceDynamic::Create(TeamColorInfo.Material, this);
+	if (TeamColorInfo.bDefaultColor)
+	{
+		// TODO:
+		// Get current value of color instead of what the TeamColor namespace uses
+		//DynamicMaterial->SetVectorParameterValue(TeamColorInfo.Material->GetVectorParameterValue(TeamColorInfo.ColorParam, Color));
+	}
 	if (TeamColorInfo.bSwapColor)
 	{
 		DynamicMaterial->SetVectorParameterValue(TeamColorInfo.ColorParam, Color);
 	}
 
-	// We're just gonna call this function 2x to set this shit
-	// ... consider making Dissolve a switchable param in the material so we can just turn it on
-	//DissolveMaterialInstance = DynamicMaterial;
+	if (bSetMesh)
+	{
+		GetMesh()->SetMaterial(Element, DynamicMaterial);
+	}
 }
 
 #pragma region Multicast

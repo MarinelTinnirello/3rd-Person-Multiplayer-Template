@@ -391,10 +391,12 @@ private:
 	FOnTimelineFloat DissolveTrack;
 	UPROPERTY(EditAnywhere, Category = "Character Stats - Eliminated", meta = (ToolTip = "Curve of a timeline where an eliminated character is dissolved."))
 	UCurveFloat* DissolveCurve;
+	UPROPERTY(EditAnywhere, Category = "Character Stats - Eliminated", meta = (ToolTip = "Parameter name of the curve."))
+	FName DissolveCurveParam = "Dissolve";
 	UPROPERTY(VisibleAnywhere, Category = "Character Stats - Eliminated", meta = (ToolTip = "Material for when an eliminated character is dissolved."))
-	UMaterialInstance* DissolveMaterialInstance;
+	TArray<UMaterialInstance*> DissolveMaterialInstance;
 	UPROPERTY(VisibleAnywhere, Category = "Character Stats - Eliminated", meta = (ToolTip = "Dynamic instanced material (made at runtime) for when an eliminated character is dissolved."))
-	UMaterialInstanceDynamic* DynamicDissolveMaterialInstance;
+	TArray<UMaterialInstanceDynamic*> DynamicDissolveMaterialInstance;
 
 	void StartDissolve();
 	UFUNCTION()
@@ -442,13 +444,13 @@ private:
 	// Team Colors
 	//
 	UPROPERTY(EditAnywhere, Category = "Character Stats - Team Colors", meta = (ToolTip = "Material instance of character's team color."))
-	TArray<UMaterialInstance*> TeamColors;
-	//TArray<FTeamColorInformation> TeamColors;
+	//TArray<UMaterialInstance*> TeamColors;
+	TArray<FTeamColorInformation> TeamColors;
 	UPROPERTY(EditAnywhere, Category = "Character Stats - Team Colors", meta = (ToolTip = "Material instance of character's team color for the dissolve effect."))
-	TArray<UMaterialInstance*> TeamColorsDissolve;
-	//TArray<FTeamColorInformation> TeamColorsDissolve;
+	//TArray<UMaterialInstance*> TeamColorsDissolve;
+	TArray<FTeamColorInformation> TeamColorsDissolve;
 
-	void SetTeamColorMaterial(FTeamColorInformation TeamColorInfo, int Element, FLinearColor Color);
+	void SetTeamColorMaterial(FTeamColorInformation TeamColorInfo, int Element, FLinearColor Color, bool bSetMesh);
 	#pragma endregion
 
 	#pragma endregion
