@@ -144,7 +144,7 @@ private:
 	//
 	UPROPERTY(VisibleAnywhere, ReplicatedUsing = OnRep_ItemState, Category = "Item Properties", meta = (ToolTip = "State of an item (initial, equipped, dropped)."))
 	EItemState ItemState;
-	UPROPERTY(VisibleAnywhere, Category = "Item Properties", meta = (ToolTip = "Mesh of an item."))
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Item Properties", meta = (AllowPrivateAccess = "true"), meta = (ToolTip = "Mesh of an item."))
 	class USkeletalMeshComponent* ItemMesh;
 	UPROPERTY(EditAnywhere, Category = "Item Properties", meta = (ToolTip = "Type of item."))
 	EItemType ItemType;
