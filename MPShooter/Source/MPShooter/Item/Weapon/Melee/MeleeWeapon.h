@@ -58,7 +58,6 @@ class MPSHOOTER_API AMeleeWeapon : public AWeapon
 public:
 	#pragma region Overriden Actions
 	virtual void Fire(const FVector& HitTarget) override;
-	virtual void WeaponTraceHit(const FVector& TraceStart, const FVector& HitTarget, FHitResult& OutHit) override;
 	#pragma endregion
 
 	#pragma region Overrideable Actions

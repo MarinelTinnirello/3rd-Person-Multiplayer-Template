@@ -443,8 +443,12 @@ private:
 	//
 	UPROPERTY(EditAnywhere, Category = "Character Stats - Team Colors", meta = (ToolTip = "Material instance of character's team color."))
 	TArray<UMaterialInstance*> TeamColors;
+	//TArray<FTeamColorInformation> TeamColors;
 	UPROPERTY(EditAnywhere, Category = "Character Stats - Team Colors", meta = (ToolTip = "Material instance of character's team color for the dissolve effect."))
 	TArray<UMaterialInstance*> TeamColorsDissolve;
+	//TArray<FTeamColorInformation> TeamColorsDissolve;
+
+	void SetTeamColorMaterial(FTeamColorInformation TeamColorInfo, int Element, FLinearColor Color);
 	#pragma endregion
 
 	#pragma endregion

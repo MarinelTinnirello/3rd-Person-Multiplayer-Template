@@ -456,5 +456,4 @@ bool AHitScanWeapon::ServerSpawnMaterialDecal_Validate(const FHitResult& Hit)
 }
 #pragma endregion
 
-
 #pragma endregion

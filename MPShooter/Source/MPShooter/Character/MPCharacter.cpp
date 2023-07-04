@@ -1521,6 +1521,20 @@ void AMPCharacter::SetTeamColor(ETeam Team)
 	}
 }
 
+void AMPCharacter::SetTeamColorMaterial(FTeamColorInformation TeamColorInfo, int Element, FLinearColor Color)
+{
+	GetMesh()->SetMaterial(Element, TeamColorInfo.Material);
+	UMaterialInstanceDynamic* DynamicMaterial = UMaterialInstanceDynamic::Create(TeamColorInfo.Material, this);
+	if (TeamColorInfo.bSwapColor)
+	{
+		DynamicMaterial->SetVectorParameterValue(TeamColorInfo.ColorParam, Color);
+	}
+
+	// We're just gonna call this function 2x to set this shit
+	// ... consider making Dissolve a switchable param in the material so we can just turn it on
+	//DissolveMaterialInstance = DynamicMaterial;
+}
+
 #pragma region Multicast
 void AMPCharacter::MulticastGainedTheLead_Implementation()
 {

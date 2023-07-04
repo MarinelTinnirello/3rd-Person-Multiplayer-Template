@@ -109,6 +109,11 @@ void AProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimi
 	{
 		ServerSpawnMaterialDecal(Hit);
 	}
+	else
+	{
+		AMPCharacter* MPCharacter = Cast<AMPCharacter>(OtherActor);
+		MPCharacter->DirectionalHitReact(GetActorLocation());
+	}
 	/*IHitActorInterface* Interface = Cast<IHitActorInterface>(this);
 	Interface->ServerSpawnMaterialDecal(
 		Hit,
@@ -255,7 +260,6 @@ void AProjectile::ExplodeDamage()
 	if (FiringPawn && HasAuthority())
 	{
 		AController* FiringController = FiringPawn->GetController();
-		//AMPCharacter* MPCharacter = Cast<AMPCharacter>(FiringPawn);
 		if (FiringController)
 		{
 			UGameplayStatics::ApplyRadialDamageWithFalloff(
@@ -271,7 +275,6 @@ void AProjectile::ExplodeDamage()
 				this,
 				FiringController
 			);
-			//MPCharacter->DirectionalHitReact(GetActorLocation());
 		}
 	}
 }
